@@ -1,9 +1,12 @@
+require('dotenv').config()
 const { MongoClient } = require('mongodb');
 // or as an es module:
 // import { MongoClient } from 'mongodb'
 
 // Connection URL
-const url = 'mongodb+srv://daddybingo:XsYUroHIMSsZi6xE@dbp.39ern.mongodb.net/test';
+const dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.URL;
 const client = new MongoClient(url);
 
 // Database Name
