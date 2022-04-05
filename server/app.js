@@ -2,14 +2,16 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+require('dotenv').config()
+const dotenv = require('dotenv')
+dotenv.config();
 require('./user');
 
 app.use(bodyParser.json())
 
 const User = mongoose.model("user");
 
-
-const mongoUri = 'mongodb+srv://daddybingo:XsYUroHIMSsZi6xE@dbp.39ern.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const mongoUri = process.env.DBURL;
 
 mongoose.connect(mongoUri,{ 
     useNewUrlParser: true,
