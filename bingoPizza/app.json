@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "bingoPizza",
-    "slug": "bingoPizza",
+    "name": "Pizza_Test",
+    "slug": "Pizza_Test",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

@@ -1,14 +1,22 @@
-import { StyleSheet } from 'react-native';
+import React  from 'react';
+import { StyleSheet, TextInput } from 'react-native';
+import LoginInput from '../components/LoginTextInput';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
-export default function TabThreeScreen() {
+const UselessTextInput = () => {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
+}
+
+export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>ข้าวมันไก่</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabThreeScreen.tsx" />
+      <Text style={styles.title}>Tab One</Text>
+      <LoginInput/>
+      
+      
     </View>
   );
 }
@@ -18,14 +26,17 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'red'
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderRadius: 30,
+    padding: 10,
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  
 });
