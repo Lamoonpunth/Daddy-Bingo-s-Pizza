@@ -1,9 +1,12 @@
+require('dotenv').config()
 const { MongoClient } = require('mongodb');
 // or as an es module:
 // import { MongoClient } from 'mongodb'
 
 // Connection URL
-const url = 'mongodb+srv://daddybingo:XsYUroHIMSsZi6xE@dbp.39ern.mongodb.net/test';
+const dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.URL;
 const client = new MongoClient(url);
 
 // Database Name
@@ -17,9 +20,10 @@ async function main() {
   const collection = db.collection('test1');
 
   // the following code examples can be pasted here...
-  const insertResult = await collection.insertMany([{ a: 1 }, { a: 2 }, { a: 3 }]);
-  console.log('Inserted documents =>', insertResult);
-  const findResult = await collection.find({}).toArray();
+  // const insertResult = await collection.insertMany([{ name: 'hee',age:20 }]);
+  // console.log('Inserted documents =>', insertResult);
+
+  const findResult = await collection.find({ name : "asdf" },{password : "zxcv"}).toArray();
   console.log('Found documents =>', findResult);
 
 
