@@ -1,11 +1,13 @@
+import React  from 'react';
 import { StyleSheet,
   Image,
   Dimensions,
-  Switch} from 'react-native';
+  TextInput} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
+import LoginInput from '../components/LoginTextInput';
 
 export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTab'>) {
   return (
@@ -15,9 +17,7 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTa
       </View>
       <View style={styles.login}>
         <View style={styles.roundedrec}>
-          <View style={styles.login_sign}>
-            
-          </View>
+          <LoginInput />
         </View>
       </View>
     </View>
@@ -26,6 +26,11 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTa
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
+
+const UselessTextInput = () => {
+  const [text, onChangeText] = React.useState("Useless Text");
+  const [number, onChangeNumber] = React.useState(null);
+}
 
 const styles = StyleSheet.create({
   container: {
