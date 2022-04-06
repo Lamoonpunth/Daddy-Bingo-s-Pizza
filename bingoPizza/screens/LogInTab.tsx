@@ -2,14 +2,19 @@ import React  from 'react';
 import { StyleSheet,
   Image,
   Dimensions,
-  TextInput} from 'react-native';
+  TextInput,
+  Pressable} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import LoginInput from '../components/LoginTextInput';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTab'>) {
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+
+
+export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
   return (
     <View style={styles.container}>
       <View style={styles.pizzaBorder}>
@@ -17,20 +22,16 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTa
       </View>
       <View style={styles.login}>
         <View style={styles.roundedrec}>
-          <LoginInput />
+          <LoginInput/>
+          <View style={styles.loginbutton}>
+            <Text style={styles.title}>Log In</Text>
+          </View>
         </View>
       </View>
     </View>
   );
 }
 
-const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
-
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -42,13 +43,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
   },
   pizzaBorder: {
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
     width: screenWidth,
-    height: screenHeight/2,
+    height: screenHeight/2.3,
   },
   pizza: {
     width: 400,
@@ -61,13 +63,24 @@ const styles = StyleSheet.create({
     height: screenHeight/2,
   },
   roundedrec: {
-    borderWidth:1,
     borderColor:'rgba(0,0,0,0.2)',
     alignItems:'center',
     justifyContent:'center',
-    width:screenWidth*75/100,
-    height:screenHeight*35/100,
+    width:screenWidth*.75,
+    height:screenHeight*.4,
     backgroundColor:'#fff',
+    borderRadius:50,
+    elevation: 10,
+    
+  },
+  loginbutton: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*36/100,
+    height:screenHeight*6/100,
+    backgroundColor:'#FF6D6D',
     borderRadius:50,
   },
   login_sign: {
@@ -80,16 +93,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#FF6D6D',
     borderRadius:50,
     
-  },
-  logbox: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:screenWidth*45/100,
-    height:screenHeight*5/100,
-    backgroundColor:'#FF6D6D',
-    borderRadius:50,
   },
   signbox: {
     borderWidth:1,

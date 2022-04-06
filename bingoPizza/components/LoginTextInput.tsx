@@ -1,14 +1,14 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, Dimensions } from "react-native";
+import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
 
 const {height, width} = Dimensions.get('screen');
 
 const UselessTextInput = () => {
-  const [username, onChangeText] = React.useState(null);
-  const [password, onChangeNumber] = React.useState(null);
+  const [username, onChangeText] = React.useState('');
+  const [password, onChangeNumber] = React.useState('');
 
   return (
-    <SafeAreaView>
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -20,26 +20,43 @@ const UselessTextInput = () => {
         style={styles.input}
         onChangeText={onChangeNumber}
         value={password}
-        placeholder="password"
+        placeholder="Password"
         secureTextEntry={true}
         
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   input: {
-    width: width / 1.3,
-    height: height * 0.065,
-    margin: 12,
-    borderWidth: 1,
+    fontSize: 12,
+    width: width *.6,
+    height: height * 0.055,
+    margin: 8,
     padding: 10,
     borderRadius: 30,
     backgroundColor: 'white',
-    
-    
-    
+    elevation: 12,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  loginbutton: {
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*36/100,
+    height:height*6/100,
+    backgroundColor:'#FF6D6D',
+    borderRadius:50,
   },
 });
 
