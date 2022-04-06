@@ -9,36 +9,43 @@ import { StyleSheet,
   Platform,
   Keyboard } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
-import Colors from '../constants/Colors';
 import SigninInput from '../components/SigninTextInput';
+
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+const {height, width} = Dimensions.get('screen');
 
 export default function SignInTab() {
   return (
     <View style={styles.container}>
       <View style={styles.pizzaBorder}>
         <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
+
       </View>
+
       <View style={styles.login}>
         <View style={styles.roundedrec}>
+
+        <View style={styles.container3}>
+        </View>
+
           <SigninInput/>
+
           <View style={styles.loginbutton}>
             <Text style={styles.title}>Sign In</Text>
           </View>
+
+          <View style={styles.space}/>
         </View>
       </View>
     </View>
   );
 }
 
-const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
 
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-}
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -46,6 +53,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FF6D6D',
+  },
+  space: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.025,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+
+  },
+  container3: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.040,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+
   },
   avoid:{
     flex:1,

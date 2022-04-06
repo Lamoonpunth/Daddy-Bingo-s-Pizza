@@ -1,35 +1,30 @@
 import React  from 'react';
-import { StyleSheet, 
-  TextInput, 
-  Dimensions, 
-  KeyboardAvoidingView,
-  Platform,
-  Keyboard } from 'react-native';
+import { StyleSheet, TextInput, Dimensions, KeyboardAvoidingView,Platform,Keyboard,Button,Alert } from 'react-native';
 import RegInput from '../components/ReginfoInput';
 
-import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-}
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+const {height, width} = Dimensions.get('screen');
 
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>User SDasdas</Text>
+      <Text style={styles.title}>User Information</Text>
+      <View style={styles.space1}/>
+
       <View style={styles.roundedrec}>
         <RegInput/>
+        <View style={styles.space2}/>
+        <View style={styles.spaceforbutton}/>
+
       </View>
-      
-      
     </View>
   );
 }
 
-const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -38,6 +33,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FF6D6D'
   },
+  space1: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.015,
+    backgroundColor:'transparent',
+  },
+  space2: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.3,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+  },
+  spaceforbutton: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.07,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+  },
   input: {
     height: 40,
     margin: 12,
@@ -45,19 +63,22 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 26,
+    fontWeight: 'normal',
     color: 'white',
+    
   },
   roundedrec: {
-    borderWidth:0,
-    borderColor:'rgba(0,0,0,0.2)',
     alignItems:'center',
     justifyContent:'center',
-    width:screenWidth*75/100,
-    height:screenHeight*55/100,
-    backgroundColor:'#fff',
+    width:screenWidth*.8,
+    height:screenHeight*.6,
+    backgroundColor:'white',
     borderRadius:50,
+    elevation: 12,
+  },
+  savebutton:{
+
   },
 
 });
