@@ -14,6 +14,9 @@ import { Text, View } from '../components/Themed';
 import Colors from '../constants/Colors';
 import SigninInput from '../components/SigninTextInput';
 
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+
 export default function SignInTab() {
   return (
     <View style={styles.container}>
@@ -32,13 +35,8 @@ export default function SignInTab() {
   );
 }
 
-const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
 
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-}
+
 
 const styles = StyleSheet.create({
   container: {

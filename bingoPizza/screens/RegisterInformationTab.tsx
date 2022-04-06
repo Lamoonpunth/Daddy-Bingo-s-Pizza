@@ -10,11 +10,6 @@ import RegInput from '../components/ReginfoInput';
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-}
-
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>

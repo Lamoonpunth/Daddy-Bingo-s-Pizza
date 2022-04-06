@@ -14,16 +14,16 @@ const UselessTextInput = () => {
         onChangeText={onChangeText}
         value={username}
         placeholder="Username"
-
       />
+      <Text> username = {username} </Text>
       <TextInput
         style={styles.input}
         onChangeText={onChangeNumber}
         value={password}
         placeholder="Password"
         secureTextEntry={true}
-        
       />
+      <Text> password = {password} </Text>
     </View>
   );
 };
