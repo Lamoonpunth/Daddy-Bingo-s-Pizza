@@ -10,6 +10,10 @@ import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import LoginInput from '../components/LoginTextInput';
 
+const screenWidth = Dimensions.get('screen').width;
+const screenHeight = Dimensions.get('screen').height;
+
+
 export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
   return (
     <View style={styles.container}>
@@ -28,13 +32,6 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
   );
 }
 
-const screenWidth = Dimensions.get('screen').width;
-const screenHeight = Dimensions.get('screen').height;
-
-const UselessTextInput = () => {
-  const [text, onChangeText] = React.useState("Useless Text");
-  const [number, onChangeNumber] = React.useState(null);
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -53,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: screenWidth,
-    height: screenHeight/2,
+    height: screenHeight/2.3,
   },
   pizza: {
     width: 400,
@@ -66,14 +63,15 @@ const styles = StyleSheet.create({
     height: screenHeight/2,
   },
   roundedrec: {
-    borderWidth:1,
     borderColor:'rgba(0,0,0,0.2)',
     alignItems:'center',
     justifyContent:'center',
-    width:screenWidth*75/100,
-    height:screenHeight*35/100,
+    width:screenWidth*.75,
+    height:screenHeight*.4,
     backgroundColor:'#fff',
     borderRadius:50,
+    elevation: 10,
+    
   },
   loginbutton: {
     borderWidth:1,

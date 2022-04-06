@@ -8,7 +8,7 @@ const UselessTextInput = () => {
   const [password, onChangeNumber] = React.useState('');
 
   return (
-    <SafeAreaView>
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -24,20 +24,25 @@ const UselessTextInput = () => {
         secureTextEntry={true}
         
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   input: {
-    width: width *60/100,
+    fontSize: 12,
+    width: width *.6,
     height: height * 0.055,
-    margin: 12,
-    borderWidth: 1,
+    margin: 8,
     padding: 10,
     borderRadius: 30,
     backgroundColor: 'white',
-    borderColor: 'gray',
+    elevation: 12,
   },
   title: {
     fontSize: 20,
@@ -45,7 +50,6 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   loginbutton: {
-    borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
     justifyContent:'center',

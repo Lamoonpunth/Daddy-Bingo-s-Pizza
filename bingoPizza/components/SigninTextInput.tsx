@@ -15,7 +15,7 @@ const SignIntext = () => {
   const [confirm, onConfirm] = React.useState('');
 
   return (
-    <SafeAreaView>
+    <View style={styles.container}>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -39,23 +39,25 @@ const SignIntext = () => {
         secureTextEntry={true}
         
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: 'center',
+    height: height*.5,
   },
   input: {
-    width: width *60/100,
-    height: height * 0.055,
-    margin: 12,
-    borderWidth: 1,
+    fontSize: 12,
+    width: width *.6,
+    height: height * .055,
+    margin: 8,
     padding: 10,
     borderRadius: 30,
     backgroundColor: 'white',
-    borderColor: 'gray',
+    elevation: 12,
   },
   title: {
     fontSize: 20,
