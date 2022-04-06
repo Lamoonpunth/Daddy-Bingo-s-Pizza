@@ -18,7 +18,7 @@ const UselessTextInput = () => {
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>User Information</Text>
+      <Text style={styles.title}>User SDasdas</Text>
       <View style={styles.roundedrec}>
         <RegInput/>
       </View>
