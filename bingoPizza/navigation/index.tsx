@@ -15,8 +15,8 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import LogInTab from '../screens/LogInTab';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import TabThreeScreen from '../screens/TabThreeScreen';
+import SignInTab from '../screens/SignInTab';
+import RegInfo from '../screens/RegisterInformationTab';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -86,18 +86,18 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="SignInTab"
+        component={SignInTab}
         options={{
-          title: 'Tab Two',
+          title: 'Sign In',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />
       <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeScreen}
+        name="RegisterInformationTab"
+        component={RegInfo}
         options={{
-          title: 'Tab Three',
+          title: 'Register Information',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

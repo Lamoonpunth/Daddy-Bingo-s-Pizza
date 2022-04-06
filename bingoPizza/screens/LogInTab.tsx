@@ -2,14 +2,15 @@ import React  from 'react';
 import { StyleSheet,
   Image,
   Dimensions,
-  TextInput} from 'react-native';
+  TextInput,
+  Pressable} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import LoginInput from '../components/LoginTextInput';
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTab'>) {
+export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
   return (
     <View style={styles.container}>
       <View style={styles.pizzaBorder}>
@@ -17,7 +18,10 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'LogInTa
       </View>
       <View style={styles.login}>
         <View style={styles.roundedrec}>
-          <LoginInput />
+          <LoginInput/>
+          <View style={styles.loginbutton}>
+            <Text style={styles.title}>Log In</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -42,6 +46,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
   },
   pizzaBorder: {
     backgroundColor: 'transparent',
@@ -70,6 +75,16 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     borderRadius:50,
   },
+  loginbutton: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*36/100,
+    height:screenHeight*6/100,
+    backgroundColor:'#FF6D6D',
+    borderRadius:50,
+  },
   login_sign: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
@@ -80,16 +95,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#FF6D6D',
     borderRadius:50,
     
-  },
-  logbox: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:screenWidth*45/100,
-    height:screenHeight*5/100,
-    backgroundColor:'#FF6D6D',
-    borderRadius:50,
   },
   signbox: {
     borderWidth:1,
