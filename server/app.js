@@ -23,9 +23,28 @@ mongoose.connection.on("connected",()=>{
 mongoose.connection.on("error",(err)=>{
     console.log("Error connecting to mongo",err);
 })
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 })
+app.post('/send',(req,res)=>{
+  console.log(req.body)
+  res.send("posted")
+})
+app.post('/send-data',(req,res) =>{
+  const user = new User({
+    username:req.body.username,
+    password:req.body.password
+  })
+  user.save()
+  .then(data => {
+    console.log(data)
+    res.send("success")
+  }).catch(err => {
+    console.log(err)
+  })
+})
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
