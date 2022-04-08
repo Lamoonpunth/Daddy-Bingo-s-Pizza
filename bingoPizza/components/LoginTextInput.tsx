@@ -1,4 +1,5 @@
 import React from "react";
+import { TouchableOpacity } from "react-native";
 import { Button } from "react-native";
 import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
 
@@ -10,7 +11,13 @@ const UselessTextInput = () => {
   const [password, onChangePass] = React.useState('');
   const [submitted, onSubmit] = React.useState(false);
   const onSubmitButton = () => {
-    onSubmit(!submitted);
+    if (submitted == false) {
+      onSubmit(!submitted);
+    }
+    else{
+      onChangeText('');
+      onSubmit(!submitted);
+    }
   }
 
   return (
@@ -32,16 +39,16 @@ const UselessTextInput = () => {
         <Pressable>
           <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
         </Pressable>
+        {submitted?
         <Text>You are now Logged In as {username}</Text>
+        :null}
       </View>
       <View style={styles.container3}/>
-      <Button title="LogIn"
-      onPress={onSubmitButton}/>
-      <View style={styles.loginbutton}>
+      <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
         <Text style={{fontSize:20, color: 'white'}}>
           LogIn
         </Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.space}/>
     </View>
   );
