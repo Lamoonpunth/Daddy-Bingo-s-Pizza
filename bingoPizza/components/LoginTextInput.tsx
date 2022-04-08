@@ -13,7 +13,7 @@ const UselessTextInput = () => {
   const onSubmitButton = () => {
     if (submitted == false) {
       onSubmit(!submitted);
-      fetch("http://localhost:3000/send-data",{
+      fetch("http://10.0.2.2:3000/send-data",{
       method:'post',
       headers:{
           'Content-Type': 'application/json'
@@ -30,6 +30,7 @@ const UselessTextInput = () => {
     }
     else{
       onChangeText('');
+      onChangePass('');
       onSubmit(!submitted);
     }
   }
