@@ -6,11 +6,24 @@ const {height, width} = Dimensions.get('screen');
 
 const UselessTextInput = () => {
 
-  const [username, onChangeText] = React.useState('');
-  const [password, onChangePass] = React.useState('');
+  const [Username, onChangeText] = React.useState('');
+  const [Password, onChangePass] = React.useState('');
   const [submitted, onSubmit] = React.useState(false);
   const onSubmitButton = () => {
-    onSubmit(!submitted);
+    fetch("http://localhost:3000/send-data",{
+      method:'post',
+      headers:{
+          'Content-Type': 'application/json'
+      },
+      body:JSON.stringify({
+        username:Username,
+        password:Password
+      })
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+    })
   }
 
   return (
@@ -18,13 +31,13 @@ const UselessTextInput = () => {
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
-        value={username}
+        value={Username}
         placeholder="Username"
       />
       <TextInput
         style={styles.input}
         onChangeText={onChangePass}
-        value={password}
+        value={Password}
         placeholder="Password"
         secureTextEntry={true} 
       />
@@ -32,7 +45,7 @@ const UselessTextInput = () => {
         <Pressable>
           <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
         </Pressable>
-        <Text>You are now Logged In as {username}</Text>
+        <Text>You are now Logged In as {Username}</Text>
       </View>
       <View style={styles.container3}/>
       <Button title="LogIn"
