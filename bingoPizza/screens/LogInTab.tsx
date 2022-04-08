@@ -3,7 +3,7 @@ import { StyleSheet,
   Image,
   Dimensions,
   TextInput,
-  Pressable} from 'react-native';
+  Pressable,} from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
@@ -24,15 +24,7 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
       <View style={styles.login}>
 
         <View style={styles.roundedrec}>
-
           <LoginInput/>
-          <View style={styles.container3}/>
-          <View style={styles.loginbutton}>
-
-            <Text style={styles.title}>Log In</Text>
-
-          </View>
-          <View style={styles.space}/>
         </View>
       </View>
 
