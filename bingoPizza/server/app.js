@@ -45,6 +45,24 @@ app.post('/send-data',(req,res) =>{
   })
 })
 
+app.get('/usercheck', function(req, res) {
+  User.findOne({username: req.query.username,password : req.query.password}, function(err, user){
+      if(err) {
+        console.log(err);
+      }
+      var message;
+      if(user) {
+        console.log(user)
+          message = "user exists";
+          console.log(message)
+      } else {
+          message= "user doesn't exist";
+          console.log(message)
+      }
+      res.json({message: message});
+  });
+});
+
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
