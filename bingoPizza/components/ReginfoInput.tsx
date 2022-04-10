@@ -1,13 +1,17 @@
 import React from "react";
 import { Image, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 const {height, width} = Dimensions.get('screen');
+
+
 
 const RegInfoText = () => {
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
   const [phone, onChangeNumber] = React.useState('');
   const [address, onChangeAddr] = React.useState('');
+  const [selectedMonth, setSelectedMonth] = React.useState('');
 
   return (
     <View style={styles.container}>
@@ -60,9 +64,18 @@ const RegInfoText = () => {
           value={address}
           placeholder="Address"
         />
+        
 
       </View>
-
+      <Picker style={styles.pickermonth}
+          selectedValue={selectedMonth}
+          placeholder= "Month"
+          onValueChange={(itemValue, itemIndex) =>
+            setSelectedMonth(itemValue)
+          }>
+          <Picker.Item label="January" value="java" />
+          <Picker.Item label="Febuary" value="js" />
+        </Picker>
       
     </View>
   );
@@ -127,6 +140,17 @@ const styles = StyleSheet.create({
   addricon:{
     width: 50,
     height:50,
+  },
+  pickermonth:{
+    fontSize: 12,
+    width: width *.27,
+    height: height * 0.045,
+    margin: 8,
+    padding: 10,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    elevation: 12,
+
   },
 });
 
