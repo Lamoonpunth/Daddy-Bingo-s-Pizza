@@ -6,6 +6,11 @@ import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable}
 
 const {height, width} = Dimensions.get('screen');
 
+const options = [
+  { label: "Log In", value: "L", testID: "switch-one", accessibilityLabel: "switch-one" },
+  { label: "Sign Up", value: "R", testID: "switch-one-thirty", accessibilityLabel: "switch-one-thirty" },
+];
+
 const UselessTextInput = () => {
 
   const [Username, onChangeText] = React.useState('');
