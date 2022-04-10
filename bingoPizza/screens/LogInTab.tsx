@@ -51,6 +51,8 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
             textColor='#FF6D6D'
             selectedTextStyle={{color:'#FFFFFF'}}
             buttonColor='#FF6D6D'
+            borderColor='#000000'
+            borderWidth={5}
           />
           {switchbutton == true?
             <LoginInput/>
