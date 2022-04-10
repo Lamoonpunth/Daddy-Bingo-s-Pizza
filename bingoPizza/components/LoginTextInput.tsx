@@ -2,7 +2,6 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import { Button } from "react-native";
 import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
-import SwitchSelector from "react-native-switch-selector";
 
 const {height, width} = Dimensions.get('screen');
 
@@ -43,15 +42,6 @@ const UselessTextInput = () => {
 
   return (
     <View style={styles.container}>
-      <SwitchSelector
-        options={options}
-        initial={0}
-        onPress={(value: any) => console.log(`Call onPress with value: ${value}`)}
-        selectedColor= 'white'
-        buttonColor= '#FF6D6D'
-        borderColor= 'black'
-        borderRadius= '1'
-      />
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
