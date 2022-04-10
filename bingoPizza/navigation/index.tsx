@@ -17,6 +17,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import LogInTab from '../screens/LogInTab';
 import SignInTab from '../screens/SignInTab';
 import RegInfo from '../screens/RegisterInformationTab';
+import OrderTab from '../screens/OrderTab';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
@@ -98,6 +99,14 @@ function BottomTabNavigator() {
         component={RegInfo}
         options={{
           title: 'Register Information',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="OrderTab"
+        component={OrderTab}
+        options={{
+          title: 'Order',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

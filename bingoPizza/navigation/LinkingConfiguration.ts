@@ -30,6 +30,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               RegisterInformationTabScreen: 'three',
             },
           },
+          OrderTab:{
+            screens: {
+              RegisterInformationTabScreen: 'four',
+            },
+          },
         },
       },
       Modal: 'modal',
