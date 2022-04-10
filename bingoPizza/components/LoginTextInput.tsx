@@ -3,6 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { Button } from "react-native";
 import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
 
+
 const {height, width} = Dimensions.get('screen');
 
 const UselessTextInput = () => {
@@ -13,19 +14,19 @@ const UselessTextInput = () => {
   const onSubmitButton = () => {
     if (submitted == false) {
       onSubmit(!submitted);
-      fetch("http://10.0.2.2:3000/send-data",{
+      const target =  "http://10.0.2.2:3000/usercheck?username="+Username+"&password="+Password
+      fetch(target,{
       method:'post',
       headers:{
           'Content-Type': 'application/json'
-      },
-      body:JSON.stringify({
-        username:Username,
-        password:Password
-      })
+      }
     })
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
+      if(data.message === "SUCCESS"){
+        alert("You are logged in.");
+       }
     })
     }
     else{

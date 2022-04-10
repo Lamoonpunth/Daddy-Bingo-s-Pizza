@@ -27,6 +27,7 @@ mongoose.connection.on("error",(err)=>{
 app.get('/', (req, res) => {
   res.send('Hello World!');
 })
+
 app.post('/send',(req,res)=>{
   console.log(req.body)
   res.send("posted")
@@ -45,21 +46,23 @@ app.post('/send-data',(req,res) =>{
   })
 })
 
-app.get('/usercheck', function(req, res) {
+
+
+app.post('/usercheck', (req,res) => {
   User.findOne({username: req.query.username,password : req.query.password}, function(err, user){
       if(err) {
-        console.log(err);
+        console.log(err)
       }
       var message;
       if(user) {
         console.log(user)
-          message = "user exists";
+          message = "SUCCESS"
           console.log(message)
       } else {
-          message= "user doesn't exist";
+          message= "user doesn't exist"
           console.log(message)
       }
-      res.json({message: message});
+      res.json(message)
   });
 });
 
