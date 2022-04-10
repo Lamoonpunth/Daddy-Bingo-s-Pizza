@@ -4,15 +4,34 @@ import { StyleSheet,
   Dimensions,
   TextInput,
   Pressable,} from 'react-native';
+import SwitchSelector from "react-native-switch-selector";
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import LoginInput from '../components/LoginTextInput';
+import SigninInput from '../components/SigninTextInput';
+import Colors from '../constants/Colors';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
+/*ตัวเลือกของswitch selector*/ 
+const options = [
+  { label: "Log In", value: "Login" },
+  { label: "Sign up", value: "Signup" },
+];
+
 export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
+  const [switchbutton, onSelector] = React.useState(true);
+  const onSwitch = () => {
+    if (switchbutton == true){
+      onSelector(!switchbutton);
+    }
+    else{
+      onSelector(!switchbutton);
+    }
+  }
+
   return (
     <View style={styles.container}>
 
@@ -23,7 +42,21 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
       <View style={styles.login}>
 
         <View style={styles.roundedrec}>
-          <LoginInput/>
+          <View style={styles.space}>
+          </View>
+          <SwitchSelector
+            onPress={onSwitch}
+            options={options}
+            initial={0}
+            textColor='#FF6D6D'
+            selectedTextStyle={{color:'#FFFFFF'}}
+            buttonColor='#FF6D6D'
+            borderColor='#000000'
+            borderWidth='5'
+          />
+          {switchbutton == true?
+            <LoginInput/>
+          :<SigninInput/>}
         </View>
       </View>
 
@@ -118,6 +151,5 @@ const styles = StyleSheet.create({
     height:screenHeight*5/100,
     backgroundColor:'#FF6D6D',
     borderRadius:50,
-  }
-
+  },
 });

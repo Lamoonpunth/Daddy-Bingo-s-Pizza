@@ -21,22 +21,13 @@ export default function SignInTab() {
     <View style={styles.container}>
       <View style={styles.pizzaBorder}>
         <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
-
       </View>
 
       <View style={styles.login}>
         <View style={styles.roundedrec}>
 
-        <View style={styles.container3}>
-        </View>
-
           <SigninInput/>
 
-          <View style={styles.loginbutton}>
-            <Text style={styles.title}>Sign In</Text>
-          </View>
-
-          <View style={styles.space}/>
         </View>
       </View>
     </View>
@@ -61,7 +52,6 @@ const styles = StyleSheet.create({
     height:height*.025,
     backgroundColor:'transparent',
     borderWidth: 1,
-
   },
   container3: {
     alignItems:'center',
@@ -70,7 +60,6 @@ const styles = StyleSheet.create({
     height:height*.040,
     backgroundColor:'transparent',
     borderWidth: 1,
-
   },
   avoid:{
     flex:1,
@@ -112,7 +101,7 @@ const styles = StyleSheet.create({
     borderRadius:50,
     elevation: 10,
   },
-  loginbutton: {
+  signinbutton: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',

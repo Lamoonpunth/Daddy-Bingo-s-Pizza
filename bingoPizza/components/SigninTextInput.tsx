@@ -5,7 +5,8 @@ import { SafeAreaView,
   Dimensions, 
   View, 
   Text, 
-  Pressable} from "react-native";
+  Pressable,
+  TouchableOpacity} from "react-native";
 
 const {height, width} = Dimensions.get('screen');
 
@@ -13,6 +14,10 @@ const SignIntext = () => {
   const [username, onChangeText] = React.useState('');
   const [password, onChangeNumber] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
+
+  const onSignInButton = () => {
+
+  }
 
   return (
     <View style={styles.container}>
@@ -37,8 +42,13 @@ const SignIntext = () => {
         value={confirm}
         placeholder="Confirm password"
         secureTextEntry={true}
-        
       />
+      <TouchableOpacity style={styles.signinbutton} onPress={onSignInButton}>
+        <View >
+          <Text style={styles.title}>Sign In</Text>
+        </View>
+      </TouchableOpacity>
+      <View style={styles.space}/>
     </View>
   );
 };
@@ -46,8 +56,8 @@ const SignIntext = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
-    height: height*.5,
   },
   input: {
     fontSize: 12,
@@ -64,7 +74,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  loginbutton: {
+  signinbutton: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
@@ -73,6 +83,22 @@ const styles = StyleSheet.create({
     height:height*6/100,
     backgroundColor:'#FF6D6D',
     borderRadius:50,
+  },
+  container3: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.040,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+  },
+  space: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.025,
+    backgroundColor:'transparent',
+    borderWidth: 1,
   },
 });
 
