@@ -29,7 +29,7 @@ const UselessTextInput = () => {
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-      if(data.message === "SUCCESS"){
+      if(data === "SUCCESS"){
         alert("You are logged in.");
        }
     })
