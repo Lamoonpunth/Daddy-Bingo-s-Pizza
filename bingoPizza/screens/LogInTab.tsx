@@ -22,13 +22,13 @@ const options = [
 ];
 
 export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
-  const [switchbutton, onSelector] = React.useState(true);
+  const [switchbutton, onSelector] = React.useState(0);
   const onSwitch = () => {
-    if (switchbutton == true){
-      onSelector(!switchbutton);
+    if (options[switchbutton].value == "Login"){
+      onSelector(1);
     }
-    else{
-      onSelector(!switchbutton);
+    else if (options[switchbutton].value == "Signup"){
+      onSelector(0)
     }
   }
 
@@ -54,7 +54,8 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
             borderColor='#000000'
             borderWidth={5}
           />
-          {switchbutton == true?
+          <Text>{options[switchbutton].value}</Text>
+          {options[switchbutton].value == "Login"?
             <LoginInput/>
           :<SigninInput/>}
         </View>

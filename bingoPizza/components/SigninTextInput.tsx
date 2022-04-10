@@ -44,9 +44,7 @@ const SignIntext = () => {
         secureTextEntry={true}
       />
       <TouchableOpacity style={styles.signinbutton} onPress={onSignInButton}>
-        <View >
-          <Text style={styles.title}>Sign In</Text>
-        </View>
+        <Text style={{fontSize:20, color: 'white'}}>Sign In</Text>
       </TouchableOpacity>
       <View style={styles.space}/>
     </View>
