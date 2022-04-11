@@ -81,7 +81,7 @@ app.post('/login', (req,res) => {
 
 app.post('/usercheck', (req,res) => {
   User.findOne({username: req.query.username}, function(err, user){
-      if(err) {
+      if(err) {0
         console.log(err)
       }
       var message;
