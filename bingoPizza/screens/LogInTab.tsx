@@ -42,7 +42,7 @@ export default function LogInTab({navigation}) {
       console.log(data)
       if(data === "SUCCESS"){
         alert("You are logged in.");
-        navigation.navigate("Order");
+        navigation.navigate("Register Information");
        }
     })
     }
