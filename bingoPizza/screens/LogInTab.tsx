@@ -7,7 +7,6 @@ import { StyleSheet,
   TextInput,
   TouchableOpacity} from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
-import { AuthStackNavigator } from '../navigation/AuthStackNavigator';
 import { View } from '../components/Themed';
 
 const screenWidth = Dimensions.get('screen').width;

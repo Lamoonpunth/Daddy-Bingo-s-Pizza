@@ -2,14 +2,18 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { AuthStackNavigator } from "./AuthStackNavigator";
+import AuthStackNavigator from "./AuthStackNavigator";
+
+export type RootStackParamList = {
+    AuthStackNavigator: undefined,
+};
 
 const RootStack = createNativeStackNavigator();
 
-export default function Navigator() {
+export default function StackNavigator(){
     
     return (
-        <NavigationContainer>
+        <NavigationContainer >
             <RootStack.Navigator screenOptions={{headerShown:false}}>
                 <RootStack.Screen name={'AuthStack'} component={AuthStackNavigator}/>
             </RootStack.Navigator>
