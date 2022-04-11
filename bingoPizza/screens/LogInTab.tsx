@@ -39,7 +39,6 @@ export default function LogInTab({navigation}) {
     .then(data=>{
       console.log(data)
       if(data === "SUCCESS"){
-        alert("You are logged in.");
         navigation.navigate("Order");
        }
     })
