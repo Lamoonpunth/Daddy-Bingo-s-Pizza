@@ -3,12 +3,11 @@ import { StyleSheet,
   Image,
   Dimensions,} from 'react-native';
 import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>) {
+export default function OrderTab({ navigation }) {
   return (
     <View style={styles.container}>
         <Text style={{fontSize:50}}>

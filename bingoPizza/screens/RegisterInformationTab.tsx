@@ -1,5 +1,5 @@
 import React  from 'react';
-import { StyleSheet, TextInput, Dimensions, KeyboardAvoidingView,Platform,Keyboard,Button,Alert,TouchableOpacity } from 'react-native';
+import { StyleSheet, TextInput, Dimensions, TouchableOpacity } from 'react-native';
 import RegInput from '../components/ReginfoInput';
 
 import { Text, View } from '../components/Themed';
@@ -12,6 +12,10 @@ const {height, width} = Dimensions.get('screen');
 
 export default function TabOneScreen({navigation}) {
   
+  const onSave = () => {
+    navigation.navigate("LogIn");
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>User Information</Text>
@@ -19,8 +23,13 @@ export default function TabOneScreen({navigation}) {
 
       <View style={styles.roundedrec}>
         <RegInput/>
-        <View style={styles.space2}/>
-
+        <View style={styles.spaceforbutton}>
+          <TouchableOpacity style={styles.savebutton} onPress={onSave}>
+            <Text style={{fontSize:20, color: 'white'}}>Save</Text>
+          </TouchableOpacity>
+          <View style={styles.box}>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -51,6 +60,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   spaceforbutton: {
+    flexDirection:'row-reverse',
+    flexWrap: 'wrap',
     alignItems:'center',
     justifyContent:'center',
     width:width*.75,
@@ -74,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'center',
     width:screenWidth*.97,
-    height:screenHeight*.6,
+    height:screenHeight*.7,
     backgroundColor:'white',
     borderRadius:50,
     elevation: 12,
@@ -87,6 +98,14 @@ const styles = StyleSheet.create({
     height:height*6/100,
     backgroundColor:'#FF6D6D',
     borderRadius:50,
+  },
+  box:{
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*36/100,
+    height:height*6/100,
+    backgroundColor:'transparent',
   },
   pickerboxinside:{
     alignItems:'center',
