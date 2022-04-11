@@ -1,15 +1,21 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Button } from "react-native";
-import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
+import { StyleSheet, 
+  TextInput, 
+  Dimensions, 
+  View, 
+  Text, 
+  Pressable} from "react-native";
 
+import { useLinkTo } from '@react-navigation/native';
+import OrderTab from "../screens/OrderTab";
+import { RootTabScreenProps } from "../types";
 
 const {height, width} = Dimensions.get('screen');
 
-const options = [
-  { label: "Log In", value: "L", testID: "switch-one", accessibilityLabel: "switch-one" },
-  { label: "Sign Up", value: "R", testID: "switch-one-thirty", accessibilityLabel: "switch-one-thirty" },
-];
+const Stack = createNativeStackNavigator();
 
 const UselessTextInput = () => {
 
@@ -31,6 +37,7 @@ const UselessTextInput = () => {
       console.log(data)
       if(data === "SUCCESS"){
         alert("You are logged in.");
+
        }
     })
     }
