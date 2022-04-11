@@ -1,15 +1,13 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Button } from "react-native";
-import { SafeAreaView, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
-
+import { StyleSheet, 
+  TextInput, 
+  Dimensions, 
+  View, 
+  Text, 
+  Pressable} from "react-native";
 
 const {height, width} = Dimensions.get('screen');
-
-const options = [
-  { label: "Log In", value: "L", testID: "switch-one", accessibilityLabel: "switch-one" },
-  { label: "Sign Up", value: "R", testID: "switch-one-thirty", accessibilityLabel: "switch-one-thirty" },
-];
 
 const UselessTextInput = () => {
 
@@ -42,7 +40,7 @@ const UselessTextInput = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.logincontainer}>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -64,19 +62,19 @@ const UselessTextInput = () => {
         <Text>You are now Logged In as {Username}</Text>
         :null}
       </View>
-      <View style={styles.container3}/>
+      <View style={styles.box1}/>
       <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
         <Text style={{fontSize:20, color: 'white'}}>
           LogIn
         </Text>
       </TouchableOpacity>
-      <View style={styles.space}/>
+      <View style={styles.box2}/>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  logincontainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -92,11 +90,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 12,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
   loginbutton: {
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
@@ -106,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#FF6D6D',
     borderRadius:50,
   },
-  container3: {
+  box1: {
     alignItems:'center',
     justifyContent:'center',
     width:width*.75,
@@ -114,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent',
     borderWidth: 1,
   },
-  space: {
+  box2: {
     alignItems:'center',
     justifyContent:'center',
     width:width*.75,

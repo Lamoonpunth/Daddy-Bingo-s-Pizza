@@ -32,10 +32,22 @@ app.post('/send',(req,res)=>{
   console.log(req.body)
   res.send("posted")
 })
+
 app.post('/send-data',(req,res) =>{
   const user = new User({
     username:req.body.username,
-    password:req.body.password
+    password:req.body.password,
+    fname:req.body.fname,
+    lname:req.body.lname,
+    phonenumber:req.body.phonenumber,
+    birthm:req.body.birthm,
+    birthy:req.body.birthy,
+    sex:req.body.sex,
+    address:req.body.address,
+    province:req.body.province,
+    district:req.body.district,
+    subdistrict:req.body.subdistrict,
+    postcode:req.body.postcode
   })
   user.save()
   .then(data => {
