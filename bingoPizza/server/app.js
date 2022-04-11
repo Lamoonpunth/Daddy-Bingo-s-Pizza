@@ -60,7 +60,7 @@ app.post('/send-data',(req,res) =>{
 
 
 
-app.post('/usercheck', (req,res) => {
+app.post('/login', (req,res) => {
   User.findOne({username: req.query.username,password : req.query.password}, function(err, user){
       if(err) {
         console.log(err)
@@ -69,6 +69,25 @@ app.post('/usercheck', (req,res) => {
       if(user) {
         console.log(user)
           message = "SUCCESS"
+          console.log(message)
+      } else {
+          message= "user doesn't exist"
+          console.log(message)
+      }
+      res.json(message)
+  });
+});
+
+
+app.post('/usercheck', (req,res) => {
+  User.findOne({username: req.query.username}, function(err, user){
+      if(err) {
+        console.log(err)
+      }
+      var message;
+      if(user) {
+        console.log(user)
+          message = "user exist"
           console.log(message)
       } else {
           message= "user doesn't exist"
