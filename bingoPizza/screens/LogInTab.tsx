@@ -27,9 +27,7 @@ export default function LogInTab({navigation}) {
   const [Password, onChangePass] = React.useState('');
   const [submitted, onSubmit] = React.useState(false);
   const onSubmitButton = () => {
-    if (submitted == false) {
-      onSubmit(!submitted);
-      const target =  "http://10.0.2.2:3000/usercheck?username="+Username+"&password="+Password
+      const target =  "http://10.0.2.2:3000/login?username="+Username+"&password="+Password
       fetch(target,{
       method:'post',
       headers:{
@@ -40,16 +38,12 @@ export default function LogInTab({navigation}) {
     .then(data=>{
       console.log(data)
       if(data === "SUCCESS"){
-        alert("You are logged in.");
         navigation.navigate("Order");
        }
     })
-    }
-    else{
       onChangeText('');
       onChangePass('');
       onSubmit(!submitted);
-    }
   }
   /*********************************LogIn*********************************/
 
@@ -57,10 +51,28 @@ export default function LogInTab({navigation}) {
   const [username, onChangeSignUser] = React.useState('');
   const [password, onChangeSignPass] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
-
   const onSignUpButton = () => {
-    alert("ข้าวมันไก่.");
-    navigation.navigate("RegisterInformation");
+      const target =  "http://10.0.2.2:3000/usercheck?username="+username
+      fetch(target,{
+      method:'post',
+      headers:{
+          'Content-Type': 'application/json'
+      }
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      if(data === "user doesn't exist"){
+        navigation.navigate('Register Information')
+          }
+       else{
+         alert("user exist");
+          }
+        }
+      )
+      onChangeSignUser('');
+      onChangeSignPass('');
+      onConfirm('');
   }
   /********************************SignUp*********************************/
 
@@ -83,8 +95,8 @@ export default function LogInTab({navigation}) {
               textColor='#FF6D6D'
               selectedTextStyle={{color:'#FFFFFF'}}
               buttonColor='#FF6D6D'
-              borderColor='#000000'
-              borderWidth={5}
+              borderColor='#E5E5E5'
+              hasPadding
             />  
           </View>
           {switchbutton == "Login"?
@@ -146,7 +158,7 @@ export default function LogInTab({navigation}) {
               secureTextEntry={true}
             />
             <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
-              <Text style={{fontSize:20, color: 'white'}}>Sign In</Text>
+              <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
             </TouchableOpacity>
             <View style={styles.box3}/>
           </View>
