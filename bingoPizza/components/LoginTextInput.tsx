@@ -1,7 +1,5 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, 
   TextInput, 
   Dimensions, 
@@ -9,13 +7,7 @@ import { StyleSheet,
   Text, 
   Pressable} from "react-native";
 
-import { useLinkTo } from '@react-navigation/native';
-import OrderTab from "../screens/OrderTab";
-import { RootTabScreenProps } from "../types";
-
 const {height, width} = Dimensions.get('screen');
-
-const Stack = createNativeStackNavigator();
 
 const UselessTextInput = () => {
 
@@ -37,7 +29,6 @@ const UselessTextInput = () => {
       console.log(data)
       if(data === "SUCCESS"){
         alert("You are logged in.");
-
        }
     })
     }
@@ -49,7 +40,7 @@ const UselessTextInput = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.logincontainer}>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -71,19 +62,19 @@ const UselessTextInput = () => {
         <Text>You are now Logged In as {Username}</Text>
         :null}
       </View>
-      <View style={styles.container3}/>
+      <View style={styles.box1}/>
       <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
         <Text style={{fontSize:20, color: 'white'}}>
           LogIn
         </Text>
       </TouchableOpacity>
-      <View style={styles.space}/>
+      <View style={styles.box2}/>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  logincontainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -99,11 +90,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 12,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
   loginbutton: {
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
@@ -113,7 +99,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#FF6D6D',
     borderRadius:50,
   },
-  container3: {
+  box1: {
     alignItems:'center',
     justifyContent:'center',
     width:width*.75,
@@ -121,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent',
     borderWidth: 1,
   },
-  space: {
+  box2: {
     alignItems:'center',
     justifyContent:'center',
     width:width*.75,

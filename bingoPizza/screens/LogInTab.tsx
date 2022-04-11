@@ -1,27 +1,68 @@
 import React  from 'react';
 import { StyleSheet,
+  Text,
   Image,
-  Dimensions,} from 'react-native';
+  Dimensions,
+  Pressable,
+  TextInput,
+  TouchableOpacity} from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
-import LoginInput from '../components/LoginTextInput';
-import SigninInput from '../components/SigninTextInput';
-import Colors from '../constants/Colors';
+import { AuthStackNavigator } from '../navigation/AuthStackNavigator';
+import { View } from '../components/Themed';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
-export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
-  
+export default function LogInTab({navigation}) {
+  /**************************************************/
   /*ตัวเลือกของswitch selector*/ 
   const options = [
     { label: "Log In", value: "Login" },
     { label: "Sign up", value: "Signup" },
   ];
+  const [switchbutton, onSelector] = React.useState('Login');
 
-  const [switchbutton, onSelector] = React.useState('');
+  /*********************************LogIn*********************************/
+  const [Username, onChangeText] = React.useState('');
+  const [Password, onChangePass] = React.useState('');
+  const [submitted, onSubmit] = React.useState(false);
+  const onSubmitButton = () => {
+    if (submitted == false) {
+      onSubmit(!submitted);
+      const target =  "http://10.0.2.2:3000/usercheck?username="+Username+"&password="+Password
+      fetch(target,{
+      method:'post',
+      headers:{
+          'Content-Type': 'application/json'
+      }
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data)
+      if(data === "SUCCESS"){
+        alert("You are logged in.");
+        navigation.navigate("Order");
+       }
+    })
+    }
+    else{
+      onChangeText('');
+      onChangePass('');
+      onSubmit(!submitted);
+    }
+  }
+  /*********************************LogIn*********************************/
+
+  /********************************SignUp*********************************/
+  const [username, onChangeSignUser] = React.useState('');
+  const [password, onChangeSignPass] = React.useState('');
+  const [confirm, onConfirm] = React.useState('');
+
+  const onSignInButton = () => {
+
+  }
+  /********************************SignUp*********************************/
 
   return (
     <View style={styles.container}>
@@ -30,24 +71,89 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
         <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
       </View>
 
-      <View style={styles.login}>
-
+      <View style={styles.LogInAndSignUp}>
         <View style={styles.roundedrec}>
-          <View style={styles.space}>
+          <View style={styles.space1}>
           </View>
-          <SwitchSelector
-            onPress={(value: any) => onSelector(value)}
-            options={options}
-            initial={0}
-            textColor='#FF6D6D'
-            selectedTextStyle={{color:'#FFFFFF'}}
-            buttonColor='#FF6D6D'
-            borderColor='#000000'
-            borderWidth={5}
-          />
+          <View style={styles.selector}>
+            <SwitchSelector
+              onPress={(value: any) => onSelector(value)}
+              options={options}
+              initial={0}
+              textColor='#FF6D6D'
+              selectedTextStyle={{color:'#FFFFFF'}}
+              buttonColor='#FF6D6D'
+              borderColor='#000000'
+              borderWidth={5}
+            />  
+          </View>
           {switchbutton == "Login"?
-            <LoginInput/>
-          :<SigninInput/>}
+            /*********************************LogIn*********************************/
+            <View style={styles.logincontainer}>
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangeText}
+                value={Username}
+                placeholder="Username"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangePass}
+                value={Password}
+                placeholder="Password"
+                secureTextEntry={true} 
+              />
+              <View style={{alignItems: 'center',}}>
+                <Pressable>
+                  <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
+                </Pressable>
+                {submitted?
+                <Text>You are now Logged In as {Username}</Text>
+                :null}
+              </View>
+              <View style={styles.box1}/>
+              <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
+                <Text style={{fontSize:20, color: 'white'}}>
+                  LogIn
+                </Text>
+              </TouchableOpacity>
+              <View style={styles.box2}/>
+          </View>
+          /*********************************LogIn*********************************/
+          /********************************SignUp*********************************/
+          :
+          <View style={styles.signupcontainer}>
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeSignUser}
+              value={username}
+              placeholder="Username"
+
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeSignPass}
+              value={password}
+              placeholder="Password"
+              secureTextEntry={true}
+              
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onConfirm}
+              value={confirm}
+              placeholder="Confirm password"
+              secureTextEntry={true}
+            />
+            <TouchableOpacity style={styles.signupbutton} onPress={onSignInButton}>
+              <Text style={{fontSize:20, color: 'white'}}>Sign In</Text>
+            </TouchableOpacity>
+            <View style={styles.box3}/>
+          </View>
+          
+          /********************************SignUp*********************************/
+          }
+          
         </View>
       </View>
 
@@ -63,27 +169,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FF6D6D',
   },
-  space: {
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.75,
-    height:height*.025,
-    backgroundColor:'transparent',
-    borderWidth: 1,
-  },
-  container3: {
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.75,
-    height:height*.035,
-    backgroundColor:'transparent',
-    borderWidth: 1,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
   pizzaBorder: {
     backgroundColor: 'transparent',
     alignItems: 'center',
@@ -95,12 +180,6 @@ const styles = StyleSheet.create({
     width: 400,
     height: 400,
   },
-  login: {
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    width: screenWidth,
-    height: screenHeight/2,
-  },
   roundedrec: {
     borderColor:'rgba(0,0,0,0.2)',
     alignItems:'center',
@@ -110,37 +189,91 @@ const styles = StyleSheet.create({
     backgroundColor:'#fff',
     borderRadius:50,
     elevation: 10,
-    
+  },
+  space1: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.025,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+  },
+  selector: {
+    width:screenWidth*.55,
+  },
+  LogInAndSignUp: {
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    width: screenWidth,
+    height: screenHeight/2,
+  },
+  /******************LogIn****************/
+  logincontainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  input: {
+    fontSize: 12,
+    width: width *.6,
+    height: height * 0.055,
+    margin: 8,
+    padding: 10,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    elevation: 12,
   },
   loginbutton: {
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*36/100,
+    height:height*6/100,
+    backgroundColor:'#FF6D6D',
+    borderRadius:50,
+  },
+  box1: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.035,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+  },
+  box2: {
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.75,
+    height:height*.025,
+    backgroundColor:'transparent',
+    borderWidth: 1,
+  },
+  /******************LogIn****************/
+  /*****************SignUp****************/
+  signupcontainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  signupbutton: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
     justifyContent:'center',
-    width:screenWidth*.36,
-    height:screenHeight*.06,
+    width:width*36/100,
+    height:height*6/100,
     backgroundColor:'#FF6D6D',
     borderRadius:50,
   },
-  login_sign: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
+  box3: {
     alignItems:'center',
     justifyContent:'center',
-    width:screenWidth*45/100,
-    height:screenHeight*5/100,
-    backgroundColor:'#FF6D6D',
-    borderRadius:50,
-    
+    width:width*.75,
+    height:height*.025,
+    backgroundColor:'transparent',
+    borderWidth: 1,
   },
-  signbox: {
-    borderWidth:1,
-    borderColor:'rgba(0,0,0,0)',
-    alignItems:'center',
-    justifyContent:'center',
-    width:screenWidth*45/100,
-    height:screenHeight*5/100,
-    backgroundColor:'#FF6D6D',
-    borderRadius:50,
-  },
+  /*****************SignUp****************/
 });

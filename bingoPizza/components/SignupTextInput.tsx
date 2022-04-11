@@ -1,18 +1,14 @@
 import React from "react";
-import { SafeAreaView, 
-  StyleSheet, 
+import { StyleSheet, 
   TextInput, 
   Dimensions, 
   View, 
   Text, 
-  Pressable,
   TouchableOpacity} from "react-native";
-
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const {height, width} = Dimensions.get('screen');
 
-const SignIntext = () => {
+const SignUptext = () => {
   const [username, onChangeText] = React.useState('');
   const [password, onChangeNumber] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
@@ -22,7 +18,7 @@ const SignIntext = () => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.signupcontainer}>
       <TextInput
         style={styles.input}
         onChangeText={onChangeText}
@@ -45,16 +41,16 @@ const SignIntext = () => {
         placeholder="Confirm password"
         secureTextEntry={true}
       />
-      <TouchableOpacity style={styles.signinbutton} onPress={onSignInButton}>
+      <TouchableOpacity style={styles.signupbutton} onPress={onSignInButton}>
         <Text style={{fontSize:20, color: 'white'}}>Sign In</Text>
       </TouchableOpacity>
-      <View style={styles.space}/>
+      <View style={styles.box3}/>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  signupcontainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -69,12 +65,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 12,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
-  },
-  signinbutton: {
+  signupbutton: {
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
@@ -84,15 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#FF6D6D',
     borderRadius:50,
   },
-  container3: {
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.75,
-    height:height*.040,
-    backgroundColor:'transparent',
-    borderWidth: 1,
-  },
-  space: {
+  box3: {
     alignItems:'center',
     justifyContent:'center',
     width:width*.75,
@@ -102,4 +85,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIntext;
+export default SignUptext;
