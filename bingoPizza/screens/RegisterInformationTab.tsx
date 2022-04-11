@@ -1,5 +1,5 @@
 import React  from 'react';
-import { StyleSheet, TextInput, Dimensions, KeyboardAvoidingView,Platform,Keyboard,Button,Alert } from 'react-native';
+import { StyleSheet, TextInput, Dimensions, KeyboardAvoidingView,Platform,Keyboard,Button,Alert,TouchableOpacity } from 'react-native';
 import RegInput from '../components/ReginfoInput';
 
 import { Text, View } from '../components/Themed';
@@ -8,7 +8,10 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
-export default function TabOneScreen() {
+
+
+export default function TabOneScreen({navigation}) {
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>User Information</Text>
@@ -17,7 +20,6 @@ export default function TabOneScreen() {
       <View style={styles.roundedrec}>
         <RegInput/>
         <View style={styles.space2}/>
-        <View style={styles.spaceforbutton}/>
 
       </View>
     </View>
@@ -78,7 +80,22 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   savebutton:{
-
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*36/100,
+    height:height*6/100,
+    backgroundColor:'#FF6D6D',
+    borderRadius:50,
+  },
+  pickerboxinside:{
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.24,
+    height:height*0.055,
+    backgroundColor:'green',
+    borderRadius:50,
+    elevation: 12,
   },
 
 });
