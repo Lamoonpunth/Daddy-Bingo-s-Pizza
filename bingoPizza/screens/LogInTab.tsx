@@ -83,8 +83,8 @@ export default function LogInTab({navigation}) {
               textColor='#FF6D6D'
               selectedTextStyle={{color:'#FFFFFF'}}
               buttonColor='#FF6D6D'
-              borderColor='#000000'
-              borderWidth={5}
+              borderColor='#E5E5E5'
+              hasPadding
             />  
           </View>
           {switchbutton == "Login"?
