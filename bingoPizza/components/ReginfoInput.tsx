@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import BouncyCheckbox from "react-native-bouncy-checkbox";
 
 const {height, width} = Dimensions.get('screen');
 
@@ -179,10 +180,38 @@ const RegInfoText = () => {
           
 
       </View>
+
+      <View style={styles.box1}>
       <Image 
         style={styles.gendericon}
         source={require('../assets/images/gender2_icon.png')}
         />
+      <Text>  </Text>
+      <BouncyCheckbox
+        size={20}
+        fillColor="red"
+        unfillColor="#FFFFFF"
+        text="Boy    "
+        iconStyle={{ borderColor: "red" }}
+        textStyle={{
+          textDecorationLine: "none",
+        }}
+        onPress={(isChecked: boolean) => {}}
+      />
+      <BouncyCheckbox
+        size={20}
+        fillColor="red"
+        unfillColor="#FFFFFF"
+        text="Girl"
+        textStyle={{
+          textDecorationLine: "none",
+        }}
+        iconStyle={{ borderColor: "red" }}
+        onPress={(isChecked: boolean) => {}}
+      />
+
+      </View>
+
       <View style={styles.box1}>
         <Image 
           style={styles.phonenumicon}
