@@ -28,8 +28,6 @@ export default function LogInTab({navigation}) {
   const [Password, onChangePass] = React.useState('');
   const [submitted, onSubmit] = React.useState(false);
   const onSubmitButton = () => {
-    if (submitted == false) {
-      onSubmit(!submitted);
       const target =  "http://10.0.2.2:3000/login?username="+Username+"&password="+Password
       fetch(target,{
       method:'post',
@@ -45,12 +43,9 @@ export default function LogInTab({navigation}) {
         navigation.navigate("Order");
        }
     })
-    }
-    else{
       onChangeText('');
       onChangePass('');
       onSubmit(!submitted);
-    }
   }
   /*********************************LogIn*********************************/
 
@@ -58,10 +53,7 @@ export default function LogInTab({navigation}) {
   const [username, onChangeSignUser] = React.useState('');
   const [password, onChangeSignPass] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
-  const [signupsubmitted,onSignupSubmit] = React.useState(false);
   const onSignUpButton = () => {
-    if (signupsubmitted == false) {
-      onSignupSubmit(!signupsubmitted);
       const target =  "http://10.0.2.2:3000/usercheck?username="+username
       fetch(target,{
       method:'post',
@@ -80,13 +72,9 @@ export default function LogInTab({navigation}) {
           }
         }
       )
-    }
-    else{
       onChangeSignUser('');
       onChangeSignPass('');
       onConfirm('');
-      onSignupSubmit(!signupsubmitted);
-    }
   }
   /********************************SignUp*********************************/
 
