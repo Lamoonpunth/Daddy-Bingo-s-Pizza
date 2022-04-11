@@ -1,5 +1,5 @@
 import React  from 'react';
-import { StyleSheet, TextInput, Dimensions, KeyboardAvoidingView,Platform,Keyboard,Button,Alert } from 'react-native';
+import { StyleSheet, TextInput, Dimensions } from 'react-native';
 import RegInput from '../components/ReginfoInput';
 
 import { Text, View } from '../components/Themed';

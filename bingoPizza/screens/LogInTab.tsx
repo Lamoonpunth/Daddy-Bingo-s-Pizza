@@ -59,8 +59,9 @@ export default function LogInTab({navigation}) {
   const [password, onChangeSignPass] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
 
-  const onSignInButton = () => {
-
+  const onSignUpButton = () => {
+    alert("ข้าวมันไก่.");
+    navigation.navigate("RegisterInformation");
   }
   /********************************SignUp*********************************/
 
@@ -145,18 +146,15 @@ export default function LogInTab({navigation}) {
               placeholder="Confirm password"
               secureTextEntry={true}
             />
-            <TouchableOpacity style={styles.signupbutton} onPress={onSignInButton}>
+            <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
               <Text style={{fontSize:20, color: 'white'}}>Sign In</Text>
             </TouchableOpacity>
             <View style={styles.box3}/>
           </View>
-          
           /********************************SignUp*********************************/
           }
-          
         </View>
       </View>
-
     </View>
   );
 }
