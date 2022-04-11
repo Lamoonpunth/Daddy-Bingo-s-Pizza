@@ -1,9 +1,7 @@
 import React  from 'react';
 import { StyleSheet,
   Image,
-  Dimensions,
-  TextInput,
-  Pressable,} from 'react-native';
+  Dimensions,} from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
 import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
@@ -15,22 +13,15 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
-/*ตัวเลือกของswitch selector*/ 
-const options = [
-  { label: "Log In", value: "Login" },
-  { label: "Sign up", value: "Signup" },
-];
-
 export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>) {
-  const [switchbutton, onSelector] = React.useState(0);
-  const onSwitch = () => {
-    if (options[switchbutton].value == "Login"){
-      onSelector(1);
-    }
-    else if (options[switchbutton].value == "Signup"){
-      onSelector(0)
-    }
-  }
+  
+  /*ตัวเลือกของswitch selector*/ 
+  const options = [
+    { label: "Log In", value: "Login" },
+    { label: "Sign up", value: "Signup" },
+  ];
+
+  const [switchbutton, onSelector] = React.useState('');
 
   return (
     <View style={styles.container}>
@@ -45,7 +36,7 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
           <View style={styles.space}>
           </View>
           <SwitchSelector
-            onPress={onSwitch}
+            onPress={(value: any) => onSelector(value)}
             options={options}
             initial={0}
             textColor='#FF6D6D'
@@ -54,8 +45,7 @@ export default function LogInTab({ navigation }: RootTabScreenProps<'LogInTab'>)
             borderColor='#000000'
             borderWidth={5}
           />
-          <Text>{options[switchbutton].value}</Text>
-          {options[switchbutton].value == "Login"?
+          {switchbutton == "Login"?
             <LoginInput/>
           :<SigninInput/>}
         </View>
