@@ -19,8 +19,7 @@ export default function TabOneScreen({navigation}) {
 
       <View style={styles.roundedrec}>
         <RegInput/>
-        <View style={styles.space2}/>
-
+        
       </View>
     </View>
   );

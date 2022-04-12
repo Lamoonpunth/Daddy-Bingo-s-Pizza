@@ -3,6 +3,7 @@ import { Image, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "
 import { Picker } from "@react-native-picker/picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { PanResponder } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 const {height, width} = Dimensions.get('screen');
 
@@ -20,6 +21,10 @@ const RegInfoText = () => {
   const [listOfProvince,setListOfProvince] =React.useState([]);
   const [listOfDistrict,setListOfDistrict] =React.useState([]);
   const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
+
+  const onSaveButton = () => {
+    alert('Hello How are you? I am under the water pls help me.');
+  }
 
   const getProvinceList = async() =>{
   fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces',{ method: "GET",
@@ -71,17 +76,6 @@ const RegInfoText = () => {
   useEffect(()=>{
   getProvinceList()
   },[])
-
-  
-
-
-
-
-
-
-
-
-  
 
   const renderProvinceList = () => {
     return listOfProvince.map((province) => {
@@ -371,8 +365,15 @@ const RegInfoText = () => {
           </Picker>
         </View>
       </View>
-        
-      
+      <View style={styles.space2}>
+        <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
+          <View>
+            <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
+          </View>  
+        </TouchableOpacity>
+        <View style={{flex:1}}>
+        </View>
+      </View>
     </View>
   );
 };
@@ -407,7 +408,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
-  loginbutton: {
+  savebutton: {
+    flex:1,
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
@@ -508,6 +510,15 @@ const styles = StyleSheet.create({
     borderRadius:50,
     elevation: 12,
     margin: 6
+  },
+  space2: {
+    flexDirection:'row-reverse',
+    flexWrap:'wrap-reverse',
+    alignItems:'center',
+    justifyContent:'center',
+    height:height*.15,
+    backgroundColor:'transparent',
+    borderWidth: 1,
   },
 });
 

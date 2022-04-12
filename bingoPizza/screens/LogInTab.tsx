@@ -13,7 +13,7 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
-export default function LogInTab({navigation}) {
+export default function LogInTab({navigation}:{navigation:any}) {
   /**************************************************/
   /*ตัวเลือกของswitch selector*/ 
   const options = [
