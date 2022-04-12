@@ -38,7 +38,7 @@ export default function LogInTab({navigation}) {
     .then(data=>{
       console.log(data)
       if(data === "SUCCESS"){
-        navigation.navigate("Order");
+        navigation.navigate("RegisterInformation");
        }
     })
       onChangeText('');

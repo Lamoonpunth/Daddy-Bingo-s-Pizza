@@ -14,6 +14,9 @@ const RegInfoText = () => {
   const [address, onChangeAddr] = React.useState('');
   const [selectedDate, setSelectedDate] = React.useState('');
   const [selectedMonth, setSelectedMonth] = React.useState('');
+  const [selectedProvince, setSelectedProvince] = React.useState('');
+  const [selectedDistrict, setSelectedDistrict] = React.useState('');
+  const [selectedSubDistrict, setSelectedSubDistrict] = React.useState('');
 
   return (
     <View style={styles.container}>
@@ -60,7 +63,6 @@ const RegInfoText = () => {
             selectedValue={selectedMonth}
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
-            prompt= "Month"
             onValueChange={(itemValue) =>
               setSelectedMonth(itemValue)
             }>
@@ -88,7 +90,6 @@ const RegInfoText = () => {
             selectedValue={selectedDate}
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
-            prompt= "Date"
             onValueChange={(itemValue, itemIndex) =>
               setSelectedDate(itemValue)
             }>
@@ -177,11 +178,12 @@ const RegInfoText = () => {
           </Picker>
           </View>
         </View>
-          
+        
 
       </View>
 
       <View style={styles.box1}>
+        
       <Image 
         style={styles.gendericon}
         source={require('../assets/images/gender2_icon.png')}
@@ -226,7 +228,50 @@ const RegInfoText = () => {
         
 
       </View>
-      
+
+      <View style={styles.box1}>
+        <Text>         </Text>
+        <View style={styles.pickerboxinside3}>
+          <Picker style={styles.pickerProvince}
+            selectedValue={selectedProvince}
+            dropdownIconColor='#FF6D6D'
+            mode='dropdown'
+            onValueChange={(itemValue) =>
+              setSelectedProvince(itemValue)
+            }>
+            <Picker.Item label="Province" value="0" color='#A0A0A0' enabled={false} />
+          </Picker>
+        </View>
+        
+        <Text>       </Text>
+        <View style={styles.pickerboxinside3}>
+          <Picker style={styles.pickerDistrict}
+            selectedValue={selectedDistrict}
+            dropdownIconColor='#FF6D6D'
+            mode='dropdown'
+            onValueChange={(itemValue) =>
+              setSelectedDistrict(itemValue)
+            }>
+            <Picker.Item label="District" value="0" color='#A0A0A0' enabled={false} />
+          </Picker>
+        </View>
+
+      </View>
+
+      <View style={styles.box1}>
+        <Text>         </Text>
+        <View style={styles.pickerboxinside3}>
+          <Picker style={styles.pickerSubDistrict}
+            selectedValue={selectedDistrict}
+            dropdownIconColor='#FF6D6D'
+            mode='dropdown'
+            onValueChange={(itemValue) =>
+              setSelectedSubDistrict(itemValue)
+            }>
+            <Picker.Item label="SubDistrict" value="0" color='#A0A0A0' enabled={false} />
+          </Picker>
+        </View>
+      </View>
         
       
     </View>
@@ -309,7 +354,27 @@ const styles = StyleSheet.create({
     fontSize: 12,
     width: width *.22,
     minHeight: height * 0.06,
-    elevation: 12,
+    backgroundColor: 'transparent',
+
+  },
+  pickerProvince:{
+    fontSize: 12,
+    width: width *.35,
+    minHeight: height * 0.06,
+    backgroundColor: 'transparent',
+
+  },
+  pickerDistrict:{
+    fontSize: 12,
+    width: width *.35,
+    minHeight: height * 0.06,
+    backgroundColor: 'transparent',
+
+  },
+  pickerSubDistrict:{
+    fontSize: 12,
+    width: width *.35,
+    minHeight: height * 0.06,
     backgroundColor: 'transparent',
 
   },
@@ -334,6 +399,16 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     borderRadius:50,
     elevation: 12,
+  },
+  pickerboxinside3:{
+    alignItems:'center',
+    justifyContent:'center',
+    width:width*.35,
+    height:height*0.055,
+    backgroundColor:'white',
+    borderRadius:50,
+    elevation: 12,
+    margin: 6
   },
 });
 
