@@ -5,7 +5,6 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { PanResponder } from "react-native";
 
 const {height, width} = Dimensions.get('screen');
-import mockAddress from "../new_data.json"
 
 const RegInfoText = () => {
   const [firstname, onChangeName] = React.useState('');
@@ -20,6 +19,7 @@ const RegInfoText = () => {
 
   const [listOfProvince,setListOfProvince] =React.useState([]);
   const [listOfDistrict,setListOfDistrict] =React.useState([]);
+  const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
 
   const getProvinceList = async() =>{
   fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces',{ method: "GET",
@@ -36,8 +36,9 @@ const RegInfoText = () => {
   )
   }
 
-  const getDistrictList = async() =>{
-    fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+selectedProvince+'/district',{ method: "GET",
+  const getDistrictList = async(itemValue : String) =>{
+
+    fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+itemValue+'/district',{ method: "GET",
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -46,12 +47,26 @@ const RegInfoText = () => {
     )
     .then(response => response.json())
     .then(json => {
-        console.log(json.data)
         setListOfDistrict(json.data);
       }
     )
     }
 
+    const getSubDistrictList = async(itemValue : String) =>{
+      console.log(selectedProvince)
+      fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+selectedProvince+'/district/'+itemValue,{ method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+      }
+      )
+      .then(response => response.json())
+      .then(json => {
+          setListOfSubDistrict(json.data);
+        }
+      )
+      }
   
   useEffect(()=>{
   getProvinceList()
@@ -72,20 +87,25 @@ const RegInfoText = () => {
     return listOfProvince.map((province) => {
       return <Picker.Item label={province.province}
       value={province.province}
-      key = "0"/>;
+      key = {province.province}/>;
     });
   };
 
   const renderDistrictList = () => {
     return listOfDistrict.map((district) => {
-      console.log(district)
       return <Picker.Item label={district}
       value={district}
-      key = "0"/>;
+      key = {district}/>;
     });
   }
 
-
+  const renderSubDistrictList = () => {
+    return listOfSubDistrict.map((subdistrict) => {
+      return <Picker.Item label={subdistrict}
+      value={subdistrict}
+      key = {subdistrict}/>;
+    });
+  }
 
 
 
@@ -310,7 +330,7 @@ const RegInfoText = () => {
             onValueChange={(itemValue) =>
               {
                 setSelectedProvince(itemValue)
-                getDistrictList()
+                getDistrictList(itemValue)
               }
             }>
             <Picker.Item label="Province" value="0" color='#A0A0A0' enabled={false} />
@@ -324,8 +344,10 @@ const RegInfoText = () => {
             selectedValue={selectedDistrict}
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
-            onValueChange={(itemValue) =>
+            onValueChange={(itemValue) =>{
               setSelectedDistrict(itemValue)
+              getSubDistrictList(itemValue)
+              }
             }>
             <Picker.Item label="District" value="0" color='#A0A0A0' enabled={false} />
             {renderDistrictList()}
@@ -338,13 +360,14 @@ const RegInfoText = () => {
         <Text>         </Text>
         <View style={styles.pickerboxinside3}>
           <Picker style={styles.pickerSubDistrict}
-            selectedValue={selectedDistrict}
+            selectedValue={selectedSubDistrict}
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
             onValueChange={(itemValue) =>
               setSelectedSubDistrict(itemValue)
             }>
             <Picker.Item label="SubDistrict" value="0" color='#A0A0A0' enabled={false} />
+            {renderSubDistrictList()}
           </Picker>
         </View>
       </View>
