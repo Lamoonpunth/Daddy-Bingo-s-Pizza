@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Image, StyleSheet, TextInput, Dimensions, View, Text, Pressable} from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { PanResponder } from "react-native";
 
 const {height, width} = Dimensions.get('screen');
-
-
 
 const RegInfoText = () => {
   const [firstname, onChangeName] = React.useState('');
@@ -17,6 +16,98 @@ const RegInfoText = () => {
   const [selectedProvince, setSelectedProvince] = React.useState('');
   const [selectedDistrict, setSelectedDistrict] = React.useState('');
   const [selectedSubDistrict, setSelectedSubDistrict] = React.useState('');
+
+  const [listOfProvince,setListOfProvince] =React.useState([]);
+  const [listOfDistrict,setListOfDistrict] =React.useState([]);
+  const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
+
+  const getProvinceList = async() =>{
+  fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces',{ method: "GET",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
+  }
+  )
+  .then(response => response.json())
+  .then(json => {
+      setListOfProvince(json.data);
+    }
+  )
+  }
+
+  const getDistrictList = async(itemValue : String) =>{
+
+    fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+itemValue+'/district',{ method: "GET",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+    }
+    )
+    .then(response => response.json())
+    .then(json => {
+        setListOfDistrict(json.data);
+      }
+    )
+    }
+
+    const getSubDistrictList = async(itemValue : String) =>{
+      console.log(selectedProvince)
+      fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+selectedProvince+'/district/'+itemValue,{ method: "GET",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+      }
+      )
+      .then(response => response.json())
+      .then(json => {
+          setListOfSubDistrict(json.data);
+        }
+      )
+      }
+  
+  useEffect(()=>{
+  getProvinceList()
+  },[])
+
+  
+
+
+
+
+
+
+
+
+  
+
+  const renderProvinceList = () => {
+    return listOfProvince.map((province) => {
+      return <Picker.Item label={province.province}
+      value={province.province}
+      key = {province.province}/>;
+    });
+  };
+
+  const renderDistrictList = () => {
+    return listOfDistrict.map((district) => {
+      return <Picker.Item label={district}
+      value={district}
+      key = {district}/>;
+    });
+  }
+
+  const renderSubDistrictList = () => {
+    return listOfSubDistrict.map((subdistrict) => {
+      return <Picker.Item label={subdistrict}
+      value={subdistrict}
+      key = {subdistrict}/>;
+    });
+  }
+
+
 
   return (
     <View style={styles.container}>
@@ -237,9 +328,13 @@ const RegInfoText = () => {
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
             onValueChange={(itemValue) =>
-              setSelectedProvince(itemValue)
+              {
+                setSelectedProvince(itemValue)
+                getDistrictList(itemValue)
+              }
             }>
             <Picker.Item label="Province" value="0" color='#A0A0A0' enabled={false} />
+            {renderProvinceList()}
           </Picker>
         </View>
         
@@ -249,10 +344,13 @@ const RegInfoText = () => {
             selectedValue={selectedDistrict}
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
-            onValueChange={(itemValue) =>
+            onValueChange={(itemValue) =>{
               setSelectedDistrict(itemValue)
+              getSubDistrictList(itemValue)
+              }
             }>
             <Picker.Item label="District" value="0" color='#A0A0A0' enabled={false} />
+            {renderDistrictList()}
           </Picker>
         </View>
 
@@ -262,13 +360,14 @@ const RegInfoText = () => {
         <Text>         </Text>
         <View style={styles.pickerboxinside3}>
           <Picker style={styles.pickerSubDistrict}
-            selectedValue={selectedDistrict}
+            selectedValue={selectedSubDistrict}
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
             onValueChange={(itemValue) =>
               setSelectedSubDistrict(itemValue)
             }>
             <Picker.Item label="SubDistrict" value="0" color='#A0A0A0' enabled={false} />
+            {renderSubDistrictList()}
           </Picker>
         </View>
       </View>
