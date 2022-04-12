@@ -26,7 +26,8 @@ const RegInfoText = () => {
     alert('Hello How are you? I am under the water pls help me.');
   }
 
-  const getProvinceList = async() =>{
+  const getProvinceList = async() =>{  
+  console.log("getProvinceList");
   fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces',{ method: "GET",
   headers: {
     'Accept': 'application/json',
@@ -36,13 +37,18 @@ const RegInfoText = () => {
   )
   .then(response => response.json())
   .then(json => {
-      setListOfProvince(json.data);
+      setListOfProvince(json.data);     
+             
     }
   )
   }
 
   const getDistrictList = async(itemValue : String) =>{
-
+    //console.log("getDistrictList");
+    setListOfDistrict([]);
+    setListOfSubDistrict([]);
+    setSelectedDistrict('');
+    setSelectedSubDistrict('');
     fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+itemValue+'/district',{ method: "GET",
     headers: {
       'Accept': 'application/json',
@@ -52,13 +58,14 @@ const RegInfoText = () => {
     )
     .then(response => response.json())
     .then(json => {
-        setListOfDistrict(json.data);
+        setListOfDistrict(json.data);                    
       }
     )
     }
 
-    const getSubDistrictList = async(itemValue : String) =>{
-      console.log(selectedProvince)
+    const getSubDistrictList = async(itemValue : String) =>{   
+      //console.log("getSubDistrictList");   
+      //console.log(selectedProvince)
       fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+selectedProvince+'/district/'+itemValue,{ method: "GET",
       headers: {
         'Accept': 'application/json',
@@ -68,7 +75,7 @@ const RegInfoText = () => {
       )
       .then(response => response.json())
       .then(json => {
-          setListOfSubDistrict(json.data);
+          setListOfSubDistrict(json.data);         
         }
       )
       }
@@ -323,7 +330,7 @@ const RegInfoText = () => {
             mode='dropdown'
             onValueChange={(itemValue) =>
               {
-                setSelectedProvince(itemValue)
+                setSelectedProvince(itemValue)               
                 getDistrictList(itemValue)
               }
             }>
@@ -339,7 +346,7 @@ const RegInfoText = () => {
             dropdownIconColor='#FF6D6D'
             mode='dropdown'
             onValueChange={(itemValue) =>{
-              setSelectedDistrict(itemValue)
+              setSelectedDistrict(itemValue)                            
               getSubDistrictList(itemValue)
               }
             }>
