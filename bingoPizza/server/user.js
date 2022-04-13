@@ -14,7 +14,8 @@ const UserSchema = new mongoose.Schema({
     province : String,
     district : String,
     subdistrict : String,
-    postcode : String
+    postcode : String,
+    salt : String
 });
 
 mongoose.model('user', UserSchema);

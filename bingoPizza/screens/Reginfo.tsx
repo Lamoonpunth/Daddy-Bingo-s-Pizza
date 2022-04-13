@@ -340,7 +340,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
               size={20}
               fillColor="red"
               unfillColor="#FFFFFF"
-              text="Male    "
+              text="Boy    "
               iconStyle={{ borderColor: "red" }}
               textStyle={{textDecorationLine: "none",}}
               disableBuiltInState
@@ -351,7 +351,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
               size={20}
               fillColor="red"
               unfillColor="#FFFFFF"
-              text="Female"
+              text="Girl"
               textStyle={{textDecorationLine: "none",}}
               iconStyle={{ borderColor: "red" }}
               disableBuiltInState
