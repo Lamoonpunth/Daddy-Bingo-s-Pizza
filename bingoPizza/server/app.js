@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config()
 const dotenv = require('dotenv')
+const crypto = require('crypto-js');
+
 dotenv.config();
 require('./user');
 
@@ -12,31 +14,34 @@ app.use(bodyParser.json())
 const User = mongoose.model("user");
 
 const mongoUri = process.env.DBURL;
-
+  //mongodb connection
 mongoose.connect(mongoUri,{ 
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
 mongoose.connection.on("connected",()=>{
-    console.log("Connected to mongo instance");
+    console.log("Connected to mongo instance");   
 })
+
 mongoose.connection.on("error",(err)=>{
     console.log("Error connecting to mongo",err);
 })
+  //---------------------------------------------------------------------
 
-app.get('/', (req, res) => {
+  app.get('/', (req, res) => {
   res.send('Hello World!');
 })
-
+ 
 app.post('/send',(req,res)=>{
   console.log(req.body)
   res.send("posted")
 })
 
 app.post('/send-data',(req,res) =>{
+  const Salts = crypto.lib.WordArray.random(128/8);
   const user = new User({
     username:req.body.username,
-    password:req.body.password,
+    password:crypto.SHA256(req.body.password+Salts).toString(),
     fname:req.body.fname,
     lname:req.body.lname,
     phonenumber:req.body.phonenumber,
@@ -47,7 +52,8 @@ app.post('/send-data',(req,res) =>{
     province:req.body.province,
     district:req.body.district,
     subdistrict:req.body.subdistrict,
-    postcode:req.body.postcode
+    postcode:req.body.postcode,
+    salt :Salts
   })
   user.save()
   .then(data => {

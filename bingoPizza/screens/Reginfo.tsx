@@ -52,7 +52,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
     if (checkboxBoy)selectedSex = 1
     else if (checkboxGirl)selectedSex = 2
     else selectedSex = 0
-    const target =  "http://10.0.2.2:3000/send-data"
+    const target =  "http://192.168.1.43:3000/send-data"
     fetch(target,{
     method:'post',
     headers:{
