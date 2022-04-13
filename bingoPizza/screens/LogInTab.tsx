@@ -25,7 +25,6 @@ export default function LogInTab({navigation}:{navigation:any}) {
   /*********************************LogIn*********************************/
   const [Username, onChangeText] = React.useState('');
   const [Password, onChangePass] = React.useState('');
-  const [submitted, onSubmit] = React.useState(false);
   const onSubmitButton = () => {
       const target =  "http://10.0.2.2:3000/login?username="+Username+"&password="+Password
       fetch(target,{
@@ -40,10 +39,21 @@ export default function LogInTab({navigation}:{navigation:any}) {
       if(data === "SUCCESS"){
         navigation.navigate("Order");
        }
+      else if (Username=='' && Password==''){
+        alert("Please enter your username and password.");
+      }
+      else if (Username==''){
+        alert("Please enter your username.");
+      }
+      else if (Password==''){
+        alert("Please enter your password.");
+        }
+      else{
+        alert(' Your username or password is incorrect.');
+      }
     })
       onChangeText('');
       onChangePass('');
-      onSubmit(!submitted);
   }
   /*********************************LogIn*********************************/
 
@@ -116,12 +126,9 @@ export default function LogInTab({navigation}:{navigation:any}) {
                 secureTextEntry={true} 
               />
               <View style={{alignItems: 'center',}}>
-                <Pressable>
+                <TouchableOpacity>
                   <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
-                </Pressable>
-                {submitted?
-                <Text>You are now Logged In as {Username}</Text>
-                :null}
+                </TouchableOpacity>
               </View>
               <View style={styles.box1}/>
               <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>

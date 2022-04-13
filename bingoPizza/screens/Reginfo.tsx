@@ -22,6 +22,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   const [selectedProvince, setSelectedProvince] = React.useState('');
   const [selectedDistrict, setSelectedDistrict] = React.useState('');
   const [selectedSubDistrict, setSelectedSubDistrict] = React.useState('');
+  const [selectedZipCode, setSelectedZipCode] = React.useState('');
 
   const [checkboxBoy, setcheckboxBoy] = React.useState(false);
   const [checkboxGirl, setcheckboxGirl] = React.useState(false);
@@ -413,6 +414,17 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
               </Picker>
             </View>
           </View>
+          <View style={styles.box1}>
+            <Text>         </Text>
+            <View style={styles.pickerboxinside3}>
+              <TextInput
+                style={{fontSize:14}}
+                onChangeText={setSelectedZipCode}
+                value={selectedZipCode}
+                placeholder="Zip Code"
+              />
+            </View>
+          </View>
           <View style={styles.space2}>
             <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
               <View style={{backgroundColor:'transparent'}}>
@@ -551,7 +563,12 @@ const styles = StyleSheet.create({
     width: width *.35,
     minHeight: height * 0.06,
     backgroundColor: 'transparent',
-
+  },
+  pickerZipCode:{
+    fontSize: 14,
+    width: width *.35,
+    minHeight: height * 0.06,
+    backgroundColor: 'transparent',
   },
   pickerbox:{
     height: height * .05,
@@ -586,6 +603,7 @@ const styles = StyleSheet.create({
     margin: 6
   },
   space2: {
+    flex:0.65,
     flexDirection:'row-reverse',
     flexWrap:'wrap-reverse',
     alignItems:'center',
