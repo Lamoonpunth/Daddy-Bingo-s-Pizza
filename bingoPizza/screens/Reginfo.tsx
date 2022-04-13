@@ -35,6 +35,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   }
 
   const getProvinceList = async() =>{
+  console.log("getProvinceList");
   fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces',{ method: "GET",
   headers: {
     'Accept': 'application/json',
@@ -51,6 +52,11 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
 
   const getDistrictList = async(itemValue : String) =>{
 
+    //console.log("getDistrictList");
+    setListOfDistrict([]);
+    setListOfSubDistrict([]);
+    setSelectedDistrict('');
+    setSelectedSubDistrict('');
     fetch('https://thaiaddressapi-thaikub.herokuapp.com/v1/thailand/provinces/'+itemValue+'/district',{ method: "GET",
     headers: {
       'Accept': 'application/json',
