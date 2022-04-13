@@ -61,6 +61,11 @@ export default function LogInTab({navigation}:{navigation:any}) {
   const [username, onChangeSignUser] = React.useState('');
   const [password, onChangeSignPass] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
+
+  function isPerfect(str:any) {
+    return /[a-z]/.test(str) && /[A-Z]/.test(str) && /[0-9]/.test(str);
+  }
+
   const onSignUpButton = () => {
       const target =  "http://10.0.2.2:3000/usercheck?username="+username
       fetch(target,{
@@ -85,7 +90,15 @@ export default function LogInTab({navigation}:{navigation:any}) {
         alert("Please match your password.");
       }
       else if(data === "user doesn't exist"){
-        navigation.navigate('RegisterInfo',{username:username,password:password})
+        if (password.length < 8){
+          alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
+        }
+        else if (isPerfect(password) == true){
+          navigation.navigate('RegisterInfo',{username:username,password:password});
+        }
+        else{
+          alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
+        }
       }
       else{
         alert("user exist");
@@ -177,7 +190,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
               secureTextEntry={true}
             />
             {password != confirm && password != '' && confirm != ''?
-              <Text style={{color:'palevioletred',}}>Your password doesn't match.</Text>
+              <Text style={{color:'red',}}>Your password doesn't match.</Text>
             :null}
             <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
               <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
