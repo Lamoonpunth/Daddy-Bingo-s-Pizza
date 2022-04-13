@@ -23,6 +23,20 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   const [selectedDistrict, setSelectedDistrict] = React.useState('');
   const [selectedSubDistrict, setSelectedSubDistrict] = React.useState('');
 
+  const [checkboxBoy, setcheckboxBoy] = React.useState(false);
+  const [checkboxGirl, setcheckboxGirl] = React.useState(false);
+
+  const onstateCheckboxBoy = () => {
+    setcheckboxBoy(!checkboxBoy);
+    setcheckboxGirl(false);
+  }
+
+  const onstateCheckboxGirkl = () => {
+    setcheckboxGirl(!checkboxGirl);
+    setcheckboxBoy(false);
+
+  }
+
   const [listOfProvince,setListOfProvince] =React.useState([]);
   const [listOfDistrict,setListOfDistrict] =React.useState([]);
   const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
@@ -318,21 +332,21 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
               unfillColor="#FFFFFF"
               text="Boy    "
               iconStyle={{ borderColor: "red" }}
-              textStyle={{
-                textDecorationLine: "none",
-              }}
-              onPress={(isChecked: boolean) => {}}
+              textStyle={{textDecorationLine: "none",}}
+              disableBuiltInState
+              isChecked={checkboxBoy}
+              onPress={onstateCheckboxBoy}
             />
             <BouncyCheckbox
               size={20}
               fillColor="red"
               unfillColor="#FFFFFF"
               text="Girl"
-              textStyle={{
-                textDecorationLine: "none",
-              }}
+              textStyle={{textDecorationLine: "none",}}
               iconStyle={{ borderColor: "red" }}
-              onPress={(isChecked: boolean) => {}}
+              disableBuiltInState
+              isChecked={checkboxGirl}
+              onPress={onstateCheckboxGirkl}
             />
           </View>
 
