@@ -403,16 +403,12 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
           <View style={styles.box1}>
             <Text>         </Text>
             <View style={styles.pickerboxinside3}>
-              <Picker style={styles.pickerZipCode}
-                selectedValue={selectedZipCode}
-                dropdownIconColor='#FF6D6D'
-                mode='dropdown'
-                onValueChange={(itemValue) =>
-                  setSelectedZipCode(itemValue)
-                }>
-                <Picker.Item label="Zip Code" value="0" color='#A0A0A0' enabled={false} />
-                {}
-              </Picker>
+              <TextInput
+                style={{fontSize:14}}
+                onChangeText={setSelectedZipCode}
+                value={selectedZipCode}
+                placeholder="Zip Code"
+              />
             </View>
           </View>
           <View style={styles.space2}>
@@ -555,7 +551,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   pickerZipCode:{
-    fontSize: 12,
+    fontSize: 14,
     width: width *.35,
     minHeight: height * 0.06,
     backgroundColor: 'transparent',
