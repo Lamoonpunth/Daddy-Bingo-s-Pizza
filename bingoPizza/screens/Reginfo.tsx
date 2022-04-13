@@ -53,7 +53,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
       "province" : selectedProvince,
       "district" : selectedDistrict,
       "subdistrict" : selectedSubDistrict,
-      "postcode" : "0"
+      "postcode" : selectedZipCode
     })
   })
   .then(res=>res.json())
