@@ -48,7 +48,7 @@ export default function LogIn({navigation}: {navigation: any}) {
           <Gradient>
 
             <View style={{flex:1}}>
-              <Image source={require('../assets/pizza(login).png')} style={styles.pizzaImage}/>
+              <Image source={require('../assets/images/pizza(login).png')} style={styles.pizzaImage}/>
             </View>
 
             <View style={{flex:1 , alignItems:'center' , justifyContent:'center'}}>
