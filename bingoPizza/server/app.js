@@ -52,7 +52,6 @@ app.post('/send-data',(req,res) =>{
   user.save()
   .then(data => {
     console.log(data)
-    res.send("success")
   }).catch(err => {
     console.log(err)
   })

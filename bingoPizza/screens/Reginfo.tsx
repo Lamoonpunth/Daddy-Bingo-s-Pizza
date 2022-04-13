@@ -48,6 +48,10 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   const onSaveButton = () => {
     alert('Hello How are you? I am under the water pls help me.');
 
+    var selectedSex
+    if (checkboxBoy)selectedSex = 1
+    else if (checkboxGirl)selectedSex = 2
+    else selectedSex = 0
     const target =  "http://10.0.2.2:3000/send-data"
     fetch(target,{
     method:'post',
@@ -62,7 +66,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
       "phonenumber" : phone,
       "birthdatem" : selectedMonth,
       "birthdatey" : selectedDate,
-      "sex" : 0,
+      "sex" : selectedSex,
       "address" : address,
       "province" : selectedProvince,
       "district" : selectedDistrict,
