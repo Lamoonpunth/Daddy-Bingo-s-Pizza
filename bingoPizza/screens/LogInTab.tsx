@@ -40,7 +40,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
         navigation.navigate("Order");
        }
       else if (Username=='' && Password==''){
-        alert("Please enter username and password.");
+        alert("Please enter your username and password.");
       }
       else if (Username==''){
         alert("Please enter your username.");
