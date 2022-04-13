@@ -63,7 +63,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
     .then(data=>{
       console.log(data)
       if(data === "user doesn't exist"){
-        navigation.navigate('RegisterInformation')
+        navigation.navigate('RegisterInfo',{username:username,password:password})
           }
        else{
          alert("user exist");
