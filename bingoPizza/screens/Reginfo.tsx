@@ -4,7 +4,6 @@ import { Picker } from "@react-native-picker/picker";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { PanResponder } from "react-native";
 import { Text, View } from '../components/Themed';
-
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
@@ -15,8 +14,6 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
 
-  const [getUsername, onUsername] = React.useState('');
-  const [getPassword, onPassword] = React.useState('');
 
   const [phone, onChangeNumber] = React.useState('');
   const [address, onChangeAddr] = React.useState('');
@@ -29,9 +26,37 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   const [listOfProvince,setListOfProvince] =React.useState([]);
   const [listOfDistrict,setListOfDistrict] =React.useState([]);
   const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
+  
 
+  const Username=navigation.getParam("username")
+  const Password=navigation.getParam("password")
   const onSaveButton = () => {
     alert('Hello How are you? I am under the water pls help me.');
+
+    const target =  "http://10.0.2.2:3000/send-data"
+    fetch(target,{
+    method:'post',
+    headers:{
+        'Content-Type': 'application/json'
+    },
+    body : JSON.stringify({
+      "username" : Username,
+      "password" : Password,
+      "fname" : firstname,
+      "lname" : lastname,
+      "phonenumber" : phone,
+      "birthdatem" : selectedMonth,
+      "birthdatey" : selectedDate,
+      "sex" : 0,
+      "address" : address,
+      "province" : selectedProvince,
+      "district" : selectedDistrict,
+      "subdistrict" : selectedSubDistrict,
+      "postcode" : "0"
+    })
+  })
+  .then(res=>res.json())
+  .then(data=>{console.log(data)})
   }
 
   const getProvinceList = async() =>{
