@@ -47,7 +47,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
       }
       else if (Password==''){
         alert("Please enter your password.");
-        }
+      }
       else{
         alert(' Your username or password is incorrect.');
       }
@@ -72,13 +72,25 @@ export default function LogInTab({navigation}:{navigation:any}) {
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-      if(data === "user doesn't exist"){
+      if (username=='' && password==''){
+        alert("Please enter your username and password.");
+      }
+      else if (username==''){
+        alert("Please enter your username.");
+      }
+      else if (password==''){
+        alert("Please enter your password.");
+      }
+      else if(password != confirm){
+        alert("Please match your password.");
+      }
+      else if(data === "user doesn't exist"){
         navigation.navigate('RegisterInfo',{username:username,password:password})
-          }
-       else{
-         alert("user exist");
-          }
-        }
+      }
+      else{
+        alert("user exist");
+      }
+    }
       )
       onChangeSignUser('');
       onChangeSignPass('');
@@ -164,6 +176,9 @@ export default function LogInTab({navigation}:{navigation:any}) {
               placeholder="Confirm password"
               secureTextEntry={true}
             />
+            {password != confirm && password != '' && confirm != ''?
+              <Text style={{color:'palevioletred',}}>Your password doesn't match.</Text>
+            :null}
             <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
               <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
             </TouchableOpacity>

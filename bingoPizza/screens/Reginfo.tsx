@@ -145,8 +145,6 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>User Information</Text>
-      <View style={styles.space1}/>
-
       <View style={styles.roundedrec}>
 
           <View style={styles.inputcontainer}>
@@ -347,6 +345,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
               onChangeText={onChangeAddr}
               value={address}
               placeholder="Address"
+              multiline={true}
             />
           </View>
 
@@ -411,16 +410,16 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
               />
             </View>
           </View>
-          <View style={styles.space2}>
-            <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
-              <View style={{backgroundColor:'transparent'}}>
-                <Text style={{fontSize:20, color: 'white'}}>Save</Text>
-              </View>  
-            </TouchableOpacity>
-            <View style={{flex:1}}>
-            </View>
-          </View>
         </View> 
+        <View style={styles.space2}>
+          <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
+            <View style={{backgroundColor:'transparent'}}>
+              <Text style={{fontSize:20, color: 'white'}}>Save</Text>
+            </View>  
+          </TouchableOpacity>
+          <View style={{flex:1}}>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -446,17 +445,19 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: 'normal',
     color: 'white',
+    padding:20
   },
   roundedrec: {
     alignItems:'center',
     justifyContent:'center',
     width:screenWidth*.97,
-    height:screenHeight*.6,
+    height:screenHeight*.8,
     backgroundColor:'white',
     borderRadius:50,
     elevation: 12,
   },
   inputcontainer: {
+    flex:0.8,
     backgroundColor:'transparent',
     borderWidth: 1,
   },
@@ -589,13 +590,14 @@ const styles = StyleSheet.create({
     margin: 6
   },
   space2: {
-    flex:0.65,
+    flex:0.1,
     flexDirection:'row-reverse',
     flexWrap:'wrap-reverse',
     alignItems:'center',
     justifyContent:'center',
     height:height*.15,
     backgroundColor:'transparent',
+    width:screenWidth*.97,
     borderWidth: 1,
   },
 });
