@@ -15,7 +15,7 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function LogIn({navigation}: {navigation: any}) {
-
+ 
   const ModeOptions = [
     { label: "Admin", value: "Admin" },
     { label: "Chef", value: "Chef" },
@@ -31,12 +31,15 @@ export default function LogIn({navigation}: {navigation: any}) {
     const onLogIn = () => {
       if (ModeLogIn == 'Admin') {
         alert('You are now logged in as Admin.');
+        navigation.navigate('Admin');
       }
       else if (ModeLogIn == 'Chef') {
         alert('You are now logged in as Chef.');
+        navigation.navigate('Chef');
       }
       else if (ModeLogIn == 'Rider'){
         alert('You are now logged in as Rider');
+        navigation.navigate('Rider');
       }
     }
     /*------------------------------------------------------------------------------------------------*/
