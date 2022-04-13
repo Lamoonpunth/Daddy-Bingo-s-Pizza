@@ -439,15 +439,11 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
         </View> 
 
         <View style={styles.space2}>
-          <View style={{flex:1}}>
-          </View>
           <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
             <View style={{backgroundColor:'transparent'}}>
               <Text style={{fontSize:20, color: 'white'}}>Save</Text>
             </View>  
           </TouchableOpacity>
-          <View style={{flex:1}}>
-          </View>
         </View>
 
       </View>
@@ -473,7 +469,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent',
   },
   title: {
-    fontSize: 26,
+    fontSize: 30,
     fontWeight: 'normal',
     color: 'white',
     padding:20
@@ -516,7 +512,7 @@ const styles = StyleSheet.create({
     elevation: 12,
   },
   savebutton: {
-    flex:1,
+    flex:0.75,
     borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
@@ -525,6 +521,7 @@ const styles = StyleSheet.create({
     height:height*6/100,
     backgroundColor:'#FF6D6D',
     borderRadius:50,
+    marginRight:70
   },
   box1: {
     flexDirection: "row",
@@ -655,7 +652,7 @@ const styles = StyleSheet.create({
   },
   space2: {
     flex:1,
-    flexDirection:'row-reverse',
+    flexDirection:'column',
     flexWrap:'wrap-reverse',
     alignItems:'center',
     justifyContent:'center',
