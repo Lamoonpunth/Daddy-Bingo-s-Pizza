@@ -7,14 +7,15 @@ import { StyleSheet,
   TextInput,
   TouchableOpacity} from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
-import { AuthStackNavigator } from '../navigation/AuthStackNavigator';
 import { View } from '../components/Themed';
+import Gradient from '../components/Gradient';
+import DismissKeyboard from '../components/DismissKeyboard';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
-export default function LogInTab({navigation}) {
+export default function LogInTab({navigation}:{navigation:any}) {
   /**************************************************/
   /*ตัวเลือกของswitch selector*/ 
   const options = [
@@ -26,7 +27,6 @@ export default function LogInTab({navigation}) {
   /*********************************LogIn*********************************/
   const [Username, onChangeText] = React.useState('');
   const [Password, onChangePass] = React.useState('');
-  const [submitted, onSubmit] = React.useState(false);
   const onSubmitButton = () => {
       const target =  "http://10.0.2.2:3000/login?username="+Username+"&password="+Password
       fetch(target,{
@@ -39,13 +39,23 @@ export default function LogInTab({navigation}) {
     .then(data=>{
       console.log(data)
       if(data === "SUCCESS"){
-        alert("You are logged in.");
         navigation.navigate("Order");
        }
+      else if (Username=='' && Password==''){
+        alert("Please enter your username and password.");
+      }
+      else if (Username==''){
+        alert("Please enter your username.");
+      }
+      else if (Password==''){
+        alert("Please enter your password.");
+      }
+      else{
+        alert(' Your username or password is incorrect.');
+      }
     })
       onChangeText('');
       onChangePass('');
-      onSubmit(!submitted);
   }
   /*********************************LogIn*********************************/
 
@@ -53,6 +63,11 @@ export default function LogInTab({navigation}) {
   const [username, onChangeSignUser] = React.useState('');
   const [password, onChangeSignPass] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
+
+  function isPerfect(str:any) {
+    return /[a-z]/.test(str) && /[A-Z]/.test(str) && /[0-9]/.test(str);
+  }
+
   const onSignUpButton = () => {
       const target =  "http://10.0.2.2:3000/usercheck?username="+username
       fetch(target,{
@@ -64,13 +79,33 @@ export default function LogInTab({navigation}) {
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-      if(data === "user doesn't exist"){
-        navigation.navigate('Register Information')
-          }
-       else{
-         alert("user exist");
-          }
+      if (username=='' && password==''){
+        alert("Please enter your username and password.");
+      }
+      else if (username==''){
+        alert("Please enter your username.");
+      }
+      else if (password==''){
+        alert("Please enter your password.");
+      }
+      else if(password != confirm){
+        alert("Please match your password.");
+      }
+      else if(data === "user doesn't exist"){
+        if (password.length < 8){
+          alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
+        else if (isPerfect(password) == true){
+          navigation.navigate('RegisterInfo',{username:username,password:password});
+        }
+        else{
+          alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
+        }
+      }
+      else{
+        alert("user exist");
+      }
+    }
       )
       onChangeSignUser('');
       onChangeSignPass('');
@@ -79,99 +114,97 @@ export default function LogInTab({navigation}) {
   /********************************SignUp*********************************/
 
   return (
-    <View style={styles.container}>
-
-      <View style={styles.pizzaBorder}>
-        <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
-      </View>
-
-      <View style={styles.LogInAndSignUp}>
-        <View style={styles.roundedrec}>
-          <View style={styles.space1}>
-          </View>
-          <View style={styles.selector}>
-            <SwitchSelector
-              onPress={(value: any) => onSelector(value)}
-              options={options}
-              initial={0}
-              textColor='#FF6D6D'
-              selectedTextStyle={{color:'#FFFFFF'}}
-              buttonColor='#FF6D6D'
-              borderColor='#E5E5E5'
-              hasPadding
-            />  
-          </View>
-          {switchbutton == "Login"?
-            /*********************************LogIn*********************************/
-            <View style={styles.logincontainer}>
-              <TextInput
-                style={styles.input}
-                onChangeText={onChangeText}
-                value={Username}
-                placeholder="Username"
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={onChangePass}
-                value={Password}
-                placeholder="Password"
-                secureTextEntry={true} 
-              />
-              <View style={{alignItems: 'center',}}>
-                <Pressable>
-                  <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
-                </Pressable>
-                {submitted?
-                <Text>You are now Logged In as {Username}</Text>
-                :null}
-              </View>
-              <View style={styles.box1}/>
-              <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
-                <Text style={{fontSize:20, color: 'white'}}>
-                  LogIn
-                </Text>
-              </TouchableOpacity>
-              <View style={styles.box2}/>
-          </View>
-          /*********************************LogIn*********************************/
-          /********************************SignUp*********************************/
-          :
-          <View style={styles.signupcontainer}>
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeSignUser}
-              value={username}
-              placeholder="Username"
-
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeSignPass}
-              value={password}
-              placeholder="Password"
-              secureTextEntry={true}
-              
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={onConfirm}
-              value={confirm}
-              placeholder="Confirm password"
-              secureTextEntry={true}
-            />
-            <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
-              <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
-            </TouchableOpacity>
-            <View style={styles.box3}/>
-          </View>
-          
-          /********************************SignUp*********************************/
-          }
-          
+    <Gradient>
+      <DismissKeyboard>
+        <View style={styles.pizzaBorder}>
+          <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
         </View>
-      </View>
 
-    </View>
+        <View style={styles.LogInAndSignUp}>
+          <View style={styles.roundedrec}>
+            <View style={styles.space1}>
+            </View>
+            <View style={styles.selector}>
+              <SwitchSelector
+                onPress={(value: any) => onSelector(value)}
+                options={options}
+                initial={0}
+                textColor='#FF6D6D'
+                selectedTextStyle={{color:'#FFFFFF'}}
+                buttonColor='#FF6D6D'
+                borderColor='#E5E5E5'
+                hasPadding
+              />  
+            </View>
+            {switchbutton == "Login"?
+              /*********************************LogIn*********************************/
+              <View style={styles.logincontainer}>
+                <TextInput
+                  style={styles.input}
+                  onChangeText={onChangeText}
+                  value={Username}
+                  placeholder="Username"
+                />
+                <TextInput
+                  style={styles.input}
+                  onChangeText={onChangePass}
+                  value={Password}
+                  placeholder="Password"
+                  secureTextEntry={true} 
+                />
+                <View style={{alignItems: 'center',}}>
+                  <TouchableOpacity>
+                    <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={styles.box1}/>
+                <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
+                  <Text style={{fontSize:20, color: 'white'}}>
+                    LogIn
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.box2}/>
+            </View>
+            /*********************************LogIn*********************************/
+            /********************************SignUp*********************************/
+            :
+            <View style={styles.signupcontainer}>
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangeSignUser}
+                value={username}
+                placeholder="Username"
+
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangeSignPass}
+                value={password}
+                placeholder="Password"
+                secureTextEntry={true}
+                
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={onConfirm}
+                value={confirm}
+                placeholder="Confirm password"
+                secureTextEntry={true}
+              />
+              {password != confirm && password != '' && confirm != ''?
+                <Text style={{color:'red',}}>Your password doesn't match.</Text>
+              :null}
+              <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
+                <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
+              </TouchableOpacity>
+              <View style={styles.box3}/>
+            </View>
+            /********************************SignUp*********************************/
+            }
+          </View>
+        </View>
+      </DismissKeyboard>
+    </Gradient>
   );
 }
 
@@ -210,7 +243,7 @@ const styles = StyleSheet.create({
     width:width*.75,
     height:height*.025,
     backgroundColor:'transparent',
-    borderWidth: 1,
+    //borderWidth: 1,
   },
   selector: {
     width:screenWidth*.55,
@@ -253,7 +286,7 @@ const styles = StyleSheet.create({
     width:width*.75,
     height:height*.035,
     backgroundColor:'transparent',
-    borderWidth: 1,
+    //borderWidth: 1,
   },
   box2: {
     alignItems:'center',
@@ -261,7 +294,7 @@ const styles = StyleSheet.create({
     width:width*.75,
     height:height*.025,
     backgroundColor:'transparent',
-    borderWidth: 1,
+    //borderWidth: 1,
   },
   /******************LogIn****************/
   /*****************SignUp****************/
@@ -272,7 +305,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   signupbutton: {
-    borderWidth:1,
+    //borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
     justifyContent:'center',
@@ -287,7 +320,7 @@ const styles = StyleSheet.create({
     width:width*.75,
     height:height*.025,
     backgroundColor:'transparent',
-    borderWidth: 1,
+    //borderWidth: 1,
   },
   /*****************SignUp****************/
 });
