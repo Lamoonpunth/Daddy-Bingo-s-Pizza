@@ -5,6 +5,9 @@ const mongoose = require('mongoose');
 require('dotenv').config()
 const dotenv = require('dotenv')
 const crypto = require('crypto-js');
+const multer = require('multer');
+
+
 
 dotenv.config();
 require('./user');
@@ -107,3 +110,19 @@ app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
 
+
+const fileStorageEngine = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './images');
+  },
+  filename: (req, file, cb) => {
+    cb(null,Date.now()+'_'+file.originalname);
+  }
+});
+
+const upload = multer({storage: fileStorageEngine});
+
+app.post('/uploadSingle', upload.single('image'), (req, res) => {
+  console.log(req.file);
+  res.send('Uploaded');
+});
