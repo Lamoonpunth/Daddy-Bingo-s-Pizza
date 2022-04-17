@@ -130,9 +130,24 @@ export default function LogInTab({navigation}:{navigation:any}) {
   }
 
   const onSignUpButton = () => {
+    const controller = new AbortController()
+
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
+    fetch("http://10.0.2.2:3000/online",{
+      method:"post",
+      signal:controller.signal
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      const controller = new AbortController()
+
+      // 1 second timeout:
+      const timeoutId = setTimeout(() => controller.abort(), 1000)
       const target =  "http://10.0.2.2:3000/usercheck?username="+username
       fetch(target,{
       method:'post',
+      signal:controller.signal,
       headers:{
           'Content-Type': 'application/json'
       }
@@ -168,9 +183,12 @@ export default function LogInTab({navigation}:{navigation:any}) {
       }
     }
       )
+    .catch(error=>alert(error))
       onChangeSignUser('');
       onChangeSignPass('');
       onConfirm('');
+    })
+    .catch(error=>alert("Cannot connect to server"))
   }
   /********************************SignUp*********************************/
 
