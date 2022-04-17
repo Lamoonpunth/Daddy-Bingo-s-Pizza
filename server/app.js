@@ -124,27 +124,13 @@ app.post('/login', async(req,res) => {
       //return new user
       res.status(200).json(user);
     }
-    res.status(400).send("Invalid username or password");   
+    else{
+      res.status(400).json("Invalid username or password");
+    }   
   }catch(err){
     console.log(err);
   }
 
-
-  User.findOne({username: req.query.username,password : req.query.password}, function(err, user){
-      if(err) {
-        console.log(err)
-      }
-      var message;
-      if(user) {
-        console.log(user)
-          message = "SUCCESS"
-          console.log(message)
-      } else {
-          message= "user doesn't exist"
-          console.log(message)
-      }
-      res.json(message)
-  });
 });
 
 app.post('/welcome',auth,(req,res)=>{
@@ -154,7 +140,7 @@ app.post('/welcome',auth,(req,res)=>{
 //usercheck before register
 app.post('/usercheck', (req,res) => {
   User.findOne({username: req.query.username}, function(err, user){
-      if(err) {0
+      if(err) {
         console.log(err)
       }
       var message;

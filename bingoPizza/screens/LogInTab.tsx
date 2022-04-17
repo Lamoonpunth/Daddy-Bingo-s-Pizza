@@ -28,32 +28,41 @@ export default function LogInTab({navigation}:{navigation:any}) {
   const [Username, onChangeText] = React.useState('');
   const [Password, onChangePass] = React.useState('');
   const onSubmitButton = () => {
-      const target =  "http://10.0.2.2:3000/login?username="+Username+"&password="+Password
+    if (Username=='' && Password==''){
+      alert("Please enter your username and password.");
+    }
+    else if (Username==''){
+      alert("Please enter your username.");
+    }
+    else if (Password==''){
+      alert("Please enter your password.");
+    }
+    else{
+      const target =  "http://10.0.2.2:3000/login"
       fetch(target,{
       method:'post',
       headers:{
           'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({
+        "username" : Username,
+        "password" : Password
+      })
     })
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-      if(data === "SUCCESS"){
-        navigation.navigate("Order");
-       }
-      else if (Username=='' && Password==''){
-        alert("Please enter your username and password.");
+      if (data == "Invalid username or password")
+      {
+        alert(data)
       }
-      else if (Username==''){
-        alert("Please enter your username.");
-      }
-      else if (Password==''){
-        alert("Please enter your password.");
-      }
-      else{
-        alert(' Your username or password is incorrect.');
+      else
+      {
+        navigation.navigate('Order')
       }
     })
+
+    }
       onChangeText('');
       onChangePass('');
   }
