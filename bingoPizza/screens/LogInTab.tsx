@@ -16,6 +16,28 @@ const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
 export default function LogInTab({navigation}:{navigation:any}) {
+
+
+
+
+
+
+  //Server online check
+  function isOnline(){
+    const controller = new AbortController()
+
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
+    fetch("http://10.0.2.2:3000/online",{
+      method:"post",
+      signal:controller.signal
+    })
+    .then(res=>res.json())
+    .then(data=>{console.log(data)})
+    .catch(error=>{alert(error)})
+  }
+
+
   /**************************************************/
   /*ตัวเลือกของswitch selector*/ 
   const options = [
@@ -38,18 +60,28 @@ export default function LogInTab({navigation}:{navigation:any}) {
       alert("Please enter your password.");
     }
     else{
+      const controller = new AbortController()
+
+      // 1 second timeout:
+      const timeoutId = setTimeout(() => controller.abort(), 1000)
+
       const target =  "http://10.0.2.2:3000/login"
       fetch(target,{
       method:'post',
       headers:{
           'Content-Type': 'application/json'
       },
+      
+      signal:controller.signal,
+
       body: JSON.stringify({
         "username" : Username,
         "password" : Password
-      })
+      }
+      )
     })
     .then(res=>res.json())
+    
     .then(data=>{
       console.log(data)
       if (data == "Invalid username or password")
@@ -60,7 +92,9 @@ export default function LogInTab({navigation}:{navigation:any}) {
       {
         navigation.navigate('Order')
       }
-    })
+    }).catch(error=>alert("Cannot connect to server"))
+    
+    
 
     }
       onChangeText('');

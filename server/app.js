@@ -41,7 +41,11 @@ app.listen(3000, () => {
 });
   //---------------------------------------------------------------------
 
-
+  //serveronlinecheck
+  app.post('/online',(req,res)=>{
+    console.log("online")
+    res.json("online")
+  })
 
 
 app.post('/send',(req,res)=>{
