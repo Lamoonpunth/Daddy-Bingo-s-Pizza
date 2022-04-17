@@ -125,7 +125,7 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
 const styles = StyleSheet.create({
   scrollMainContainer: {
     flex:1,
-    marginVertical:25,
+    marginTop:25,
     backgroundColor:'transparent'
   },
   /*----------------------------------------------Promotion-------------------------------------------*/
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-around',
     backgroundColor: 'transparent',
     //borderWidth:1,
-    marginHorizontal:25,
+    marginHorizontal:30,
     width:screenWidth,
     height:screenHeight*0.4,
   },
