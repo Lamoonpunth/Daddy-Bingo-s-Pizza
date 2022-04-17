@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
 
     },
     fontNormal:{
-
+        fontSize: 22
     },
     fontLogIn:{
         fontSize: 12,

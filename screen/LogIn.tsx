@@ -9,6 +9,7 @@ import { StyleSheet,
 
 import { globalStyles } from '../styles/globalStyles';
 import Gradient from '../styles/Gradient';
+import DismissKeyboard from '../styles/DismissKeyboard';
 import SwitchSelector from "react-native-switch-selector";
 
 const screenWidth = Dimensions.get('screen').width;
@@ -87,7 +88,7 @@ export default function LogIn({navigation}: {navigation: any}) {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
+            </View>  
 
           </Gradient>   
   );
@@ -114,5 +115,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-evenly',
     backgroundColor: 'transparent',
+    elevation:10
   },
 });

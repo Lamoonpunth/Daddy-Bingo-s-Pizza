@@ -1,64 +1,235 @@
-import React  from 'react';
+import React,{useState}  from 'react';
 import { StyleSheet,
     Text,
     View,
     Image,
+    FlatList,
     Dimensions,
     ScrollView,
+    TouchableOpacity,
     } from 'react-native';
 
 import Gradient from '../../styles/Gradient';
+import { globalStyles } from '../../styles/globalStyles';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function HomeAdmin({navigation}:{navigation:any}) {
+
+  const [promotion, onChangePromo] = React.useState([
+    {}
+  ]);
+  const [recommend, onChangeRec] = React.useState([
+    {menu:'Pizza1' ,key:'1'},
+    {menu:'Pizza2' ,key:'2'},
+    {menu:'Pizza3' ,key:'3'},
+  ]);
+  const [category, onChangCate] = React.useState([
+    {type:'Appetizer',key:'1'},
+    {type:'Pizza',key:'2'},
+    {type:'VitaminA',key:'3'},
+    {type:'VitaminB',key:'4'},
+    {type:'VitaminC',key:'5'},
+    {type:'VitaminD',key:'6'},
+    {type:'VitaminE',key:'7'},
+    {type:'VitaminF',key:'8'},
+    {type:'VitaminG',key:'9'},
+    {type:'VitaminH',key:'10'},
+  ]);
+
+  const onClickUserIcon = () =>{
+
+  }
+
+  const onClickUserAddress = () =>{
+
+  }
+
+  const onClickPromotion = () =>{
+
+  }
+
+  const onClickRecommend = () =>{
+
+  }
+
+  const onClickCategory = () =>{
+
+  }
+
   return (
     <Gradient>
-      <View style={styles.uppercontainer}>
-        <View style={styles.box1}>
-        </View>
-        <View style={styles.promotionBox}>
-          <View style={styles.userBox}>
-            <View style={styles.profileIcon}>
-              <Image source={require('../../assets/images/user_icon.png')} style={styles.profileImage}/>
-            </View>
-            <View style={styles.adminAddress}>
-              <Text>123/2 bingo house</Text>
-            </View>
-          </View>
-          <View style={styles.promotion}>
-            <View style={styles.roundedrec}>
-              <Text>Promotion</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={styles.lowercontainer}>
+      <ScrollView style={styles.scrollMainContainer} >
 
-      </View>
+        <View style={styles.promocontainer}>
+          <View style={styles.userBox}>
+            <TouchableOpacity>
+              <Image source={require('../../assets/images/user_icon.png')} style={styles.userIcon}/>  
+            </TouchableOpacity>
+            <View style={styles.userAddress}>
+              <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.promoBox}>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.recommendcontainer}>
+          <View style={styles.textBox}>
+            <Text style={globalStyles.fontNormal}>
+              Recommend
+            </Text>
+            <TouchableOpacity>
+              <Text style={{fontSize:18, color:'#343434'}}>
+                See All
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.scrollHorizontalBox}>
+            <ScrollView style={styles.scrollHorizontal} horizontal={true}>
+              {recommend.map((item) => {
+                return(
+                  <TouchableOpacity style={styles.menuIcon} key={item.key}>
+                    <Text>{item.menu}</Text>
+                  </TouchableOpacity>
+                )
+              })}
+            </ScrollView>
+          </View>
+        </View>
+        
+        <View style={styles.textBox}>
+          <Text style={globalStyles.fontNormal}>
+            Categories
+          </Text>
+        </View> 
+        <ScrollView style={{marginHorizontal:15}} horizontal={true}>
+          <FlatList
+            style={{width:screenWidth}}
+            numColumns={2}
+            data={category}
+            renderItem={({item}) => (
+              <TouchableOpacity style={styles.categoryIcon} key={item.key}>
+                <Text>{item.type}</Text>
+              </TouchableOpacity>
+            )}
+          />  
+        </ScrollView>
+        
+      </ScrollView>
     </Gradient>
   );
 }
 
 const styles = StyleSheet.create({
-  uppercontainer: {
-    flex: 2,
-    flexDirection:'column',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    backgroundColor: 'transparent',
-    borderWidth:1,
-    width:screenWidth,
-    marginTop: 0.1,
+  scrollMainContainer: {
+    flex:1,
+    marginVertical:25,
+    backgroundColor:'transparent'
   },
-  lowercontainer: {
-    flex: 3,
-    alignItems: 'center',
-    justifyContent: 'center',
+  /*----------------------------------------------Promotion-------------------------------------------*/
+  promocontainer: {
+    flexWrap:'wrap',
+    flexDirection:'column',
+    justifyContent:'space-around',
     backgroundColor: 'transparent',
-    borderWidth:1,
-    width:screenWidth
+    //borderWidth:1,
+    marginHorizontal:25,
+    width:screenWidth,
+    height:screenHeight*0.4,
+  },
+  userBox: {
+    flexWrap:'wrap',
+    flexDirection:'row',
+    //borderWidth:1,
+    width:screenWidth*0.85,
+    height:screenWidth*0.125
+  },
+  userIcon: {
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenWidth*0.125,
+    height:screenWidth*0.125,
+  },
+  userAddress: {
+    flexWrap:'wrap',
+    flexDirection:'column',
+    justifyContent:'space-evenly',
+    paddingHorizontal:15,
+    backgroundColor: 'transparent',
+    //borderWidth:1,
+    width:screenWidth*0.715,
+    height:screenWidth*0.125,
+  },
+  promoBox:{
+    backgroundColor:'white',
+    width:screenWidth*0.85,
+    height:screenHeight*0.3,
+    borderRadius:50,
+    elevation: 10,
+  },
+  /*----------------------------------------------Recommend-------------------------------------------*/
+  recommendcontainer: {
+    paddingTop:15,
+    flexWrap:'wrap',
+    flexDirection:'column',
+    backgroundColor: 'transparent',
+    //borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.3,
+  },
+  textBox: {
+    flexWrap:'wrap',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    //borderWidth:1,
+    marginHorizontal:25,
+    width:screenWidth*0.85,
+    height:screenWidth*0.1
+  },
+  scrollHorizontalBox: {
+    flexWrap:'wrap',
+    flexDirection:'row',
+    backgroundColor:'transparent',
+    //borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.2
+  },
+  scrollHorizontal: {
+    height:screenHeight*0.25,
+    backgroundColor:'transparent'
+  },
+  menuIcon: {
+    marginHorizontal:10,
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenHeight*0.22,
+    height:screenHeight*0.22,
+    elevation:10
+  },
+  /*----------------------------------------------Categories-------------------------------------------*/
+  categoriesScroll: {
+    backgroundColor: 'transparent',
+    //borderWidth:1,
+    marginHorizontal:10,
+    width:screenWidth*0.85,
+    height:screenHeight*0.7,
+  },
+  textBox2: {
+    flexWrap:'wrap',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    //borderWidth:1,
+    width:screenWidth*0.85,
+  },
+  categoryIcon: {
+    margin:15,
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenHeight*0.185,
+    height:screenHeight*0.185,
+    elevation:10
   },
   roundedrec: {
     flex:1,
@@ -69,51 +240,5 @@ const styles = StyleSheet.create({
     borderRadius:50,
     elevation: 10,
   },
-  box1: {
-    flex:1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    width:screenWidth*0.9
-  },
-  promotionBox: {
-    flex:8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    width:screenWidth*0.9
-  },
-  promotion: {
-    flex:8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    width:screenWidth*0.9
-  },
-  userBox: {
-    flex:2,
-    flexDirection:'row',
-    flexWrap:'wrap',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    backgroundColor: 'transparent',
-    width:screenWidth*0.9,
-  },
-  profileIcon: {
-    width: screenWidth * 0.12,
-    height: screenWidth * 0.12,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 10,
-  },
-  profileImage: {
-    width: screenWidth * 0.12,
-    height: screenWidth * 0.12,
-  },
-  adminAddress: {
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor: 'transparent',
-  },
+  
 });
