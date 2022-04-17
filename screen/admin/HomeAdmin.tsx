@@ -38,11 +38,11 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
     {type:'VitaminH',key:'10'},
   ]);
 
-  const onClickUserIcon = () =>{
+  const onClickAdminIcon = () =>{
 
   }
 
-  const onClickUserAddress = () =>{
+  const onClickAdminAddress = () =>{
 
   }
 
@@ -63,11 +63,11 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
       <ScrollView style={styles.scrollMainContainer} >
 
         <View style={styles.promocontainer}>
-          <View style={styles.userBox}>
+          <View style={styles.adminBox}>
             <TouchableOpacity>
-              <Image source={require('../../assets/images/user_icon.png')} style={styles.userIcon}/>  
+              <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
             </TouchableOpacity>
-            <View style={styles.userAddress}>
+            <View style={styles.adminAddress}>
               <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
             </View>
           </View>
@@ -99,12 +99,12 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
           </View>
         </View>
         
-        <View style={styles.textBox}>
+        <View style={styles.textBox2}>
           <Text style={globalStyles.fontNormal}>
             Categories
           </Text>
         </View> 
-        <ScrollView style={{marginHorizontal:15}} horizontal={true}>
+        <ScrollView horizontal={true}>
           <FlatList
             style={{width:screenWidth}}
             numColumns={2}
@@ -139,20 +139,20 @@ const styles = StyleSheet.create({
     width:screenWidth,
     height:screenHeight*0.4,
   },
-  userBox: {
+  adminBox: {
     flexWrap:'wrap',
     flexDirection:'row',
     //borderWidth:1,
     width:screenWidth*0.85,
     height:screenWidth*0.125
   },
-  userIcon: {
+  adminIcon: {
     borderRadius:50,
     backgroundColor:'white',
     width:screenWidth*0.125,
     height:screenWidth*0.125,
   },
-  userAddress: {
+  adminAddress: {
     flexWrap:'wrap',
     flexDirection:'column',
     justifyContent:'space-evenly',
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   },
   /*----------------------------------------------Recommend-------------------------------------------*/
   recommendcontainer: {
-    paddingTop:15,
+    paddingTop:10,
     flexWrap:'wrap',
     flexDirection:'column',
     backgroundColor: 'transparent',
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   menuIcon: {
-    marginHorizontal:10,
+    marginHorizontal:9,
     borderRadius:50,
     backgroundColor:'white',
     width:screenHeight*0.22,
@@ -209,36 +209,22 @@ const styles = StyleSheet.create({
     elevation:10
   },
   /*----------------------------------------------Categories-------------------------------------------*/
-  categoriesScroll: {
-    backgroundColor: 'transparent',
-    //borderWidth:1,
-    marginHorizontal:10,
-    width:screenWidth*0.85,
-    height:screenHeight*0.7,
-  },
   textBox2: {
+    paddingTop:10,
     flexWrap:'wrap',
     flexDirection:'row',
     justifyContent:'space-between',
     //borderWidth:1,
+    marginHorizontal:25,
     width:screenWidth*0.85,
+    height:screenWidth*0.1
   },
   categoryIcon: {
-    margin:15,
+    margin:9,
     borderRadius:50,
     backgroundColor:'white',
-    width:screenHeight*0.185,
-    height:screenHeight*0.185,
+    width:screenHeight*0.22,
+    height:screenHeight*0.22,
     elevation:10
   },
-  roundedrec: {
-    flex:1,
-    alignItems:'center',
-    justifyContent:'center',
-    backgroundColor:'white',
-    width:screenWidth*0.9,
-    borderRadius:50,
-    elevation: 10,
-  },
-  
 });
