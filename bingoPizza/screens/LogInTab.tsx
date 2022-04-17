@@ -50,55 +50,73 @@ export default function LogInTab({navigation}:{navigation:any}) {
   const [Username, onChangeText] = React.useState('');
   const [Password, onChangePass] = React.useState('');
   const onSubmitButton = () => {
-    if (Username=='' && Password==''){
-      alert("Please enter your username and password.");
-    }
-    else if (Username==''){
-      alert("Please enter your username.");
-    }
-    else if (Password==''){
-      alert("Please enter your password.");
-    }
-    else{
-      const controller = new AbortController()
+    const controller = new AbortController()
 
-      // 1 second timeout:
-      const timeoutId = setTimeout(() => controller.abort(), 1000)
-
-      const target =  "http://10.0.2.2:3000/login"
-      fetch(target,{
-      method:'post',
-      headers:{
-          'Content-Type': 'application/json'
-      },
-      
-      signal:controller.signal,
-
-      body: JSON.stringify({
-        "username" : Username,
-        "password" : Password
-      }
-      )
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
+    fetch("http://10.0.2.2:3000/online",{
+      method:"post",
+      signal:controller.signal
     })
     .then(res=>res.json())
-    
     .then(data=>{
-      console.log(data)
-      if (data == "Invalid username or password")
-      {
-        alert(data)
-      }
-      else
-      {
-        navigation.navigate('Order')
-      }
-    }).catch(error=>alert("Cannot connect to server"))
-    
-    
 
-    }
-      onChangeText('');
-      onChangePass('');
+      console.log(data)
+      if (Username=='' && Password==''){
+        alert("Please enter your username and password.");
+      }
+      else if (Username==''){
+        alert("Please enter your username.");
+      }
+      else if (Password==''){
+        alert("Please enter your password.");
+      }
+      else{
+        const controller = new AbortController()
+  
+        // 1 second timeout:
+        const timeoutId = setTimeout(() => controller.abort(), 1000)
+  
+        const target =  "http://10.0.2.2:3000/login"
+        fetch(target,{
+        method:'post',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        
+        signal:controller.signal,
+  
+        body: JSON.stringify({
+          "username" : Username,
+          "password" : Password
+        }
+        )
+      })
+      .then(res=>res.json())
+      
+      .then(data=>{
+        console.log(data)
+        if (data == "Invalid username or password")
+        {
+          alert(data)
+        }
+        else
+        {
+          navigation.navigate('Order')
+        }
+      }).catch(error=>alert(error))
+      
+      
+  
+      }
+        onChangeText('');
+        onChangePass('');
+
+    })
+    .catch(error=>{alert("Cannot connect to server")})
+
+
+
   }
   /*********************************LogIn*********************************/
 
