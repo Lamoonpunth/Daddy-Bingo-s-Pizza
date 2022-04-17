@@ -39,7 +39,7 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
   ]);
 
   const onClickAdminIcon = () =>{
-
+    navigation.openDrawer();
   }
 
   const onClickAdminAddress = () =>{
@@ -64,7 +64,7 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
 
         <View style={styles.promocontainer}>
           <View style={styles.adminBox}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onClickAdminIcon}>
               <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
             </TouchableOpacity>
             <View style={styles.adminAddress}>

@@ -2,14 +2,12 @@ import 'react-native-gesture-handler'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,} from 'react-native';
 import HomeStack from './navigation/HomeStack';
-import RootDrawerNavigator from './navigation/AdminDrawer';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <RootDrawerNavigator/>
+      <HomeStack/>
       <StatusBar style="auto" />  
     </NavigationContainer>
   );
