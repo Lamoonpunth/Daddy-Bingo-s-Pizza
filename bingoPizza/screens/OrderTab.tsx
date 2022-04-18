@@ -1,256 +1,232 @@
-import React, { useState } from 'react';
-import {
-  StyleSheet,
-  Dimensions,
-  StatusBar,
-  ScrollView,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  FlatList,
-} from 'react-native';
-import { Text, View } from '../components/Themed';
-import { Categories,COLOURS } from '../constants/items';
-import { RootTabScreenProps } from '../types';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import React,{useState}  from 'react';
+import { StyleSheet,
+    Text,
+    View,
+    Image,
+    FlatList,
+    Dimensions,
+    ScrollView,
+    TouchableOpacity,
+    } from 'react-native';
 
-
-const images = [
-  'https://cdn.pixabay.com/photo/2017/03/25/17/55/colorful-2174045_960_720.png',
-  'https://cdn.pixabay.com/photo/2016/03/17/06/49/renovation-1262389_960_720.png',
-  'https://cdn.pixabay.com/photo/2016/09/01/19/53/pocket-watch-1637396_960_720.jpg'
-
-]
+import Gradient from '../styles/Gradient';
+import { globalStyles } from '../styles/globalStyles';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>) {
-  const [imgActive, setimgActive] = useState(0);
-  const [currentSelected, setCurrentSelected] = useState([0]);
-  onchange = (nativeEvent) => {
-    if(nativeEvent){
-      const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width)
-      if (slide != imgActive){
-        setimgActive(slide)
-      }
-    }
-   }
-   
-   const renderCategories =({item , index}) =>{
-    return(
-      <TouchableOpacity activeOpacity={0.9}
-        onPress={() => setCurrentSelected(index)}
-      >
-        <View
-          style={{
-            width:120,
-            height: 180,
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            backgroundColor:
-              currentSelected == index ? COLOURS.accent : COLOURS.white,
-              borderRadius: 20,margin: 10,elevation: 50
-                 
-          }}>
-          <View style={{width: 60, height: 60}}>
-            <Image
-              source={item.image}
-              style={{
-                width: '100%',
-                height: '100%',
-                resizeMode: 'center',
-              }}
-            />
-          </View>
-          <Text style ={{fontSize:16,color:COLOURS.black,fontWeight:'600'}}>
-            {item.name}
-          </Text>
-          <View 
-            style ={{width: 30,
-              height: 30,
-              borderRadius: 100,
-              backgroundColor:
-              currentSelected == index ? COLOURS.white : COLOURS.accentRed,
-              justifyContent: 'center',
-              alignItems: 'center',}}
-          >
-            <FontAwesome name ="angle-right" style={{fontSize:12,
-                color: currentSelected == index ? COLOURS.black : COLOURS.white,}}/>
-          </View>
-          </View>  
-      </TouchableOpacity>
-    )
+export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
 
-   };
-   const renderItem = (data ,index)=>{
-    <TouchableOpacity key ={index}
-    style={{width: '100',height: 180,justifyContent:'center',alignItems:'center'}}>
-      <View
-      style={{
-        width:'90%',
-        height :160,
-        backgroundColor : COLOURS.white,
-        borderRadius:20,
-        elevation:4,
-        position: 'relative',
-        padding:15,
-        flexDirection:'row',
-        justifyContent:'space-between',
-        alignItems:'center'
-      }}
-      >
-        <View
-        style ={{marginBottom: 50}}>
-          <View style ={{}}>
-            <FontAwesome name="crown" style ={{fontSize: 10,
-                  color: COLOURS.accent,}}/>
+  const [promotion, onChangePromo] = React.useState([
+    {}
+  ]);
+  const [recommend, onChangeRec] = React.useState([
+    {menu:'Pizza1' ,key:'1'},
+    {menu:'Pizza2' ,key:'2'},
+    {menu:'Pizza3' ,key:'3'},
+  ]);
+  const [category, onChangCate] = React.useState([
+    {type:'Appetizer',key:'1'},
+    {type:'Pizza',key:'2'},
+    {type:'VitaminA',key:'3'},
+    {type:'VitaminB',key:'4'},
+    {type:'VitaminC',key:'5'},
+    {type:'VitaminD',key:'6'},
+    {type:'VitaminE',key:'7'},
+    {type:'VitaminF',key:'8'},
+    {type:'VitaminG',key:'9'},
+    {type:'VitaminH',key:'10'},
+    {type:'VitaminH',key:'11'},
+    {type:'VitaminH',key:'12'},
+  ]);
+
+  const onClickAdminIcon = () =>{
+    navigation.openDrawer();
+  }
+
+  const onClickAdminAddress = () =>{
+
+  }
+
+  const onClickPromotion = () =>{
+
+  }
+
+  const onClickRecommend = () =>{
+
+  }
+
+  const onClickCategory = () =>{
+
+  }
+
+  return (
+    <Gradient>
+      <ScrollView style={styles.scrollMainContainer} >
+        
+        <View style={styles.promocontainer}>
+          <View style={styles.adminBox}>
+            <TouchableOpacity onPress={onClickAdminIcon}>
+              <Image source={require('../assets/images/user_icon.png')} style={styles.adminIcon}/>  
+            </TouchableOpacity>
+            <View style={styles.adminAddress}>
+              <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.promoBox}>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.recommendcontainer}>
+          <View style={styles.textBox}>
+            <Text style={globalStyles.fontNormal}>
+              Recommend
+            </Text>
+            <TouchableOpacity>
+              <Text style={{fontSize:18, color:'#343434'}}>
+                See All
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.scrollHorizontalBox}>
+            <ScrollView style={styles.scrollHorizontal} horizontal={true} showsHorizontalScrollIndicator ={false}>
+              {recommend.map((item) => {
+                return(
+                  <TouchableOpacity style={styles.menuIcon} key={item.key}>
+                    <Text>{item.menu}</Text>
+                  </TouchableOpacity>
+                )
+              })}
+            </ScrollView>
           </View>
         </View>
-      </View>
-
-    </TouchableOpacity>
-
-   }
-  return (
-    <View style={styles.container}>
-        <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              padding: 20,
-            }}>
-            <TouchableOpacity
-              style={{
-                width: 40,
-                height: 40,
-              }}>
-              <Image
-                source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  resizeMode: 'contain',
-                  borderRadius: 500,
-                }}
-              />
-            </TouchableOpacity>
-            <Text style ={{fontSize : 16,color:'black',opacity:0.5 }}>
-                  test
-            </Text>
-            </View>
-      
-      <View style={styles.wrap}>
-      <ScrollView
-          //onScroll={({nativeEvent}) => onchange(nativeEvent)}
-          showsHorizontalScrollIndicator={false}
-          pagingEnabled
-          horizontal
-          style={styles.wrap}
-        >
-          {
-            images.map((e, index) =>
-              <Image
-                key={e}
-                resizeMode='contain'
-                style={styles.wrap}
-                source={{uri:e}}
-
-              />
-            )
-          }
-          </ScrollView>
-          <View style ={styles.wrapDot}>
-            {
-              images.map((e, index) =>
-              <Text
-                key={e}
-                style={imgActive == index ? styles.dotActive : styles.dot}
-              >
-                ●
-              </Text>
-                
-              )
-            }
-          </View>
-          <View
-            style={{
-              backgroundColor:'white',
-              padding: 10,
-            }}></View>
-          <View
-            style={{
-              backgroundColor:'#e8e8e8',
-              padding: 20,
-            }}> 
-            <Text style ={{fontSize : 16,color:'black',opacity:0.5 }}>
-                  Categories
-            </Text>
-            </View>
-
-      </View>
-      <FlatList 
-            horizontal ={true}
-            data ={Categories}
-            renderItem={renderCategories}
-            showsHorizontalScrollIndicator ={false}
-      /> 
-       <Text style={{
-        paddingTop: 20,
-         paddingHorizontal: 20,
-        fontSize: 18,
-        fontWeight: '700',
-        color: COLOURS.black,
-         }}> Popular </Text>
-         
-        {Categories[currentSelected].items.map(renderItem)}
-    </View>
+        
+        <View style={styles.textBox2}>
+          <Text style={globalStyles.fontNormal}>
+            Categories
+          </Text>
+        </View> 
+        <ScrollView horizontal={true}>
+          <FlatList
+            style={{width:screenWidth}}
+            numColumns={2}
+            data={category}
+            renderItem={({item}) => (
+              <TouchableOpacity style={styles.categoryIcon} key={item.key}>
+                <Text>{item.type}</Text>
+              </TouchableOpacity>
+            )}
+          />  
+        </ScrollView>
+        
+      </ScrollView>
+    </Gradient>
   );
 }
 
-
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-   // alignItems: 'center',
-  //  justifyContent: 'center',
-  width: '100%',
-  height: '100%',
-  backgroundColor:'gray',
-  
+  scrollMainContainer: {
+    flex:1,
+    marginTop:25,
+    backgroundColor:'transparent'
   },
-  wrap: {
-    width: screenWidth ,
-    height: (screenHeight)*.25,
-    
-
+  /*----------------------------------------------Promotion-------------------------------------------*/
+  promocontainer: {
+    flexWrap:'wrap',
+    flexDirection:'column',
+    justifyContent:'space-around',
+    backgroundColor: 'transparent',
+    //borderWidth:1,
+    marginHorizontal:30,
+    width:screenWidth,
+    height:screenHeight*0.4,
   },
-  roundedrec: {
-    borderColor: 'rgba(0,0,0,0.2)',
-    //alignItems: 'center',
-    //justifyContent: 'center',
-    width: screenWidth * .75,
-    height: screenHeight * .4,
-    backgroundColor: '#fff',
-    borderRadius: 50,
-    elevation: 10,
-
-  },
-  
-  wrapDot:{
-    backgroundColor: 'rgba(52, 52, 52, 0.0)',
-    position: 'absolute',
-    bottom: 0,
+  adminBox: {
+    flexWrap:'wrap',
     flexDirection:'row',
-    alignSelf: 'center'
+    //borderWidth:1,
+    width:screenWidth*0.85,
+    height:screenWidth*0.125
   },
-  dotActive:{
-    margin: 3,
-    color: 'black',
+  adminIcon: {
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenWidth*0.125,
+    height:screenWidth*0.125,
   },
-  dot: {
-    margin: 3,
-    color: '#888'
-  }
+  adminAddress: {
+    flexWrap:'wrap',
+    flexDirection:'column',
+    justifyContent:'space-evenly',
+    paddingHorizontal:15,
+    backgroundColor: 'transparent',
+    //borderWidth:1,
+    width:screenWidth*0.715,
+    height:screenWidth*0.125,
+  },
+  promoBox:{
+    backgroundColor:'white',
+    width:screenWidth*0.85,
+    height:screenHeight*0.3,
+    borderRadius:50,
+    elevation: 10,
+  },
+  /*----------------------------------------------Recommend-------------------------------------------*/
+  recommendcontainer: {
+    paddingTop:10,
+    flexWrap:'wrap',
+    flexDirection:'column',
+    backgroundColor: 'transparent',
+    //borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.3,
+  },
+  textBox: {
+    flexWrap:'wrap',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    //borderWidth:1,
+    marginHorizontal:25,
+    width:screenWidth*0.85,
+    height:screenWidth*0.1
+  },
+  scrollHorizontalBox: {
+    flexWrap:'wrap',
+    flexDirection:'row',
+    backgroundColor:'transparent',
+    //borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.2
+  },
+  scrollHorizontal: {
+    height:screenHeight*0.25,
+    backgroundColor:'transparent'
+  },
+  menuIcon: {
+    marginHorizontal:9,
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenHeight*0.22,
+    height:screenHeight*0.22,
+    elevation:10
+  },
+  /*----------------------------------------------Categories-------------------------------------------*/
+  textBox2: {
+    paddingTop:10,
+    flexWrap:'wrap',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    //borderWidth:1,
+    marginHorizontal:25,
+    width:screenWidth*0.85,
+    height:screenWidth*0.1
+  },
+  categoryIcon: {
+    margin:9,
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenHeight*0.22,
+    height:screenHeight*0.22,
+    elevation:10
+  },
 });
