@@ -11,11 +11,35 @@ import { View } from '../components/Themed';
 import Gradient from '../components/Gradient';
 import DismissKeyboard from '../components/DismissKeyboard';
 
+const crypto = require('crypto-js');
+
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 
 export default function LogInTab({navigation}:{navigation:any}) {
+
+
+
+
+
+
+  //Server online check
+  function isOnline(){
+    const controller = new AbortController()
+
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
+    fetch("http://10.0.2.2:3000/online",{
+      method:"post",
+      signal:controller.signal
+    })
+    .then(res=>res.json())
+    .then(data=>{console.log(data)})
+    .catch(error=>{alert(error)})
+  }
+
+
   /**************************************************/
   /*ตัวเลือกของswitch selector*/ 
   const options = [
@@ -28,20 +52,19 @@ export default function LogInTab({navigation}:{navigation:any}) {
   const [Username, onChangeText] = React.useState('');
   const [Password, onChangePass] = React.useState('');
   const onSubmitButton = () => {
-      const target =  "http://10.0.2.2:3000/login?username="+Username+"&password="+Password
-      fetch(target,{
-      method:'post',
-      headers:{
-          'Content-Type': 'application/json'
-      }
+    const controller = new AbortController()
+
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
+    fetch("http://10.0.2.2:3000/online",{
+      method:"post",
+      signal:controller.signal
     })
     .then(res=>res.json())
     .then(data=>{
+
       console.log(data)
-      if(data === "SUCCESS"){
-        navigation.navigate("Order");
-       }
-      else if (Username=='' && Password==''){
+      if (Username=='' && Password==''){
         alert("Please enter your username and password.");
       }
       else if (Username==''){
@@ -51,11 +74,51 @@ export default function LogInTab({navigation}:{navigation:any}) {
         alert("Please enter your password.");
       }
       else{
-        alert(' Your username or password is incorrect.');
+        const controller = new AbortController()
+  
+        // 1 second timeout:
+        const timeoutId = setTimeout(() => controller.abort(), 1000)
+  
+        const target =  "http://10.0.2.2:3000/login"
+        fetch(target,{
+        method:'post',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        
+        signal:controller.signal,
+  
+        body: JSON.stringify({
+          "username" : Username,
+          "password" : crypto.MD5(Password)
+        }
+        )
+      })
+      .then(res=>res.json())
+      
+      .then(data=>{
+        console.log(data)
+        if (data == "Invalid username or password")
+        {
+          alert(data)
+        }
+        else
+        {
+          navigation.navigate('Order')
+        }
+      }).catch(error=>alert(error))
+      
+      
+  
       }
+        onChangeText('');
+        onChangePass('');
+
     })
-      onChangeText('');
-      onChangePass('');
+    .catch(error=>{alert("Cannot connect to server")})
+
+
+
   }
   /*********************************LogIn*********************************/
 
@@ -69,9 +132,24 @@ export default function LogInTab({navigation}:{navigation:any}) {
   }
 
   const onSignUpButton = () => {
+    const controller = new AbortController()
+
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
+    fetch("http://10.0.2.2:3000/online",{
+      method:"post",
+      signal:controller.signal
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      const controller = new AbortController()
+
+      // 1 second timeout:
+      const timeoutId = setTimeout(() => controller.abort(), 1000)
       const target =  "http://10.0.2.2:3000/usercheck?username="+username
       fetch(target,{
       method:'post',
+      signal:controller.signal,
       headers:{
           'Content-Type': 'application/json'
       }
@@ -96,7 +174,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
         else if (isPerfect(password) == true){
-          navigation.navigate('RegisterInfo',{username:username,password:password});
+          navigation.navigate('RegisterInfo',{username:username,password:crypto.MD5(password)});
         }
         else{
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
@@ -107,9 +185,12 @@ export default function LogInTab({navigation}:{navigation:any}) {
       }
     }
       )
+    .catch(error=>alert(error))
       onChangeSignUser('');
       onChangeSignPass('');
       onConfirm('');
+    })
+    .catch(error=>alert("Cannot connect to server"))
   }
   /********************************SignUp*********************************/
 
