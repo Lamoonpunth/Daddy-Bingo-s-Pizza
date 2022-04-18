@@ -4,6 +4,7 @@ import { StyleSheet,
     View,
     Image,
     FlatList,
+    TextInput,
     Dimensions,
     TouchableOpacity,
     } from 'react-native';
@@ -43,8 +44,23 @@ export default function EditService({navigation}:{navigation:any}) {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
                 <View style={styles.service} key={item.key}>
-                  <View>
-                    
+                  <View style={styles.boxImage}>
+
+                  </View>
+                  <View style={styles.boxDetails}>
+                    <TextInput
+                    style={styles.serviceFont}
+                    value={item.name}
+                    placeholder={item.name}
+                    />
+                    <TextInput
+                    style={styles.serviceFont}
+                    value={item.price}
+                    placeholder={item.price}
+                    />
+                    <TouchableOpacity style={styles.moreBox}>
+                      <Text style={styles.moreFont}>More</Text>  
+                    </TouchableOpacity>
                   </View>
                 </View>
               )}
@@ -102,18 +118,45 @@ const styles = StyleSheet.create({
     height:screenHeight*0.22,
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'center',
+    justifyContent:'space-evenly',
   },
   boxImage: {
-    borderRadius:50,
+    borderRadius:20,
     backgroundColor:'white',
-    width:screenHeight*0.1,
-    height:screenHeight*0.1,
+    width:screenHeight*0.125,
+    height:screenHeight*0.125,
+    borderWidth:1
   },
-  boxName: {
-
+  boxDetails: {
+    backgroundColor:'transparent',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenHeight*0.2,
+    height:screenHeight*0.2,
   },
-  boxMore: {
-
+  serviceFont:{
+    fontSize: 18,
+    width: screenHeight*0.2,
+    height: screenHeight * 0.05,
+    margin: 8,
+    padding: 10,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    elevation: 12,
+  },
+  moreBox:{
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    width: screenHeight*0.1,
+    height: screenHeight * 0.05,
+    borderRadius: 10,
+    backgroundColor: '#FF6D7D',
+    elevation: 12,
+  },
+  moreFont:{
+    fontSize: 18,
+    color:'white',
   },
 });

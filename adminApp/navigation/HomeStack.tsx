@@ -27,8 +27,8 @@ function AdminNavigator() {
             <Drawer.Screen name='Home' component={HomeAdmin}/>
             <Drawer.Screen name='Profile' component={EditProfile}/>
             <Drawer.Screen name='Service' component={EditService} options={{swipeEnabled:false,}}/>
-            <Drawer.Screen name='Ingredients' component={EditIngredients}/>
-            <Drawer.Screen name='Pizza' component={EditPizza}/>
+            <Drawer.Screen name='Ingredients' component={EditIngredients} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='Pizza' component={EditPizza} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Appetizer' component={EditAppetizer}/>
             <Drawer.Screen name='Log Out' component={LogIn}/>
         </Drawer.Navigator>

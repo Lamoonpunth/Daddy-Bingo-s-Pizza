@@ -1,38 +1,101 @@
-import React  from 'react';
+import React,{useState}  from 'react';
 import { StyleSheet,
     Text,
     View,
-    Dimensions,} from 'react-native';
+    Image,
+    FlatList,
+    Dimensions,
+    ScrollView,
+    TouchableOpacity,
+    } from 'react-native';
+
+import { globalStyles } from '../../../styles/globalStyles';
+import Gradient from '../../../styles/Gradient';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function EditPizza({navigation}:{navigation:any}) {
   return (
-    <View style={styles.container}>
-        <Text style={{fontSize:50}}>
-            EditPizza Screen
-        </Text>
-    </View>
+    <Gradient>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
+          <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
+        </TouchableOpacity>
+      </View>
+      <ScrollView style={styles.scrollMainContainer} showsVerticalScrollIndicator={false}>
+
+        <View style={styles.container}>
+
+          <View style={styles.pizzaBox}>
+          </View>
+          
+          <View style={styles.ingredientBox}>
+          </View>
+
+          <View style={styles.sizeBox}>
+          </View>
+
+          <View style={styles.sizeBox}>
+          </View>
+
+          <View style={styles.sizeBox}>
+          </View>
+
+          <View style={styles.sizeBox}>
+          </View>
+
+          <View style={styles.sizeBox}>
+          </View>
+
+        </View>  
+
+      </ScrollView>
+    </Gradient>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollMainContainer: {
+    flex:1,
+    marginTop:10,
+    backgroundColor:'transparent'
+  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FF6D6D',
+    backgroundColor: 'transparent',
   },
-  roundedrec: {
-    borderColor:'rgba(0,0,0,0.2)',
+  header: {
+    flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
-    width:screenWidth*.75,
-    height:screenHeight*.4,
-    backgroundColor:'#fff',
-    borderRadius:50,
-    elevation: 10,
-    
+    marginTop:30,
+  },
+  iconContainer: {
+    width:screenWidth*0.9,
+    flexDirection:'row',
+    alignItems:'flex-start'
+  },
+  pizzaBox: {
+    borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.4,
+  },
+  ingredientBox: {
+    borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.3,
+  },
+  sizeBox: {
+    borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.25,
+  },
+  customBox: {
+    borderWidth:1,
+    width:screenWidth,
+    height:screenHeight*0.3,
   },
 });

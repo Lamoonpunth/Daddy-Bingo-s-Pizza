@@ -60,8 +60,8 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
 
   return (
     <Gradient>
-      <ScrollView style={styles.scrollMainContainer} >
-        
+      <ScrollView style={styles.scrollMainContainer} showsVerticalScrollIndicator={false}>
+
         <View style={styles.promocontainer}>
           <View style={styles.adminBox}>
             <TouchableOpacity onPress={onClickAdminIcon}>
@@ -87,7 +87,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             </TouchableOpacity>
           </View>
           <View style={styles.scrollHorizontalBox}>
-            <ScrollView style={styles.scrollHorizontal} horizontal={true}>
+            <ScrollView style={styles.scrollHorizontal} horizontal={true} showsHorizontalScrollIndicator={false}>
               {recommend.map((item) => {
                 return(
                   <TouchableOpacity style={styles.menuIcon} key={item.key}>
@@ -104,7 +104,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             Categories
           </Text>
         </View> 
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <FlatList
             style={{width:screenWidth}}
             numColumns={2}
