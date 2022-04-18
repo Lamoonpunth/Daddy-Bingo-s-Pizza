@@ -4,10 +4,15 @@ import {
   Dimensions,
   StatusBar,
   ScrollView,
-  Image
+  Image,
+  TouchableOpacity,
+  TextInput,
+  FlatList,
 } from 'react-native';
 import { Text, View } from '../components/Themed';
+import { Categories,COLOURS } from '../constants/items';
 import { RootTabScreenProps } from '../types';
+
 
 const images = [
   'https://cdn.pixabay.com/photo/2017/03/25/17/55/colorful-2174045_960_720.png',
@@ -15,6 +20,7 @@ const images = [
   'https://cdn.pixabay.com/photo/2016/09/01/19/53/pocket-watch-1637396_960_720.jpg'
 
 ]
+
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
@@ -28,8 +34,64 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
       }
     }
    }
+   const[currentSelected, setcurrentSelected] = useState([0])
+   const renderCategories =({item , index}) =>{
+    return(
+      <TouchableOpacity activeOpacity={0.9}>
+        <View
+          style={{
+            width:120,
+            height: 180,
+            justifyContent: 'space-evenly',
+            alignItems: 'center',
+            backgroundColor:
+              currentSelected == index ? COLOURS.accent : COLOURS.white,
+              borderRadius: 20,margin: 10,elevation: 50
+                 
+          }}>
+          <View style={{width: 60, height: 60}}>
+            <Image
+              source={item.image}
+              style={{
+                width: '100%',
+                height: '100%',
+                resizeMode: 'center',
+              }}
+            />
+          </View>
+          </View>  
+      </TouchableOpacity>
+    )
+
+   }
   return (
     <View style={styles.container}>
+        <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              padding: 20,
+            }}>
+            <TouchableOpacity
+              style={{
+                width: 40,
+                height: 40,
+              }}>
+              <Image
+                source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  resizeMode: 'contain',
+                  borderRadius: 500,
+                }}
+              />
+            </TouchableOpacity>
+            <Text style ={{fontSize : 16,color:'black',opacity:0.5 }}>
+                  test
+            </Text>
+            </View>
+      
       <View style={styles.wrap}>
         <ScrollView
           //onScroll={({nativeEvent}) => onchange(nativeEvent)}
@@ -42,7 +104,7 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
             images.map((e, index) =>
               <Image
                 key={e}
-                resizeMode='stretch'
+                resizeMode='contain'
                 style={styles.wrap}
                 source={{uri:e}}
 
@@ -62,11 +124,28 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
                 
               )
             }
-
-
           </View>
-
+          <View
+            style={{
+              backgroundColor:'white',
+              padding: 10,
+            }}></View>
+          <View
+            style={{
+              backgroundColor:'#e8e8e8',
+              padding: 20,
+            }}> 
+            <Text style ={{fontSize : 16,color:'black',opacity:0.5 }}>
+                  HOT
+            </Text>
+            </View>
       </View>
+      <FlatList 
+            horizontal ={true}
+            data ={Categories}
+            renderItem={renderCategories}
+            showsHorizontalScrollIndicator ={false}
+            />
     </View>
   );
 }
@@ -77,7 +156,16 @@ const styles = StyleSheet.create({
     flex: 1,
    // alignItems: 'center',
   //  justifyContent: 'center',
-    backgroundColor: '#FF6D6D',
+  width: '100%',
+  height: '100%',
+  backgroundColor:'gray',
+  
+  },
+  wrap: {
+    width: screenWidth ,
+    height: (screenHeight)*.25,
+    
+
   },
   roundedrec: {
     borderColor: 'rgba(0,0,0,0.2)',
@@ -90,11 +178,7 @@ const styles = StyleSheet.create({
     elevation: 10,
 
   },
-  wrap: {
-    width: screenWidth,
-    height: screenHeight * .25
-
-  },
+  
   wrapDot:{
     backgroundColor: 'rgba(52, 52, 52, 0.0)',
     position: 'absolute',
