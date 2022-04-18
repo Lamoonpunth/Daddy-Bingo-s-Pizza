@@ -11,6 +11,8 @@ import { View } from '../components/Themed';
 import Gradient from '../components/Gradient';
 import DismissKeyboard from '../components/DismissKeyboard';
 
+const crypto = require('crypto-js');
+
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
@@ -88,7 +90,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
   
         body: JSON.stringify({
           "username" : Username,
-          "password" : Password
+          "password" : crypto.MD5(Password)
         }
         )
       })
@@ -172,7 +174,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
         else if (isPerfect(password) == true){
-          navigation.navigate('RegisterInfo',{username:username,password:password});
+          navigation.navigate('RegisterInfo',{username:username,password:crypto.MD5(password)});
         }
         else{
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
