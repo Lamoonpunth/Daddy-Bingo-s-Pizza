@@ -61,6 +61,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   return (
     <Gradient>
       <ScrollView style={styles.scrollMainContainer} >
+        
         <View style={styles.promocontainer}>
           <View style={styles.adminBox}>
             <TouchableOpacity onPress={onClickAdminIcon}>

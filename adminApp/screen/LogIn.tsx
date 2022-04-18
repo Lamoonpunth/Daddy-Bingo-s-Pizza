@@ -9,7 +9,6 @@ import { StyleSheet,
 
 import { globalStyles } from '../styles/globalStyles';
 import Gradient from '../styles/Gradient';
-import DismissKeyboard from '../styles/DismissKeyboard';
 import SwitchSelector from "react-native-switch-selector";
 
 const screenWidth = Dimensions.get('screen').width;

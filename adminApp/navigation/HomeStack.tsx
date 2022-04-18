@@ -1,15 +1,6 @@
 import React from 'react';
-import {View,
-    Text,
-    StyleSheet,
-    } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator,
-    DrawerContentScrollView,
-    DrawerItemList,
-    DrawerItem,
-    DrawerContent,
     } from '@react-navigation/drawer';
 
 import LogIn from "../screen/LogIn";
@@ -35,7 +26,7 @@ function AdminNavigator() {
         <Drawer.Navigator initialRouteName='Home' screenOptions={{headerShown:false}} drawerContent={props => <Menu{...props}/>}>
             <Drawer.Screen name='Home' component={HomeAdmin}/>
             <Drawer.Screen name='Profile' component={EditProfile}/>
-            <Drawer.Screen name='Service' component={EditService}/>
+            <Drawer.Screen name='Service' component={EditService} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Ingredients' component={EditIngredients}/>
             <Drawer.Screen name='Pizza' component={EditPizza}/>
             <Drawer.Screen name='Appetizer' component={EditAppetizer}/>

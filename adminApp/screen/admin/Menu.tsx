@@ -37,7 +37,7 @@ export function Menu({navigation}:{navigation:any},props:any){
     }
 
     const onLogOut = () => {
-        navigation.replace('LogIn');
+        navigation.pop();
     }
     
     return(

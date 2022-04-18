@@ -7,7 +7,8 @@ export const globalStyles = StyleSheet.create({
 
     },
     fontHeader:{
-
+        fontSize: 42,
+        color:'white',
     },
     fontNormal:{
         fontSize: 22
@@ -21,6 +22,18 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: 'white',
         elevation: 12,
+    },
+    underline: {
+        backgroundColor:'white',
+        width: width*0.6,
+        height: 2.5,
+        marginTop:10,
+        borderRadius:50,
+        elevation: 50
+    },
+    backIcon: {
+        width:40,
+        height:25
     },
     linearGradient: {
         flex: 1,
