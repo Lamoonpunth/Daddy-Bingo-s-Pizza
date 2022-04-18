@@ -12,6 +12,8 @@ import {
 import { Text, View } from '../components/Themed';
 import { Categories,COLOURS } from '../constants/items';
 import { RootTabScreenProps } from '../types';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 const images = [
@@ -26,6 +28,7 @@ const screenHeight = Dimensions.get('screen').height;
 
 export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>) {
   const [imgActive, setimgActive] = useState(0);
+  const [currentSelected, setCurrentSelected] = useState([0]);
   onchange = (nativeEvent) => {
     if(nativeEvent){
       const slide = Math.ceil(nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width)
@@ -34,10 +37,12 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
       }
     }
    }
-   const[currentSelected, setcurrentSelected] = useState([0])
+   
    const renderCategories =({item , index}) =>{
     return(
-      <TouchableOpacity activeOpacity={0.9}>
+      <TouchableOpacity activeOpacity={0.9}
+        onPress={() => setCurrentSelected(index)}
+      >
         <View
           style={{
             width:120,
@@ -59,9 +64,53 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
               }}
             />
           </View>
+          <Text style ={{fontSize:16,color:COLOURS.black,fontWeight:'600'}}>
+            {item.name}
+          </Text>
+          <View 
+            style ={{width: 30,
+              height: 30,
+              borderRadius: 100,
+              backgroundColor:
+              currentSelected == index ? COLOURS.white : COLOURS.accentRed,
+              justifyContent: 'center',
+              alignItems: 'center',}}
+          >
+            <FontAwesome name ="angle-right" style={{fontSize:12,
+                color: currentSelected == index ? COLOURS.black : COLOURS.white,}}/>
+          </View>
           </View>  
       </TouchableOpacity>
     )
+
+   };
+   const renderItem = (data ,index)=>{
+    <TouchableOpacity key ={index}
+    style={{width: '100',height: 180,justifyContent:'center',alignItems:'center'}}>
+      <View
+      style={{
+        width:'90%',
+        height :160,
+        backgroundColor : COLOURS.white,
+        borderRadius:20,
+        elevation:4,
+        position: 'relative',
+        padding:15,
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+      }}
+      >
+        <View
+        style ={{marginBottom: 50}}>
+          <View style ={{}}>
+            <FontAwesome name="crown" style ={{fontSize: 10,
+                  color: COLOURS.accent,}}/>
+          </View>
+        </View>
+      </View>
+
+    </TouchableOpacity>
 
    }
   return (
@@ -93,7 +142,7 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
             </View>
       
       <View style={styles.wrap}>
-        <ScrollView
+      <ScrollView
           //onScroll={({nativeEvent}) => onchange(nativeEvent)}
           showsHorizontalScrollIndicator={false}
           pagingEnabled
@@ -136,16 +185,26 @@ export default function OrderTab({ navigation }: RootTabScreenProps<'OrderTab'>)
               padding: 20,
             }}> 
             <Text style ={{fontSize : 16,color:'black',opacity:0.5 }}>
-                  HOT
+                  Categories
             </Text>
             </View>
+
       </View>
       <FlatList 
             horizontal ={true}
             data ={Categories}
             renderItem={renderCategories}
             showsHorizontalScrollIndicator ={false}
-            />
+      /> 
+       <Text style={{
+        paddingTop: 20,
+         paddingHorizontal: 20,
+        fontSize: 18,
+        fontWeight: '700',
+        color: COLOURS.black,
+         }}> Popular </Text>
+         
+        {Categories[currentSelected].items.map(renderItem)}
     </View>
   );
 }
