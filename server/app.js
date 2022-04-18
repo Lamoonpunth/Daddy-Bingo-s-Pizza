@@ -1,5 +1,6 @@
 //import 
 require('./model/user');
+require('./model/user-admin')
 require('dotenv').config()
 
 const express = require('express');
@@ -20,6 +21,7 @@ dotenv.config();
 
 app.use(bodyParser.json())
 const User = mongoose.model("user");
+const Admin= mongoose.model("user-admin")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -27,7 +29,8 @@ mongoose.connect(mongoUri,{
     useUnifiedTopology: true
 })
 mongoose.connection.on("connected",()=>{
-    console.log("Connected to mongo instance");   
+    console.log("Connected to mongo instance");
+    salt = crypto.lib.WordArray.random(128/8)
 })
 
 mongoose.connection.on("error",(err)=>{
@@ -61,7 +64,7 @@ app.post('/register',async(req,res) =>{
       birthdatem,birthdatey,sex,address,province,
       district,subdistrict,postcode} = req.body;
     //Encrypt user password+salt
-    const Salts = crypto.lib.WordArray.random(128/8);  
+    const Salts = crypto.lib.WordArray.random(128/8);
     encryptedPassword = await SHA256(password+Salts);
 
     //Create user in database
@@ -136,6 +139,84 @@ app.post('/login', async(req,res) => {
   }
 
 });
+
+
+
+
+
+//admin account generate
+app.post('/admingen',async(req,res) =>{
+  try{
+      //Get user input
+    const {username,password} = req.body;
+    //Encrypt user password+salt
+    const Salts = crypto.lib.WordArray.random(128/8);
+    encryptedPassword = await SHA256(password+Salts);
+
+    //Create user in database
+    const user = await Admin.create({
+      username:username,
+      password:encryptedPassword,
+      salt :Salts
+    })
+    // Create token 
+      const token = jwt.sign(
+        { user_id:user._id, username:username},
+        process.env.TOKEN_KEY,
+        { 
+          expiresIn: '1h'   
+        }
+      )
+    // save user token
+    user.token = token;
+    console.log('register success')
+    //return new user
+    res.status(201).json(user);
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+
+});
+
+
+
+app.post('/login-admin', async(req,res) => {
+  try{
+    //Get user input
+    const {username,password} = req.body;
+    //Validate user input
+      if (!username || !password) {
+        return res.status(400).send("Please enter username and password");
+      }
+    //Find user in database
+    const user = await Admin.findOne({username:username});
+    if (user && (await SHA256 (password+user.salt).toString() === user.password)) {
+      //Create token
+      const token = jwt.sign(
+        { user_id:user._id, username:username},
+        process.env.TOKEN_KEY,
+        { 
+          expiresIn: '1h'   
+        }
+      )
+      //save user token
+      user.token = token;
+      //return new user
+      res.status(200).json(user);
+    }
+    else{
+      res.status(400).json("Invalid username or password");
+    }   
+  }catch(err){
+    console.log(err);
+  }
+
+});
+
+
+
 
 app.post('/welcome',auth,(req,res)=>{
   res.status(200).send("Welcome");

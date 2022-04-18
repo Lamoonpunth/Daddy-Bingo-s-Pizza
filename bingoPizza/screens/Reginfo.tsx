@@ -55,12 +55,19 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
     if (checkboxBoy)selectedSex = 1
     else if (checkboxGirl)selectedSex = 2
     else selectedSex = 0
+
+
+    const controller = new AbortController()
+
+    // 1 second timeout:
+    const timeoutId = setTimeout(() => controller.abort(), 1000)
     const target =  "http://10.0.2.2:3000/register"
     fetch(target,{
     method:'post',
     headers:{
         'Content-Type': 'application/json'
     },
+    signal:controller.signal,
     body : JSON.stringify({
       "username" : Username,
       "password" : Password,
@@ -79,7 +86,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   })
   .then(res=>res.json())
   .then(data=>{console.log(data)})
-  .catch(error=>{alert(error)})
+  .catch(error=>{alert("Cannot connect to server")})
   }
 
   const getProvinceList = async() =>{
