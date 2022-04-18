@@ -15,7 +15,7 @@ import { globalStyles } from '../../styles/globalStyles';
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function HomeAdmin({navigation}:{navigation:any}) {
+export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
 
   const [promotion, onChangePromo] = React.useState([
     {}
@@ -39,7 +39,7 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
   ]);
 
   const onClickAdminIcon = () =>{
-
+    navigation.openDrawer();
   }
 
   const onClickAdminAddress = () =>{
@@ -61,10 +61,9 @@ export default function HomeAdmin({navigation}:{navigation:any}) {
   return (
     <Gradient>
       <ScrollView style={styles.scrollMainContainer} >
-
         <View style={styles.promocontainer}>
           <View style={styles.adminBox}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onClickAdminIcon}>
               <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
             </TouchableOpacity>
             <View style={styles.adminAddress}>

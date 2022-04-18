@@ -1,0 +1,108 @@
+1. Install drawer
+npm install @react-navigation/drawer
+
+// rename AppNavigator.js to homeStack.js
+2. Changes in routes/homeStack.js 
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+
+import Home from '../screens/home';
+import ReviewDetails from '../screens/reviewDetails';
+
+const { Navigator, Screen } = createStackNavigator();
+
+export const HomeStack = () => (
+  <Navigator
+    headerMode='screen'
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#eee',
+      },
+      headerTintColor: '#444',
+      height: 60
+    }}
+  >
+    <Screen
+      name='Home'
+      component={Home}
+      options={{ title: 'GameZone' }}
+    />
+    <Screen
+      name='ReviewDetails'
+      component={ReviewDetails}
+      options={{ title: 'Review Details' }}
+    />
+  </Navigator>
+);
+
+export default HomeStack;
+
+3. Create routes/aboutStack.js
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import About from '../screens/about';
+
+const { Navigator, Screen } = createStackNavigator();
+
+export const AboutStack = () => (
+  <Navigator
+    headerMode='screen'
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: '#eee',
+      },
+      headerTintColor: '#444',
+      height: 60
+    }}
+  >
+    <Screen
+      name='About'
+      component={About}
+      options={{ title: 'About GameZone' }}
+    />
+  </Navigator>
+);
+
+export default AboutStack;
+
+4. Create routes/drawer.js
+import React from 'react';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import { NavigationContainer } from '@react-navigation/native';
+
+import HomeStack from './homeStack';
+import AboutStack from './aboutStack';
+
+const { Navigator, Screen } = createDrawerNavigator();
+
+export const RootDrawerNavigator = () => (
+  <Navigator initialRouteName='Home'>
+    <Screen
+      name='Home'
+      component={HomeStack}
+    />
+    <Screen
+      name='About'
+      component={AboutStack}
+    />
+  </Navigator>
+);
+
+export const AppNavigator = () => (
+  <NavigationContainer>
+    <RootDrawerNavigator />
+  </NavigationContainer>
+);
+
+export default AppNavigator;
+
+5. Changes in App.js
+import { AppNavigator } from './routes/drawer';
+
+if (fontsLoaded) {
+    return (
+      <AppNavigator />
+    );
+  } else {
+      ...
+  }

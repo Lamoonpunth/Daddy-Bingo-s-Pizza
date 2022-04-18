@@ -7,11 +7,11 @@ import { StyleSheet,
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function EditPizza({navigation}:{navigation:any}) {
+export default function EditProfile({navigation}:{navigation:any}) {
   return (
     <View style={styles.container}>
         <Text style={{fontSize:50}}>
-            EditPizza Screen
+            EditProfile Screen
         </Text>
     </View>
   );
