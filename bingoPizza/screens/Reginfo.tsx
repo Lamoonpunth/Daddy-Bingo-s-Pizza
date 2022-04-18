@@ -55,7 +55,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
     if (checkboxBoy)selectedSex = 1
     else if (checkboxGirl)selectedSex = 2
     else selectedSex = 0
-    const target =  "http://10.0.2.2:3000/send-data"
+    const target =  "http://10.0.2.2:3000/register"
     fetch(target,{
     method:'post',
     headers:{
@@ -79,6 +79,7 @@ export default function TabOneScreen({navigation}: {navigation:any}) {
   })
   .then(res=>res.json())
   .then(data=>{console.log(data)})
+  .catch(error=>{alert(error)})
   }
 
   const getProvinceList = async() =>{
