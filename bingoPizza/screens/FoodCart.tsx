@@ -32,9 +32,9 @@ export default function FoodCart({navigation}:{navigation:any}){
 
                 <View style={styles.cartContainer}>
                     <View style={styles.flatContainer}>
-                        <View style={styles.menu}>
-                            <Text></Text>
-                        </View>
+                        <TouchableOpacity style={styles.menu}>
+                            <Image source={require('../assets/images/pooh.jpg')} style={styles.menu}/>
+                        </TouchableOpacity>
                     </View>
                 </View>
             

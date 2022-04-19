@@ -47,7 +47,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   }
 
   const onClickRecommend = () =>{
-
+    
   }
 
   const onClickCategory = () =>{
@@ -87,17 +87,17 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             </TouchableOpacity>
           </View>
           <View style={styles.scrollHorizontalBox}>
-          <FlatList
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-            style={{width:screenWidth}}
-            data={recommend}
-            renderItem={({item}) => (
-              <TouchableOpacity style={styles.categoryIcon} key={item.key}>
-                <Text>{item.menu}</Text>
-              </TouchableOpacity>
-            )}
-          /> 
+            <FlatList
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+              style={{width:screenWidth}}
+              data={recommend}
+              renderItem={({item}) => (
+                <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={onClickRecommend}>
+                  <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage} />
+                </TouchableOpacity>
+              )}
+            /> 
           </View>
         </View>
         
@@ -242,5 +242,11 @@ const styles = StyleSheet.create({
     width:screenWidth*0.45,
     height:screenWidth*0.45,
     elevation:10
+  },
+  foodImage: {
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
   },
 });
