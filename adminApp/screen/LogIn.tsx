@@ -83,7 +83,6 @@ export default function LogIn({navigation}: {navigation: any}) {
             }
             else
             {
-              alert('You are now logged in as Admin.');
               navigation.navigate('Admin');
             }
           }).catch(error=>alert(error))
