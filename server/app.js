@@ -280,11 +280,17 @@ const fileStorageEngine = multer.diskStorage({
   }
 });
 
-
-
 const upload = multer({storage: fileStorageEngine});
 
 app.post('/uploadSingle', upload.single('image'), (req, res) => {
   console.log(req.file);
   res.send(req.file.path);
 });
+
+app.get('/getImage/:image', (req, res) => {
+ 
+  const image = req.params.image;
+  res.sendFile(__dirname+'/images/'+image); 
+ 
+});
+
