@@ -72,6 +72,9 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             <View style={styles.adminAddress}>
               <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
             </View>
+            <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}}>
+              <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
+            </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.promoBox}>
           </TouchableOpacity>
@@ -154,14 +157,23 @@ const styles = StyleSheet.create({
     width:screenWidth*0.125,
     height:screenWidth*0.125,
   },
+  basketIcon: {
+    
+    backgroundColor:'transparent',
+   // width:screenWidth*0.1,
+    //height:screenWidth*0.1,
+    width:30,
+    height:30
+  },
+
   adminAddress: {
     flexWrap:'wrap',
     flexDirection:'column',
     justifyContent:'space-evenly',
     paddingHorizontal:15,
     backgroundColor: 'transparent',
-    //borderWidth:1,
-    width:screenWidth*0.715,
+   // borderWidth:1,
+    width:screenWidth*0.63,
     height:screenWidth*0.125,
   },
   promoBox:{
