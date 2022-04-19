@@ -87,15 +87,17 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             </TouchableOpacity>
           </View>
           <View style={styles.scrollHorizontalBox}>
-            <ScrollView style={styles.scrollHorizontal} horizontal={true} showsHorizontalScrollIndicator ={false}>
-              {recommend.map((item) => {
-                return(
-                  <TouchableOpacity style={styles.menuIcon} key={item.key}>
-                    <Text>{item.menu}</Text>
-                  </TouchableOpacity>
-                )
-              })}
-            </ScrollView>
+          <FlatList
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            style={{width:screenWidth}}
+            data={recommend}
+            renderItem={({item}) => (
+              <TouchableOpacity style={styles.categoryIcon} key={item.key}>
+                <Text>{item.menu}</Text>
+              </TouchableOpacity>
+            )}
+          /> 
           </View>
         </View>
         

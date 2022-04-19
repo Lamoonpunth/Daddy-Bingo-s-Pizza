@@ -14,7 +14,7 @@ const Order = createDrawerNavigator();
 function HomeOrder(){
     return (
         <Order.Navigator initialRouteName='Home' screenOptions={{headerShown:false}} drawerContent={props => <OrderDrawer{...props}/>}>
-            <Order.Screen name='Home' component={OrderTab}/>
+            <Order.Screen name='Home' component={OrderTab} options={{swipeEnabled:false}}/>
         </Order.Navigator>
     )
 };
