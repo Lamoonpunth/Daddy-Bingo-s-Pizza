@@ -1,9 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-
+import { NavigationContainer } from '@react-navigation/native';
+import 'react-native-gesture-handler';
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
-import Navigation from './navigation/HomeStack';
+import HomeStack from './navigation/HomeStack';
+
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([
+  'Non-serializable values were found in the navigation state',
+]);
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -13,10 +20,10 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        <Navigation/>
+      <NavigationContainer>
+        <HomeStack/>
         <StatusBar />
-      </SafeAreaProvider>
+      </NavigationContainer>
     );
   }
 }
