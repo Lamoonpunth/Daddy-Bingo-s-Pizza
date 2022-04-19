@@ -37,6 +37,7 @@ export const globalStyles = StyleSheet.create({
     },
     linearGradient: {
         flex: 1,
+        flexDirection:'column',
         alignItems: 'center',
         justifyContent: 'center',
     },

@@ -67,11 +67,11 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             <View style={styles.userAddress}>
               <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
             </View>
-            <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}}>
+            <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart'))}>
               <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
             </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.promoBox}>
+          <TouchableOpacity style={styles.promoBox} onPress={()=>{}}>
           </TouchableOpacity>
         </View>
 

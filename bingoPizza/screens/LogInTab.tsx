@@ -8,8 +8,7 @@ import { StyleSheet,
   TouchableOpacity} from 'react-native';
 import SwitchSelector from "react-native-switch-selector";
 import { View } from '../components/Themed';
-import Gradient from '../components/Gradient';
-import DismissKeyboard from '../components/DismissKeyboard';
+import Gradient from '../styles/Gradient';
 
 const crypto = require('crypto-js');
 
@@ -191,95 +190,95 @@ export default function LogInTab({navigation}:{navigation:any}) {
 
   return (
     <Gradient>
-      <DismissKeyboard>
-        <View style={styles.pizzaBorder}>
-          <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
-        </View>
+      
+      <View style={styles.pizzaBorder}>
+        <Image source={require('../assets/images/pizza(login).png')} style={styles.pizza}/>
+      </View>
 
-        <View style={styles.LogInAndSignUp}>
-          <View style={styles.roundedrec}>
-            <View style={styles.space1}>
-            </View>
-            <View style={styles.selector}>
-              <SwitchSelector
-                onPress={(value: any) => onSelector(value)}
-                options={options}
-                initial={0}
-                textColor='#FF6D6D'
-                selectedTextStyle={{color:'#FFFFFF'}}
-                buttonColor='#FF6D6D'
-                borderColor='#E5E5E5'
-                hasPadding
-              />  
-            </View>
-            {switchbutton == "Login"?
-              /*********************************LogIn*********************************/
-              <View style={styles.logincontainer}>
-                <TextInput
-                  style={styles.input}
-                  onChangeText={onChangeText}
-                  value={Username}
-                  placeholder="Username"
-                />
-                <TextInput
-                  style={styles.input}
-                  onChangeText={onChangePass}
-                  value={Password}
-                  placeholder="Password"
-                  secureTextEntry={true} 
-                />
-                <View style={{alignItems: 'center',}}>
-                  <TouchableOpacity>
-                    <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.box1}/>
-                <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
-                  <Text style={{fontSize:20, color: 'white'}}>
-                    LogIn
-                  </Text>
-                </TouchableOpacity>
-                <View style={styles.box2}/>
-            </View>
-            /*********************************LogIn*********************************/
-            /********************************SignUp*********************************/
-            :
-            <View style={styles.signupcontainer}>
-              <TextInput
-                style={styles.input}
-                onChangeText={onChangeSignUser}
-                value={username}
-                placeholder="Username"
-
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={onChangeSignPass}
-                value={password}
-                placeholder="Password"
-                secureTextEntry={true}
-                
-              />
-              <TextInput
-                style={styles.input}
-                onChangeText={onConfirm}
-                value={confirm}
-                placeholder="Confirm password"
-                secureTextEntry={true}
-              />
-              {password != confirm && password != '' && confirm != ''?
-                <Text style={{color:'red',}}>Your password doesn't match.</Text>
-              :null}
-              <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
-                <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
-              </TouchableOpacity>
-              <View style={styles.box3}/>
-            </View>
-            /********************************SignUp*********************************/
-            }
+      <View style={styles.LogInAndSignUp}>
+        <View style={styles.roundedrec}>
+          <View style={styles.space1}>
           </View>
+          <View style={styles.selector}>
+            <SwitchSelector
+              onPress={(value: any) => onSelector(value)}
+              options={options}
+              initial={0}
+              textColor='#FF6D6D'
+              selectedTextStyle={{color:'#FFFFFF'}}
+              buttonColor='#FF6D6D'
+              borderColor='#E5E5E5'
+              hasPadding
+            />  
+          </View>
+          {switchbutton == "Login"?
+            /*********************************LogIn*********************************/
+            <View style={styles.logincontainer}>
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangeText}
+                value={Username}
+                placeholder="Username"
+              />
+              <TextInput
+                style={styles.input}
+                onChangeText={onChangePass}
+                value={Password}
+                placeholder="Password"
+                secureTextEntry={true} 
+              />
+              <View style={{alignItems: 'center',}}>
+                <TouchableOpacity>
+                  <Text style={{color:'palevioletred',}}>Forgot Password?</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.box1}/>
+              <TouchableOpacity style={styles.loginbutton} onPress={onSubmitButton}>
+                <Text style={{fontSize:20, color: 'white'}}>
+                  LogIn
+                </Text>
+              </TouchableOpacity>
+              <View style={styles.box2}/>
+          </View>
+          /*********************************LogIn*********************************/
+          /********************************SignUp*********************************/
+          :
+          <View style={styles.signupcontainer}>
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeSignUser}
+              value={username}
+              placeholder="Username"
+
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeSignPass}
+              value={password}
+              placeholder="Password"
+              secureTextEntry={true}
+              
+            />
+            <TextInput
+              style={styles.input}
+              onChangeText={onConfirm}
+              value={confirm}
+              placeholder="Confirm password"
+              secureTextEntry={true}
+            />
+            {password != confirm && password != '' && confirm != ''?
+              <Text style={{color:'red',}}>Your password doesn't match.</Text>
+            :null}
+            <TouchableOpacity style={styles.signupbutton} onPress={onSignUpButton}>
+              <Text style={{fontSize:20, color: 'white'}}>Sign Up</Text>
+            </TouchableOpacity>
+            <View style={styles.box3}/>
+          </View>
+          /********************************SignUp*********************************/
+          }
         </View>
-      </DismissKeyboard>
+      </View>
+      
     </Gradient>
   );
 }
