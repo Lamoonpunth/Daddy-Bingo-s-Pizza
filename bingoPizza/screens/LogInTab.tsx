@@ -15,7 +15,8 @@ const crypto = require('crypto-js');
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
-
+//serverIP + port ex http://10.0.2.2:3000
+const serverIP = "http://10.0.2.2:3000"
 export default function LogInTab({navigation}:{navigation:any}) {
 
   //Server online check
@@ -24,7 +25,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
 
     // 1 second timeout:
     const timeoutId = setTimeout(() => controller.abort(), 1000)
-    fetch("http://10.0.2.2:3000/online",{
+    fetch(serverIP+"/online",{
       method:"post",
       signal:controller.signal
     })
@@ -50,7 +51,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
 
     // 1 second timeout:
     const timeoutId = setTimeout(() => controller.abort(), 1000)
-    fetch("http://10.0.2.2:3000/online",{
+    fetch(serverIP+"/online",{
       method:"post",
       signal:controller.signal
     })
@@ -73,7 +74,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
         // 1 second timeout:
         const timeoutId = setTimeout(() => controller.abort(), 1000)
   
-        const target =  "http://10.0.2.2:3000/login"
+        const target =  serverIP+"/login"
         fetch(target,{
         method:'post',
         headers:{
@@ -130,7 +131,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
 
     // 1 second timeout:
     const timeoutId = setTimeout(() => controller.abort(), 1000)
-    fetch("http://10.0.2.2:3000/online",{
+    fetch(serverIP+"/online",{
       method:"post",
       signal:controller.signal
     })
@@ -140,7 +141,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
 
       // 1 second timeout:
       const timeoutId = setTimeout(() => controller.abort(), 1000)
-      const target =  "http://10.0.2.2:3000/usercheck?username="+username
+      const target =  serverIP+"usercheck?username="+username
       fetch(target,{
       method:'post',
       signal:controller.signal,

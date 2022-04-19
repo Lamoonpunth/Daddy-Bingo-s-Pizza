@@ -1,6 +1,7 @@
 //import 
 require('./model/user');
 require('./model/user-admin')
+require('./model/menu')
 require('dotenv').config()
 
 const express = require('express');
@@ -22,6 +23,7 @@ dotenv.config();
 app.use(bodyParser.json())
 const User = mongoose.model("user");
 const Admin= mongoose.model("user-admin")
+const Menu = mongoose.model("menu")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -141,7 +143,35 @@ app.post('/login', async(req,res) => {
 });
 
 
+  // app.post('/carttoorder',async(req,res) => {
+  //   const username = req.body.username
+  //   const item = req.body.item
+  //   const user = await User.findOne({username:username});
+  //   console.log(user)
+  //   res.json(user)
+  // })
 
+//add menu from adminApp
+app.post('/addmenu',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,type,price,ingr_need,description,img_path} = req.body;
+    upload.single(img_path)
+    const menu = await Menu.create({
+      name:name,
+      type:type,
+      price:price,
+      ingr_need:ingr_need,
+      description:description,
+      img_path:img_path
+    })
+    res.json(menu)
+  }
+
+  catch(err){
+    console.log(err)
+  }
+})
 
 
 //admin account generate
@@ -253,7 +283,8 @@ const fileStorageEngine = multer.diskStorage({
 
 
 const upload = multer({storage: fileStorageEngine});
+
 app.post('/uploadSingle', upload.single('image'), (req, res) => {
   console.log(req.file);
-  res.send('Uploaded');
+  res.send(req.file.path);
 });
