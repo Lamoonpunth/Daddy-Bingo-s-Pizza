@@ -19,11 +19,6 @@ const {height, width} = Dimensions.get('screen');
 
 export default function LogInTab({navigation}:{navigation:any}) {
 
-
-
-
-
-
   //Server online check
   function isOnline(){
     const controller = new AbortController()
@@ -174,7 +169,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
         else if (isPerfect(password) == true){
-          navigation.navigate('RegisterInfo',{username:username,password:crypto.MD5(password)});
+          navigation.navigate('Register',{username:username,password:crypto.MD5(password)});
         }
         else{
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');

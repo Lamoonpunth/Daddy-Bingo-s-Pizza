@@ -17,27 +17,21 @@ const screenHeight = Dimensions.get('screen').height;
 
 export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
 
-  const [promotion, onChangePromo] = React.useState([
+  const [promotion, onClickPromo] = React.useState([
     {}
   ]);
-  const [recommend, onChangeRec] = React.useState([
+  const [recommend, onClickRec] = React.useState([
     {menu:'Pizza1' ,key:'1'},
     {menu:'Pizza2' ,key:'2'},
     {menu:'Pizza3' ,key:'3'},
   ]);
-  const [category, onChangCate] = React.useState([
+  const [category, onClickCate] = React.useState([
     {type:'Appetizer',key:'1'},
     {type:'Pizza',key:'2'},
-    {type:'VitaminA',key:'3'},
-    {type:'VitaminB',key:'4'},
-    {type:'VitaminC',key:'5'},
-    {type:'VitaminD',key:'6'},
-    {type:'VitaminE',key:'7'},
-    {type:'VitaminF',key:'8'},
-    {type:'VitaminG',key:'9'},
-    {type:'VitaminH',key:'10'},
-    {type:'VitaminH',key:'11'},
-    {type:'VitaminH',key:'12'},
+    {type:'Drink',key:'3'},
+    {type:'VitaminA',key:'4'},
+    {type:'VitaminB',key:'5'},
+    {type:'VitaminC',key:'6'},
   ]);
 
   const onClickAdminIcon = () =>{
@@ -62,14 +56,15 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
 
   return (
     <Gradient>
+      <View>
       <ScrollView style={styles.scrollMainContainer} >
         
         <View style={styles.promocontainer}>
-          <View style={styles.adminBox}>
+          <View style={styles.userBox}>
             <TouchableOpacity onPress={onClickAdminIcon}>
-              <Image source={require('../assets/images/user_icon.png')} style={styles.adminIcon}/>  
+              <Image source={require('../assets/images/user_icon.png')} style={styles.userIcon}/>  
             </TouchableOpacity>
-            <View style={styles.adminAddress}>
+            <View style={styles.userAddress}>
               <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
             </View>
             <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}}>
@@ -123,13 +118,18 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
         </ScrollView>
         
       </ScrollView>
+      </View>
     </Gradient>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollMainContainer: {
+  container: {
     flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  scrollMainContainer: {
     marginTop:25,
     backgroundColor:'transparent'
   },
@@ -144,14 +144,14 @@ const styles = StyleSheet.create({
     width:screenWidth,
     height:screenHeight*0.4,
   },
-  adminBox: {
+  userBox: {
     flexWrap:'wrap',
     flexDirection:'row',
     //borderWidth:1,
     width:screenWidth*0.85,
     height:screenWidth*0.125
   },
-  adminIcon: {
+  userIcon: {
     borderRadius:50,
     backgroundColor:'white',
     width:screenWidth*0.125,
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     height:30
   },
 
-  adminAddress: {
+  userAddress: {
     flexWrap:'wrap',
     flexDirection:'column',
     justifyContent:'space-evenly',
@@ -234,11 +234,11 @@ const styles = StyleSheet.create({
     height:screenWidth*0.1
   },
   categoryIcon: {
-    margin:9,
+    margin:10,
     borderRadius:50,
     backgroundColor:'white',
-    width:screenHeight*0.22,
-    height:screenHeight*0.22,
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
     elevation:10
   },
 });
