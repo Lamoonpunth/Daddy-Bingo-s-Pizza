@@ -2,6 +2,7 @@
 require('./model/user');
 require('./model/user-admin')
 require('./model/menu')
+require('./model/appetizer')
 require('dotenv').config()
 
 const express = require('express');
@@ -24,6 +25,7 @@ app.use(bodyParser.json())
 const User = mongoose.model("user");
 const Admin= mongoose.model("user-admin")
 const Menu = mongoose.model("menu")
+const Appetizer = mongoose.model("appetizer")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -156,7 +158,6 @@ app.post('/addmenu',async(req,res) =>{
   try{
     //img_path from upload single
     const {name,type,price,ingr_need,description,img_path} = req.body;
-    upload.single(img_path)
     const menu = await Menu.create({
       name:name,
       type:type,
@@ -173,6 +174,36 @@ app.post('/addmenu',async(req,res) =>{
   }
 })
 
+app.post('/addappetizer',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,price,ingr_need,description,img_path} = req.body;
+    const appetizer = await Appetizer.create({
+      name:name,
+      price:price,
+      ingr_need:ingr_need,
+      description:description,
+      img_path:img_path
+    })
+    res.json(appetizer)
+  }
+
+  catch(err){
+    console.log(err)
+  }
+})
+
+
+app.get('/getmenu',async(req,res)=>{
+  try{
+    const menu = await Menu.find({})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
 //admin account generate
 app.post('/admingen',async(req,res) =>{
