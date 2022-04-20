@@ -318,10 +318,13 @@ app.post('/uploadSingle', upload.single('image'), (req, res) => {
   res.send(req.file.path);
 });
 
-app.get('/getImage/:image', (req, res) => {
- 
-  const image = req.params.image;
-  res.sendFile(__dirname+'/images/'+image); 
+app.get('/getImage/:fileName', (req, res) => {
+  try{  
+    const fileName = req.params.fileName;
+    res.sendFile(__dirname+'/images/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  } 
  
 });
 
