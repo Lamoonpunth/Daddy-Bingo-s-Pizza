@@ -36,12 +36,10 @@ mongoose.connection.on("connected",()=>{
     console.log("Connected to mongo instance");
     salt = crypto.lib.WordArray.random(128/8)
 })
-
 mongoose.connection.on("error",(err)=>{
     console.log("Error connecting to mongo",err);
 })
-  //---------------------------------------------------------------------
- 
+  //--------------------------------------------------------------------- 
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
@@ -50,8 +48,8 @@ app.listen(3000, () => {
 
   //serveronlinecheck
   app.post('/online',(req,res)=>{
-    console.log("online")
-    res.json("online")
+    console.log("online naniiii")
+    res.json("online nannnii")
   })
 
 
@@ -107,9 +105,7 @@ app.post('/register',async(req,res) =>{
   }
   
 
-});
-  
-
+}); 
 
 app.post('/login', async(req,res) => {
   try{
@@ -265,9 +261,6 @@ app.post('/admingen',async(req,res) =>{
   
 
 });
-
-
-
 app.post('/login-admin', async(req,res) => {
   try{
     //Get user input
@@ -300,10 +293,7 @@ app.post('/login-admin', async(req,res) => {
   }
 
 });
-
-
-
-
+//token test
 app.post('/welcome',auth,(req,res)=>{
   res.status(200).send("Welcome");
 })
