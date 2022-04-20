@@ -205,6 +205,31 @@ app.get('/getmenu',async(req,res)=>{
   }
 })
 
+app.get('/getappetizer',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"appetizer"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/getdrink',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"drink"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+
+
+
 //admin account generate
 app.post('/admingen',async(req,res) =>{
   try{
