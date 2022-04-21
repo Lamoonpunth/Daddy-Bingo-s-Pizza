@@ -224,6 +224,18 @@ app.get('/getdrink',async(req,res)=>{
 })
 
 
+app.get('/getpizza',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"pizza"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+
 
 
 //admin account generate
