@@ -6,7 +6,7 @@ import Reginfo from "../screens/Reginfo";
 import OrderTab from "../screens/OrderTab";
 import { OrderDrawer } from "./OrderDrawer";
 import FoodCart from "../screens/FoodCart";
-import AppeMenu from "../screens/AppetizerMenu";
+import Menu from "../screens/Menu";
 
 import 'react-native-gesture-handler';
 
@@ -18,7 +18,7 @@ function HomeOrder(){
         <Order.Navigator initialRouteName='Home' screenOptions={{headerShown:false}} drawerContent={props => <OrderDrawer{...props}/>}>
             <Order.Screen name='Home' component={OrderTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Cart' component={FoodCart} options={{swipeEnabled:false}}/>
-            <Order.Screen name='Appetizer' component={AppeMenu} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Menu' component={Menu} options={{swipeEnabled:false}}/>
         </Order.Navigator>
     )
 };

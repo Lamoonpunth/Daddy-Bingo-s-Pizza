@@ -54,8 +54,8 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     
   }
 
-  const onClickCategory = () =>{
-    navigation.navigate('Appetizer')
+  const onClickCategory= (type:any)=>{
+    navigation.navigate('Menu',{"type":type})
   }
 
   function getMenuList(){
@@ -132,7 +132,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             numColumns={2}
             data={category}
             renderItem={({item}) => (
-              <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={onClickCategory}>
+              <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={()=>onClickCategory(item.type)}>
                 <Text>{item.type}</Text>
               </TouchableOpacity>
             )}
