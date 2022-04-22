@@ -141,7 +141,7 @@ export default function LogInTab({navigation}:{navigation:any}) {
 
       // 1 second timeout:
       const timeoutId = setTimeout(() => controller.abort(), 1000)
-      const target =  serverIP+"usercheck?username="+username
+      const target =  serverIP+"/usercheck?username="+username
       fetch(target,{
       method:'post',
       signal:controller.signal,
