@@ -8,8 +8,6 @@ import {
     TouchableOpacity,
     } from "react-native";
 
-import '../globals';
-
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
