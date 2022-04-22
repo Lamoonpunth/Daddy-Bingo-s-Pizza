@@ -19,8 +19,8 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function Menu({navigation,route}:{navigation:any,route:any}){
   const [listOfMenu,setListOfMenu] =React.useState([]);
-  const onMoreButton= (name:any) =>{
-    navigation.navigate('More',{"name":name});
+  const onMoreButton= (menu:any) =>{
+    navigation.navigate('More',{item:menu});
   }
   const {type} = route.params
   const Item = ({title}:{title:any}) => (
@@ -42,7 +42,6 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
     )
     .then(response => response.json())
     .then(json => {
-        console.log(json);
         setListOfMenu(json);
       }
     )
@@ -68,7 +67,7 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
                     data={[{"id":menu._id,"title":menu.name}]}
                     renderItem={renderItem}
                   />
-                  <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu.name)}>
+                  <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu)}>
                     <Text style={{fontSize:16, color: 'white'}}>More</Text>
                   </TouchableOpacity>  
                 </View>

@@ -223,6 +223,16 @@ app.get('/getDrink',async(req,res)=>{
   }
 })
 
+app.get('/getID',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"_id":req.query.id})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
 app.get('/getPizza',async(req,res)=>{
   try{

@@ -12,13 +12,13 @@ import {
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-
+import { useFocusEffect } from '@react-navigation/native';
 import { globalStyles } from "../styles/globalStyles";
 import Gradient from "../styles/Gradient";
 
 export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
-    const {name} = route.params;
+    const {item} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
 
     const onBackButton = () =>{
@@ -38,43 +38,23 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
             onOrderNumber(orderNumber-1);
         }
     }
-
+    console.log(item)
     return (
         <Gradient>
             <View style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
-                        <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
+                        <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>   
                     </TouchableOpacity>
-                    <Text style={globalStyles.fontHeader}>{name}</Text>
+                    <Text style={globalStyles.fontHeader}>{item.name}</Text>
                     <View style={globalStyles.underline}></View>  
                 </View>
 
                 <View style={styles.cartContainer}>
-                    <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage}/>
+                    <Image source={{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
                     <View style={styles.detail}>
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
-                            <Text>ยายกินลำยอง น้องเป็นสาวขอนแก่น</Text>
+                            <Text>{item.description}</Text>
                         </ScrollView>
                     </View>
                     <View style={styles.selected}>
