@@ -33,7 +33,7 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
   // );
   
   const renderItem = ({ item }:{item:any}) => (
-    <Item title={item.title} />
+    <Item title={item.title}/>
   );
   
   const getMenuList = async() =>{
@@ -54,19 +54,19 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
   const renderMenuBox = () => {
     const get = 'http://10.0.2.2:3000/getImage/'
     return listOfMenu.map((menu:any) => {
-      return  <View style={styles.menu}>
-                  <View>
-                    <Image source={ {uri:get+menu.img_path} }
-                          style={styles.foodImage}       
-                    />
-                  </View>
+      return  <View style={styles.menu} key={menu._id}>
+                <View>
+                  <Image source={ {uri:get+menu.img_path} }
+                        style={styles.foodImage}       
+                  />
+                </View>
                 <View style={styles.boxDetails}>
                   <FlatList
                     horizontal={true}
                     scrollEnabled={false}
+                    keyExtractor={() => menu._id}
                     data={[{"id":menu._id,"title":menu.name}]}
                     renderItem={renderItem}
-                    keyExtractor={() => menu._id}
                   />
                   <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu.name)}>
                     <Text style={{fontSize:16, color: 'white'}}>More</Text>

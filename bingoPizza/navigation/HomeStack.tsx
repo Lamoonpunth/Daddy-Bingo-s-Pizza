@@ -36,28 +36,3 @@ function HomeStack() {
   }
 
 export default HomeStack;
-/*
-const screens = {
-    LogIn:{
-        screen: LogInTab,
-        navigationOptions:{
-            headerShown: false
-        },
-    },
-    RegisterInfo:{
-        screen: Reginfo,
-        navigationOptions:{
-            headerShown: false
-        },
-    },
-    Order:{
-        screen: OrderTab,
-        navigationOptions:{
-            headerShown: false
-        },
-    },
-}
-
-const HomeStack = createStackNavigator(screens);
-
-export default createAppContainer(HomeStack);*/
