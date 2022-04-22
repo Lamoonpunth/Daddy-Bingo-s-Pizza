@@ -18,11 +18,12 @@ import Gradient from "../styles/Gradient";
 
 export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
+    const {type} = route.params;
     const {name} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
 
     const onBackButton = () =>{
-        navigation.goBack();
+        navigation.navigate('Menu',{"type":type});
     }
 
     const onAddToCart = () =>{
