@@ -17,9 +17,11 @@ import { globalStyles } from "../styles/globalStyles";
 import { FlatList } from "react-native-gesture-handler";
 import { useFocusEffect } from '@react-navigation/native';
 
-export default function Menu({navigation,route}:{navigation:any}){
+export default function Menu({navigation,route}:{navigation:any,route:any}){
   const [listOfMenu,setListOfMenu] =React.useState([]);
-  const onMoreButton= () =>{}
+  const onMoreButton= (name:any) =>{
+    navigation.navigate('More',{"name":name});
+  }
   const {type} = route.params
   const Item = ({title}:{title:any}) => (
     <View >
@@ -55,9 +57,9 @@ export default function Menu({navigation,route}:{navigation:any}){
                     scrollEnabled={false}
                     data={[{"id":menu._id,"title":menu.name}]}
                     renderItem={renderItem}
-                    key = {menu._id}
+                    keyExtractor={() => menu._id}
                   />
-                  <TouchableOpacity style={styles.moreBox} onPress={onMoreButton}>
+                  <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu.name)}>
                     <Text style={{fontSize:16, color: 'white'}}>More</Text>
                   </TouchableOpacity>  
                 </View>
