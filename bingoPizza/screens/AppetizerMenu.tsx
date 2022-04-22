@@ -3,6 +3,7 @@ import {
     View ,
     Text,
     Image,
+    TextInput,
     Dimensions,
     StyleSheet,
     TouchableOpacity,
@@ -12,32 +13,46 @@ import {
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
+
 import Gradient from "../styles/Gradient";
 import { globalStyles } from "../styles/globalStyles";
 import { FlatList } from "react-native-gesture-handler";
-import { useFocusEffect } from '@react-navigation/native';
 
-export default function Menu({navigation,route}:{navigation:any,route:any}){
+export default function AppetizerMenu({navigation}:{navigation:any}){
   const [listOfMenu,setListOfMenu] =React.useState([]);
-  const onMoreButton= (name:any) =>{
-    navigation.navigate('More',{"name":name});
-  }
-  const {type} = route.params
-  const Item = ({title}:{title:any}) => (
-    <View >
-      <Text style={styles.menuFont} >{title}</Text>
+  const onMoreButton= () =>{}
+  const DATA = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+    },
+    // {
+    //    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+    //    title: 'Second Item',
+    // },
+    // {
+    //    id: '58694a0f-3da1-471f-bd96-145571e29d72',
+    //    title: 'Third Item',
+    // },
+  ];
+
+  const Item =  ({title}:{title:any}) => (               
+    <View>        
+      <Image source={ {uri:title.path} }                
+              style={styles.foodImage}       
+       ></Image>
+      
+      <Text   style={styles.menuFont} >{title.title}  
+      </Text>
     </View>
   )  
-  // const renderItem = ({item}:{item:any}) => (    
-  //   <Item title={item}/>
-  // );
-  
-  const renderItem = ({ item }:{item:any}) => (
-    <Item title={item.title} />
+  const renderItem = ({item}:{item:any}) => (    
+    <Item title={item}/>
   );
-  
-  const getMenuList = async() =>{
-    fetch('http://10.0.2.2:3000/get'+type,{ method: "GET",
+  //ดึงข้อมูลจาก appetizer เก็บไว้ใน listOfMenu
+  const getAppetizerList = async() =>{
+    console.log("getAppetizerList");
+    fetch('http://10.0.2.2:3000/getappetizer',{ method: "GET",
     }
     )
     .then(response => response.json())
@@ -47,47 +62,30 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
       }
     )
   }
-  const onBackButton = () =>{
-    setListOfMenu([])
-    navigation.goBack()
-  }
-  const renderMenuBox = () => {
+  const renderMenuBox = () => {   
     const get = 'http://10.0.2.2:3000/getImage/'
-    return listOfMenu.map((menu:any) => {
-      return  <View style={styles.menu}>
-                  <View>
-                    <Image source={ {uri:get+menu.img_path} }
-                          style={styles.foodImage}       
-                    />
-                  </View>
+    return listOfMenu.map((appetizer:any) => {
+      return  <View style={styles.menu}>              
                 <View style={styles.boxDetails}>
                   <FlatList
                     horizontal={true}
                     scrollEnabled={false}
-                    data={[{"id":menu._id,"title":menu.name}]}
+                    //ข้อมูลที่เอามาจาก database แล้ว pass function ที่ไม่มี parameter
+                    data={[{"id":appetizer._id,"title":appetizer.name,"path":get+appetizer.img_path}]}
+                    keyExtractor={(item:any) => item._id}
+                    // function renederItem(data)
                     renderItem={renderItem}
-                    keyExtractor={() => menu._id}
                   />
-                  <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu.name)}>
+                  <TouchableOpacity style={styles.moreBox} onPress={onMoreButton}>
                     <Text style={{fontSize:16, color: 'white'}}>More</Text>
                   </TouchableOpacity>  
                 </View>
               </View>
     });
   }
-  useFocusEffect(
-    React.useCallback(() => {
-      getMenuList()
-    }, [type])
-  );
-
-  // useEffect(()=>{
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //   getMenuList()
-  //   });
-  //   // Return the function to unsubscribe from the event so it gets removed on unmount
-  //   return unsubscribe;
-  //   },[navigation])
+  useEffect(()=>{
+    getAppetizerList()
+    },[])
 
 
   return(
@@ -96,10 +94,10 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
         <View style={styles.container}>
 
             <View style={styles.header}>
-                <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
+                <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
                     <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
                 </TouchableOpacity>
-                <Text style={globalStyles.fontHeader}>{type}</Text>
+                <Text style={globalStyles.fontHeader}>Appetizer</Text>
                 <View style={globalStyles.underline}></View>  
             </View>
 
