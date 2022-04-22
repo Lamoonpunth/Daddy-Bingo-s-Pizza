@@ -36,11 +36,8 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
     // },
   ];
 
-  const Item =  ({title}:{title:any}) => (    
-    //console.log('source'+'../assets/images/forTest/'+title.path),   
-    // {uri:'http://10.0.2.2:3000/getImage'+title.path}
-    //  ../assets/images/forTest/pooh.jpg      
-    (<View>        
+  const Item =  ({title}:{title:any}) => (               
+    <View>        
       <Image source={ {uri:title.path} }                
               style={styles.foodImage}       
        ></Image>
@@ -48,7 +45,7 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
       <Text   style={styles.menuFont} >{title.title}  
       </Text>
     </View>
-  )  )
+  )  
   const renderItem = ({item}:{item:any}) => (    
     <Item title={item}/>
   );
@@ -65,7 +62,8 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
       }
     )
   }
-  const renderMenuBox = () => {        
+  const renderMenuBox = () => {   
+    const get = 'http://10.0.2.2:3000/getImage/'
     return listOfMenu.map((appetizer:any) => {
       return  <View style={styles.menu}>              
                 <View style={styles.boxDetails}>
@@ -73,7 +71,7 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
                     horizontal={true}
                     scrollEnabled={false}
                     //ข้อมูลที่เอามาจาก database แล้ว pass function ที่ไม่มี parameter
-                    data={[{"id":appetizer._id,"title":appetizer.name,"path":appetizer.img_path}]}
+                    data={[{"id":appetizer._id,"title":appetizer.name,"path":get+appetizer.img_path}]}
                     keyExtractor={(item:any) => item._id}
                     // function renederItem(data)
                     renderItem={renderItem}
