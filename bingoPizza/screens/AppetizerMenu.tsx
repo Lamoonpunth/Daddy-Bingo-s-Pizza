@@ -66,7 +66,7 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
                     horizontal={true}
                     scrollEnabled={false}
                     data={[{"id":appetizer._id,"title":appetizer.name}]}
-                    keyExtractor={(item:any) => item.id}
+                    keyExtractor={(item:any) => item._id}
                     renderItem={renderItem}
                   />
                   <TouchableOpacity style={styles.moreBox} onPress={onMoreButton}>
