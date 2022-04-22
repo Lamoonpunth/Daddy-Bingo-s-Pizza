@@ -201,7 +201,7 @@ app.get('/getmenu',async(req,res)=>{
   }
 })
 
-app.get('/getappetizer',async(req,res)=>{
+app.get('/getAppetizer',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"appetizer"})
     console.log("getmenu")
@@ -212,7 +212,7 @@ app.get('/getappetizer',async(req,res)=>{
   }
 })
 
-app.get('/getdrink',async(req,res)=>{
+app.get('/getDrink',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"drink"})
     console.log("getmenu")
@@ -224,7 +224,7 @@ app.get('/getdrink',async(req,res)=>{
 })
 
 
-app.get('/getpizza',async(req,res)=>{
+app.get('/getPizza',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"pizza"})
     console.log("getmenu")

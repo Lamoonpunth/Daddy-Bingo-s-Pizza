@@ -41,6 +41,10 @@ export default function Menu({navigation,route}:{navigation:any}){
       }
     )
   }
+  const onBackButton = () =>{
+    setListOfMenu([])
+    navigation.goBack()
+  }
   const renderMenuBox = () => {
     return listOfMenu.map((menu:any) => {
       return  <View style={styles.menu}>
@@ -65,6 +69,7 @@ export default function Menu({navigation,route}:{navigation:any}){
       getMenuList()
     }, [type])
   );
+
   // useEffect(()=>{
   //   const unsubscribe = navigation.addListener('focus', () => {
   //   getMenuList()
@@ -80,7 +85,7 @@ export default function Menu({navigation,route}:{navigation:any}){
         <View style={styles.container}>
 
             <View style={styles.header}>
-                <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
+                <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
                     <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
                 </TouchableOpacity>
                 <Text style={globalStyles.fontHeader}>{type}</Text>
