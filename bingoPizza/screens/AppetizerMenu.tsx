@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
       menu: {
         marginVertical:5,
         borderRadius:50,
-        borderWidth:1,
+        //borderWidth:1,
         borderColor:'gray',
         backgroundColor:'white',
         width:screenWidth*0.8,
@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-evenly',
+        elevation:5
       },
       boxImage: {
         borderRadius:20,
