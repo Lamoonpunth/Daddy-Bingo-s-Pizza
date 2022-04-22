@@ -20,7 +20,7 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Menu({navigation,route}:{navigation:any,route:any}){
   const [listOfMenu,setListOfMenu] =React.useState([]);
   const onMoreButton= (menu:any) =>{
-    navigation.navigate('More',{item:menu});
+    navigation.navigate('More',{item:menu,type:type});
   }
   const {type} = route.params
   const Item = ({title}:{title:any}) => (
