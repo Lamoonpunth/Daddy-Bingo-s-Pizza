@@ -1,4 +1,4 @@
-import React,{useState}  from 'react';
+import React,{useEffect, useState}  from 'react';
 import { StyleSheet,
     Text,
     View,
@@ -11,11 +11,15 @@ import { StyleSheet,
 
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
-
+const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
+  getMenuList()
+
+
+
 
   const [promotion, onClickPromo] = React.useState([
     {}
@@ -51,8 +55,24 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   }
 
   const onClickCategory = () =>{
-
+    navigation.navigate('Appetizer')
   }
+
+  function getMenuList(){
+    console.log("getMenulist");
+    fetch(serverIP+"/getmenu",{ method: "GET",
+    }
+    )
+    .then(response => response.json())
+    .then(json => {
+        console.log(json);
+      }
+    )
+  }
+
+  // useEffect(()=>{
+  // getMenuList
+  // },[])
 
   return (
     <Gradient>
@@ -112,7 +132,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             numColumns={2}
             data={category}
             renderItem={({item}) => (
-              <TouchableOpacity style={styles.categoryIcon} key={item.key}>
+              <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={onClickCategory}>
                 <Text>{item.type}</Text>
               </TouchableOpacity>
             )}

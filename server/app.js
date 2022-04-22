@@ -2,6 +2,7 @@
 require('./model/user');
 require('./model/user-admin')
 require('./model/menu')
+require('./model/appetizer')
 require('dotenv').config()
 
 const express = require('express');
@@ -24,6 +25,7 @@ app.use(bodyParser.json())
 const User = mongoose.model("user");
 const Admin= mongoose.model("user-admin")
 const Menu = mongoose.model("menu")
+const Appetizer = mongoose.model("appetizer")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -34,12 +36,10 @@ mongoose.connection.on("connected",()=>{
     console.log("Connected to mongo instance");
     salt = crypto.lib.WordArray.random(128/8)
 })
-
 mongoose.connection.on("error",(err)=>{
     console.log("Error connecting to mongo",err);
 })
-  //---------------------------------------------------------------------
- 
+  //--------------------------------------------------------------------- 
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
@@ -48,8 +48,8 @@ app.listen(3000, () => {
 
   //serveronlinecheck
   app.post('/online',(req,res)=>{
-    console.log("online")
-    res.json("online")
+    console.log("online naniiii")
+    res.json("online nannnii")
   })
 
 
@@ -105,9 +105,7 @@ app.post('/register',async(req,res) =>{
   }
   
 
-});
-  
-
+}); 
 
 app.post('/login', async(req,res) => {
   try{
@@ -156,7 +154,6 @@ app.post('/addmenu',async(req,res) =>{
   try{
     //img_path from upload single
     const {name,type,price,ingr_need,description,img_path} = req.body;
-    upload.single(img_path)
     const menu = await Menu.create({
       name:name,
       type:type,
@@ -172,6 +169,73 @@ app.post('/addmenu',async(req,res) =>{
     console.log(err)
   }
 })
+
+app.post('/addappetizer',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,price,ingr_need,description,img_path} = req.body;
+    const appetizer = await Appetizer.create({
+      name:name,
+      price:price,
+      ingr_need:ingr_need,
+      description:description,
+      img_path:img_path
+    })
+    res.json(appetizer)
+  }
+
+  catch(err){
+    console.log(err)
+  }
+})
+
+
+app.get('/getmenu',async(req,res)=>{
+  try{
+    const menu = await Menu.find({})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/getappetizer',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"appetizer"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/getdrink',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"drink"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+
+app.get('/getpizza',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"pizza"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+
 
 
 //admin account generate
@@ -209,9 +273,6 @@ app.post('/admingen',async(req,res) =>{
   
 
 });
-
-
-
 app.post('/login-admin', async(req,res) => {
   try{
     //Get user input
@@ -244,10 +305,7 @@ app.post('/login-admin', async(req,res) => {
   }
 
 });
-
-
-
-
+//token test
 app.post('/welcome',auth,(req,res)=>{
   res.status(200).send("Welcome");
 })
@@ -280,11 +338,20 @@ const fileStorageEngine = multer.diskStorage({
   }
 });
 
-
-
 const upload = multer({storage: fileStorageEngine});
 
 app.post('/uploadSingle', upload.single('image'), (req, res) => {
   console.log(req.file);
   res.send(req.file.path);
 });
+
+app.get('/getImage/:fileName', (req, res) => {
+  try{  
+    const fileName = req.params.fileName;
+    res.sendFile(__dirname+'/images/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  } 
+ 
+});
+
