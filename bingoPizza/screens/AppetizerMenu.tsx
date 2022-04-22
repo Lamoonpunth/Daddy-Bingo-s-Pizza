@@ -36,15 +36,23 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
     // },
   ];
 
-  const Item = ({title}:{title:any}) => (
-    <View >
-      <Text style={styles.menuFont} >{title}</Text>
+  const Item =  ({title}:{title:any}) => (    
+    //console.log('source'+'../assets/images/forTest/'+title.path),   
+    // {uri:'http://10.0.2.2:3000/getImage'+title.path}
+    //  ../assets/images/forTest/pooh.jpg      
+    (<View>        
+      <Image source={ {uri:title.path} }                
+              style={styles.foodImage}       
+       ></Image>
+      
+      <Text   style={styles.menuFont} >{title.title}  
+      </Text>
     </View>
+  )  )
+  const renderItem = ({item}:{item:any}) => (    
+    <Item title={item}/>
   );
-  
-  const renderItem = ({ item }:{item:any}) => (
-    <Item title={item.title} />
-  );
+  //ดึงข้อมูลจาก appetizer เก็บไว้ใน listOfMenu
   const getAppetizerList = async() =>{
     console.log("getAppetizerList");
     fetch('http://10.0.2.2:3000/getappetizer',{ method: "GET",
@@ -57,16 +65,17 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
       }
     )
   }
-  const renderMenuBox = () => {
+  const renderMenuBox = () => {        
     return listOfMenu.map((appetizer:any) => {
-      return  <View style={styles.menu}>
-                <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage}/>
+      return  <View style={styles.menu}>              
                 <View style={styles.boxDetails}>
                   <FlatList
                     horizontal={true}
                     scrollEnabled={false}
-                    data={[{"id":appetizer._id,"title":appetizer.name}]}
+                    //ข้อมูลที่เอามาจาก database แล้ว pass function ที่ไม่มี parameter
+                    data={[{"id":appetizer._id,"title":appetizer.name,"path":appetizer.img_path}]}
                     keyExtractor={(item:any) => item._id}
+                    // function renederItem(data)
                     renderItem={renderItem}
                   />
                   <TouchableOpacity style={styles.moreBox} onPress={onMoreButton}>
