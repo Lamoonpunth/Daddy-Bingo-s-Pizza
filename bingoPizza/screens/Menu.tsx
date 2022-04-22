@@ -15,6 +15,7 @@ const {height, width} = Dimensions.get('screen');
 import Gradient from "../styles/Gradient";
 import { globalStyles } from "../styles/globalStyles";
 import { FlatList } from "react-native-gesture-handler";
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Menu({navigation,route}:{navigation:any}){
   const [listOfMenu,setListOfMenu] =React.useState([]);
@@ -48,8 +49,9 @@ export default function Menu({navigation,route}:{navigation:any}){
                   <FlatList
                     horizontal={true}
                     scrollEnabled={false}
-                    data={[{"key":menu._id,"title":menu.name}]}
+                    data={[{"id":menu._id,"title":menu.name}]}
                     renderItem={renderItem}
+                    key = {menu._id}
                   />
                   <TouchableOpacity style={styles.moreBox} onPress={onMoreButton}>
                     <Text style={{fontSize:16, color: 'white'}}>More</Text>
@@ -58,14 +60,18 @@ export default function Menu({navigation,route}:{navigation:any}){
               </View>
     });
   }
-
-  useEffect(()=>{
-    const unsubscribe = navigation.addListener('focus', () => {
-    getMenuList()
-    });
-    // Return the function to unsubscribe from the event so it gets removed on unmount
-    return unsubscribe;
-    },[navigation])
+  useFocusEffect(
+    React.useCallback(() => {
+      getMenuList()
+    }, [type])
+  );
+  // useEffect(()=>{
+  //   const unsubscribe = navigation.addListener('focus', () => {
+  //   getMenuList()
+  //   });
+  //   // Return the function to unsubscribe from the event so it gets removed on unmount
+  //   return unsubscribe;
+  //   },[navigation])
 
 
   return(
