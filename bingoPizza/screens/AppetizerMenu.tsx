@@ -6,9 +6,8 @@ import {
     Dimensions,
     StyleSheet,
     TouchableOpacity,
+    ScrollView,
     } from "react-native";
-
-import '../globals';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
@@ -37,8 +36,8 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
   ];
 
   const Item = ({title}:{title:any}) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
+    <View >
+      <Text style={styles.menuFont} >{title}</Text>
     </View>
   );
   
@@ -59,16 +58,21 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
   }
   const renderMenuBox = () => {
     return listOfMenu.map((appetizer:any) => {
-      return <View style={styles.scrollHorizontalBox}>
-        <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage}/>
-        <FlatList
-          data={[{"id":appetizer._id,"title":appetizer.name}]}
-          renderItem={renderItem}
-        />
-        <TouchableOpacity style={styles.morebutton} onPress={onMoreButton}>
-          <Text style={{fontSize:16, color: 'white'}}>More</Text>
-        </TouchableOpacity>
-      </View>
+      return  <View style={styles.menu}>
+                <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage}/>
+                <View style={styles.boxDetails}>
+                  <FlatList
+                    horizontal={true}
+                    scrollEnabled={false}
+                    data={[{"id":appetizer._id,"title":appetizer.name}]}
+                    keyExtractor={(item:any) => item.id}
+                    renderItem={renderItem}
+                  />
+                  <TouchableOpacity style={styles.moreBox} onPress={onMoreButton}>
+                    <Text style={{fontSize:16, color: 'white'}}>More</Text>
+                  </TouchableOpacity>  
+                </View>
+              </View>
     });
   }
   useEffect(()=>{
@@ -90,7 +94,7 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
             </View>
 
             <View style={styles.cartContainer}>
-
+              <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
               {/* <View style={styles.scrollHorizontalBox}>
                 <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage}/>
                 <FlatList
@@ -124,7 +128,7 @@ export default function AppetizerMenu({navigation}:{navigation:any}){
                 </TouchableOpacity>
               </View> */}
               {renderMenuBox()}
-            
+              </ScrollView>
             </View>
         
         </View>
@@ -198,7 +202,7 @@ const styles = StyleSheet.create({
         width:screenHeight*0.2,
         height:screenHeight*0.2,
       },
-      serviceFont:{
+      menuFont:{
         fontSize: 18,
         width: screenHeight*0.2,
         height: screenHeight * 0.05,
