@@ -26,13 +26,14 @@ export default function Menu({navigation,route}:{navigation:any}){
       <Text style={styles.menuFont} >{title}</Text>
     </View>
   )  
-  const renderItem = ({item}:{item:any}) => (    
-    <Item title={item}/>
-  );
+  // const renderItem = ({item}:{item:any}) => (    
+  //   <Item title={item}/>
+  // );
   
   const renderItem = ({ item }:{item:any}) => (
     <Item title={item.title} />
   );
+  
   const getMenuList = async() =>{
     fetch('http://10.0.2.2:3000/get'+type,{ method: "GET",
     }
@@ -49,9 +50,14 @@ export default function Menu({navigation,route}:{navigation:any}){
     navigation.goBack()
   }
   const renderMenuBox = () => {
+    const get = 'http://10.0.2.2:3000/getImage/'
     return listOfMenu.map((menu:any) => {
       return  <View style={styles.menu}>
-                <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage}/>
+                  <View>
+                    <Image source={ {uri:get+menu.img_path} }
+                          style={styles.foodImage}       
+                    />
+                  </View>
                 <View style={styles.boxDetails}>
                   <FlatList
                     horizontal={true}
