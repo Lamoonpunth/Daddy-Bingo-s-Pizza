@@ -249,6 +249,9 @@ app.post('/addToCart',async(req,res) =>{
     try{
       const user = await User.findOne({"_id":req.body._id})
       console.log(user)
+      user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
+      user.save()
+      console.log(user)
       res.json(user)
     }
     catch(error){

@@ -84,7 +84,8 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
       "province" : selectedProvince,
       "district" : selectedDistrict,
       "subdistrict" : selectedSubDistrict,
-      "postcode" : selectedZipCode
+      "postcode" : selectedZipCode,
+      "cart" :[]
     })
   })
   .then(res=>res.json())
