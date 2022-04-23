@@ -33,6 +33,7 @@ function HomeStack() {
         <LogIn.Screen name="LogIn" component={LogInTab} />
         <LogIn.Screen name="Order" component={HomeOrder} />
         <LogIn.Screen name="Register" component={Reginfo} />
+        <LogIn.Screen name="Subscription" component={Subscription} />
       </LogIn.Navigator>
     );
   }
