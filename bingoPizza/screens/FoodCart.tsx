@@ -38,7 +38,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     const {userid} = route.params;
 
     const [cart,setListOfCart] = React.useState([
-      {name:'',img_path:'',quantity:0,additional:'',key:0},
+      {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
     ]);
     const [rawCart,setRawCart] = React.useState([])
     const [totalPrice,setPrice] = React.useState(0)

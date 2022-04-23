@@ -19,7 +19,9 @@ import { globalStyles } from '../styles/globalStyles';
 export default function Pizza({navigation,route}: {navigation:any,route:any}) {
 
   const [pizza,setPizza] = React.useState([
-    {key:1,name:'',price:1500,size:'',dough:'',crust:'',sauce:'',package:'',img_path:''},
+    {key:1,name:'mexicangreenwave',size:'M',dough:'Thick',crust:'None',sauce:'Tomato-Based',package:'Normal',img_path:'mexicangreenwave.png'},
+    {key:2,name:'pepperonipizza',size:'L',dough:'Thin',crust:'Sausage',sauce:'BBQ',package:'Normal',img_path:'pepperonipizza.png'},
+    {key:3,name:'plaincheesepizza',size:'S',dough:'Thick',crust:'None',sauce:'Tomato-Based',package:'Normal',img_path:'plaincheesepizza.png'},
   ]);
 
   const onSelected = () =>{
