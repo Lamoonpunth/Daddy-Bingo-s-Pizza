@@ -9,9 +9,8 @@ import { StyleSheet,
 import SwitchSelector from "react-native-switch-selector";
 import { View } from '../components/Themed';
 import Gradient from '../styles/Gradient';
-
+import { CommonActions } from '@react-navigation/native';
 const crypto = require('crypto-js');
-
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
@@ -99,7 +98,8 @@ export default function LogInTab({navigation}:{navigation:any}) {
         }
         else
         {
-          navigation.navigate('Order')
+          navigation.navigate('Order', {screen:'Home', params:{data:data}});
+          //navigation.navigate('Order',);
         }
       }).catch(error=>alert(error))
       

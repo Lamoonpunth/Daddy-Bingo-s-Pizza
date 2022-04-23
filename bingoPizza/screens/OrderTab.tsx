@@ -9,17 +9,29 @@ import { StyleSheet,
     TouchableOpacity,
     } from 'react-native';
 
+import SwitchSelector from "react-native-switch-selector";
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
+
+
+export default function OrderTab({navigation, route}:{navigation:any,route:any}) {
+  
+  const {data} = route.params;
+  const [userType, onChangeUserType] = React.useState('Delivery');
   getMenuList()
+  /*ตัวเลือกของswitch selector*/ 
+  const options = [
+    { label: "Delivery", value: "Delivery" },
+    { label: "Subscription", value: "Subscription" },
+  ];
 
-
-
+  const onSelector = (value:any) =>{
+    onChangeUserType(value)
+  }
 
   const [promotion, onClickPromo] = React.useState([
     {}
@@ -76,70 +88,79 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
 
   return (
     <Gradient>
-      <View>
-      <ScrollView style={styles.scrollMainContainer} >
-        
-        <View style={styles.promocontainer}>
-          <View style={styles.userBox}>
-            <TouchableOpacity onPress={onClickAdminIcon}>
-              <Image source={require('../assets/images/user_icon.png')} style={styles.userIcon}/>  
-            </TouchableOpacity>
-            <View style={styles.userAddress}>
-              <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
-            </View>
-            <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart'))}>
-              <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.promoBox} onPress={()=>{}}>
-          </TouchableOpacity>
-        </View>
 
-        <View style={styles.recommendcontainer}>
-          <View style={styles.textBox}>
-            <Text style={globalStyles.fontNormal}>
-              Recommend
-            </Text>
-            <TouchableOpacity>
-              <Text style={{fontSize:18, color:'#343434'}}>
-                See All
-              </Text>
+      <View style={styles.container}>
+        <ScrollView style={styles.scrollMainContainer}>
+          <View style={styles.promocontainer}>
+            <View style={styles.userBox}>
+              <TouchableOpacity onPress={onClickAdminIcon}>
+                <Image source={require('../assets/images/user_icon.png')} style={styles.userIcon}/>  
+              </TouchableOpacity>
+              <View style={styles.userAddress}>
+                <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+              </View>
+              <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart'))}>
+                <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity style={styles.promoBox}>
             </TouchableOpacity>
           </View>
-          <View style={styles.scrollHorizontalBox}>
+          <View style={styles.recommendcontainer}>
+            <View style={styles.textBox}>
+              <Text style={globalStyles.fontNormal}>
+                Recommend
+              </Text>
+              <TouchableOpacity>
+                <Text style={{fontSize:18, color:'#343434'}}>
+                  See All
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.scrollHorizontalBox}>
+              <FlatList
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{width:screenWidth}}
+                data={recommend}
+                renderItem={({item}) => (
+                  <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={onClickRecommend}>
+                    <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage} />
+                  </TouchableOpacity>
+                )}
+              /> 
+            </View>
+          </View>
+          <View style={styles.textBox2}>
+            <Text style={globalStyles.fontNormal}>
+              Categories
+            </Text>
+          </View> 
+          <ScrollView horizontal={true}>
             <FlatList
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
               style={{width:screenWidth}}
-              data={recommend}
+              numColumns={2}
+              data={category}
               renderItem={({item}) => (
-                <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={onClickRecommend}>
-                  <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage} />
+                <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={()=>onClickCategory(item.type)}>
+                  <Text>{item.type}</Text>
                 </TouchableOpacity>
               )}
-            /> 
-          </View>
-        </View>
-        
-        <View style={styles.textBox2}>
-          <Text style={globalStyles.fontNormal}>
-            Categories
-          </Text>
-        </View> 
-        <ScrollView horizontal={true}>
-          <FlatList
-            style={{width:screenWidth}}
-            numColumns={2}
-            data={category}
-            renderItem={({item}) => (
-              <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={()=>onClickCategory(item.type)}>
-                <Text>{item.type}</Text>
-              </TouchableOpacity>
-            )}
-          />  
+            />  
+          </ScrollView> 
         </ScrollView>
-        
-      </ScrollView>
+      </View>
+      <View style={styles.selector}>
+          <SwitchSelector
+            onPress={(value: any) => onSelector(value)}
+            options={options}
+            initial={0}
+            textColor='#FF6D6D'
+            selectedTextStyle={{color:'#FFFFFF'}}
+            buttonColor='#FF6D6D'
+            borderColor='#E5E5E5'
+            hasPadding
+            />  
       </View>
     </Gradient>
   );
@@ -269,4 +290,24 @@ const styles = StyleSheet.create({
     width:screenWidth*0.45,
     height:screenWidth*0.45,
   },
+  selector: {
+    padding:10,
+    width:screenWidth,
+    height:60,
+    backgroundColor:'transparent',
+    opacity:1
+  },
 });
+
+/*
+  <SwitchSelector
+    onPress={(value: any) => onSelector(value)}
+    options={options}
+    initial={0}
+    textColor='#FF6D6D'
+    selectedTextStyle={{color:'#FFFFFF'}}
+    buttonColor='#FF6D6D'
+    borderColor='#E5E5E5'
+    hasPadding
+  />  
+*/
