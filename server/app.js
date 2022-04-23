@@ -259,7 +259,15 @@ app.post('/addToCart',async(req,res) =>{
     }
   }
 )
-
+app.get('/getCart',async(req,res) =>{
+  try{
+    const user =await User.findOne({"_id":req.query.userid})
+    res.json(user.cart)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
 //admin account generate
 app.post('/admingen',async(req,res) =>{

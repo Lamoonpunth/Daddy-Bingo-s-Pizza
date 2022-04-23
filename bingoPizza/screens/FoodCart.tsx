@@ -8,25 +8,49 @@ import {
     StyleSheet,
     TouchableOpacity,
     } from "react-native";
-
+import { useFocusEffect } from '@react-navigation/native';
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 import Gradient from "../styles/Gradient";
 import { globalStyles } from "../styles/globalStyles";
+import { images } from "./PresetPizza";
 
-export default function FoodCart({navigation}:{navigation:any}){
+export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     
     const onCheckOut = () => {
       alert('จะกินมั้ย กินก็จ่าย');
     }
     /**numTest กับ testสร้างมาลองเฉยๆเอาไปลบได้เลย**/
     const [numTest, onnumTest] = React.useState(0);
+    const {userid} = route.params;
 
-    const [test,onTest] = React.useState([
-      {key:1,name:'A'},
+    const [test,setListOfCart] = React.useState([
     ]);
+    
 
+    const getCartList = async() =>{
+      setListOfCart([])
+      fetch('http://10.0.2.2:3000/getCart?userid='+userid)
+      .then(response => response.json())
+      .then(json => {
+        for (let i = 0; i < json.length; i++) {
+          fetch("http://10.0.2.2:3000/getID?id="+json[i].id)
+          .then(response => response.json())
+          .then(item => {
+            const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:json[i].quantity,additional:json[i].additional}
+            setListOfCart(oldArray => [...oldArray,newitem] );
+          })
+        }
+      })
+    }
+
+
+    useFocusEffect(
+      React.useCallback(() => {
+        getCartList()
+      }, [])
+    );
     return(
         <Gradient>
             <View style={styles.container}>
@@ -46,11 +70,12 @@ export default function FoodCart({navigation}:{navigation:any}){
                       renderItem={({item}) => (
                         <View style={styles.menu} key={item.key}>
                             <View style={styles.boxImage}>
+                              <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
                             </View>
                             <View style={styles.boxDetails}>
-                              <Text style={styles.cartFont}>ชื่อสินค้า</Text>
-                              <Text style={styles.cartFont}>รายละเอียด</Text>
-                              <Text style={styles.cartFont}>จำนวนสินค้า : {numTest}</Text>
+                              <Text style={styles.cartFont}>{item.name}</Text>
+                              <Text style={styles.cartFont}>{item.additional}</Text>
+                              <Text style={styles.cartFont}>จำนวน : {item.quantity}</Text>
                             </View>
                         </View>
                         )}
@@ -156,4 +181,9 @@ const styles = StyleSheet.create({
       fontSize: 24,
       color:'white',
     },
+    foodImage: {
+      width:screenWidth*0.8,
+      height:screenHeight*0.25,
+      borderRadius:50,
+  },
 });
