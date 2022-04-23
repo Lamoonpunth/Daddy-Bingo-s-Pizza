@@ -3,8 +3,8 @@ require('./model/user');
 require('./model/user-admin')
 require('./model/menu')
 require('./model/appetizer')
+require('./model/order')
 require('dotenv').config()
-
 const express = require('express');
 const app = express();
 app.use(express.json())
@@ -26,6 +26,7 @@ const User = mongoose.model("user");
 const Admin= mongoose.model("user-admin")
 const Menu = mongoose.model("menu")
 const Appetizer = mongoose.model("appetizer")
+const Order = mongoose.model("order")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -269,6 +270,25 @@ app.get('/getCart',async(req,res) =>{
   }
 })
 
+app.post('/checkout',async(req,res)=>{
+  try{
+    const order = Order.create({
+      user_id: req.body.userid,
+      datetime: Date.now(),
+      confirm_datetime: null,
+      status: "waiting for payment",
+      billing_type: "",
+      cart :req.body.cart,
+      adr_lat : "0",
+      adr_lon  : "0",
+      adr_dis : 0,
+    })
+    res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 //admin account generate
 app.post('/admingen',async(req,res) =>{
   try{
