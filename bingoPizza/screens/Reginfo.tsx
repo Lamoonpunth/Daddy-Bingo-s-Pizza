@@ -47,6 +47,8 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
   const { Username } = route.params;
   const { Password } = route.params;
+  console.log(Username)
+  console.log(Password)
   //const Username=navigation.getParam("username")
   //const Password=navigation.getParam("password")
   const onSaveButton = () => {

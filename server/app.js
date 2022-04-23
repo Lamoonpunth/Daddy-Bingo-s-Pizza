@@ -245,7 +245,17 @@ app.get('/getPizza',async(req,res)=>{
   }
 })
 
-
+app.post('/addToCart',async(req,res) =>{
+    try{
+      const user = await User.findOne({"_id":req.body._id})
+      console.log(user)
+      res.json(user)
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+)
 
 
 //admin account generate
