@@ -42,8 +42,9 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
       {name:'',img_path:'',quantity:0,additional:'',key:0},
     ]);
     const [rawCart,setRawCart] = React.useState([])
-
+    const [totalPrice,setPrice] = React.useState(0)
     const getCartList = async() =>{
+      setPrice(0)
       setListOfCart([])
       fetch('http://10.0.2.2:3000/getCart?userid='+userid)
       .then(response => response.json())
@@ -53,7 +54,8 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
           fetch("http://10.0.2.2:3000/getID?id="+json[i].id)
           .then(response => response.json())
           .then(item => {
-            const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:json[i].quantity,additional:json[i].additional,key:json[i].id}
+            const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:json[i].quantity,additional:json[i].additional,key:json[i].id,price:item[0].price}
+            setPrice(totalPrice+(item[0].price*json[i].quantity))
             setListOfCart(cart => [...cart,newitem] );
           })
         }
@@ -91,6 +93,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                               <Text style={styles.cartFont}>{item.name}</Text>
                               <Text style={styles.cartFont}>{item.additional}</Text>
                               <Text style={styles.cartFont}>จำนวน : {item.quantity}</Text>
+                              <Text style={styles.cartFont}>ราคา : {item.quantity*item.price}</Text>
                             </View>
                         </View>
                         )}
