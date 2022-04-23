@@ -58,7 +58,12 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickCategory= (type:any)=>{
-    navigation.navigate('Menu',{type:type,userid:userid})
+    if (type=='Pizza'){
+      navigation.navigate('Pizza',{type:type,userid:userid});
+    }
+    else{
+      navigation.navigate('Menu',{type:type,userid:userid});
+    }
   }
 
 

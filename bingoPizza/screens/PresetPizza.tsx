@@ -1,12 +1,23 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, ScrollView, FlatList, Dimensions, Alert, TouchableOpacity } from 'react-native'
-
-import EditScreenInfo from '../components/EditScreenInfo';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  ScrollView, 
+  FlatList, 
+  Dimensions, 
+  Alert, 
+  TouchableOpacity } from 'react-native'
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function TabOneScreen({navigation,route}: {navigation:any,route:any}) {
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import Gradient from '../styles/Gradient';
+import { globalStyles } from '../styles/globalStyles';
+
+export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
   const [dough, onChangeDough] = React.useState([
     { type: 'Thick', icon: '1', key: '1' },
@@ -30,154 +41,275 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     { type: 'Thin', icon: '2', key: '2' },
   ]);
 
+  const [xs, onXS] = React.useState(false);
+  const [s, onS] = React.useState(false);
+  const [m, onM] = React.useState(false);
+  const [l, onL] = React.useState(false);
+  const [xl, onXL] = React.useState(false);
 
+  const [selectedDough, setDough] = React.useState('Thick');
+  const [selectedCrust, setCrust] = React.useState('None');
+  const [selectedSauce, setSauce] = React.useState('Tomato-Based');
+  const [selectedPackage, setPackage] = React.useState('Thick');
 
-  const onAddCart = () => {
-    Alert.alert("Add to Cart");
+  const onSelectedDough = (type:any) =>{
+    setDough(type);
   }
 
-  const onDough = () => {
+  const onSelectedCrust = (type:any) =>{
+    setCrust(type) ;
+  }
 
-  }  
+  const onSelectedSauce = (type:any) =>{
+    setSauce(type);
+  }
 
-  const icon = '2'
+  const onSelectedPackage = (type:any) =>{
+    setPackage(type);
+  }
+
+  const onBackButton = () =>{
+    navigation.goBack()
+  }
 
   return (
-    <View style={styles.container}>
-
-      <View style={styles.body}>
+    <Gradient>
+      <View style={styles.container}>
         <ScrollView>
-          <View style={styles.topInfo}>
-            <Text style={{ fontSize: 25, fontWeight: '600', color: '#fffbf8' ,}} > Price from </Text>
-            <Text style={{ fontSize: 25, fontWeight: '600', color: '#fffbf8' }} > $12.99</Text>
+          <View style={styles.header}>
+              <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
+                  <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
+              </TouchableOpacity>
+              <Text style={globalStyles.fontHeader}>Pizza</Text>
           </View>
-          <View style={styles.bottomInfo}>
-            {/* <Image source={require('../assets/images/show.png')} style={{ width: 140, height: 110, borderRadius: 50, backgroundColor: '#EAEAEA', marginLeft: 10 }} /> */}
+
+          <View style={styles.cartContainer}>
+            
+            <View style={styles.detailBox}>
+              <Text style={styles.pizzaName}>
+                Pizza Name
+              </Text>
+              <Text style={styles.pizzaDetail}>
+                Details
+              </Text>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <View style={styles.optionHeader}>
+                <Text style={styles.optionFont}>Size</Text>
+              </View>
+              <View style={styles.optionButtons}>
+                <BouncyCheckbox
+                  size={40}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                  disableBuiltInState
+                  isChecked={xs}
+                  onPress={onXS}
+                />
+                <BouncyCheckbox
+                  size={40}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                  disableBuiltInState
+                  isChecked={xs}
+                  onPress={onXS}
+                />
+                <BouncyCheckbox
+                  size={40}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                  disableBuiltInState
+                  isChecked={xs}
+                  onPress={onXS}
+                />
+                <BouncyCheckbox
+                  size={40}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                  disableBuiltInState
+                  isChecked={xs}
+                  onPress={onXS}
+                />
+                <BouncyCheckbox
+                  size={40}
+                  fillColor="red"
+                  unfillColor="#FFFFFF"
+                  disableBuiltInState
+                  isChecked={xs}
+                  onPress={onXS}
+                />
+              </View>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <View style={styles.optionHeader}>
+                <Text style={styles.optionFont}>Dough</Text>
+              </View>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={dough}
+                  renderItem={({item}) => (
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedDough}>
+                      <Text>{item.type}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <View style={styles.optionHeader}>
+                <Text style={styles.optionFont}>Crust</Text>
+              </View>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  data={crust}
+                  renderItem={({item}) => (
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedCrust}>
+                      <Text>{item.type}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <View style={styles.optionHeader}>
+                <Text style={styles.optionFont}>Sauce</Text>
+              </View>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  data={sauce}
+                  renderItem={({item}) => (
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedSauce}>
+                      <Text>{item.type}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <View style={styles.optionHeader}>
+                <Text style={styles.optionFont}>Package</Text>
+              </View>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  data={pack}
+                  renderItem={({item}) => (
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedPackage}>
+                      <Text>{item.type}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </View>
+
           </View>
-
-          <ScrollView>
-            <View>
-              <Text style={{ fontSize: 25, fontWeight: '600', color: '#f15b5d' }} > Dough </Text>
-            </View>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={dough}
-              renderItem={({ item }) => (
-                <TouchableOpacity style={styles.selection} key={item.key} onPress={() => onDough()}>
-                  <Image source={images.icons[icon]} style={{ width: 140, height: 110, borderRadius: 20, backgroundColor: '#EAEAEA', marginLeft: 10 }} />
-                  <Text style={{ fontSize: 14, marginTop: 5, color: '#858585', marginLeft: 10 }}>{item.type}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </ScrollView>
-
-          <ScrollView>
-            <View>
-              <Text style={{ fontSize: 25, fontWeight: '600', color: '#f15b5d' }} > Crust </Text>
-            </View>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={crust}
-              renderItem={({ item }) => (
-                <TouchableOpacity style={styles.selection} key={item.key} onPress={() => onDough()}>
-                  <Image source={images.icons[icon]} style={{ width: 140, height: 110, borderRadius: 20, backgroundColor: '#EAEAEA', marginLeft: 10 }} />
-                  <Text style={{ fontSize: 14, marginTop: 5, color: '#858585', marginLeft: 10 }}>{item.type}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </ScrollView>
-
-          <ScrollView>
-            <View>
-              <Text style={{ fontSize: 25, fontWeight: '600', color: '#f15b5d' }} > Sauce </Text>
-            </View>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={sauce}
-              renderItem={({ item }) => (
-                <TouchableOpacity style={styles.selection} key={item.key} onPress={() => onDough()}>
-                  <Image source={images.icons[icon]} style={{ width: 140, height: 110, borderRadius: 20, backgroundColor: '#EAEAEA', marginLeft: 10 }} />
-                  <Text style={{ fontSize: 14, marginTop: 5, color: '#858585', marginLeft: 10 }}>{item.type}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </ScrollView>
-
-          <ScrollView>
-            <View>
-              <Text style={{ fontSize: 25, fontWeight: '600', color: '#f15b5d' }} > Package </Text>
-            </View>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={pack}
-              renderItem={({ item }) => (
-                <TouchableOpacity style={styles.selection} key={item.key} onPress={() => onDough()}>
-                  <Image source={images.icons[icon]} style={{ width: 140, height: 110, borderRadius: 20, backgroundColor: '#EAEAEA', marginLeft: 10 }} />
-                  <Text style={{ fontSize: 14, marginTop: 5, color: '#858585', marginLeft: 10 }}>{item.type}</Text>
-                </TouchableOpacity>
-              )}
-            />
-          </ScrollView>
-
         </ScrollView>
+        <TouchableOpacity style={styles.checkoutBox}>
+          <Text style={styles.checkoutFont}>Check out</Text>
+        </TouchableOpacity>   
       </View>
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.footer} onPress={() => onAddCart()}>
-          <Text style={{ fontSize: 24, color: 'black', justifyContent: 'center', alignItems: 'center' }}>{"Add to Cart"}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </Gradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#feeaeb'
-  },
-  body: {
-    flex: 11,
+    flex:1,
+    flexDirection:'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#feeaeb'
+    justifyContent:'flex-start',
+    backgroundColor: 'transparent',
+    paddingTop:25
   },
-  topInfo: {
-    height: 100,
-    backgroundColor: '#f89da4'
+  header: {
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'flex-start',
+    width:screenWidth,
+    height:screenHeight*0.25,
   },
-  bottomInfo: {
-    height: 240,
-    backgroundColor: '#fceaea'
+  iconContainer: {
+    width:screenWidth*0.9,
+    flexDirection:'row',
+    alignItems:'flex-start'
   },
-
-  footer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fc9090',
-    borderTopEndRadius: 20,
-    borderTopStartRadius: 20,
+  cartContainer: {
+    borderColor:'rgba(0,0,0,0.2)',
+    alignItems:'center',
+    justifyContent:'space-around',
+    width:screenWidth,
+    height:screenHeight*1.6,
+    backgroundColor:'#FFD1D1',
+    elevation: 10,
   },
-  selection: {
-    alignItems: 'center',
-    margin: 5
+  detailBox: {
+    width:screenWidth,
+    height:screenHeight*0.3,
+    paddingHorizontal:20,
+    flexDirection:'column',
+    alignItems:'flex-start',
+    justifyContent:'space-around',
   },
-
+  pizzaName: {
+    fontSize:28
+  },
+  pizzaDetail: {
+    fontSize:20
+  },
+  optionsBox: {
+    flexDirection:'column',
+    width:screenWidth,
+    height:screenHeight*0.25,
+  },
+  optionHeader: {
+    flex:3,
+    paddingHorizontal:20,
+    flexDirection:'row',
+    alignItems:'center',
+  },
+  optionFont: {
+    fontSize:28,
+    fontWeight:'500',
+  },
+  optionButtons: {
+    flex:7,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-evenly',
+  },
+  optionBox: {
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'white',
+    width:screenWidth*0.5,
+    height:screenHeight*0.15,
+    marginHorizontal:10,
+    borderRadius:20,
+    elevation:5
+  },
+  checkoutBox:{
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    width: screenWidth,
+    height: screenHeight * 0.075,
+    //borderRadius: 5,
+    backgroundColor: '#FF6D7D',
+  },
+  checkoutFont:{
+    fontSize: 24,
+    color:'white',
+  },
 });
-
-export const images = {
-    icons: {
-        '1': require('../assets/images/Thick.png'),
-        '2': require('../assets/images/Thin.png'),
-        '3': require('../assets/images/none.jpg'),
-        '4': require('../assets/images/sausage.jpg'),
-        '5': require('../assets/images/cheese.png'),
-        '6': require('../assets/images/tomato.jpg'),
-        '7': require('../assets/images/pesto.jpg'),
-        '8': require('../assets/images/bbq.jpg'),
-    }
-}

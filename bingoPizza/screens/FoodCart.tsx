@@ -14,7 +14,6 @@ const screenHeight = Dimensions.get('screen').height;
 
 import Gradient from "../styles/Gradient";
 import { globalStyles } from "../styles/globalStyles";
-import { images } from "./PresetPizza";
 
 export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     
@@ -148,6 +147,11 @@ const styles = StyleSheet.create({
       width:screenHeight*0.125,
       height:screenHeight*0.125,
     },
+    foodImage: {
+      borderRadius:20,
+      width:screenHeight*0.125,
+      height:screenHeight*0.125,
+    },
     boxDetails: {
       backgroundColor:'transparent',
       flexDirection:'column',
@@ -181,9 +185,4 @@ const styles = StyleSheet.create({
       fontSize: 24,
       color:'white',
     },
-    foodImage: {
-      width:screenWidth*0.8,
-      height:screenHeight*0.25,
-      borderRadius:50,
-  },
 });
