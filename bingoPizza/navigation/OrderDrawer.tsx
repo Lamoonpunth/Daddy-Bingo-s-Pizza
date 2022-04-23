@@ -11,6 +11,10 @@ export function OrderDrawer({navigation}:{navigation:any},props:any){
         
     }
 
+    const onSubscription = () => {
+        navigation.navigate("Subscription");
+    }
+
     const onService = () => {
         
     }
@@ -32,6 +36,9 @@ export function OrderDrawer({navigation}:{navigation:any},props:any){
             
             <TouchableOpacity onPress={onProfile}>
                 <Text style={styles.itemFont}>Profile</Text>    
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onSubscription}>
+                <Text style={styles.itemFont}>Subscription</Text>    
             </TouchableOpacity>
             <TouchableOpacity onPress={onAddress}>
                 <Text style={styles.itemFont}>Address</Text>
