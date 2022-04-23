@@ -3,6 +3,7 @@ import {
     View ,
     Text,
     Image,
+    FlatList,
     Dimensions,
     StyleSheet,
     TouchableOpacity,
@@ -19,11 +20,17 @@ export default function FoodCart({navigation}:{navigation:any}){
     const onCheckOut = () => {
       alert('จะกินมั้ย กินก็จ่าย');
     }
+    /**numTest กับ testสร้างมาลองเฉยๆเอาไปลบได้เลย**/
+    const [numTest, onnumTest] = React.useState(0);
+
+    const [test,onTest] = React.useState([
+      {key:1,name:'A'},
+    ]);
 
     return(
         <Gradient>
             <View style={styles.container}>
-
+                
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
@@ -33,11 +40,22 @@ export default function FoodCart({navigation}:{navigation:any}){
                 </View>
 
                 <View style={styles.cartContainer}>
-                    <View style={styles.flatContainer}>
-                        <TouchableOpacity style={styles.menu}>
-                            <Image source={require('../assets/images/pooh.jpg')} style={styles.menu}/>
-                        </TouchableOpacity>
-                    </View>
+                  <View style={styles.flatContainer}>
+                    <FlatList
+                      data={test}
+                      renderItem={({item}) => (
+                        <View style={styles.menu} key={item.key}>
+                            <View style={styles.boxImage}>
+                            </View>
+                            <View style={styles.boxDetails}>
+                              <Text style={styles.cartFont}>ชื่อสินค้า</Text>
+                              <Text style={styles.cartFont}>รายละเอียด</Text>
+                              <Text style={styles.cartFont}>จำนวนสินค้า : {numTest}</Text>
+                            </View>
+                        </View>
+                        )}
+                    />
+                  </View>
                     
                 </View>
 
@@ -90,21 +108,20 @@ const styles = StyleSheet.create({
     menu: {
       marginVertical:5,
       borderRadius:50,
-      borderWidth:1,
       borderColor:'gray',
-      backgroundColor:'white',
+      backgroundColor:'#FF6D7D',
       width:screenWidth*0.8,
-      height:screenHeight*0.22,
+      height:screenHeight*0.25,
       flexDirection:'row',
       alignItems:'center',
       justifyContent:'space-evenly',
+      elevation: 5,
     },
     boxImage: {
       borderRadius:20,
       backgroundColor:'white',
       width:screenHeight*0.125,
       height:screenHeight*0.125,
-      borderWidth:1
     },
     boxDetails: {
       backgroundColor:'transparent',
@@ -114,15 +131,15 @@ const styles = StyleSheet.create({
       width:screenHeight*0.2,
       height:screenHeight*0.2,
     },
-    serviceFont:{
-      fontSize: 18,
+    cartFont:{
+      fontSize: 20,
       width: screenHeight*0.2,
-      height: screenHeight * 0.05,
+      height: 50,
       margin: 8,
       padding: 10,
-      borderRadius: 10,
+      borderRadius: 20,
       backgroundColor: 'white',
-      elevation: 12,
+      elevation: 4,
     },
     checkoutBox:{
       flexDirection:'column',

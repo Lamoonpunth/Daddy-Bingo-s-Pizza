@@ -9,15 +9,14 @@ import { StyleSheet,
 import SwitchSelector from "react-native-switch-selector";
 import { View } from '../components/Themed';
 import Gradient from '../styles/Gradient';
-
+import { CommonActions } from '@react-navigation/native';
 const crypto = require('crypto-js');
-
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 //serverIP + port ex http://10.0.2.2:3000
 const serverIP = "http://10.0.2.2:3000"
-export default function LogInTab({navigation}:{navigation:any}) {
+export default function LogInTab({navigation,route}:{navigation:any,route:any}) {
 
   //Server online check
   function isOnline(){
@@ -92,14 +91,14 @@ export default function LogInTab({navigation}:{navigation:any}) {
       .then(res=>res.json())
       
       .then(data=>{
-        console.log(data)
         if (data == "Invalid username or password")
         {
           alert(data)
         }
         else
         {
-          navigation.navigate('Order')
+          navigation.navigate('Order', {screen:'Home', params:{userid:data}});
+          //navigation.navigate('Order',);
         }
       }).catch(error=>alert(error))
       
@@ -169,7 +168,9 @@ export default function LogInTab({navigation}:{navigation:any}) {
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
         else if (isPerfect(password) == true){
-          navigation.navigate('Register',{username:username,password:crypto.MD5(password)});
+          console.log(username)
+          console.log(password)
+          navigation.navigate('Register',{Username:username,Password:crypto.MD5(password)});
         }
         else{
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');

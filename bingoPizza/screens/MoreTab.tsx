@@ -20,6 +20,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
     const {item} = route.params;
     const {type} = route.params;
+    const {userid} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
 
     const onBackButton = () =>{
@@ -28,6 +29,11 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
     const onAddToCart = () =>{
         alert('จะกินก็นั่ง');
+        fetch("http://10.0.2.2:3000/addToCart",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({_id:userid,itemid:item._id,quantity:orderNumber,additional:"ยังไม่ได้ทำ"})
+        })
     }
 
     const onAdd = () =>{

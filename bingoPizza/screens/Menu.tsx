@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
     ScrollView,
     } from "react-native";
-
+    
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
@@ -20,8 +20,9 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Menu({navigation,route}:{navigation:any,route:any}){
   const [listOfMenu,setListOfMenu] =React.useState([]);
   const onMoreButton= (menu:any) =>{
-    navigation.navigate('More',{item:menu,type:type});
+    navigation.navigate('More',{item:menu,type:type,userid:userid});
   }
+  const {userid} = route.params;
   const {type} = route.params
   const Item = ({title}:{title:any}) => (
     <View >
