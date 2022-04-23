@@ -45,8 +45,10 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
   const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
   
 
-  const { username } = route.params;
-  const { password } = route.params;
+  const { Username } = route.params;
+  const { Password } = route.params;
+  console.log(Username)
+  console.log(Password)
   //const Username=navigation.getParam("username")
   //const Password=navigation.getParam("password")
   const onSaveButton = () => {
@@ -70,8 +72,8 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     },
     signal:controller.signal,
     body : JSON.stringify({
-      "username" : username,
-      "password" : password,
+      "username" : Username,
+      "password" : Password,
       "fname" : firstname,
       "lname" : lastname,
       "phonenumber" : phone,

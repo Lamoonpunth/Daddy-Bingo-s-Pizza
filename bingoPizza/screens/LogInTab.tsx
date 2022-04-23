@@ -91,14 +91,13 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
       .then(res=>res.json())
       
       .then(data=>{
-        console.log(data)
         if (data == "Invalid username or password")
         {
           alert(data)
         }
         else
         {
-          navigation.navigate('Order', {screen:'Home', params:{data:data}});
+          navigation.navigate('Order', {screen:'Home', params:{userid:data}});
           //navigation.navigate('Order',);
         }
       }).catch(error=>alert(error))
@@ -169,7 +168,9 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
         else if (isPerfect(password) == true){
-          navigation.navigate('Register',{username:username,password:crypto.MD5(password)});
+          console.log(username)
+          console.log(password)
+          navigation.navigate('Register',{Username:username,Password:crypto.MD5(password)});
         }
         else{
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');

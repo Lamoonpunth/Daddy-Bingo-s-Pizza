@@ -20,6 +20,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
     const {item} = route.params;
     const {type} = route.params;
+    const {userid} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
 
     const onBackButton = () =>{

@@ -20,7 +20,9 @@ const screenHeight = Dimensions.get('screen').height;
 
 export default function OrderTab({navigation, route}:{navigation:any,route:any}) {
   
-  const {data} = route.params;
+  const {userid} = route.params;
+  console.log(userid)
+  const [userType, onChangeUserType] = React.useState('Delivery');
   /*ตัวเลือกของswitch selector*/ 
 
   const [promotion, onClickPromo] = React.useState([
@@ -57,7 +59,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickCategory= (type:any)=>{
-    navigation.navigate('Menu',{"type":type})
+    navigation.navigate('Menu',{type:type,userid:userid})
   }
 
 
