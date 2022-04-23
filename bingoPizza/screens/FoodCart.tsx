@@ -25,7 +25,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     const {userid} = route.params;
 
     const [cart,setListOfCart] = React.useState([
-      {name:'',img_path:'',quantity:0,additional:''},
+      {name:'',img_path:'',quantity:0,additional:'',key:0},
     ]);
     
 
@@ -38,7 +38,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
           fetch("http://10.0.2.2:3000/getID?id="+json[i].id)
           .then(response => response.json())
           .then(item => {
-            const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:json[i].quantity,additional:json[i].additional}
+            const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:json[i].quantity,additional:json[i].additional,key:json[i].id}
             setListOfCart(cart => [...cart,newitem] );
           })
         }

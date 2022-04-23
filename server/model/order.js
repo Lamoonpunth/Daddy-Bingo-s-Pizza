@@ -13,7 +13,6 @@ const UserSchema = new mongoose.Schema({
     adr_long : {type:Number, default: null},
     adr_lon  : {type:String, default: null},
     adr_dis : {type:String, default: null},
-
 });
 
 mongoose.model('menu', UserSchema);
