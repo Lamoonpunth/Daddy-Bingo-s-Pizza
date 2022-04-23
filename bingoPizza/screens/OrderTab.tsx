@@ -22,7 +22,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   
   const {data} = route.params;
   const [userType, onChangeUserType] = React.useState('Delivery');
-  getMenuList()
   /*ตัวเลือกของswitch selector*/ 
   const options = [
     { label: "Delivery", value: "Delivery" },
@@ -70,17 +69,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     navigation.navigate('Menu',{"type":type})
   }
 
-  function getMenuList(){
-    console.log("getMenulist");
-    fetch(serverIP+"/getmenu",{ method: "GET",
-    }
-    )
-    .then(response => response.json())
-    .then(json => {
-        console.log(json);
-      }
-    )
-  }
 
   // useEffect(()=>{
   // getMenuList

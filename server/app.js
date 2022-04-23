@@ -129,7 +129,7 @@ app.post('/login', async(req,res) => {
       //save user token
       user.token = token;
       //return new user
-      res.status(200).json(user);
+      res.status(200).json(user._id);
     }
     else{
       res.status(400).json("Invalid username or password");
@@ -319,7 +319,6 @@ app.post('/login-admin', async(req,res) => {
 app.post('/welcome',auth,(req,res)=>{
   res.status(200).send("Welcome");
 })
-
 //usercheck before register
 app.post('/usercheck', (req,res) => {
   User.findOne({username: req.query.username}, function(err, user){
