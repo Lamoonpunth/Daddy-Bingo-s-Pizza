@@ -12,7 +12,7 @@ const {height, width} = Dimensions.get('screen');
 
 
 export default function TabOneScreen({navigation,route}: {navigation:any,route:any}) {
-  
+
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
 
@@ -47,6 +47,8 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
   const { Username } = route.params;
   const { Password } = route.params;
+  console.log(Username)
+  console.log(Password)
   //const Username=navigation.getParam("username")
   //const Password=navigation.getParam("password")
   const onSaveButton = () => {
@@ -82,7 +84,8 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
       "province" : selectedProvince,
       "district" : selectedDistrict,
       "subdistrict" : selectedSubDistrict,
-      "postcode" : selectedZipCode
+      "postcode" : selectedZipCode,
+      "cart" :[]
     })
   })
   .then(res=>res.json())

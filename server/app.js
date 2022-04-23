@@ -129,7 +129,7 @@ app.post('/login', async(req,res) => {
       //save user token
       user.token = token;
       //return new user
-      res.status(200).json(user);
+      res.status(200).json(user._id);
     }
     else{
       res.status(400).json("Invalid username or password");
@@ -201,7 +201,7 @@ app.get('/getmenu',async(req,res)=>{
   }
 })
 
-app.get('/getappetizer',async(req,res)=>{
+app.get('/getAppetizer',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"appetizer"})
     console.log("getmenu")
@@ -212,7 +212,7 @@ app.get('/getappetizer',async(req,res)=>{
   }
 })
 
-app.get('/getdrink',async(req,res)=>{
+app.get('/getDrink',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"drink"})
     console.log("getmenu")
@@ -223,8 +223,18 @@ app.get('/getdrink',async(req,res)=>{
   }
 })
 
+app.get('/getID',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"_id":req.query.id})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
-app.get('/getpizza',async(req,res)=>{
+app.get('/getPizza',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"pizza"})
     console.log("getmenu")
@@ -235,7 +245,20 @@ app.get('/getpizza',async(req,res)=>{
   }
 })
 
-
+app.post('/addToCart',async(req,res) =>{
+    try{
+      const user = await User.findOne({"_id":req.body._id})
+      console.log(user)
+      user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
+      user.save()
+      console.log(user)
+      res.json(user)
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
+)
 
 
 //admin account generate
@@ -309,7 +332,6 @@ app.post('/login-admin', async(req,res) => {
 app.post('/welcome',auth,(req,res)=>{
   res.status(200).send("Welcome");
 })
-
 //usercheck before register
 app.post('/usercheck', (req,res) => {
   User.findOne({username: req.query.username}, function(err, user){

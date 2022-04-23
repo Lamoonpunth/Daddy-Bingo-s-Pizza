@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     district : {type:String, default: null},
     subdistrict : {type:String, default: null},
     postcode : {type:String, default: null},
+    cart : {type:Array, default: []},
     salt : String,
     token: String
 });
