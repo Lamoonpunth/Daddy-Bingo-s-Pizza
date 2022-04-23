@@ -6,8 +6,7 @@ import {
   Image, 
   ScrollView, 
   FlatList, 
-  Dimensions, 
-  Alert, 
+  Dimensions,  
   TouchableOpacity } from 'react-native'
 
 const screenWidth = Dimensions.get('screen').width;
@@ -20,25 +19,25 @@ import { globalStyles } from '../styles/globalStyles';
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
   const [dough, onChangeDough] = React.useState([
-    { type: 'Thick', icon: '1', key: '1' },
-    { type: 'Thin', icon: '2', key: '2' },
+    { type: 'Thick', icon: '1', price:50 , key: '1' },
+    { type: 'Thin', icon: '2', price:40 , key: '2' },
   ]);
 
   const [crust, onChangeCrust] = React.useState([
-    { type: 'None', icon: '3', key: '1' },
-    { type: 'Sausage', icon: '4', key: '2' },
-    { type: 'Cheese', icon: '5', key: '3' },
+    { type: 'None', icon: '3', price:0 , key: '1' },
+    { type: 'Sausage', icon: '4', price:30 , key: '2' },
+    { type: 'Cheese', icon: '5', price:60 , key: '3' },
   ]);
 
   const [sauce, onChangeSauce] = React.useState([
-    { type: 'Tomato-Based', icon: '6', key: '1' },
-    { type: 'Pesto', icon: '7', key: '2' },
-    { type: 'BBQ', icon: '8', key: '3' },
+    { type: 'Tomato-Based', icon: '6', price:50 , key: '1' },
+    { type: 'Pesto', icon: '7', price:60 , key: '2' },
+    { type: 'BBQ', icon: '8', price:50 , key: '3' },
   ]);
 
   const [pack, onChangePackage] = React.useState([
-    { type: 'Thick', icon: '1', key: '1' },
-    { type: 'Thin', icon: '2', key: '2' },
+    { type: 'Thick', icon: '1', price:50 , key: '1' },
+    { type: 'Thin', icon: '2', price:40 , key: '2' },
   ]);
 
   const [xs, onXS] = React.useState(false);
@@ -80,7 +79,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
               <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
                   <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
               </TouchableOpacity>
-              <Text style={globalStyles.fontHeader}>Pizza</Text>
+              <Text style={globalStyles.fontHeader}>Preset Pizza</Text>
           </View>
 
           <View style={styles.cartContainer}>
