@@ -3,6 +3,7 @@ import {
     View ,
     Text,
     Image,
+    FlatList,
     Dimensions,
     StyleSheet,
     TouchableOpacity,
@@ -21,6 +22,21 @@ export default function Subscription({navigation,route}:{navigation:any,route:an
         navigation.goBack()
     }
 
+    const [test,onTest] = React.useState([
+        {key:1,name:'A'},
+        {key:2,name:'A'},
+        {key:3,name:'A'},
+        {key:4,name:'A'},
+        {key:5,name:'A'},
+        {key:6,name:'A'},
+        {key:7,name:'A'},
+        {key:8,name:'A'},
+        {key:9,name:'A'},
+        {key:10,name:'A'},
+        {key:11,name:'A'},
+        {key:12,name:'A'},
+    ])
+
     return(
         <Gradient>
             <View style={styles.container}>
@@ -30,6 +46,17 @@ export default function Subscription({navigation,route}:{navigation:any,route:an
                     </TouchableOpacity>
                     <Text style={globalStyles.fontHeader}>Subscription</Text>
                     <View style={globalStyles.underline}></View>  
+                </View>
+                <View>
+                    <FlatList
+                        style={{width:screenWidth}}
+                        data={test}
+                        renderItem={({item}) => (
+                        <TouchableOpacity key={item.key}>
+                            <Text>{item.name}</Text>
+                        </TouchableOpacity>
+                        )}
+                    />     
                 </View>
             </View>
         </Gradient>
@@ -42,15 +69,9 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection:'column',
       alignItems: 'center',
-      justifyContent: 'flex-end',
+      justifyContent: 'flex-start',
+      paddingTop:25,
       backgroundColor: 'transparent',
-    },
-    selector: {
-        padding:10,
-        width:screenWidth,
-        height:60,
-        backgroundColor:'transparent',
-        opacity:1
     },
     header: {
         flexDirection:'column',
@@ -62,4 +83,9 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'flex-start'
     },
+    listContainer: {
+        alignItems:'center',
+        width:screenWidth,
+        height:screenHeight*0.7
+    }
 });

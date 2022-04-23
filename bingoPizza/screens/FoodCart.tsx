@@ -3,6 +3,7 @@ import {
     View ,
     Text,
     Image,
+    FlatList,
     Dimensions,
     StyleSheet,
     TouchableOpacity,
@@ -20,10 +21,18 @@ export default function FoodCart({navigation}:{navigation:any}){
       alert('จะกินมั้ย กินก็จ่าย');
     }
 
+    const [test,onTest] = React.useState([
+      {key:1,name:'A'},
+      {key:2,name:'A'},
+      {key:3,name:'A'},
+      {key:4,name:'A'},
+      {key:5,name:'A'},
+    ]);
+
     return(
         <Gradient>
             <View style={styles.container}>
-
+                
                 <View style={styles.header}>
                     <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
@@ -33,11 +42,16 @@ export default function FoodCart({navigation}:{navigation:any}){
                 </View>
 
                 <View style={styles.cartContainer}>
-                    <View style={styles.flatContainer}>
-                        <TouchableOpacity style={styles.menu}>
-                            <Image source={require('../assets/images/pooh.jpg')} style={styles.menu}/>
+                  <View style={styles.flatContainer}>
+                    <FlatList
+                      data={test}
+                      renderItem={({item}) => (
+                        <TouchableOpacity style={styles.menu} key={item.key}>
+                            <Text>{item.name}</Text>
                         </TouchableOpacity>
-                    </View>
+                        )}
+                    />
+                  </View>
                     
                 </View>
 
