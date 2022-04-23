@@ -24,14 +24,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   console.log(userid)
   const [userType, onChangeUserType] = React.useState('Delivery');
   /*ตัวเลือกของswitch selector*/ 
-  const options = [
-    { label: "Delivery", value: "Delivery" },
-    { label: "Subscription", value: "Subscription" },
-  ];
-
-  const onSelector = (value:any) =>{
-    onChangeUserType(value)
-  }
 
   const [promotion, onClickPromo] = React.useState([
     {}
@@ -77,7 +69,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
 
   return (
     <Gradient>
-
       <View style={styles.container}>
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
@@ -138,18 +129,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
             />  
           </ScrollView> 
         </ScrollView>
-      </View>
-      <View style={styles.selector}>
-          <SwitchSelector
-            onPress={(value: any) => onSelector(value)}
-            options={options}
-            initial={0}
-            textColor='#FF6D6D'
-            selectedTextStyle={{color:'#FFFFFF'}}
-            buttonColor='#FF6D6D'
-            borderColor='#E5E5E5'
-            hasPadding
-            />  
       </View>
     </Gradient>
   );
@@ -287,16 +266,3 @@ const styles = StyleSheet.create({
     opacity:1
   },
 });
-
-/*
-  <SwitchSelector
-    onPress={(value: any) => onSelector(value)}
-    options={options}
-    initial={0}
-    textColor='#FF6D6D'
-    selectedTextStyle={{color:'#FFFFFF'}}
-    buttonColor='#FF6D6D'
-    borderColor='#E5E5E5'
-    hasPadding
-  />  
-*/

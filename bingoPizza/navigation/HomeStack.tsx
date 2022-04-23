@@ -8,6 +8,7 @@ import { OrderDrawer } from "./OrderDrawer";
 import FoodCart from "../screens/FoodCart";
 import Menu from "../screens/Menu";
 import MoreTab from "../screens/MoreTab";
+import Subscription from "../screens/SubscriptionTab";
 
 import 'react-native-gesture-handler';
 
@@ -21,6 +22,7 @@ function HomeOrder(){
             <Order.Screen name='Cart' component={FoodCart} options={{swipeEnabled:false}}/>
             <Order.Screen name='Menu' component={Menu} options={{swipeEnabled:false}}/>
             <Order.Screen name='More' component={MoreTab} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Sub' component={Subscription} options={{swipeEnabled:false}}/>
         </Order.Navigator>
     )
 };

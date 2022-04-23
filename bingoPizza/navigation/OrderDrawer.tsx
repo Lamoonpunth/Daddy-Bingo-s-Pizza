@@ -12,7 +12,7 @@ export function OrderDrawer({navigation}:{navigation:any},props:any){
     }
 
     const onSubscription = () => {
-        navigation.navigate("Subscription");
+        navigation.navigate("Sub");
     }
 
     const onService = () => {

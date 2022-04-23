@@ -12,7 +12,7 @@ const {height, width} = Dimensions.get('screen');
 
 
 export default function TabOneScreen({navigation,route}: {navigation:any,route:any}) {
-  
+
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
 
