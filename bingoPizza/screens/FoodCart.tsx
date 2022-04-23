@@ -20,6 +20,20 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     
     const onCheckOut = () => {
       alert('จะกินมั้ย กินก็จ่าย');
+      console.log(rawCart)
+      fetch("http://10.0.2.2:3000/checkout",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({
+          userid:userid,
+          cart:rawCart
+        })
+      })
+      .then(response => response.json())
+      .then(json =>{
+        console.log(json)
+      })
+      .catch(error => console.log(error))
     }
     /**numTest กับ testสร้างมาลองเฉยๆเอาไปลบได้เลย**/
     const {userid} = route.params;
@@ -27,13 +41,14 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     const [cart,setListOfCart] = React.useState([
       {name:'',img_path:'',quantity:0,additional:'',key:0},
     ]);
-    
+    const [rawCart,setRawCart] = React.useState([])
 
     const getCartList = async() =>{
       setListOfCart([])
       fetch('http://10.0.2.2:3000/getCart?userid='+userid)
       .then(response => response.json())
       .then(json => {
+        setRawCart(json)
         for (let i = 0; i < json.length; i++) {
           fetch("http://10.0.2.2:3000/getID?id="+json[i].id)
           .then(response => response.json())
