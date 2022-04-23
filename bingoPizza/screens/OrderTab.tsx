@@ -15,11 +15,9 @@ const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
-  getMenuList()
-
-
-
+export default function OrderTab({navigation, route}:{navigation:any,route:any}) {
+  
+  const {userid} = route.params;
 
   const [promotion, onClickPromo] = React.useState([
     {}
@@ -58,17 +56,6 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     navigation.navigate('Menu',{"type":type})
   }
 
-  function getMenuList(){
-    console.log("getMenulist");
-    fetch(serverIP+"/getmenu",{ method: "GET",
-    }
-    )
-    .then(response => response.json())
-    .then(json => {
-        console.log(json);
-      }
-    )
-  }
 
   // useEffect(()=>{
   // getMenuList

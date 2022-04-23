@@ -17,7 +17,7 @@ const screenHeight = Dimensions.get('screen').height;
 const {height, width} = Dimensions.get('screen');
 //serverIP + port ex http://10.0.2.2:3000
 const serverIP = "http://10.0.2.2:3000"
-export default function LogInTab({navigation}:{navigation:any}) {
+export default function LogInTab({navigation,route}:{navigation:any,route:any}) {
 
   //Server online check
   function isOnline(){
@@ -99,7 +99,8 @@ export default function LogInTab({navigation}:{navigation:any}) {
         }
         else
         {
-          navigation.navigate('Order')
+          console.log(data)
+          navigation.navigate('Order',{userid:data})
         }
       }).catch(error=>alert(error))
       
