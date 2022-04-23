@@ -18,5 +18,12 @@ const UserSchema = new mongoose.Schema({
     salt : String,
     token: String
 });
-
+UserSchema.methods.toAuthJSON = (user)=>{
+    return {
+      username: this.username,
+      password: this.password,
+      token: this.token,
+      
+    };
+  };
 mongoose.model('user', UserSchema);
