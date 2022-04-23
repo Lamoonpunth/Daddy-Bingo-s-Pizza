@@ -21,7 +21,6 @@ const screenHeight = Dimensions.get('screen').height;
 export default function OrderTab({navigation, route}:{navigation:any,route:any}) {
   
   const {userid} = route.params;
-  console.log(userid)
   const [userType, onChangeUserType] = React.useState('Delivery');
   /*ตัวเลือกของswitch selector*/ 
 
@@ -79,7 +78,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
               <View style={styles.userAddress}>
                 <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
               </View>
-              <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart'))}>
+              <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart',{userid:userid}))}>
                 <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
               </TouchableOpacity>
             </View>
