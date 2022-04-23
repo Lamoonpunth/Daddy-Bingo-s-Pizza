@@ -48,7 +48,7 @@ export default function FoodCart({navigation}:{navigation:any}){
                             <View style={styles.boxImage}>
                             </View>
                             <View style={styles.boxDetails}>
-                              <Text style={styles.cartFont}>ชื่อสินค้า</Text>
+                              <Text style={styles.cartFont}>{item.name}</Text>
                               <Text style={styles.cartFont}>รายละเอียด</Text>
                               <Text style={styles.cartFont}>จำนวนสินค้า : {numTest}</Text>
                             </View>

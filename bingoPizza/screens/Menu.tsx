@@ -69,7 +69,7 @@ export default function Menu({navigation,route}:{navigation:any,route:any}){
                     renderItem={renderItem}
                   />
                   <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu)}>
-                    <Text style={{fontSize:16, color: 'white'}}>More</Text>
+                    <Text style={{fontSize:18, color: '#FF6D7D'}}>More</Text>
                   </TouchableOpacity>  
                 </View>
               </View>
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
         borderRadius:50,
         //borderWidth:1,
         borderColor:'gray',
-        backgroundColor:'white',
+        backgroundColor:'#FF6D6D',
         width:screenWidth*0.8,
         height:screenHeight*0.22,
         flexDirection:'row',
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
         width:screenHeight*0.125,
         height:screenHeight*0.125,
-        borderWidth:1
+        //borderWidth:1
       },
       boxDetails: {
         backgroundColor:'transparent',
@@ -230,12 +230,12 @@ const styles = StyleSheet.create({
         width: screenHeight*0.1,
         height: screenHeight * 0.05,
         borderRadius: 10,
-        backgroundColor: '#FF6D7D',
+        backgroundColor: 'white',
         elevation: 12,
       },
       moreFont:{
         fontSize: 18,
-        color:'white',
+        color:'#FF6D7D',
       },
       ////////////////////
       
