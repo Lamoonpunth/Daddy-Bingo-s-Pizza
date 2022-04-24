@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -18,6 +18,8 @@ import { globalStyles } from "../styles/globalStyles";
 
 export default function OrderSummary({ navigation, route }: { navigation: any, route: any }) {
 
+    const {cart} = route.params;
+
     const [code, onChangeCode] = React.useState('');
 
     const [choosepayment1, setChoosePayment1] = React.useState(false);
@@ -32,7 +34,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
 
 
     const onClickBack = () =>{
-        
+        navigation.goBack();
     }
 
     const onEbankChooseButton = () =>{
@@ -52,30 +54,34 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
         alert("nice");
     }
 
-
     return (
         <Gradient>
+
             <View style={styles.backcontainer}>
                 <TouchableOpacity style={styles.backicon} onPress={() => {onClickBack()}}>
                     <Image source={require('../assets/images/back_icon.png')} style={styles.backicon}/>  
                 </TouchableOpacity>
             </View>
+
             <View style={styles.mainContainer}>
                 <View style={styles.headerbox}>
                     <Text style={{fontSize: 32,}}>Order Summary</Text>
                 </View>
-
-                
                 <View style={styles.orderlistspace}>
-
+                    <FlatList
+                        data={cart}
+                        renderItem={({item})=>(
+                            <View key={item.key} style={styles.orderBox}>
+                                <Text style={styles.orderFont}>x{item.quantity} {item.name}</Text>
+                                <Text style={styles.orderFont}>{item.price}</Text>
+                            </View>
+                        )}
+                    />
                 </View>
-
                 <View style={styles.line}/>
-                
                 <View style={styles.paymenttextbox}>
                     <Text style={{fontSize: 16,}}>Payment </Text>
                 </View>
-
                 <View style={styles.paymenttickbox}>
 
                 <TouchableOpacity 
@@ -109,14 +115,10 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                 </TouchableOpacity>
 
                 </View>
-
                 <View style={styles.line}/>
-
-
                 <View style={styles.giftcodetextbox}>
                     <Text style={{fontSize: 16,}}>Gift card/Discount code</Text>
                 </View>
-
                 <View style={styles.applybtnbox}>
                     <TextInput 
                         style={styles.giftcodeinput}
@@ -129,7 +131,6 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                         </View> 
                     </TouchableOpacity>
                 </View>
-
                 <View style={styles.line}/>
                 <View style={styles.subtotal}>
                     <View style={styles.subtotaltext}>
@@ -159,10 +160,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                     </TouchableOpacity>
                 </View>
                 
-
             </View>
-
-
 
         </Gradient>
     );
@@ -181,6 +179,9 @@ const styles = StyleSheet.create({
     },
     mainContainer:{
         borderRadius:45,
+        flexDirection:'column',
+        alignItems:'center',
+        justifyContent:'center',
         backgroundColor: 'white',
         height: height*.8,
         width: width*.9,
@@ -188,10 +189,7 @@ const styles = StyleSheet.create({
     },
     headerbox:{
         justifyContent: 'center',
-        marginLeft:width*.075,
-        marginTop:height*.02,
         width: width*.6,
-        
     },
     backicon:{
         backgroundColor: 'transparent',
@@ -199,47 +197,41 @@ const styles = StyleSheet.create({
         width: width*.13,
     },
     line:{
-        
         backgroundColor: 'black',
         height: height*.001,
         width: width*.8,
-        marginLeft:width*.05,
+        marginVertical:5,
         opacity:.2,
     },
     orderlistspace:{
-        borderWidth:1,
         borderColor: 'black',
         height: height*.225,
         width: width*.75,
-        marginLeft:width*.075,
-        marginTop:height*.01,
-        marginBottom:height*.013,
+        
+    },
+    orderBox: {
+        flexDirection:'row',
+        alignContent:'center',
+        justifyContent:'space-between',
+        height: height*0.05,
+        width: width*.75,
+    },
+    orderFont: {
+        fontSize:20
     },
     paymenttextbox:{
-        //borderWidth:1,
-        //borderColor: 'black',
         justifyContent: 'center',
-        marginLeft:width*.075,
-        marginTop:height*.0075,
         width: width*.6,
         opacity:.5,
     },
     paymenttickbox:{
         flexDirection:'row',
-        //borderWidth:1,
-        //borderColor: 'black',
         height: height*.07,
         width: width*.75,
-        marginLeft:width*.075,
-        marginTop:height*.01,
-        marginBottom:height*.013,
     },
     giftcodetextbox:{
-        //borderWidth:1,
-        //borderColor: 'black',
+        alignItems:'center',
         justifyContent: 'center',
-        marginLeft:width*.075,
-        marginTop:height*.0075,
         width: width*.6,
         opacity:.5,
     },
@@ -247,7 +239,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
         width: width *.5,
         height: height * 0.05,
-        marginLeft:width*.08,
         padding: 10,
         borderRadius: 10,
         backgroundColor: 'white',
@@ -258,17 +249,10 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
-        //borderWidth:1,
-        //borderColor: 'black',
         height: height * 0.05,
         width: width*.75,
-        marginLeft:width*.075,
-        marginTop:height*.01,
-        marginBottom:height*.012,
     },
     applybutton: {
-        //borderWidth:1,
-        //borderColor:'rgba(0,0,0,0)',
         marginHorizontal:20,
         alignItems:'center',
         justifyContent:'center',
@@ -279,49 +263,34 @@ const styles = StyleSheet.create({
         elevation:5,
       },
     subtotal:{
+        marginTop:25,
         flexDirection:'row',
-        //borderWidth:1,
-        //borderColor: 'black',
         height: height*.15,
         width: width*.75,
-        marginLeft:width*.075,
-        marginTop:height*.01,
-        marginBottom:height*.011,
     },
     subtotaltext:{
         flexDirection:'column',
-        //borderWidth:1,
-        //borderColor: 'black',
         height: height*.15,
         width: width*.5,
     },
     subtotalmoney:{
         flexDirection:'column',
-        //borderWidth:1,
-        //borderColor: 'black',
         height: height*.15,
         width: width*.145,
-        marginLeft:width*.13,
     },
     checkoutbtnbox:{
-        flexDirection:'row',
-        //borderWidth:1,
-        //borderColor: 'black',
+        flexDirection:'row-reverse',
+        marginTop:25,
         height: height*.06,
         width: width*.75,
-        marginLeft:width*.075,
     },
     checkoutbutton:{
-        //borderWidth:1,
-        //borderColor:'rgba(0,0,0,0)',
-        marginHorizontal:20,
         alignItems:'center',
         justifyContent:'center',
         width:width*.24,
         height:height*.0545,
         backgroundColor:'#FF6D6D',
         borderRadius:10,
-        marginLeft:205,
         elevation:5,
     },
 

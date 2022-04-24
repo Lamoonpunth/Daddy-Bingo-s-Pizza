@@ -18,7 +18,6 @@ import { globalStyles } from "../styles/globalStyles";
 export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     
     const onCheckOut = () => {
-      alert('จะกินมั้ย กินก็จ่าย');
       console.log(rawCart)
       fetch("http://10.0.2.2:3000/checkout",{
         method:"POST",
@@ -31,6 +30,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
       .then(response => response.json())
       .then(json =>{
         console.log(json)
+        navigation.navigate('OrderSummary',{cart:cart});
       })
       .catch(error => console.log(error))
     }
