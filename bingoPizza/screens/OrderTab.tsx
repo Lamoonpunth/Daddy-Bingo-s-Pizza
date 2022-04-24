@@ -39,7 +39,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     {type:'Drink',key:'2',img_path:require('../assets/images/Category/Drink.jpg')},
     {type:'Pasta',key:'3',img_path:require('../assets/images/Category/Pasta.jpg')},
     {type:'Dessert',key:'4',img_path:require('../assets/images/Category/Dessert.jpg')},
-    {type:'À la carte',key:'5',img_path:require('../assets/images/Category/À la carte.jpg')},
+    {type:'À la carte',key:'5',img_path:require('../assets/images/Category/carte.jpg')},
   ]);
 
   const onClickAdminIcon = () =>{
@@ -128,7 +128,9 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
               renderItem={({item}) => (
                 <TouchableOpacity style={styles.categoryBox} key={item.key} onPress={()=>onClickCategory(item.type)}>
                   <ImageBackground source={item.img_path} style={styles.categoryIcon} imageStyle={{borderRadius:50}}>
-                    <Text style={styles.categoryFont}>{item.type}</Text>  
+                    <View style={styles.categoryIconBox}>
+                      <Text style={styles.categoryFont}>{item.type}</Text>  
+                    </View>
                   </ImageBackground>
                 </TouchableOpacity>
               )}
@@ -274,17 +276,17 @@ const styles = StyleSheet.create({
     width:screenWidth*0.45,
     height:screenWidth*0.45,
   },
-  categoryFont: {
-    color:'white',
-    fontSize: 20,
+  categoryIconBox: {
     borderRadius:50,
     width:screenWidth*0.45,
     height:screenWidth*0.45,
-    lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
     alignItems:'center',
     justifyContent:'center',
-    backgroundColor: "#000000c0"
+    backgroundColor: "#000000c0",
+    opacity:0.7
+  },
+  categoryFont:{
+    color:'white',
+    fontSize: 24,
   },
 });
