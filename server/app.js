@@ -254,6 +254,9 @@ app.post('/addToCart',async(req,res) =>{
       if ( index !== -1) {
       user.cart[index].quantity = req.body.quantity
       }
+      else if (req.body.quantity === 0){
+        user.cart.splice(index,1)
+      }
       else{
       user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
       }
