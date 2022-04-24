@@ -1,101 +1,179 @@
-import React,{useState}  from 'react';
-import { StyleSheet,
-    Text,
-    View,
-    Image,
-    FlatList,
-    Dimensions,
-    ScrollView,
-    TouchableOpacity,
-    } from 'react-native';
-
-import { globalStyles } from '../../../styles/globalStyles';
-import Gradient from '../../../styles/Gradient';
+import React from 'react'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  Image, 
+  ScrollView, 
+  FlatList, 
+  Dimensions, 
+  Alert, 
+  TouchableOpacity } from 'react-native'
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export default function EditPizza({navigation}:{navigation:any}) {
+import Gradient from '../../../styles/Gradient';
+import { globalStyles } from '../../../styles/globalStyles';
+import { color } from 'react-native-reanimated';
+
+export default function EditPizza({navigation,route}: {navigation:any,route:any}) {
+
+  const [pizza,setPizza] = React.useState([
+    {key:1,name:'mexicangreenwave',size:'M',dough:'Thick',crust:'None',sauce:'Tomato-Based',package:'Normal',img_path:'mexicangreenwave.png'},
+    {key:2,name:'pepperonipizza',size:'L',dough:'Thin',crust:'Sausage',sauce:'BBQ',package:'Normal',img_path:'pepperonipizza.png'},
+    {key:3,name:'plaincheesepizza',size:'S',dough:'Thick',crust:'None',sauce:'Tomato-Based',package:'Normal',img_path:'plaincheesepizza.png'},
+  ]);
+
+  const onSelected = () =>{
+    
+  }
+
+  const onBackButton = () =>{
+    navigation.goBack()
+  }
+
+  const onMake = () =>{
+    navigation.navigate('PresetPizza')
+  }
+
   return (
     <Gradient>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
-          <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
-        </TouchableOpacity>
+      <View style={styles.container}>
+
+        <View style={styles.header}>
+            <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
+                <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
+            </TouchableOpacity>
+            <Text style={globalStyles.fontHeader}>Pizza</Text>
+            <View style={globalStyles.underline}></View>  
+        </View>
+
+        <View style={styles.cartContainer}>
+          <FlatList
+            data={pizza}
+            renderItem={({item}) => (
+              <TouchableOpacity style={styles.menu} key={item.key} onPress={onSelected}>
+                  <View style={styles.boxImage}>
+                    <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
+                  </View>
+                  <View style={styles.boxDetails}>
+                    <Text style={styles.pizzaFont}>{item.name}</Text>
+                    <Text style={styles.pizzaFont}>5000</Text>
+                  </View>
+              </TouchableOpacity>
+              )}
+          />
+          <TouchableOpacity style={styles.makeBox} onPress={onMake}>
+              <Text style={styles.makeFont}>Edit</Text>
+          </TouchableOpacity>
+        </View>
+
+        
       </View>
-      <ScrollView style={styles.scrollMainContainer} showsVerticalScrollIndicator={false}>
-
-        <View style={styles.container}>
-
-          <View style={styles.pizzaBox}>
-          </View>
-          
-          <View style={styles.ingredientBox}>
-          </View>
-
-          <View style={styles.sizeBox}>
-          </View>
-
-          <View style={styles.sizeBox}>
-          </View>
-
-          <View style={styles.sizeBox}>
-          </View>
-
-          <View style={styles.sizeBox}>
-          </View>
-
-          <View style={styles.sizeBox}>
-          </View>
-
-        </View>  
-
-      </ScrollView>
     </Gradient>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollMainContainer: {
-    flex:1,
-    marginTop:10,
-    backgroundColor:'transparent'
-  },
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: 'transparent',
   },
   header: {
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
-    marginTop:30,
   },
   iconContainer: {
     width:screenWidth*0.9,
     flexDirection:'row',
     alignItems:'flex-start'
   },
-  pizzaBox: {
-    borderWidth:1,
-    width:screenWidth,
-    height:screenHeight*0.4,
+  cartContainer: {
+    padding:20,
+    borderColor:'rgba(0,0,0,0.2)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*.9,
+    height:screenHeight*.7,
+    backgroundColor:'#fff',
+    borderRadius:50,
+    elevation: 10,
   },
-  ingredientBox: {
-    borderWidth:1,
-    width:screenWidth,
-    height:screenHeight*0.3,
-  },
-  sizeBox: {
-    borderWidth:1,
-    width:screenWidth,
+  menu: {
+    marginVertical:10,
+    borderRadius:50,
+    borderColor:'gray',
+    backgroundColor:'#FF6D7D',
+    width:screenWidth*0.8,
     height:screenHeight*0.25,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-evenly',
+    elevation: 5,
   },
-  customBox: {
-    borderWidth:1,
-    width:screenWidth,
-    height:screenHeight*0.3,
+  boxImage: {
+    borderRadius:20,
+    backgroundColor:'white',
+    width:screenHeight*0.125,
+    height:screenHeight*0.125,
   },
+  foodImage: {
+    borderRadius:20,
+    width:screenHeight*0.125,
+    height:screenHeight*0.125,
+  },
+  boxDetails: {
+    backgroundColor:'transparent',
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenHeight*0.2,
+    height:screenHeight*0.2,
+  },
+  pizzaFont:{
+    fontSize: 20,
+    width: screenHeight*0.2,
+    height: 50,
+    margin: 8,
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: 'white',
+    elevation: 4,
+  },
+  buttonBox:{
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    width: screenHeight*0.2,
+    height: screenHeight * 0.05,
+  },
+  addBox:{
+    flexDirection:'column',
+    alignItems:'center',
+    justifyContent:'center',
+    width: screenHeight*0.1,
+    height: screenHeight * 0.05,
+    borderRadius: 10,
+    backgroundColor: 'white',
+    elevation: 12,
+  },
+  makeBox:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    width: screenWidth*0.4,
+    height: screenHeight * 0.05,
+    borderRadius: 10,
+    backgroundColor:'#FF6D7D',
+    marginTop:10,
+    elevation: 12,
+  },
+  makeFont: {
+    fontSize:18,
+    color:'white',
+  }
 });

@@ -10,7 +10,6 @@ import { StyleSheet,
     TouchableOpacity,
     } from 'react-native';
 
-import SwitchSelector from "react-native-switch-selector";
 import Gradient from '../../styles/Gradient';
 import { globalStyles } from '../../styles/globalStyles';
 const serverIP = "http://10.0.2.2:3000"
@@ -58,7 +57,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
 
   const onClickCategory= (type:any)=>{
     if (type=='Pizza'){
-      //navigation.navigate('Pizza',{type:type,userid:userid});
+      navigation.navigate('Pizza');
     }
     else{
       //navigation.navigate('Menu',{type:type,userid:userid});
