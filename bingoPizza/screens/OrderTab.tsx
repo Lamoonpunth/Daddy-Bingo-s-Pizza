@@ -36,9 +36,9 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     {type:'Appetizer',key:'1'},
     {type:'Pizza',key:'2'},
     {type:'Drink',key:'3'},
-    {type:'VitaminA',key:'4'},
-    {type:'VitaminB',key:'5'},
-    {type:'VitaminC',key:'6'},
+    {type:'Pasta',key:'4'},
+    {type:'Dessert',key:'5'},
+    {type:'À la carte',key:'6'},
   ]);
 
   const onClickAdminIcon = () =>{
@@ -66,7 +66,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     }
   }
 
-
   // useEffect(()=>{
   // getMenuList
   // },[])
@@ -74,19 +73,19 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   return (
     <Gradient>
       <View style={styles.container}>
+        <View style={styles.userBox}>
+          <TouchableOpacity onPress={onClickAdminIcon}>
+            <Image source={require('../assets/images/user_icon.png')} style={styles.userIcon}/>  
+          </TouchableOpacity>
+          <View style={styles.userAddress}>
+            <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+          </View>
+          <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart',{userid:userid}))}>
+            <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
+          </TouchableOpacity>
+        </View>
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
-            <View style={styles.userBox}>
-              <TouchableOpacity onPress={onClickAdminIcon}>
-                <Image source={require('../assets/images/user_icon.png')} style={styles.userIcon}/>  
-              </TouchableOpacity>
-              <View style={styles.userAddress}>
-                <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
-              </View>
-              <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart',{userid:userid}))}>
-                <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
-              </TouchableOpacity>
-            </View>
             <TouchableOpacity style={styles.promoBox}>
             </TouchableOpacity>
           </View>
@@ -143,6 +142,7 @@ const styles = StyleSheet.create({
     flex:1,
     alignItems:'center',
     justifyContent:'center',
+    paddingTop:30
   },
   scrollMainContainer: {
     marginTop:25,
@@ -164,7 +164,8 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     //borderWidth:1,
     width:screenWidth*0.85,
-    height:screenWidth*0.125
+    height:screenWidth*0.075,
+    backgroundColor:'transparent',
   },
   userIcon: {
     borderRadius:50,
@@ -251,6 +252,8 @@ const styles = StyleSheet.create({
     margin:10,
     borderRadius:50,
     backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
     width:screenWidth*0.45,
     height:screenWidth*0.45,
     elevation:10
