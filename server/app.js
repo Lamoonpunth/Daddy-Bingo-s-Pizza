@@ -260,7 +260,7 @@ app.post('/addToCart',async(req,res) =>{
       else{
       user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
       }
-      user.save()
+      await user.save()
       console.log(user)
       res.json(user)
     }
