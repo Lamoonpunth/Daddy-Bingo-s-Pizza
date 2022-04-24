@@ -28,14 +28,10 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   const [category, onChangCate] = React.useState([
     {type:'Appetizer',key:'1'},
     {type:'Pizza',key:'2'},
-    {type:'VitaminA',key:'3'},
-    {type:'VitaminB',key:'4'},
-    {type:'VitaminC',key:'5'},
-    {type:'VitaminD',key:'6'},
-    {type:'VitaminE',key:'7'},
-    {type:'VitaminF',key:'8'},
-    {type:'VitaminG',key:'9'},
-    {type:'VitaminH',key:'10'},
+    {type:'Drink',key:'3'},
+    {type:'VitaminA',key:'4'},
+    {type:'VitaminB',key:'5'},
+    {type:'VitaminC',key:'6'},
   ]);
 
   const onClickAdminIcon = () =>{
@@ -54,8 +50,16 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
 
   }
 
-  const onClickCategory = () =>{
+  const onClickCategory = (type:any) =>{
+    if (type=='Appetizer'){
+      navigation.navigate('Appetizer');
+    }
+    else if (type=='Pizza'){
+      navigation.navigate('Pizza');
+    }
+    else if (type=='Drink'){
 
+    }
   }
 
   return (
@@ -110,7 +114,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             numColumns={2}
             data={category}
             renderItem={({item}) => (
-              <TouchableOpacity style={styles.categoryIcon} key={item.key}>
+              <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={() => onClickCategory(item.type)}>
                 <Text>{item.type}</Text>
               </TouchableOpacity>
             )}
@@ -204,6 +208,8 @@ const styles = StyleSheet.create({
     marginHorizontal:9,
     borderRadius:50,
     backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
     width:screenHeight*0.22,
     height:screenHeight*0.22,
     elevation:10
@@ -223,6 +229,8 @@ const styles = StyleSheet.create({
     margin:9,
     borderRadius:50,
     backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
     width:screenHeight*0.22,
     height:screenHeight*0.22,
     elevation:10
