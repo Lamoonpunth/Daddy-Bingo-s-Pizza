@@ -20,6 +20,7 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function Menu({ navigation, route }: { navigation: any, route: any }) {
   const [listOfMenu, setListOfMenu] = React.useState([]);
   const onMoreButton = (menu: any) => {
+    console.log(menu)
     navigation.navigate('More', { item: menu, type: type, userid: userid });
   }
   const { userid } = route.params;
@@ -79,7 +80,7 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
   useFocusEffect(
     React.useCallback(() => {
       getMenuList()
-    }, [type])
+    }, [type,userid])
   );
 
   // useEffect(()=>{

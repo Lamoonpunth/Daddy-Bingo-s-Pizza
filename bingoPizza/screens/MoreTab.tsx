@@ -22,9 +22,11 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
     const {type} = route.params;
     const {userid} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
+    const [isInCart, setIsInCart] = React.useState(false);
 
     const onBackButton = () =>{
-        navigation.navigate('Menu',{"type":type});
+        navigation.navigate('Menu',{"type":type,userid:userid});
+        
     }
 
     const onAddToCart = () =>{
@@ -34,6 +36,8 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
             headers:{'Content-Type': 'application/json'},
             body:JSON.stringify({_id:userid,itemid:item._id,quantity:orderNumber,additional:"ยังไม่ได้ทำ"})
         })
+        .then(response => response.json())
+        .then(data => {console.log(data)})
     }
 
     const onAdd = () =>{
@@ -45,7 +49,25 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
             onOrderNumber(orderNumber-1);
         }
     }
-    console.log(item)
+
+    const checkItemInCart = () =>{
+        console.log(item._id)
+        fetch("http://10.0.2.2:3000/isItemInCart?userid="+userid+"&itemid="+item._id,{
+            method:"GET",
+        })
+        .then(response => response.json())
+        .then(data => {
+        onOrderNumber(data)
+        setIsInCart(true)})
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            console.log(item.name)
+          checkItemInCart()
+        }, [item,userid])
+      );
+
     return (
         <Gradient>
             <View style={styles.container}>

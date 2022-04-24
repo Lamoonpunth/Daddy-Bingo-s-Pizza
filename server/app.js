@@ -250,7 +250,13 @@ app.post('/addToCart',async(req,res) =>{
     try{
       const user = await User.findOne({"_id":req.body._id})
       console.log(user)
+      const index = user.cart.findIndex((e => e.id === req.body.itemid))
+      if ( index !== -1) {
+      user.cart[index].quantity = req.body.quantity
+      }
+      else{
       user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
+      }
       user.save()
       console.log(user)
       res.json(user)
@@ -264,6 +270,22 @@ app.get('/getCart',async(req,res) =>{
   try{
     const user =await User.findOne({"_id":req.query.userid})
     res.json(user.cart)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/isItemInCart',async(req,res) =>{
+  try{
+    const user = await User.findOne({_id:req.query.userid})
+    const index = user.cart.findIndex((e => e.id === req.query.itemid))
+    if (index===-1){
+      res.json(0)
+    }
+    else{
+      res.json(user.cart[index].quantity)
+    }
   }
   catch(error){
     console.log(error)
