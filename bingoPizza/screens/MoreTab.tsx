@@ -53,7 +53,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                     <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>   
                     </TouchableOpacity>
-                    <Text style={globalStyles.fontHeader}>{item.name}</Text>
+                    <Text style={styles.fontHeader}>{item.name}</Text>
                     <View style={globalStyles.underline}></View>  
                 </View>
 
@@ -104,6 +104,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center',
     },
+    fontHeader:{
+        fontSize: 30,
+        color:'white',
+      },
     iconContainer: {
         width:screenWidth*0.9,
         flexDirection:'row',

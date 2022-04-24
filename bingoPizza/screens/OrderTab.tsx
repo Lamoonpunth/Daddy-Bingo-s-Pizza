@@ -239,11 +239,10 @@ const styles = StyleSheet.create({
   },
   /*----------------------------------------------Categories-------------------------------------------*/
   textBox2: {
-    paddingTop:10,
+    marginTop:20,
     flexWrap:'wrap',
     flexDirection:'row',
     justifyContent:'space-between',
-    //borderWidth:1,
     marginHorizontal:25,
     width:screenWidth*0.85,
     height:screenWidth*0.1

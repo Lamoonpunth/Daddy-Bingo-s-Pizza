@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
         fontSize:20
     },
     paymenttextbox:{
+        marginVertical:5,
         justifyContent: 'center',
         width: width*.6,
         opacity:.5,
