@@ -17,9 +17,7 @@ const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-
-
-export default function OrderTab({navigation, route}:{navigation:any,route:any}) {
+export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
   
   //const {userid} = route.params;
   const [userType, onChangeUserType] = React.useState('Delivery');
@@ -75,7 +73,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     <Gradient>
       <View style={styles.container}>
         <View style={styles.userBox}>
-          <TouchableOpacity onPress={onClickAdminIcon}>
+          <TouchableOpacity style={styles.userIcon} onPress={onClickAdminIcon}>
             <Image source={require('../../assets/images/user_icon.png')} style={styles.userIcon}/>  
           </TouchableOpacity>
           <View style={styles.userAddress}>
