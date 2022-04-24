@@ -71,6 +71,10 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     navigation.goBack()
   }
 
+  const addToCart = () =>{
+    
+  }
+
   return (
     <Gradient>
       <View style={styles.container}>
@@ -215,8 +219,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
           </View>
         </ScrollView>
-        <TouchableOpacity style={styles.checkoutBox}>
-          <Text style={styles.checkoutFont}>Check out</Text>
+        <TouchableOpacity style={styles.checkoutBox} onPress={addToCart}>
+          <Text style={styles.checkoutFont}>Add to cart</Text>
         </TouchableOpacity>   
       </View>
     </Gradient>
