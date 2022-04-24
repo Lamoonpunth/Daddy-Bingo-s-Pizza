@@ -9,6 +9,7 @@ import HomeAdmin from '../screen/admin/HomeAdmin';
 import EditProfile from '../screen/admin/edit/EditProfile';
 import EditService from '../screen/admin/edit/EditService';
 import EditIngredients from '../screen/admin/edit/EditIngredients';
+import EditPresetPizza from '../screen/admin/edit/EditPresetPizza';
 import EditPizza from '../screen/admin/edit/EditPizza';
 import EditAppetizer from '../screen/admin/edit/EditAppetizer';
 
@@ -29,6 +30,7 @@ function AdminNavigator() {
             <Drawer.Screen name='Service' component={EditService} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Ingredients' component={EditIngredients} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Pizza' component={EditPizza} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='PresetPizza' component={EditPresetPizza} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Appetizer' component={EditAppetizer}/>
             <Drawer.Screen name='Log Out' component={LogIn}/>
         </Drawer.Navigator>

@@ -1,4 +1,4 @@
-import React,{useState}  from 'react';
+import React,{useEffect, useState}  from 'react';
 import { StyleSheet,
     Text,
     View,
@@ -6,32 +6,37 @@ import { StyleSheet,
     FlatList,
     Dimensions,
     ScrollView,
+    ImageBackground,
     TouchableOpacity,
     } from 'react-native';
 
 import Gradient from '../../styles/Gradient';
 import { globalStyles } from '../../styles/globalStyles';
-
+const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
+  
+  //const {userid} = route.params;
+  const [userType, onChangeUserType] = React.useState('Delivery');
+  /*ตัวเลือกของswitch selector*/ 
 
-  const [promotion, onChangePromo] = React.useState([
+  const [promotion, onClickPromo] = React.useState([
     {}
   ]);
-  const [recommend, onChangeRec] = React.useState([
+  const [recommend, onClickRec] = React.useState([
     {menu:'Pizza1' ,key:'1'},
     {menu:'Pizza2' ,key:'2'},
     {menu:'Pizza3' ,key:'3'},
   ]);
-  const [category, onChangCate] = React.useState([
-    {type:'Appetizer',key:'1'},
-    {type:'Pizza',key:'2'},
-    {type:'Drink',key:'3'},
-    {type:'VitaminA',key:'4'},
-    {type:'VitaminB',key:'5'},
-    {type:'VitaminC',key:'6'},
+  const [category, onClickCate] = React.useState([
+    {type:'Appetizer',key:'0',img_path:require('../../assets/images/Category/Appetizer.jpg')},
+    {type:'Pizza',key:'1',img_path:require('../../assets/images/Category/Pizza.jpg')},
+    {type:'Drink',key:'2',img_path:require('../../assets/images/Category/Drink.jpg')},
+    {type:'Pasta',key:'3',img_path:require('../../assets/images/Category/Pasta.jpg')},
+    {type:'Dessert',key:'4',img_path:require('../../assets/images/Category/Dessert.jpg')},
+    {type:'À la carte',key:'5',img_path:require('../../assets/images/Category/carte.jpg')},
   ]);
 
   const onClickAdminIcon = () =>{
@@ -47,88 +52,98 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   }
 
   const onClickRecommend = () =>{
-
+    
   }
 
-  const onClickCategory = (type:any) =>{
-    if (type=='Appetizer'){
-      navigation.navigate('Appetizer');
-    }
-    else if (type=='Pizza'){
+  const onClickCategory= (type:any)=>{
+    if (type=='Pizza'){
       navigation.navigate('Pizza');
     }
-    else if (type=='Drink'){
-
+    else{
+      //navigation.navigate('Menu',{type:type,userid:userid});
     }
   }
+
+  // useEffect(()=>{
+  // getMenuList
+  // },[])
 
   return (
     <Gradient>
-      <ScrollView style={styles.scrollMainContainer} showsVerticalScrollIndicator={false}>
-
-        <View style={styles.promocontainer}>
-          <View style={styles.adminBox}>
-            <TouchableOpacity onPress={onClickAdminIcon}>
-              <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
+      <View style={styles.container}>
+        <View style={styles.userBox}>
+          <TouchableOpacity style={styles.userIcon} onPress={onClickAdminIcon}>
+            <Image source={require('../../assets/images/user_icon.png')} style={styles.userIcon}/>  
+          </TouchableOpacity>
+          <View style={styles.userAddress}>
+            <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+          </View>
+        </View>
+        <ScrollView style={styles.scrollMainContainer}>
+          <View style={styles.promocontainer}>
+            <TouchableOpacity style={styles.promoBox}>
             </TouchableOpacity>
-            <View style={styles.adminAddress}>
-              <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+          </View>
+          <View style={styles.recommendcontainer}>
+            <View style={styles.textBox}>
+              <Text style={globalStyles.fontNormal}>
+                Recommend
+              </Text>
+              <TouchableOpacity>
+                <Text style={{fontSize:18, color:'#343434'}}>
+                  See All
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.scrollHorizontalBox}>
+              <FlatList
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{width:screenWidth}}
+                data={recommend}
+                renderItem={({item}) => (
+                  <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={onClickRecommend}>
+                    <Image source={require('../../assets/images/pooh.jpg')} style={styles.foodImage} />
+                  </TouchableOpacity>
+                )}
+              /> 
             </View>
           </View>
-          <TouchableOpacity style={styles.promoBox}>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.recommendcontainer}>
-          <View style={styles.textBox}>
+          <View style={styles.textBox2}>
             <Text style={globalStyles.fontNormal}>
-              Recommend
+              Categories
             </Text>
-            <TouchableOpacity>
-              <Text style={{fontSize:18, color:'#343434'}}>
-                See All
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.scrollHorizontalBox}>
-            <ScrollView style={styles.scrollHorizontal} horizontal={true} showsHorizontalScrollIndicator={false}>
-              {recommend.map((item) => {
-                return(
-                  <TouchableOpacity style={styles.menuIcon} key={item.key}>
-                    <Text>{item.menu}</Text>
-                  </TouchableOpacity>
-                )
-              })}
-            </ScrollView>
-          </View>
-        </View>
-        
-        <View style={styles.textBox2}>
-          <Text style={globalStyles.fontNormal}>
-            Categories
-          </Text>
-        </View> 
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          <FlatList
-            style={{width:screenWidth}}
-            numColumns={2}
-            data={category}
-            renderItem={({item}) => (
-              <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={() => onClickCategory(item.type)}>
-                <Text>{item.type}</Text>
-              </TouchableOpacity>
-            )}
-          />  
+          </View> 
+          <ScrollView horizontal={true}>
+            <FlatList
+              style={{width:screenWidth}}
+              numColumns={2}
+              data={category}
+              renderItem={({item}) => (
+                <TouchableOpacity style={styles.categoryBox} key={item.key} onPress={()=>onClickCategory(item.type)}>
+                  <ImageBackground source={item.img_path} style={styles.categoryIcon} imageStyle={{borderRadius:50}}>
+                    <View style={styles.categoryIconBox}>
+                      <Text style={styles.categoryFont}>{item.type}</Text>  
+                    </View>
+                  </ImageBackground>
+                </TouchableOpacity>
+              )}
+            />  
+          </ScrollView> 
         </ScrollView>
-        
-      </ScrollView>
+      </View>
     </Gradient>
   );
 }
 
 const styles = StyleSheet.create({
-  scrollMainContainer: {
+  container: {
     flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    paddingTop:30
+  },
+  scrollMainContainer: {
     marginTop:25,
     backgroundColor:'transparent'
   },
@@ -143,27 +158,37 @@ const styles = StyleSheet.create({
     width:screenWidth,
     height:screenHeight*0.4,
   },
-  adminBox: {
+  userBox: {
     flexWrap:'wrap',
     flexDirection:'row',
     //borderWidth:1,
     width:screenWidth*0.85,
-    height:screenWidth*0.125
+    height:screenWidth*0.075,
+    backgroundColor:'transparent',
   },
-  adminIcon: {
+  userIcon: {
     borderRadius:50,
     backgroundColor:'white',
     width:screenWidth*0.125,
     height:screenWidth*0.125,
   },
-  adminAddress: {
+  basketIcon: {
+    
+    backgroundColor:'transparent',
+   // width:screenWidth*0.1,
+    //height:screenWidth*0.1,
+    width:30,
+    height:30
+  },
+
+  userAddress: {
     flexWrap:'wrap',
     flexDirection:'column',
     justifyContent:'space-evenly',
     paddingHorizontal:15,
     backgroundColor: 'transparent',
-    //borderWidth:1,
-    width:screenWidth*0.715,
+   // borderWidth:1,
+    width:screenWidth*0.63,
     height:screenWidth*0.125,
   },
   promoBox:{
@@ -179,7 +204,7 @@ const styles = StyleSheet.create({
     flexWrap:'wrap',
     flexDirection:'column',
     backgroundColor: 'transparent',
-    //borderWidth:1,
+    marginBottom:10,
     width:screenWidth,
     height:screenHeight*0.3,
   },
@@ -205,34 +230,57 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   menuIcon: {
-    marginHorizontal:9,
-    borderRadius:50,
-    backgroundColor:'white',
+    backgroundColor:'transparent',
+    marginHorizontal:10,
     alignItems:'center',
     justifyContent:'center',
-    width:screenHeight*0.22,
-    height:screenHeight*0.22,
-    elevation:10
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
   },
   /*----------------------------------------------Categories-------------------------------------------*/
   textBox2: {
-    paddingTop:10,
+    marginTop:10,
     flexWrap:'wrap',
     flexDirection:'row',
     justifyContent:'space-between',
-    //borderWidth:1,
     marginHorizontal:25,
     width:screenWidth*0.85,
     height:screenWidth*0.1
   },
-  categoryIcon: {
-    margin:9,
+  categoryBox: {
+    margin:10,
     borderRadius:50,
     backgroundColor:'white',
     alignItems:'center',
     justifyContent:'center',
-    width:screenHeight*0.22,
-    height:screenHeight*0.22,
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
     elevation:10
+  },
+  categoryIcon: {
+    backgroundColor:'transparent',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
+  },
+  foodImage: {
+    borderRadius:50,
+    backgroundColor:'white',
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
+  },
+  categoryIconBox: {
+    borderRadius:50,
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor: "#000000c0",
+    opacity:0.7
+  },
+  categoryFont:{
+    color:'white',
+    fontSize: 24,
   },
 });
