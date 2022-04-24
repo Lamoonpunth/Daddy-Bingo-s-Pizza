@@ -83,7 +83,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                     <Image source={{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
                     <View style={styles.detail}>
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
-                            <Text>{item.description}</Text>
+                            <Text style={styles.descriptionFont}>{item.description}</Text>
                         </ScrollView>
                     </View>
                     <View style={styles.selected}>
@@ -157,7 +157,10 @@ const styles = StyleSheet.create({
         //borderWidth:1,
     },
     scrollContainer: {
-        
+        padding:25
+    },
+    descriptionFont: {
+        fontSize:20
     },
     selected: {
         flexDirection:'column',
