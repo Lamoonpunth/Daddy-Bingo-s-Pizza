@@ -248,19 +248,20 @@ app.get('/getPizza',async(req,res)=>{
 
 app.post('/addToCart',async(req,res) =>{
     try{
-      const user = await User.findOne({"_id":req.body._id})
-      console.log(user)
-      const index = user.cart.findIndex((e => e.id === req.body.itemid))
-      if ( index !== -1) {
-      user.cart[index].quantity = req.body.quantity
-      }
-      else if (req.body.quantity === 0){
-        user.cart.splice(index,1)
-      }
-      else{
-      user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
-      }
-      await user.save()
+      // const user = await User.findOne({"_id":req.body._id})
+      // console.log(user)
+      // const index = user.cart.findIndex((e => e.id === req.body.itemid))
+     // if ( index !== -1) {
+        user.cart[index].quantity = req.body.quantity
+        await User.updateMany({"_id":req.body._id},{$set:{"cart":user.cart}})         
+      //}
+      // else if (req.body.quantity === 0){
+      //   user.cart.splice(index,1)
+      // }
+      // else{
+      //   user.cart.push({id:req.body.itemid,quantity:req.body.quantity,additional:req.body.additional})
+      // }
+      //await user.save()
       console.log(user)
       res.json(user)
     }
