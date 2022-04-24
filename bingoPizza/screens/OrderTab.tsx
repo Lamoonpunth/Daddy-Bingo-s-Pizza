@@ -6,6 +6,7 @@ import { StyleSheet,
     FlatList,
     Dimensions,
     ScrollView,
+    ImageBackground,
     TouchableOpacity,
     } from 'react-native';
 
@@ -33,12 +34,12 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     {menu:'Pizza3' ,key:'3'},
   ]);
   const [category, onClickCate] = React.useState([
-    {type:'Appetizer',key:'1'},
-    {type:'Pizza',key:'2'},
-    {type:'Drink',key:'3'},
-    {type:'Pasta',key:'4'},
-    {type:'Dessert',key:'5'},
-    {type:'À la carte',key:'6'},
+    {type:'Appetizer',key:'0',img_path:require('../assets/images/Category/Appetizer.jpg')},
+    {type:'Pizza',key:'1',img_path:require('../assets/images/Category/Pizza.jpg')},
+    {type:'Drink',key:'2',img_path:require('../assets/images/Category/Drink.jpg')},
+    {type:'Pasta',key:'3',img_path:require('../assets/images/Category/Pasta.jpg')},
+    {type:'Dessert',key:'4',img_path:require('../assets/images/Category/Dessert.jpg')},
+    {type:'À la carte',key:'5',img_path:require('../assets/images/Category/À la carte.jpg')},
   ]);
 
   const onClickAdminIcon = () =>{
@@ -107,7 +108,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
                 style={{width:screenWidth}}
                 data={recommend}
                 renderItem={({item}) => (
-                  <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={onClickRecommend}>
+                  <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={onClickRecommend}>
                     <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage} />
                   </TouchableOpacity>
                 )}
@@ -125,8 +126,10 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
               numColumns={2}
               data={category}
               renderItem={({item}) => (
-                <TouchableOpacity style={styles.categoryIcon} key={item.key} onPress={()=>onClickCategory(item.type)}>
-                  <Text>{item.type}</Text>
+                <TouchableOpacity style={styles.categoryBox} key={item.key} onPress={()=>onClickCategory(item.type)}>
+                  <ImageBackground source={item.img_path} style={styles.categoryIcon} imageStyle={{borderRadius:50}}>
+                    <Text style={styles.categoryFont}>{item.type}</Text>  
+                  </ImageBackground>
                 </TouchableOpacity>
               )}
             />  
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
     flexWrap:'wrap',
     flexDirection:'column',
     backgroundColor: 'transparent',
-    //borderWidth:1,
+    marginBottom:10,
     width:screenWidth,
     height:screenHeight*0.3,
   },
@@ -231,16 +234,16 @@ const styles = StyleSheet.create({
     backgroundColor:'transparent'
   },
   menuIcon: {
-    marginHorizontal:9,
-    borderRadius:50,
-    backgroundColor:'white',
-    width:screenHeight*0.22,
-    height:screenHeight*0.22,
-    elevation:10
+    backgroundColor:'transparent',
+    marginHorizontal:10,
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
   },
   /*----------------------------------------------Categories-------------------------------------------*/
   textBox2: {
-    marginTop:20,
+    marginTop:10,
     flexWrap:'wrap',
     flexDirection:'row',
     justifyContent:'space-between',
@@ -248,7 +251,7 @@ const styles = StyleSheet.create({
     width:screenWidth*0.85,
     height:screenWidth*0.1
   },
-  categoryIcon: {
+  categoryBox: {
     margin:10,
     borderRadius:50,
     backgroundColor:'white',
@@ -258,17 +261,30 @@ const styles = StyleSheet.create({
     height:screenWidth*0.45,
     elevation:10
   },
+  categoryIcon: {
+    backgroundColor:'transparent',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
+  },
   foodImage: {
     borderRadius:50,
     backgroundColor:'white',
     width:screenWidth*0.45,
     height:screenWidth*0.45,
   },
-  selector: {
-    padding:10,
-    width:screenWidth,
-    height:60,
-    backgroundColor:'transparent',
-    opacity:1
+  categoryFont: {
+    color:'white',
+    fontSize: 20,
+    borderRadius:50,
+    width:screenWidth*0.45,
+    height:screenWidth*0.45,
+    lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor: "#000000c0"
   },
 });
