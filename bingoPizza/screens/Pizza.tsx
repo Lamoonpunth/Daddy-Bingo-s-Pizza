@@ -15,6 +15,7 @@ const screenHeight = Dimensions.get('screen').height;
 
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
+import { color } from 'react-native-reanimated';
 
 export default function Pizza({navigation,route}: {navigation:any,route:any}) {
 
@@ -25,11 +26,15 @@ export default function Pizza({navigation,route}: {navigation:any,route:any}) {
   ]);
 
   const onSelected = () =>{
-    navigation.navigate('PresetPizza')
+    
   }
 
   const onBackButton = () =>{
     navigation.goBack()
+  }
+
+  const onMake = () =>{
+    navigation.navigate('PresetPizza')
   }
 
   return (
@@ -54,13 +59,17 @@ export default function Pizza({navigation,route}: {navigation:any,route:any}) {
                   </View>
                   <View style={styles.boxDetails}>
                     <Text style={styles.pizzaFont}>{item.name}</Text>
-                    <Text style={styles.pizzaFont}>{item.price}</Text>
+                    <Text style={styles.pizzaFont}>5000</Text>
                   </View>
               </TouchableOpacity>
               )}
           />
+          <TouchableOpacity style={styles.makeBox} onPress={onMake}>
+              <Text style={styles.makeFont}>Make your own</Text>
+          </TouchableOpacity>
         </View>
 
+        
       </View>
     </Gradient>
   );
@@ -84,6 +93,7 @@ const styles = StyleSheet.create({
     alignItems:'flex-start'
   },
   cartContainer: {
+    padding:20,
     borderColor:'rgba(0,0,0,0.2)',
     alignItems:'center',
     justifyContent:'center',
@@ -94,7 +104,7 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   menu: {
-    marginVertical:20,
+    marginVertical:10,
     borderRadius:50,
     borderColor:'gray',
     backgroundColor:'#FF6D7D',
@@ -151,14 +161,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 12,
   },
-  editBox:{
-    flexDirection:'column',
+  makeBox:{
+    flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
-    width: screenHeight*0.1,
+    width: screenWidth*0.4,
     height: screenHeight * 0.05,
     borderRadius: 10,
-    backgroundColor: 'white',
+    backgroundColor:'#FF6D7D',
+    marginTop:10,
     elevation: 12,
   },
+  makeFont: {
+    fontSize:18,
+    color:'white',
+  }
 });
