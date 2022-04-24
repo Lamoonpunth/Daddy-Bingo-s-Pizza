@@ -41,6 +41,15 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    linearGradientforapplybtn: {
+        flex: 1,
+        flexDirection:'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius:10,
+        width:width*.225,
+        height:height*.0545,
+    },
     keyboardAvoid: {
         flex: 1,
         alignItems: 'center',
