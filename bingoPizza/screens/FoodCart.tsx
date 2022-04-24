@@ -85,14 +85,19 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                       data={cart}
                       renderItem={({item}) => (
                         <View style={styles.menu} key={item.key}>
-                            <View style={styles.boxImage}>
-                              <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
+                            <View style={styles.boxName}>
+                              <Text style={styles.nameFont}>{item.name}</Text>
+                              <View style={styles.underline}></View>
                             </View>
-                            <View style={styles.boxDetails}>
-                              <Text style={styles.cartFont}>{item.name}</Text>
-                              <Text style={styles.cartFont}>{item.additional}</Text>
-                              <Text style={styles.cartFont}>จำนวน : {item.quantity}</Text>
-                              <Text style={styles.cartFont}>ราคา : {item.quantity*item.price}</Text>
+                            <View style={styles.boxMenu}>
+                              <View style={styles.boxImage}>
+                              <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
+                              </View>
+                              <View style={styles.boxDetails}>
+                                <Text style={styles.detailFont}>{item.additional}</Text>
+                                <Text style={styles.detailFont}>จำนวน : {item.quantity}</Text>
+                                <Text style={styles.detailFont}>ราคา : {item.quantity*item.price}</Text>
+                              </View>
                             </View>
                         </View>
                         )}
@@ -154,21 +159,45 @@ const styles = StyleSheet.create({
       backgroundColor:'#FF6D7D',
       width:screenWidth*0.8,
       height:screenHeight*0.25,
-      flexDirection:'row',
+      flexDirection:'column',
       alignItems:'center',
-      justifyContent:'space-evenly',
+      justifyContent:'center',
       elevation: 5,
+    },
+    boxName: {
+      width: screenWidth*0.7,
+      alignItems:'center',
+      justifyContent:'center',
+      height:60,
+      padding: 10,
+      borderRadius: 10,
+      backgroundColor: 'transparent',
+    },
+    underline: {
+      backgroundColor:'white',
+      width: screenWidth*0.7,
+      height: 2.5,
+      marginTop:10,
+      borderRadius:50,
+      elevation: 50
+    },
+    boxMenu: {
+      width: screenWidth*0.7,
+      height:100,
+      flexDirection:'row',
+      borderRadius: 10,
+      backgroundColor: 'transparent',
     },
     boxImage: {
       borderRadius:20,
       backgroundColor:'white',
-      width:screenHeight*0.125,
-      height:screenHeight*0.125,
+      width:100,
+      height:100,
     },
     foodImage: {
       borderRadius:20,
-      width:screenHeight*0.125,
-      height:screenHeight*0.125,
+      width:100,
+      height:100,
     },
     boxDetails: {
       backgroundColor:'transparent',
@@ -176,17 +205,17 @@ const styles = StyleSheet.create({
       alignItems:'center',
       justifyContent:'center',
       width:screenHeight*0.2,
-      height:screenHeight*0.2,
+      height:100,
     },
-    cartFont:{
-      fontSize: 20,
-      width: screenHeight*0.2,
-      height: 50,
-      margin: 8,
-      padding: 10,
-      borderRadius: 20,
-      backgroundColor: 'white',
-      elevation: 4,
+    nameFont:{
+      fontSize: 24,
+      color:'white',
+      backgroundColor: 'transparent',
+    },
+    detailFont:{
+      fontSize: 22,
+      color:'white',
+      backgroundColor: 'transparent',
     },
     checkoutBox:{
       flexDirection:'column',
