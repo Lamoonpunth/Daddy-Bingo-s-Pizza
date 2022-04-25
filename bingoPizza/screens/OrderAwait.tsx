@@ -40,7 +40,14 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
         <View style={styles.status}>
             <View style={styles.statusBar}>
                 <View style={styles.statusIcon}>
-                    <View style={styles.iconBox}>
+                    <View style={{
+                      alignItems:'center',
+                      justifyContent:'center',
+                      width:screenWidth*0.25,
+                      height:screenWidth*0.25,
+                      backgroundColor:'white',
+                      borderRadius:50,
+                    }}>
                         <Image source={require('../assets/images/OrderAwait/queueing.png')}/>
                     </View>
                 </View>
