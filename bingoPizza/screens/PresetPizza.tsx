@@ -59,7 +59,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedSize = (type:any,item:any,index:any) =>{
     setDough(type);
     const newArrData = size.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -74,7 +74,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedDough = (type:any,item:any,index:any) =>{
     setDough(type);
     const newArrData = dough.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -89,7 +89,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedCrust = (type:any,item:any,index:any) =>{
     setCrust(type) ;
     const newArrData = crust.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -104,7 +104,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedSauce = (type:any,item:any,index:any) =>{
     setSauce(type);
     const newArrData = sauce.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -119,7 +119,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedPackage = (type:any,item:any,index:any) =>{
     setPackage(type);
     const newArrData = pack.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
