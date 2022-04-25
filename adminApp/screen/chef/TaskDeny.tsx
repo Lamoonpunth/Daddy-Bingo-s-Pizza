@@ -19,7 +19,7 @@ import Gradient from '../../styles/Gradient';
 //import { FlatList } from "react-native-gesture-handler";
 import Constants from 'expo-constants';
 
-export default function FoodCart({ navigation }: { navigation: any }) {
+export default function TaskDeny({ navigation }: { navigation: any }) {
   
   
   const UselessTextInputMultiline = () => {

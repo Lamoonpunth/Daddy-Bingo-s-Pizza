@@ -18,7 +18,7 @@ import Gradient from '../../styles/Gradient';
 //import { FlatList } from "react-native-gesture-handler";
 import Constants from 'expo-constants';
 
-export default function FoodCart({ navigation }: { navigation: any }) {
+export default function TaskPrepare({ navigation }: { navigation: any }) {
   const DATA = [
     { num: 'Order1', key: '1', img_path: require('../../assets/images/classicburger.png') },
     { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
