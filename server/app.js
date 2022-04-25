@@ -258,11 +258,11 @@ app.get('/getPackage',async(req,res) =>{
 app.post('/addpizza',async(req,res) =>{
   try{
     //img_path from upload single
-    const {name,img_path,size,dough,crust,sauce,package} = req.body;
+    const {name,price,img_path,size,dough,crust,sauce,package} = req.body;
     const menu = await Menu.create({
       name:name,
-      type:"PresetPizza",
-      price:null,
+      type:"Pizza",
+      price:price,
       ingr_need:null,
       description:null,
       img_path:img_path,
@@ -279,6 +279,29 @@ app.post('/addpizza',async(req,res) =>{
   }
 })
 
+app.post('/adduserpizza',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,price,img_path,size,dough,crust,sauce,package} = req.body;
+    const menu = await Menu.create({
+      name:name,
+      type:"userPizza",
+      price:price,
+      ingr_need:null,
+      description:null,
+      img_path:img_path,
+      size: size,
+      dough: dough,
+      crust: crust,
+      sauce: sauce,
+      package: package      
+    })
+    res.json(menu)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
 
 app.get('/getmenu',async(req,res)=>{
   try{

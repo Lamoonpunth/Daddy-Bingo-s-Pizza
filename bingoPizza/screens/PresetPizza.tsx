@@ -16,9 +16,10 @@ const screenHeight = Dimensions.get('screen').height;
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 import { useFocusEffect } from '@react-navigation/native';
-
+const get = 'http://10.0.2.2:3000/getImage/'
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
+  const {userid} = route.params;
   const [topping, onChangeTopping] = React.useState([
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
   ]);
@@ -43,15 +44,24 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
-  const [selectedTopping, setTopping] = React.useState('Hawaiian')
-  const [selectedSize, setSize] = React.useState('Thick');
+  const [selectedTopping, setTopping] = React.useState('Bacon')
+  const [selectedSize, setSize] = React.useState('XS');
   const [selectedDough, setDough] = React.useState('Thick');
   const [selectedCrust, setCrust] = React.useState('None');
   const [selectedSauce, setSauce] = React.useState('Tomato-Based');
-  const [selectedPackage, setPackage] = React.useState('Thick');
+  const [selectedPackage, setPackage] = React.useState('Normal');
 
+  const [selectedToppingPrice, setToppingPrice] = React.useState(0)
+  const [selectedSizePrice, setSizePrice] = React.useState(99);
+  const [selectedDoughPrice, setDoughPrice] = React.useState(50);
+  const [selectedCrustPrice, setCrustPrice] = React.useState(0);
+  const [selectedSaucePrice, setSaucePrice] = React.useState(50);
+  const [selectedPackagePrice, setPackagePrice] = React.useState(0);
+  const [selectedToppingImage, setToppingImage] = React.useState("PizzaBacon.jpg")
   const onSelectedTopping = (type:any,item:any,index:any) =>{
     setTopping(type);
+    setToppingPrice(item.price)
+    setToppingImage(item.img_path)
     const newArrData = topping.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -67,6 +77,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
   const onSelectedSize = (type:any,item:any,index:any) =>{
     setSize(type);
+    setSizePrice(item.price)
     const newArrData = size.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -82,6 +93,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
   const onSelectedDough = (type:any,item:any,index:any) =>{
     setDough(type);
+    setDoughPrice(item.price)
     const newArrData = dough.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -97,6 +109,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
   const onSelectedCrust = (type:any,item:any,index:any) =>{
     setCrust(type) ;
+    setCrustPrice(item.price)
     const newArrData = crust.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -112,6 +125,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
   const onSelectedSauce = (type:any,item:any,index:any) =>{
     setSauce(type);
+    setSaucePrice(item.price)
     const newArrData = sauce.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -127,6 +141,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
   const onSelectedPackage = (type:any,item:any,index:any) =>{
     setPackage(type);
+    setPackagePrice(item.price)
     const newArrData = pack.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -145,7 +160,37 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   }
 
   const addToCart = () =>{
+    alert("add to cart")
+    fetch("http://10.0.2.2:3000/adduserpizza",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
     
+      body:JSON.stringify({    
+        name:selectedTopping,
+        type:"userPizza",
+        price:selectedToppingPrice+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice,
+        ingr_need:null,
+        description:null,
+        img_path:selectedToppingImage,
+        size: selectedSize,
+        dough: selectedDough,
+        crust: selectedCrust,
+        sauce: selectedSauce,
+        package: selectedPackage})
+      }
+
+    )
+    .then(response=>response.json())
+    .then(userpizza=>{
+      console.log(userpizza)
+      fetch("http://10.0.2.2:3000/addToCart",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({_id:userid,itemid:userpizza._id,quantity:1,additional:"-"})
+    })
+    .then(response => response.json())
+    .then(data => {console.log(data)})
+    })
   }
   const getTopping = () =>{
     fetch("http://10.0.2.2:3000/getTopping")
@@ -230,7 +275,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     style={styles.optionBox} 
                     onPress={() => onSelectedTopping(item.name,item,index)}
                     key={item._id}>
-                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
                           width:screenWidth*0.5,
@@ -246,6 +291,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}
+                            {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -269,7 +315,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     style={styles.optionBox} 
                     onPress={() => onSelectedSize(item.name,item,index)}
                     key={item._id}>
-                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
                           width:screenWidth*0.5,
@@ -285,6 +331,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}
+                            {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -308,7 +355,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     style={styles.optionBox} 
                     onPress={() => onSelectedDough(item.name,item,index)}
                     key={item._id}>
-                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
                           width:screenWidth*0.5,
@@ -324,6 +371,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}
+                            {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -347,7 +395,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     style={styles.optionBox} 
                     onPress={() => onSelectedCrust(item.name,item,index)}
                     key={item._id}>
-                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
                           width:screenWidth*0.5,
@@ -363,6 +411,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}
+                            {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -386,7 +435,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     style={styles.optionBox} 
                     onPress={() => onSelectedSauce(item.name,item,index)}
                     key={item._id}>
-                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
                           width:screenWidth*0.5,
@@ -402,6 +451,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}
+                            {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -425,7 +475,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     style={styles.optionBox} 
                     onPress={() => onSelectedPackage(item.name,item,index)}
                     key={item._id}>
-                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
                           width:screenWidth*0.5,
@@ -441,6 +491,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}
+                            {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -454,7 +505,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
         </ScrollView>
         <TouchableOpacity style={styles.checkoutBox} onPress={addToCart}>
           <Text style={styles.checkoutFont}>Add to cart</Text>
-          <Text style={styles.checkoutFont}>เงิน</Text>
+          <Text style={styles.checkoutFont}>{selectedToppingPrice+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice}</Text>
         </TouchableOpacity>   
       </View>
     </Gradient>
