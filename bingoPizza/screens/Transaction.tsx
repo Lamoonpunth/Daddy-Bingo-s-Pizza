@@ -65,7 +65,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                         <TouchableOpacity style={styles.insertButton} onPress={pickImage}>
                             <Text style={styles.uploadFont}>Upload</Text>
                         </TouchableOpacity>   
-                        <Text style={styles.imageNameFont}>Image name</Text> 
+                        <Text style={styles.imageNameFont}>{image}</Text> 
                     </View>
                     
                 </View>
