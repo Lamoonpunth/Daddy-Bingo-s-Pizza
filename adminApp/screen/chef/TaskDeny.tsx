@@ -20,13 +20,14 @@ import Gradient from '../../styles/Gradient';
 import Constants from 'expo-constants';
 
 export default function TaskDeny({ navigation }: { navigation: any }) {
-  
+  const [denyText , onChangedeny] = React.useState('');
   
   const UselessTextInputMultiline = () => {
     const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
   }
   const onSend = () => {
     navigation.navigate('TaskOrder')
+    onChangedeny('')
   }
   const onClickAdminIcon = () => {
     navigation.openDrawer();
@@ -55,6 +56,7 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
             multiline={true}
             numberOfLines={13}
             maxLength ={400}
+
             placeholder="useless placeholder"
             keyboardType="numeric"/>
           
