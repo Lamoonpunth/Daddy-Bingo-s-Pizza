@@ -12,6 +12,7 @@ import EditIngredients from '../screen/admin/edit/EditIngredients';
 import EditRecommend from '../screen/admin/edit/EditRecommend';
 import EditAddRecommend from '../screen/admin/edit/EditAddRecommend';
 import AwaitingPayment from '../screen/admin/AwaitingPayment';
+import PaymentInfo from '../screen/admin/PaymentInfo';
 import Menu from '../screen/admin/Menu';
 import EditAddMenu from '../screen/admin/edit/EditAddMenu';
 import EditMore from '../screen/admin/edit/EditMore';
@@ -43,6 +44,7 @@ function AdminNavigator() {
             <Drawer.Screen name='EditMore' component={EditMore} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Ingredients' component={EditIngredients} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Awaiting' component={AwaitingPayment} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='PaymentInfo' component={PaymentInfo} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Log Out' component={LogIn}/>
         </Drawer.Navigator>
     )

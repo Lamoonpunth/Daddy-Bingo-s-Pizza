@@ -25,12 +25,16 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
   }
 
   const [awaitingPayment, onChangeAwaiting] = React.useState([
-    {customer_id:1, customer_fname:'โทนี่', customer_lname:'ฟรีไฟร์', payment: 1500, transaction:'complete', },
-    {customer_id:2, customer_fname:'ไม้โมก', customer_lname:'โยกไฟ', payment: 1500, transaction:'incomplete', },
-    {customer_id:3, customer_fname:'บิงโก', customer_lname:'โอรีโอ้', payment: 1500, transaction:'incomplete', },
-    {customer_id:4, customer_fname:'โอ๊ต', customer_lname:'กระโดดยาง', payment: 1500, transaction:'incomplete', },
-    {customer_id:5, customer_fname:'โอ', customer_lname:'เยอรมัน', payment: 1500, transaction:'complete', },
+    {customer_id:1, order_time:7.43, customer_fname:'โทนี่', customer_lname:'ฟรีไฟร์', payment: 1500, transaction:'complete', },
+    {customer_id:2, order_time:9.14, customer_fname:'ไม้โมก', customer_lname:'โยกไฟ', payment: 1500, transaction:'incomplete', },
+    {customer_id:3, order_time:10.15, customer_fname:'บิงโก', customer_lname:'โอรีโอ้', payment: 1500, transaction:'incomplete', },
+    {customer_id:4, order_time:12.58, customer_fname:'โอ๊ต', customer_lname:'กระโดดยาง', payment: 1500, transaction:'incomplete', },
+    {customer_id:5, order_time:13.11, customer_fname:'โอ', customer_lname:'เยอรมัน', payment: 1500, transaction:'complete', },
   ])
+
+  const onClickInfo = (item:any) =>{
+    navigation.navigate('PaymentInfo',{payment:item})
+  }
 
   return (
 
@@ -52,7 +56,7 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
           <FlatList
             data={awaitingPayment}
             renderItem={({item}) => (
-              <TouchableOpacity key={item.customer_id} style={styles.touch}>
+              <TouchableOpacity key={item.customer_id} style={styles.touch} onPress={() => onClickInfo(item)}>
                 <ImageBackground style={styles.awaiting} imageStyle={{borderRadius:30, opacity:0.25}} source={require('../../assets/images/Category/Pizza.jpg')}>
                   <View style={styles.customerDetail}>
                     <Text style={styles.detailFont}>{item.customer_id}.{item.customer_fname} {item.customer_lname}</Text>
@@ -77,6 +81,7 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
               </TouchableOpacity>
             )}
           />
+
         </View>
         
         </View>
