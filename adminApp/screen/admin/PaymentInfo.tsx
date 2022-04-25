@@ -30,6 +30,10 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
     navigation.navigate('Awaiting');
   }
 
+  const onSave = () =>{
+    
+  }
+
   return (
 
     <Gradient>
@@ -40,7 +44,9 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
               <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
                 <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
               </TouchableOpacity>
-              
+              <TouchableOpacity style={styles.saveButton} onPress={onSave}>
+                <Text style={styles.saveFont}>Save</Text>
+              </TouchableOpacity>
             </View>
           <Text style={globalStyles.fontHeader}>{payment.customer_fname} {payment.customer_lname}</Text>
           <View style={globalStyles.underline}></View>
@@ -90,6 +96,18 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  saveButton: {
+    width:60,
+    height:30,
+    backgroundColor:'white',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:20
+  },
+  saveFont: {
+    fontSize:18,
+    color:'#FF6D6D',
   },
   iconContainer: {
     width: screenWidth * 0.9,
