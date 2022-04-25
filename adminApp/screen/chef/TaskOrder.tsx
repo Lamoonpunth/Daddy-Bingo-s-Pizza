@@ -40,51 +40,54 @@ export default function FoodCart({navigation}:{navigation:any}){
 
     return(
         <Gradient>
-            <View style={styles.container}>
+          <View style={styles.container}>
+
             <View style={styles.adminBox}>
-            <TouchableOpacity onPress={onClickAdminIcon}>
-              <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
-            </TouchableOpacity>
-              </View>
-                <View style={styles.header}>
-                
-                    <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
-                        <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon }/> 
-                    </TouchableOpacity>
-                    <Text style={globalStyles.fontHeader}>TASK</Text> 
+              <TouchableOpacity onPress={onClickAdminIcon}>
+                <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.header}>
+                <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
+                    <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon }/> 
+                </TouchableOpacity>
+                <Text style={globalStyles.fontHeader}>TASK</Text> 
+                <View style={styles.iconContainer}>
+
                 </View>
-                <View style={styles.TaskTrack}>
-                    <View style={styles.flatContainer}>
-                    <FlatList
-                          
-                          numColumns={1}
-                          data={Task}
-                          renderItem={({item}) => (
-                            <View style={styles.taskOrder}  key={item.key} /*onPress={()=>onClickTask(item.num)}*/>
-                              <Text>{item.num}</Text>
-                            <View style ={styles.bottontoleftside}>  
-                              <View style = {styles.forrowview}>
-                              <TouchableOpacity style={styles.ac_rjbox} onPress={onCheckOut}>
+            </View>
+
+            <View style={styles.TaskTrack}>
+              <View style={styles.flatContainer}>
+                <FlatList   
+                  numColumns={1}
+                  data={Task}
+                  renderItem={({item}) => (
+                    <View style={styles.taskOrder}  key={item.key} /*onPress={()=>onClickTask(item.num)}*/>
+                      <Text style={styles.taskFont}>{item.num}</Text>
+                      <View style ={styles.bottontoleftside}>  
+                        <View style = {styles.forrowview}>
+                          <TouchableOpacity style={styles.ac_rjbox} onPress={onCheckOut}>
                             <Text style={styles.normalFont}>reject</Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={styles.acbox} onPress={onCheckOut}>
                             <Text style={styles.normalFont}>accept</Text>
                           </TouchableOpacity>
-                            </View>
-                            </View>
-                            </View>
-                            )}
-                            
-                      />
+                        </View>
+                      </View>
                     </View>
-                    
-                </View>
-
-                <TouchableOpacity style={styles.LogoutBox} onPress={onCheckOut}>
-                  <Text style={styles.checkoutFont}>Log out</Text>
-                </TouchableOpacity>
-            
+                  )}
+                />
+              </View>
+                
             </View>
+
+            <TouchableOpacity style={styles.LogoutBox} onPress={onCheckOut}>
+              <Text style={styles.checkoutFont}>Log out</Text>
+            </TouchableOpacity>
+
+          </View>
         </Gradient>
     );
 
@@ -92,22 +95,22 @@ export default function FoodCart({navigation}:{navigation:any}){
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      //borderWidth: 1,
-      flexDirection:'column',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
+      paddingVertical:50,
+      width:screenWidth,
+      height:screenHeight,
+      alignItems:'center',
+      justifyContent:'space-evenly',
       backgroundColor: 'transparent',
     },
     header: {
+      width:screenWidth*.8,
       flexDirection:'row',
       alignItems:'center',
-      justifyContent:'center',
+      justifyContent:'space-between',
     },
     iconContainer: {
       width:screenWidth*0.1,
       flexDirection:'row',
-      borderWidth: 1,
       alignItems:'flex-start'
     },
     TaskTrack: {
@@ -115,18 +118,17 @@ const styles = StyleSheet.create({
       alignItems:'center',
       justifyContent:'center',
       width:screenWidth*.9,
-      height:screenHeight*.75,
+      height:screenHeight*.6,
       backgroundColor:'#fff',
       borderRadius:50,
       elevation: 10,
     },
     flatContainer: {
-      flexDirection:'row',
-      alignItems:'flex-start',
+      flexDirection:'column',
+      alignItems:'center',
       justifyContent:'center',
       width:screenWidth*.89,
-      //borderWidth: 1,
-      height:screenHeight*.65,
+      height:screenHeight*0.5,
      
       backgroundColor:'#fff',
     },
@@ -136,7 +138,6 @@ const styles = StyleSheet.create({
       backgroundColor:'white',
       width:screenHeight*0.125,
       height:screenHeight*0.125,
-      borderWidth:1
     },
     boxDetails: {
       backgroundColor:'transparent',
@@ -145,16 +146,6 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       width:screenHeight*0.2,
       height:screenHeight*0.2,
-    },
-    serviceFont:{
-      fontSize: 18,
-      width: screenHeight*0.2,
-      height: screenHeight * 0.05,
-      margin: 8,
-      padding: 10,
-      borderRadius: 10,
-      backgroundColor: 'white',
-      elevation: 12,
     },
     LogoutBox:{
       flexDirection:'column',
@@ -175,7 +166,6 @@ const styles = StyleSheet.create({
     adminBox: {
       flexWrap:'wrap',
       flexDirection:'row',
-      borderWidth:1,
       width:screenWidth*0.85,
       height:screenWidth*0.125
     },
@@ -199,11 +189,16 @@ const styles = StyleSheet.create({
       justifyContent:'center',
       
     },
+    taskFont: {
+      paddingLeft:20,
+      textAlign:'left',
+      fontSize:28,
+      width:screenWidth*0.85,
+    },
     forrowview:{
-      width:screenWidth*0.4,
+      width:screenWidth*0.5,
       height:screenWidth*0.06,
       flexDirection:'row',
-      //borderWidth: 1,
       alignItems:'center',
       justifyContent:'space-evenly',
       marginVertical: 1,
@@ -212,7 +207,6 @@ const styles = StyleSheet.create({
     bottontoleftside:{
       width:screenWidth*0.85,
       height:screenHeight*0.05,
-     // borderWidth:1,
       alignItems:'flex-end',
       justifyContent:'center',
 
@@ -220,23 +214,23 @@ const styles = StyleSheet.create({
     ac_rjbox: {
       flexDirection:'row',
       borderWidth:1,
-      width:screenWidth*0.15,
-      height:screenWidth*.05,
+      width:screenWidth*0.2,
+      height:25,
       justifyContent: 'center',
       borderRadius:50,
     },
     acbox: {
       flexDirection:'row',
       borderWidth:1,
-      width:screenWidth*0.15,
-      height:screenWidth*.05,
+      width:screenWidth*0.2,
+      height:25,
       justifyContent: 'center',
       backgroundColor: '#FF6D7D',
       borderRadius:50,
 
     },
     normalFont:{
-      fontSize: 11,
+      fontSize: 18,
       color:'#330000',
     },
     
