@@ -15,13 +15,16 @@ const { height, width } = Dimensions.get('screen');
 import Gradient from "../styles/Gradient";
 import GradientForBTN from "../styles/GradientForBTN";
 import { globalStyles } from "../styles/globalStyles";
-
+import { useFocusEffect } from '@react-navigation/native';
 export default function OrderSummary({ navigation, route }: { navigation: any, route: any }) {
 
-    const {cart} = route.params;
-
+    const {userid} = route.params;
     const [code, onChangeCode] = React.useState('');
-
+    const [cart,setListOfCart] = React.useState([
+        {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
+      ]);
+    const [rawCart,setRawCart] = React.useState([])
+    const [totalPrice,setPrice] = React.useState(0)
     const [choosepayment1, setChoosePayment1] = React.useState(false);
     const [choosepayment2, setChoosePayment2] = React.useState(false);
 
@@ -30,7 +33,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
     const [tax, setTax] = React.useState('Nan');
     const [shipping, setShipping] = React.useState('Nan');
     const [discount, setDiscount] = React.useState('Nan');
-    const [total, setTotal] = React.useState('Nan');
+    const [total, setTotal] = React.useState(0);
 
 
     const onClickBack = () =>{
@@ -52,8 +55,48 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
 
     const onCheckOutButton = () =>{
         alert("nice");
+        console.log(cart)
+        fetch("http://10.0.2.2:3000/checkout",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+            userid:userid,
+            cart:rawCart
+            })
+        })
+        .then(response => response.json())
+        .then(json =>{
+            console.log(json)
+        })
+        .catch(error => console.log(error))
     }
-
+    const getRawCart = () =>{
+        setTotal(0)
+        setListOfCart([])
+        fetch('http://10.0.2.2:3000/getCart?userid='+userid)
+        .then(response => response.json())
+        .then(json => {
+          setRawCart(json)
+          for (let i = 0; i < json.length; i++) {
+            fetch("http://10.0.2.2:3000/getID?id="+json[i].id)
+            .then(response => response.json())
+            .then(item => {
+              const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:json[i].quantity,additional:json[i].additional,key:json[i].id,price:item[0].price}
+              setListOfCart(cart => [...cart,newitem] );
+            })
+          }
+        })
+        let sum = 0
+        for (let i = 0; i < cart.length; i++) {
+            sum += cart[i].price;
+          }
+        setTotal(sum)
+    }
+    useFocusEffect(
+        React.useCallback(() => {
+            getRawCart()
+        }, [])
+      );
     return (
         <Gradient>
 

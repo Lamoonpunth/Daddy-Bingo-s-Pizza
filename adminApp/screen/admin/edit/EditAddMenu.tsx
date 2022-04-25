@@ -16,7 +16,7 @@ const screenHeight = Dimensions.get('screen').height;
 import { useFocusEffect } from '@react-navigation/native';
 import { globalStyles } from "../../../styles/globalStyles";
 import Gradient from "../../../styles/Gradient";
-
+import * as ImagePicker from 'expo-image-picker';
 export default function EditAddMenu({navigation,route}:{navigation:any,route:any}) {
 
     const {type} = route.params;
@@ -24,14 +24,34 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
 
     const [nameMenu, onNameMenu] = React.useState('');
     const [description, onDescription] = React.useState('');
+    const [image, setImage] = useState(null);
 
     const onBackButton = () =>{
         navigation.navigate('Menu',{"type":type,userid:userid});
     }
 
+
+    //เพิ่มรูปผ่านตัวนี้ไปก่อน
     const onAddMenu = () =>{
+        pickImage()
         alert('สินค้าชื่อ : '+ nameMenu);
     }
+
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+          setImage(result.uri);
+        }
+      };
 
     return (
         <Gradient>
@@ -52,7 +72,7 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
                         onChangeText={onNameMenu}
                     />
                     <TouchableOpacity style={styles.foodImage}>
-                        <Image source={require('../../../assets/images/addImage.png')} style={globalStyles.addImageIcon}/>
+                        <Image source={{uri:image}} style={globalStyles.addImageIcon}/>
                     </TouchableOpacity>
                     <View style={styles.detail}>
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
