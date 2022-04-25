@@ -42,15 +42,15 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
           allowsEditing: true,
-          aspect: [4, 3],
+          aspect: [16, 9],
           quality: 1,
         });
     
-        console.log(result);
-    
+        console.log(result);    
         if (!result.cancelled) {
           setImage(result.uri);
         }
+
       };
 
     return (
@@ -72,7 +72,11 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
                         onChangeText={onNameMenu}
                     />
                     <TouchableOpacity style={styles.foodImage}>
-                        <Image source={{uri:image}} style={globalStyles.addImageIcon}/>
+                        <Image source={{uri:image}} style={{
+                                                            resizeMode: "contain",
+                                                            height: 300,
+                                                            width: 300
+                                                        }}/>
                     </TouchableOpacity>
                     <View style={styles.detail}>
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
