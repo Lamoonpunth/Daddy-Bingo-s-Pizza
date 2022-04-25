@@ -18,15 +18,25 @@ import { globalStyles } from "../styles/globalStyles";
 
 export default function Subscription({navigation}:{navigation:any}){
 
+    const [duedate, setDueDate] = React.useState('3');
+    const [pizzaname, setPizzaName] = React.useState('Havana Pizza');
+    const [day, setDay] = React.useState('Monday');
+    const [price, setPrice] = React.useState('10');
+    const [hrs, setHrs] = React.useState('12');
+    const [mins, setMins] = React.useState('00');
+
+
     const onClickBack = () =>{
         navigation.goBack();
+    }
+
+    const onEditPlan = () =>{
+        navigation.navigate('SubscriptionSummary');
     }
 
     const [test,onTest] = React.useState([
         {key:1,name:'A'},
         {key:2,name:'A'},
-        {key:3,name:'A'},
-        {key:4,name:'A'},
     ])
 
     return(
@@ -46,9 +56,25 @@ export default function Subscription({navigation}:{navigation:any}){
                         renderItem={({item}) => (
                             <View style={styles.menu} key={item.key}>
                                 <View style={styles.dueDate}>
-
+                                    <Text style={styles.planremain}>{duedate} Weeks left</Text>
                                 </View>
                                 <View style={styles.detailBox}>
+                                    <View style={styles.detailsrow1}>
+                                        <Text style={styles.pizzaname}>{pizzaname}</Text>
+                                        <Text style={styles.day}>every {day}</Text>
+                                    </View>
+                                    <View style={styles.detailsrow2}>
+                                        <Text style={styles.price}>${price} per weeks</Text>
+                                        <Text style={styles.time}>time: {hrs}:{mins}</Text>
+                                        
+                                    </View>
+                                    <View style={styles.checkoutbtnbox}>
+                                        <TouchableOpacity style={styles.checkoutbutton} onPress={onEditPlan}>
+                                            <View style={{backgroundColor:'transparent'}}>
+                                                <Text style={{fontSize:18, color: 'white'}}>Edit</Text>
+                                            </View> 
+                                        </TouchableOpacity>
+                                    </View>
 
                                 </View>  
                             </View>
@@ -100,13 +126,59 @@ const styles = StyleSheet.create({
         elevation:5
       },
     dueDate: {
+        alignItems:'center',
         width:screenWidth*0.8,
         height:screenHeight*0.05,
-        borderWidth:1
     },
     detailBox: {
         width:screenWidth*0.8,
         height:screenHeight*0.17,
-        borderWidth:1,
+    },
+    planremain:{
+        fontSize: 28,
+        color:'red',
+    },
+    detailsrow1:{
+        flexDirection:'row',
+        margin:5,
+        height:screenHeight*.04,
+    },
+    detailsrow2:{
+        flexDirection:'row',
+        margin:5,
+        height:screenHeight*.04,
+    },
+    pizzaname:{
+        width:screenWidth*.45,
+        fontSize:17,
+        marginLeft:screenWidth*.02
+    },
+    day:{
+        width:screenWidth*.35,
+        fontSize:17,
+        
+    },
+    price:{
+        width:screenWidth*.5,
+        fontSize:15,
+        marginLeft:screenWidth*.02
+    },
+    time:{
+        width:screenWidth*.35,
+        fontSize:15,
+    },
+    checkoutbtnbox:{
+        flexDirection:'row-reverse',
+        height: screenHeight*.06,
+        width: screenWidth*.75,
+    },
+    checkoutbutton:{
+        alignItems:'center',
+        justifyContent:'center',
+        width:screenWidth*.2,
+        height:screenHeight*.0545,
+        backgroundColor:'#FF6D6D',
+        borderRadius:30,
+        elevation:5,
     },
 });

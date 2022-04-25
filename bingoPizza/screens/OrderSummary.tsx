@@ -91,12 +91,12 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                         alignItems: "center",
                         justifyContent: "center",
                         borderRadius: 15,
-                        backgroundColor: choosepayment1 ? "#fff" : "#FF6D6D",
+                        backgroundColor: choosepayment1 ? "#FF6D6D" : "#fff",
                         elevation:10,
                         marginRight:10,
                     }}
                     onPress={onEbankChooseButton}>
-                        <Text style={{ color: choosepayment1? "#FF6D6D":"#fff",fontSize: 16, }}>E-Bank</Text>
+                        <Text style={{ color: choosepayment1? "#fff":"#FF6D6D",fontSize: 16, }}>E-Bank</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity 
@@ -106,12 +106,12 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                         alignItems: "center",
                         justifyContent: "center",
                         borderRadius: 15,
-                        backgroundColor: choosepayment2 ? "#fff" : "#FF6D6D",
+                        backgroundColor: choosepayment2 ? "#FF6D6D" : "#fff",
                         elevation:10,
                         marginRight:10,
                     }}
                     onPress={onMasterVisaChooseButton}>
-                        <Text style={{ color: choosepayment2? "#FF6D6D":"#fff",fontSize: 16, }}>Master/Visa</Text>
+                        <Text style={{ color: choosepayment2? "#fff":"#FF6D6D",fontSize: 16, }}>Master/Visa</Text>
                 </TouchableOpacity>
 
                 </View>
@@ -200,11 +200,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         height: height*.001,
         width: width*.8,
-        marginVertical:5,
+        marginTop:height*.013,
         opacity:.2,
     },
     orderlistspace:{
         borderColor: 'black',
+        borderWidth:1,
         height: height*.225,
         width: width*.75,
         
@@ -220,7 +221,8 @@ const styles = StyleSheet.create({
         fontSize:20
     },
     paymenttextbox:{
-        marginVertical:5,
+        marginVertical:height*.001,
+        marginRight:width*0.15,
         justifyContent: 'center',
         width: width*.6,
         opacity:.5,
@@ -233,14 +235,16 @@ const styles = StyleSheet.create({
     giftcodetextbox:{
         alignItems:'center',
         justifyContent: 'center',
+        marginRight:width*0.3,
         width: width*.6,
         opacity:.5,
     },
     giftcodeinput:{
         fontSize: 16,
-        width: width *.5,
+        width: width *.45,
         height: height * 0.05,
         padding: 10,
+        marginLeft:width*.05,
         borderRadius: 10,
         backgroundColor: 'white',
         elevation: 8,
