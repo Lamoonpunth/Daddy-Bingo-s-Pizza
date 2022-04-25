@@ -13,39 +13,31 @@ import {
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
   
   const [dough, onChangeDough] = React.useState([
-    { type: 'Thick', icon: '1', price:50 , key: '1' },
-    { type: 'Thin', icon: '2', price:40 , key: '2'},
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
   
   const [crust, onChangeCrust] = React.useState([
-    { type: 'None', icon: '3', price:0 , key: '1'},
-    { type: 'Sausage', icon: '4', price:30 , key: '2'},
-    { type: 'Cheese', icon: '5', price:60 , key: '3'},
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
   const [sauce, onChangeSauce] = React.useState([
-    { type: 'Tomato-Based', icon: '6', price:50 , key: '1'},
-    { type: 'Pesto', icon: '7', price:60 , key: '2'},
-    { type: 'BBQ', icon: '8', price:50 , key: '3'},
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
   const [pack, onChangePackage] = React.useState([
-    { type: 'Thick', icon: '1', price:50 , key: '1'},
-    { type: 'Thin', icon: '2', price:40 , key: '2'},
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
   const [size, onChangeSize] = React.useState([
-    { type: 'XS', icon: '1', price:50 , key: '1'},
-    { type: 'S', icon: '2', price:40 , key: '2'},
-
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
   const [selectedSize, setSize] = React.useState('Thick');
@@ -57,7 +49,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedSize = (type:any,item:any,index:any) =>{
     setDough(type);
     const newArrData = size.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -72,7 +64,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedDough = (type:any,item:any,index:any) =>{
     setDough(type);
     const newArrData = dough.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -87,7 +79,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedCrust = (type:any,item:any,index:any) =>{
     setCrust(type) ;
     const newArrData = crust.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -102,7 +94,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedSauce = (type:any,item:any,index:any) =>{
     setSauce(type);
     const newArrData = sauce.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -117,7 +109,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const onSelectedPackage = (type:any,item:any,index:any) =>{
     setPackage(type);
     const newArrData = pack.map((e, index) =>{
-      if (item.key == e.key){
+      if (item._id == e._id){
         return {
           ...e,selected:true
         }
@@ -136,7 +128,50 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const addToCart = () =>{
     
   }
+  const getSize = () =>{
+    fetch("http://10.0.2.2:3000/getSize")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeSize(json)})
+  }
+  const getDough = () =>{
+    fetch("http://10.0.2.2:3000/getDough")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeDough(json)})
+  }
+  const getCrust = () =>{
+    fetch("http://10.0.2.2:3000/getCrust")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeCrust(json)})
+  }
+  const getSauce = () =>{
+    fetch("http://10.0.2.2:3000/getSauce")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeSauce(json)})
+  }
+  const getPackage = () =>{
+    fetch("http://10.0.2.2:3000/getPackage")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangePackage(json)})
+  }
+  const renderall = () =>{
+    getSize()
+    getDough()
+    getCrust()
+    getSauce()
+    getPackage()
+  }
 
+  useFocusEffect(
+    React.useCallback(() => {
+        renderall()
+      //checkItemInCart()
+    }, [])
+  );
   return (
     <Gradient>
       <View style={styles.container}>
@@ -167,7 +202,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedSize(item.type,item,index)}>
+                    onPress={() => onSelectedSize(item.name,item,index)}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -183,7 +218,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -205,7 +240,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedDough(item.type,item,index)}>
+                    onPress={() => onSelectedDough(item.name,item,index)}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -221,7 +256,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -243,7 +278,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedCrust(item.type,item,index)}>
+                    onPress={() => onSelectedCrust(item.name,item,index)}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -259,7 +294,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -281,7 +316,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedSauce(item.type,item,index)}>
+                    onPress={() => onSelectedSauce(item.name,item,index)}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -297,7 +332,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -319,7 +354,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedPackage(item.type,item,index)}>
+                    onPress={() => onSelectedPackage(item.name,item,index)}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -335,7 +370,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
