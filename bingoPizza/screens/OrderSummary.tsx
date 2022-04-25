@@ -51,7 +51,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
     }
 
     const onCheckOutButton = () =>{
-        alert("nice");
+        navigation.navigate('Transaction');
     }
 
     return (
