@@ -11,18 +11,24 @@ import EditService from '../screen/admin/edit/EditService';
 import EditIngredients from '../screen/admin/edit/EditIngredients';
 import EditRecommend from '../screen/admin/edit/EditRecommend';
 import EditAddRecommend from '../screen/admin/edit/EditAddRecommend';
+import AwaitingPayment from '../screen/admin/AwaitingPayment';
 import Menu from '../screen/admin/Menu';
 import EditAddMenu from '../screen/admin/edit/EditAddMenu';
 import EditMore from '../screen/admin/edit/EditMore';
 
 import TaskOrder from "../screen/chef/TaskOrder";
+import TaskDeny from '../screen/chef/TaskDeny';
+import TaskPrepare from '../screen/chef/TaskPrepare';
+
 import RiderTask from "../screen/rider/RiderTask";
 
 import 'react-native-gesture-handler';
-import { DrawerMenu } from './DrawerMenu';
+import { DrawerMenu } from './DrawerAdmin';
+import { DrawerChef } from './DrawerChef';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const Chef = createDrawerNavigator();
 
 function AdminNavigator() {
     return (
@@ -36,8 +42,20 @@ function AdminNavigator() {
             <Drawer.Screen name='AddMenu' component={EditAddMenu} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='EditMore' component={EditMore} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Ingredients' component={EditIngredients} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='Awaiting' component={AwaitingPayment} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Log Out' component={LogIn}/>
         </Drawer.Navigator>
+    )
+};
+
+function ChefNavigator() {
+    return (
+        <Chef.Navigator initialRouteName='TaskOrder' screenOptions={{headerShown:false}} drawerContent={props => <DrawerChef{...props}/>}>
+            <Chef.Screen name='TaskOrder' component={TaskOrder}/>
+            <Chef.Screen name='TaskDeny' component={TaskDeny}/>
+            <Chef.Screen name='TaskPrepare' component={TaskPrepare}/>
+            <Chef.Screen name='Log Out' component={LogIn}/>
+        </Chef.Navigator>
     )
 };
 
@@ -45,7 +63,7 @@ export const HomeStack = () => (
     <Stack.Navigator screenOptions={{headerShown:false}} >
         <Stack.Screen name='LogIn' component={LogIn}/>
         <Stack.Screen name='Admin' component={AdminNavigator}/>
-        <Stack.Screen name='Chef'  component={TaskOrder}/>
+        <Stack.Screen name='Chef'  component={ChefNavigator}/>
         <Stack.Screen name='Rider' component={RiderTask}/>  
     </Stack.Navigator>
 );

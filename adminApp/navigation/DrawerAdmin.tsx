@@ -21,6 +21,10 @@ export function DrawerMenu({navigation}:{navigation:any},props:any){
         navigation.navigate('Profile')
     }
 
+    const onAwaitingPayment = () =>{
+        navigation.navigate('Awaiting')
+    }
+
     const onService = () => {
         navigation.navigate('Service')
     }
@@ -61,6 +65,10 @@ export function DrawerMenu({navigation}:{navigation:any},props:any){
                 <TouchableOpacity onPress={onIngredients} style={styles.option}>
                     <Image source={require('../assets/images/ingredients.png')} style={styles.optionImage}/>
                     <Text style={styles.itemFont}>Ingredients</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onAwaitingPayment} style={styles.option}>
+                    <Image source={require('../assets/images/awaiting.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Awaiting payment</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.option}>
                     <Image source={require('../assets/images/logout.png')} style={styles.optionImage}/>

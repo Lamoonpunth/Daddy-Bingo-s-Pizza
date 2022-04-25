@@ -18,7 +18,8 @@ import Gradient from '../../styles/Gradient';
 //import { FlatList } from "react-native-gesture-handler";
 
 
-export default function FoodCart({navigation}:{navigation:any}){
+export default function TaskOrder({navigation, route}:{navigation:any,route:any}){
+ 
   const [Task, onClickTask] = React.useState([
     {num:'Order1' ,key:'1'},
     {num:'Order2' ,key:'2'},
