@@ -12,6 +12,7 @@ import Profile from "../screens/Profile";
 import PresetPizza from "../screens/PresetPizza";
 import MoreTab from "../screens/MoreTab";
 import Subscription from "../screens/SubscriptionTab";
+import SubscriptionSummary from "../screens/SubscriptionSummary";
 import OrderSummary from "../screens/OrderSummary";
 
 import 'react-native-gesture-handler';
@@ -29,6 +30,7 @@ function HomeOrder(){
             <Order.Screen name='Profile' component={Profile} options={{swipeEnabled:false}}/>
             <Order.Screen name='More' component={MoreTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Sub' component={Subscription} options={{swipeEnabled:false}}/>
+            <Order.Screen name='SubscriptionSummary' component={SubscriptionSummary} options={{swipeEnabled:false}}/>
             <Order.Screen name='PresetPizza' component={PresetPizza} options={{swipeEnabled:false}}/>
             <Order.Screen name='OrderSummary' component={OrderSummary} options={{swipeEnabled:false}}/>
         </Order.Navigator>
@@ -41,7 +43,6 @@ function HomeStack() {
         <LogIn.Screen name="LogIn" component={LogInTab} />
         <LogIn.Screen name="Order" component={HomeOrder} />
         <LogIn.Screen name="Register" component={Reginfo} />
-        <Order.Screen name='PresetPizza' component={PresetPizza} options={{swipeEnabled:false}}/>
       </LogIn.Navigator>
     );
   }
