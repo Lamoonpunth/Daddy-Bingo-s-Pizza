@@ -26,6 +26,11 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
         {status:'Arriving'},
     ])
 
+    const [orderlist, onChangeOrderList] = React.useState([
+        {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
+        
+    ])
+
   return (
     <Gradient>
       <View style={styles.container}>
@@ -36,22 +41,22 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
             <View style={styles.statusBar}>
                 <View style={styles.statusIcon}>
                     <View style={styles.iconBox}>
-
+                        <Image source={require('../assets/images/OrderAwait/queueing.png')}/>
                     </View>
                 </View>
                 <View style={styles.statusIcon}>
                     <View style={styles.iconBox}>
-                        
+                        <Image source={require('../assets/images/OrderAwait/preparing.png')}/>
                     </View>
                 </View>
                 <View style={styles.statusIcon}>
                     <View style={styles.iconBox}>
-                        
+                        <Image source={require('../assets/images/OrderAwait/delivering.png')}/>
                     </View>
                 </View>
                 <View style={styles.statusIcon}>
                     <View style={styles.iconBox}>
-                        
+                        <Image style={styles.image} source={require('../assets/images/OrderAwait/arriving.png')}/>
                     </View>
                 </View>
             </View>
@@ -76,9 +81,12 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
         <View style={styles.orderSummary}>
             <View style={styles.orderBox}>
                 <Text style={styles.orderHeadFont}>Order summary</Text>
-                <Text style={styles.orderFont}>
-                    123123
-                </Text>
+                <FlatList
+                    data={orderlist}
+                    renderItem={({item}) => (
+                        <Text style={styles.orderFont}>x{item.quantity}  {item.name}</Text>
+                    )}
+                />
             </View>
         </View>
       </View>
@@ -107,43 +115,43 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     backgroundColor:'transparent',
     width:screenWidth,
-    borderWidth:1,
   },
   statusBar: {
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
     flex:1,
-    borderWidth:1,
   },
   statusIcon: {
     flex:1,
-    borderWidth:1,
     alignItems:'center',
     justifyContent:'center',
     width:screenWidth/3,
   },
   iconBox: {
+    alignItems:'center',
+    justifyContent:'center',
     width:screenWidth*0.25,
     height:screenWidth*0.25,
     backgroundColor:'white',
     borderRadius:50,
   },
+  image: {
+    width:screenWidth*0.20,
+    height:screenWidth*0.20,
+  },
   statusName: {
     flex:1,
-    borderWidth:1,
   },
   nameBox: {
     flex:1,
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
-    borderWidth:1,
     width:screenWidth/3,
   },
   statusBlank: {
     flex:1,
-    borderWidth:1,
   },
   orderSummary: {
     flex:5,
@@ -151,12 +159,10 @@ const styles = StyleSheet.create({
     width:screenWidth,
     alignItems:'center',
     justifyContent:'center',
-    borderWidth:1,
   },
   orderBox: {
     width:screenWidth*0.9,
     height:screenHeight*4/20,
-    borderWidth:1,
   },
 
   /*************************************Font*********************************/
@@ -176,13 +182,9 @@ const styles = StyleSheet.create({
   },
   orderFont: {
     paddingLeft:10,
-    flex:8,
     fontSize:18,
-    borderWidth:1,
   },
   orderHeadFont: {
-    flex:2,
     fontSize:20,
-    borderWidth:1,
   },
 });
