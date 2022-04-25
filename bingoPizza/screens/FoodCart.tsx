@@ -18,21 +18,22 @@ import { globalStyles } from "../styles/globalStyles";
 export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     
     const onCheckOut = () => {
-      console.log(rawCart)
-      fetch("http://10.0.2.2:3000/checkout",{
-        method:"POST",
-        headers:{'Content-Type': 'application/json'},
-        body:JSON.stringify({
-          userid:userid,
-          cart:rawCart
-        })
-      })
-      .then(response => response.json())
-      .then(json =>{
-        console.log(json)
-        navigation.navigate('OrderSummary',{cart:cart});
-      })
-      .catch(error => console.log(error))
+      navigation.navigate('OrderSummary',{cart:cart,rawcart:rawCart,userid:userid});
+      // console.log(rawCart)
+      // fetch("http://10.0.2.2:3000/checkout",{
+      //   method:"POST",
+      //   headers:{'Content-Type': 'application/json'},
+      //   body:JSON.stringify({
+      //     userid:userid,
+      //     cart:rawCart
+      //   })
+      // })
+      // .then(response => response.json())
+      // .then(json =>{
+      //   console.log(json)
+      //   navigation.navigate('OrderSummary',{cart:cart});
+      // })
+      // .catch(error => console.log(error))
     }
     /**numTest กับ testสร้างมาลองเฉยๆเอาไปลบได้เลย**/
     const {userid} = route.params;
