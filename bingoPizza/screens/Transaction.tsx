@@ -40,7 +40,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
     };
 
     const onConfirm = () =>{
-        
+
     }
 
     const {price} = route.params;
