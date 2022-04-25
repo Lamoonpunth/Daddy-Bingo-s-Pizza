@@ -19,16 +19,7 @@ import Gradient from '../../styles/Gradient';
 import Constants from 'expo-constants';
 
 export default function TaskPrepare({ navigation }: { navigation: any }) {
-  const DATA = [
-    { num: 'Order1', key: '1', img_path: require('../../assets/images/classicburger.png') },
-    { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '3', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '4', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '5', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '6', img_path: require('../../assets/images/classicburger.png') },
-    { num: 'Order3', key: '7', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order4', key: '8', img_path: require('../../assets/images/mexicangreenwave.png') },
-  ];
+  
   const [Ingredient, onClickIng] = React.useState([
     { num: 'Order1', key: '1', img_path: require('../../assets/images/mexicangreenwave.png') },
     { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
@@ -40,33 +31,7 @@ export default function TaskPrepare({ navigation }: { navigation: any }) {
     { num: 'Order4', key: '8', img_path: require('../../assets/images/mexicangreenwave.png') },
 
   ]);
-  /*function Item({ id, title, selected, onSelect }) {
-    return (
-      <TouchableOpacity
-        onPress={() => onSelect(id)}
-        style={[
-          styles.item,
-          { backgroundColor: selected ? '#6e3b6e' : '#f9c2ff' },
-        ]}
-      >
-        <Text style={styles.title}>{title}</Text>
-      </TouchableOpacity>
-    );
-  }
-
-  export default function TaskOrder() {
-    const [selected, setSelected] = React.useState(new Map());
-
-    const onSelect = React.useCallback(
-      id => {
-        const newSelected = new Map(selected);
-        newSelected.set(id, !selected.get(id));
-
-        setSelected(newSelected);
-      },
-      [selected],
-    );*/
-
+ 
   const onCheckOut = () => {
     alert('จะกินมั้ย กินก็จ่าย');
   }

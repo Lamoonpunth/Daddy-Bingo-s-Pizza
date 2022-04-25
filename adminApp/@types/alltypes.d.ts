@@ -6,3 +6,4 @@ declare module 'react-native-linear-gradient';
 declare module 'react-native-bouncy-checkbox';
 declare module 'react-native-dialog';
 declare module 'react-native-image-picker';
+declare module 'expo-image-picker'

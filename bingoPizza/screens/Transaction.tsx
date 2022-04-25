@@ -18,7 +18,8 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
     const onBackButton = () =>{
         navigation.goBack();
     }
-
+    const {price} = route.params;
+    console.log(price)
     return (
         <Gradient>
             <View style={styles.container}>
@@ -29,7 +30,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                     <Text style={styles.fontHeader}>Transaction</Text>
                     <View style={globalStyles.underline}></View>  
                 </View>
-                <Image style={styles.transaction} source={require('../constants/images/profile.jpg')}/>
+                <Image style={styles.transaction} source={{uri:"https://qrmango.com/promptpay/qr?pp_no=0808491161"+"&amount="+price+"&size=300"}}/>
             </View>
         </Gradient>
     );

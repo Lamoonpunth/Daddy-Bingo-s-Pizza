@@ -16,6 +16,7 @@ import Gradient from "../styles/Gradient";
 import GradientForBTN from "../styles/GradientForBTN";
 import { globalStyles } from "../styles/globalStyles";
 import { useFocusEffect } from '@react-navigation/native';
+import { ScreenStackHeaderBackButtonImage } from "react-native-screens";
 export default function OrderSummary({ navigation, route }: { navigation: any, route: any }) {
 
     const {userid} = route.params;
@@ -66,11 +67,12 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
         .then(response => response.json())
         .then(json =>{
             console.log(json)
-            navigation.navigate('Transaction');
+            console.log(total)
+            navigation.navigate('Transaction',{price:total});
         })
         .catch(error => console.log(error))
     }
-    const getRawCart = () =>{
+    const getRawCart = async() =>{
         setTotal(0)
         setListOfCart([])
         fetch('http://10.0.2.2:3000/getCart?userid='+userid)
@@ -86,16 +88,27 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
             })
           }
         })
+    }
+
+    const setSum = () =>{
         let sum = 0
         for (let i = 0; i < cart.length; i++) {
             sum += cart[i].price;
           }
+        console.log(sum)
         setTotal(sum)
     }
+
     useFocusEffect(
         React.useCallback(() => {
             getRawCart()
         }, [])
+      );
+
+    useFocusEffect(
+        React.useCallback(() => {
+            setSum()
+        }, [cart])
       );
     return (
         <Gradient>
