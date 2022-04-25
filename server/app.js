@@ -280,7 +280,6 @@ app.post('/addpizza',async(req,res) =>{
 })
 
 
-
 app.get('/getmenu',async(req,res)=>{
   try{
     const menu = await Menu.find({})
@@ -332,7 +331,7 @@ app.get('/getDessert',async(req,res)=>{
     console.log(error)
   }
 })
-app.get('/getÀ la carte',async(req,res)=>{
+app.get('/getAlacarte',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"À la carte"})
     console.log("getmenu")
@@ -366,6 +365,7 @@ app.get('/getPizza',async(req,res)=>{
 
 app.post('/removemenu',async(req,res)=>{
   try{
+
     Menu.find({ "_id":req.body._id }).deleteOne().exec();
     res.json("removed")
   }
@@ -423,6 +423,7 @@ app.post('/addToCart',async(req,res) =>{
     }
   }
 )
+
 app.get('/getCart',async(req,res) =>{
   try{
     const user =await User.findOne({"_id":req.query.userid})
@@ -463,6 +464,68 @@ app.post('/checkout',async(req,res)=>{
       adr_dis : 0,
     })
     res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.post('/paymentcheck',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{status: "waiting for kitchen"}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+
+})
+
+app.post('/kitchenaccept',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{status: "preparing order"}})
+    await Order.updateMany({"_id":req.body._id},{$set:{confirm_datetime: Date.now()}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.post('/kitchendeny',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{status: "cancled by kitchen"}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.post('/kitchendone',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{status: "waiting for rider"}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.post('/rideraccept',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{status: "delivering order"}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.post('/riderdone',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{status: "order completed"}})
+    res.json("updated")
   }
   catch(error){
     console.log(error)
