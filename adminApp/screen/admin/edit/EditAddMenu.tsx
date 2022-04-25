@@ -48,9 +48,15 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
     
         console.log(result);    
         if (!result.cancelled) {
-          setImage(result.uri);
+          setImage(result.uri);         
+        const requestOptions = {
+            method: 'POST',
+            key:'image',
+            value: result.uri,           
+        };
+        const postUri = 'http://10.0.2.2:3000/uploadSingle' 
+        fetch(postUri, requestOptions)     
         }
-
       };
 
     return (
