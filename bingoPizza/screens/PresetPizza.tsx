@@ -147,6 +147,12 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const addToCart = () =>{
     
   }
+  const getTopping = () =>{
+    fetch("http://10.0.2.2:3000/getTopping")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeTopping(json)})
+  }
   const getSize = () =>{
     fetch("http://10.0.2.2:3000/getSize")
     .then(response=>response.json())
@@ -178,6 +184,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     onChangePackage(json)})
   }
   const renderall = () =>{
+    getTopping()
     getSize()
     getDough()
     getCrust()
