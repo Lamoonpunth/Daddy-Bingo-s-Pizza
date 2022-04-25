@@ -202,12 +202,12 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     <Gradient>
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.header}>
+          <ImageBackground source={require('../assets/images/Category/Pizza.jpg')} style={styles.header} imageStyle={{opacity:0.4}}>
               <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
                   <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
               </TouchableOpacity>
               <Text style={globalStyles.fontHeader}>Preset Pizza</Text>
-          </View>
+          </ImageBackground>
 
           <View style={styles.cartContainer}>
             
@@ -217,9 +217,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../assets/images/topping.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Topping</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
@@ -256,9 +256,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../assets/images/size.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Size</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
@@ -295,9 +295,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../assets/images/dough.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Dough</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
@@ -334,9 +334,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../assets/images/crust.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Crust</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
@@ -373,9 +373,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../assets/images/sauce.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Sauce</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
@@ -412,9 +412,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../assets/images/package.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Package</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
@@ -454,6 +454,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
         </ScrollView>
         <TouchableOpacity style={styles.checkoutBox} onPress={addToCart}>
           <Text style={styles.checkoutFont}>Add to cart</Text>
+          <Text style={styles.checkoutFont}>เงิน</Text>
         </TouchableOpacity>   
       </View>
     </Gradient>
@@ -589,9 +590,9 @@ const styles = StyleSheet.create({
     elevation:5
   },
   checkoutBox:{
-    flexDirection:'column',
+    flexDirection:'row',
     alignItems:'center',
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     width: screenWidth,
     height: screenHeight * 0.075,
     //borderRadius: 5,
