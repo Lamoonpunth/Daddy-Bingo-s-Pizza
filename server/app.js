@@ -194,11 +194,18 @@ app.post('/addpizzaoption',async(req,res) =>{
   }
 })
 
-//getsize
+app.get('/getTopping',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Topping"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
 app.get('/getSize',async(req,res) =>{
   try{
-    //img_path from upload single
-    const {name,type,price,img_path,extra} = req.body;
     const pizzaoption = await Pizzaoption.find({type:"Size"})
     res.json(pizzaoption)
   }
@@ -209,8 +216,6 @@ app.get('/getSize',async(req,res) =>{
 
 app.get('/getDough',async(req,res) =>{
   try{
-    //img_path from upload single
-    const {name,type,price,img_path,extra} = req.body;
     const pizzaoption = await Pizzaoption.find({type:"Dough"})
     res.json(pizzaoption)
   }
@@ -221,8 +226,6 @@ app.get('/getDough',async(req,res) =>{
 
 app.get('/getCrust',async(req,res) =>{
   try{
-    //img_path from upload single
-    const {name,type,price,img_path,extra} = req.body;
     const pizzaoption = await Pizzaoption.find({type:"Crust"})
     res.json(pizzaoption)
   }
@@ -233,8 +236,6 @@ app.get('/getCrust',async(req,res) =>{
 
 app.get('/getSauce',async(req,res) =>{
   try{
-    //img_path from upload single
-    const {name,type,price,img_path,extra} = req.body;
     const pizzaoption = await Pizzaoption.find({type:"Sauce"})
     res.json(pizzaoption)
   }
@@ -245,8 +246,6 @@ app.get('/getSauce',async(req,res) =>{
 
 app.get('/getPackage',async(req,res) =>{
   try{
-    //img_path from upload single
-    const {name,type,price,img_path,extra} = req.body;
     const pizzaoption = await Pizzaoption.find({type:"Package"})
     res.json(pizzaoption)
   }
@@ -254,6 +253,7 @@ app.get('/getPackage',async(req,res) =>{
     console.log(err)
   }
 })
+
 //addpresetpizza
 app.post('/addpizza',async(req,res) =>{
   try{
