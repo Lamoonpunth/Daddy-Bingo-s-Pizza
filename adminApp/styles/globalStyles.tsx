@@ -43,7 +43,7 @@ export const globalStyles = StyleSheet.create({
     },
     addImageIcon: {
         width:25,
-        height:25
+        height:25,
     },
     linearGradient: {
         flex: 1,

@@ -114,11 +114,11 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
           <View style={globalStyles.underline}></View>
         </View>
 
-            <View style={styles.cartContainer}>
-              <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
-                {renderMenuBox()}
-              </ScrollView>
-            </View>
+        <View style={styles.cartContainer}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
+            {renderMenuBox()}
+          </ScrollView>
+        </View>
         
         </View>
     </Gradient>

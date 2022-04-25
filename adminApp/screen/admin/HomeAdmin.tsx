@@ -26,9 +26,9 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     {}
   ]);
   const [recommend, onClickRec] = React.useState([
-    {menu:'Pizza1' ,key:'1',img_path:require('../../assets/images/Category/Appetizer.jpg')},
-    {menu:'Pizza2' ,key:'2',img_path:require('../../assets/images/Category/Appetizer.jpg')},
-    {menu:'Pizza3' ,key:'3',img_path:require('../../assets/images/Category/Appetizer.jpg')},
+    {key:1,name:'mexicangreenwave', img_path:'mexicangreenwave.png'},
+    {key:2,name:'pepperonipizza', img_path:'pepperonipizza.png'},
+    {key:3,name:'plaincheesepizza', img_path:'plaincheesepizza.png'},
   ]);
   const [category, onClickCate] = React.useState([
     {type:'Appetizer',key:'0',img_path:require('../../assets/images/Category/Appetizer.jpg')},
@@ -43,16 +43,16 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     navigation.openDrawer();
   }
 
-  const onClickAdminAddress = () =>{
-
-  }
-
   const onClickPromotion = () =>{
-
+    
   }
 
   const onClickRecommend = () =>{
     
+  }
+  
+  const onEditRecommend = () =>{
+    navigation.navigate('Recommend');
   }
 
   const onClickCategory= (type:any)=>{
@@ -86,7 +86,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
             <TouchableOpacity style={styles.promoBox} onPress={onEditPromo}>
-
+              <Image source = {{uri:"http://10.0.2.2:3000/getImage/Promotion_1.jpg"}}/>
             </TouchableOpacity>
           </View>
           <View style={styles.recommendcontainer}>
@@ -94,7 +94,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
               <Text style={globalStyles.fontNormal}>
                 Recommend
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onEditRecommend}>
                 <Text style={{fontSize:18, color:'#343434'}}>
                   Edit
                 </Text>
@@ -108,7 +108,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
                 data={recommend}
                 renderItem={({item}) => (
                   <TouchableOpacity style={styles.menuIcon} onPress={onClickRecommend}>
-                    <Image source={require('../../assets/images/pooh.jpg')} style={styles.foodImage} />
+                    <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage} />
                   </TouchableOpacity>
                 )}
               />

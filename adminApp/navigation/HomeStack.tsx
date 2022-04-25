@@ -9,6 +9,8 @@ import HomeAdmin from '../screen/admin/HomeAdmin';
 import EditProfile from '../screen/admin/edit/EditProfile';
 import EditService from '../screen/admin/edit/EditService';
 import EditIngredients from '../screen/admin/edit/EditIngredients';
+import EditRecommend from '../screen/admin/edit/EditRecommend';
+import EditAddRecommend from '../screen/admin/edit/EditAddRecommend';
 import Menu from '../screen/admin/Menu';
 import EditAddMenu from '../screen/admin/edit/EditAddMenu';
 import EditMore from '../screen/admin/edit/EditMore';
@@ -30,6 +32,8 @@ function AdminNavigator() {
             <Drawer.Screen name='Home' component={HomeAdmin}/>
             <Drawer.Screen name='Profile' component={EditProfile}/>
             <Drawer.Screen name='Service' component={EditService} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='Recommend' component={EditRecommend} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='AddRecommend' component={EditAddRecommend} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Menu' component={Menu} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='AddMenu' component={EditAddMenu} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='EditMore' component={EditMore} options={{swipeEnabled:false,}}/>
