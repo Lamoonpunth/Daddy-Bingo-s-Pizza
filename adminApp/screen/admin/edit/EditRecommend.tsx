@@ -19,7 +19,7 @@ import { color } from 'react-native-reanimated';
 
 export default function EditRecommend({navigation,route}: {navigation:any,route:any}) {
 
-  const [pizza,setPizza] = React.useState([
+  const [recommend,setRecommend] = React.useState([
     {key:1,name:'mexicangreenwave', img_path:'mexicangreenwave.png'},
     {key:2,name:'pepperonipizza', img_path:'pepperonipizza.png'},
     {key:3,name:'plaincheesepizza', img_path:'plaincheesepizza.png'},
@@ -40,6 +40,8 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
   const onAddRecommend = () =>{
     navigation.navigate('AddRecommend');
   }
+  
+  
 
   return (
     <Gradient>
@@ -60,7 +62,7 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
 
         <View style={styles.cartContainer}>
           <FlatList
-            data={pizza}
+            data={recommend}
             renderItem={({item}) => (
               <View style={styles.menu} key={item.key}>
                   <View style={styles.boxImage}>

@@ -4,6 +4,7 @@ require('./model/user-admin')
 require('./model/menu')
 require('./model/appetizer')
 require('./model/order')
+require('./model/recommend')
 require('dotenv').config()
 const express = require('express');
 const app = express();
@@ -27,6 +28,7 @@ const Admin= mongoose.model("user-admin")
 const Menu = mongoose.model("menu")
 const Appetizer = mongoose.model("appetizer")
 const Order = mongoose.model("order")
+const Recommend = mongoose.model("recommend")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -246,16 +248,29 @@ app.get('/getPizza',async(req,res)=>{
   }
 })
 
-app.post('/removeMenu',async(req,res)=>{
+app.post('/removemenu',async(req,res)=>{
   try{
     Menu.find({ "_id":req.body._id }).deleteOne().exec();
     res.json("removed")
   }
   catch(error){
     console.log(error)
+    res.json(error)
   }
 }
 )
+
+app.post('/addrecommend',async(req,res)=> {
+  try{
+    const reccomend = await Recommend.create({menuid:req.body.menuid})
+    reccomend.save()
+    res.json(reccomend)
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+})
 
 app.post('/addToCart',async(req,res) =>{
     try{
