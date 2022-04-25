@@ -28,7 +28,7 @@ export default function DeliveryTask({ navigation, route }: { navigation: any, r
   )
 
   const renderItem = ({ item }: { item: any }) => (
-    <Item title={item.type} />
+    <Item title={item.Address} />
   );
 
   const [Address, onChangeAdd] = React.useState([
@@ -53,9 +53,7 @@ export default function DeliveryTask({ navigation, route }: { navigation: any, r
           <FlatList
             scrollEnabled={false}
             data={Address}
-            renderItem={({ item }) => (
-              <Text style={styles.menuFont}>Address: {item.Address} </Text>
-            )}
+            renderItem={renderItem}
           />
           <TouchableOpacity style={styles.acceptBox} onPress={() => onAcceptButton()}>
             <Text style={{ fontSize: 18, color: '#FF6D7D' }}>Accept</Text>
