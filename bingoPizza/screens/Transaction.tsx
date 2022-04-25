@@ -39,14 +39,12 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
         }
     };
 
+    const onConfirm = () =>{
+        
+    }
+
     const {price} = route.params;
     console.log(price)
-
-    useEffect(() => {
-        if (isUpload){
-            navigation.navigate('OrderAwait');
-        }
-    });
 
     return (
         <Gradient>
@@ -62,10 +60,13 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                 <View style={styles.insertBox}>
                     <Text style={styles.insertFont}>Insert transaction</Text>
                     <View style={styles.upload}>
+                        <Text style={styles.imageNameFont}>Image name</Text> 
                         <TouchableOpacity style={styles.insertButton} onPress={pickImage}>
                             <Text style={styles.uploadFont}>Upload</Text>
-                        </TouchableOpacity>   
-                        <Text style={styles.imageNameFont}>Image name</Text> 
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.confirmButton} onPress={onConfirm}>
+                            <Text style={styles.uploadFont}>Confirm</Text>
+                        </TouchableOpacity> 
                     </View>
                     
                 </View>
@@ -126,7 +127,14 @@ const styles = StyleSheet.create({
     insertButton: {
         padding:15,
         height: 50,
-        width: width*0.2,
+        width: 75,
+        backgroundColor:'#FF6D6D',
+        borderRadius:10,
+    },
+    confirmButton: {
+        padding:15,
+        height: 50,
+        width: 85,
         backgroundColor:'#FF6D6D',
         borderRadius:10,
     },
