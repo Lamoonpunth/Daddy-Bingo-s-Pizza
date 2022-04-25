@@ -28,7 +28,12 @@ export default function DeliveryTask({ navigation, route }: { navigation: any, r
   )
 
   const renderItem = ({ item }: { item: any }) => (
-    <Item title={item.Address} />
+    <View>
+      <Item title={item.Address} />
+      <TouchableOpacity style={styles.acceptBox} onPress={() => onAcceptButton()}>
+        <Text style={{ fontSize: 18, color: '#FF6D7D' }}>Accept</Text>
+      </TouchableOpacity>
+    </View>
   );
 
   const [Address, onChangeAdd] = React.useState([

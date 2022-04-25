@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
     user_id: {type:String, default: null},
-    datetime: {type:Date, default: Date.now},
-    confirm_datetime: {type:Date, default: null},
+    datetime: {type:Date, default: Date.now()},
+    confirm_datetime: {type:Date, default: Date.now()},
     status: {type:String, default: null},
     billing_type: {type:String, default: null},
     cart :{type:Array, default: null},
