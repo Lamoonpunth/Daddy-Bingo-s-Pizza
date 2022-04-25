@@ -30,7 +30,7 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
     navigation.navigate('Awaiting');
   }
 
-  const onSave = () =>{
+  const onComplete = () =>{
     
   }
 
@@ -67,9 +67,15 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
               <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
                 <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
               </TouchableOpacity>
-              <TouchableOpacity style={styles.saveButton} onPress={onSave}>
-                <Text style={styles.saveFont}>Save</Text>
+              {payment.transaction == 'complete' ?
+              <TouchableOpacity style={styles.saveButton} onPress={onComplete} disabled={true}>
+                <Text style={styles.saveFont}>Complete</Text>
               </TouchableOpacity>
+              :
+              <TouchableOpacity style={styles.saveButton} onPress={onComplete} disabled={false}>
+                <Text style={styles.saveFont}>Complete</Text>
+              </TouchableOpacity>
+              }
             </View>
           <Text style={globalStyles.fontHeader}>{payment.user_fname} {payment.user_lname}</Text>
           <View style={globalStyles.underline}></View>
@@ -77,7 +83,7 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
 
         <View style={styles.cartContainer}>
           <View style={styles.orderTime}>
-            <Text style={styles.orderTimeFont}>รหัสคำสั่งซื้อ : {payment.user_id}</Text>
+            <Text style={{fontSize:16}}>รหัสคำสั่งซื้อ : {payment.user_id}</Text>
             <Text style={styles.orderTimeFont}>เวลา : {payment.datetime}</Text>
           </View>
           <View style={styles.orderSummary}>
@@ -87,7 +93,7 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
               renderItem={({item}) => (
                 <View style={styles.orderDetail}>
                     <Text style={styles.orderDetailFont}> x{item.quantity} {item.name}</Text>
-                    <Text style={styles.orderDetailFont}>{item.price} baht</Text>
+                    <Text style={styles.orderDetailFont}>{item.price} baht  </Text>
                 </View>
               )}
             />
@@ -95,9 +101,6 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
           <View style={styles.moreDetail}>
             <View style={styles.topic}>
               <Text style={styles.topicFont}>รวม {payment.price} บาท</Text>
-            </View>
-            <View style={styles.detail}>
-              <Text style={styles.detailFont}></Text>
             </View>
           </View>
         </View>
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   saveButton: {
-    width:60,
+    width:100,
     height:30,
     backgroundColor:'white',
     alignItems:'center',
@@ -142,7 +145,7 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical:30,
+    paddingVertical:10,
     width: screenWidth * .9,
     height: screenHeight * .7,
     backgroundColor: '#fff',
@@ -150,23 +153,25 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   orderTime: {
-    flexDirection:'row',
+    flexDirection:'column',
     width: screenWidth * .85,
-    height: 50,
+    height: 100,
     alignItems:'center',
-    justifyContent:'space-between',
+    justifyContent:'space-evenly',
     paddingHorizontal:10,
   },
   orderTimeFont: {
     fontSize:20,
   },
   orderSummary: {
-    borderWidth:1,
-    flexDirection:'row',
+    borderWidth:2,
+    flexDirection:'column',
     width: screenWidth * .85,
-    height: 200,
+    height: 350,
     alignItems:'center',
-    justifyContent:'center',
+    justifyContent:'flex-start',
+    borderRadius:10,
+    borderColor:'#FF6D6D',
   },
   orderDetail: {
     flexDirection:'row',
@@ -182,7 +187,7 @@ const styles = StyleSheet.create({
   moreDetail: {
     flexDirection:'column',
     width: screenWidth * .85,
-    height: 250,
+    height: 50,
     alignItems:'center',
     justifyContent:'center',
   },
@@ -191,7 +196,7 @@ const styles = StyleSheet.create({
     width: screenWidth * .85,
     height: 50,
     alignItems:'center',
-    justifyContent:'flex-start',
+    justifyContent:'flex-end',
     paddingHorizontal:10,
   },
   topicFont: {

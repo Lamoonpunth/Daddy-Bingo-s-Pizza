@@ -24,17 +24,20 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
 
     const [nameMenu, onNameMenu] = React.useState('');
     const [description, onDescription] = React.useState('');
+    const [price, onPrice] = React.useState('');
     const [image, setImage] = useState(null);
 
     const onBackButton = () =>{
         navigation.navigate('Menu',{"type":type,userid:userid});
     }
 
-
-    //เพิ่มรูปผ่านตัวนี้ไปก่อน
-    const onAddMenu = () =>{
+    //เพิ่มรูปผ่านตัวนี้
+    const onSelectImage = () =>{
         pickImage()
-        alert('สินค้าชื่อ : '+ nameMenu);
+    }
+
+    const onAddMenu = () =>{
+        alert('สินค้าชื่อ : '+ nameMenu + 'ราคา : '+ price);
     }
 
     const pickImage = async () => {
@@ -80,14 +83,20 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
                         value={nameMenu} 
                         onChangeText={onNameMenu}
                     />
-                    <TouchableOpacity style={styles.foodImage}>
+                    <TouchableOpacity style={styles.foodImage} onPress={onSelectImage}>
                         <Image source={{uri:image}} style={{
-                                                            resizeMode: "contain",
-                                                            height: 300,
-                                                            width: 300
-                                                        }}/>
+                            resizeMode: "contain",
+                            height: 300,
+                            width: 300
+                        }}/>
                     </TouchableOpacity>
                     <View style={styles.detail}>
+                        <TextInput
+                            style={styles.addPrice}
+                            placeholder='กรุณากรอกราคา'
+                            value={price} 
+                            onChangeText={onPrice}
+                        />
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                             <TextInput 
                                 style={styles.descriptionFont} 
@@ -142,8 +151,19 @@ const styles = StyleSheet.create({
     },
     addName: {
         fontSize:20,
+        textAlign:'center',
         marginVertical:10,
         width:screenWidth*.8,
+        height:50,
+        borderRadius:10,
+        backgroundColor:'white',
+        elevation:5
+    },
+    addPrice: {
+        textAlign:'center',
+        fontSize:20,
+        marginVertical:10,
+        width:screenWidth*.4,
         height:50,
         borderRadius:10,
         backgroundColor:'white',
@@ -162,6 +182,8 @@ const styles = StyleSheet.create({
         width:screenWidth*.8,
         height:screenHeight*.3,
         marginVertical:10,
+        alignItems:'center',
+        justifyContent:'center',
     },
     scrollContainer: {
         
