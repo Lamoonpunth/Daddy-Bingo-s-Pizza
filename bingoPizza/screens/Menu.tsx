@@ -84,7 +84,7 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
   );
 
   const onMake = () =>{
-    navigation.navigate('PresetPizza')
+    navigation.navigate('PresetPizza',{userid:userid})
   }
 
   return (
