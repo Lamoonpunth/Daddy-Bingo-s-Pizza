@@ -58,6 +58,10 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     
   }
 
+  const onSeeAllRecommend = (type:any) =>{
+    navigation.navigate('SeeAll',{userid:userid});
+  }
+
   const onClickCategory= (type:any)=>{
     navigation.navigate('Menu',{type:type,userid:userid});
   }
@@ -86,7 +90,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
               <Text style={globalStyles.fontNormal}>
                 Recommend
               </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={onSeeAllRecommend}>
                 <Text style={{fontSize:18, color:'#343434'}}>
                   See All
                 </Text>

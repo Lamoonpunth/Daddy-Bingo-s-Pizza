@@ -14,10 +14,8 @@ import {
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
-import { color } from 'react-native-reanimated';
 
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
