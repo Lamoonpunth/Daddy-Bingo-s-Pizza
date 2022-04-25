@@ -17,6 +17,7 @@ const { height, width } = Dimensions.get('screen');
 import Gradient from "../../styles/Gradient";
 import { globalStyles } from "../../styles/globalStyles";
 import { useFocusEffect } from '@react-navigation/native';
+import { DrawerItem } from "@react-navigation/drawer";
 
 export default function PaymentInfo({ navigation, route }: { navigation: any, route: any }) {
   
@@ -25,7 +26,6 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
   const [orderList, onChangeOrderList] = React.useState([
     {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
   ])
-
   const onBackButton = () =>{
     navigation.navigate('Awaiting');
   }
@@ -34,6 +34,29 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
     
   }
 
+  const getOrderCart = () =>{
+    onChangeOrderList([])
+    console.log(payment._id)
+    fetch("http://10.0.2.2:3000/getordercart?_id="+payment._id)
+    .then(response => response.json())
+    .then(cart => {
+      console.log(cart)
+      for (let i = 0; i < cart.length; i++) {
+        fetch("http://10.0.2.2:3000/getID?id="+cart[i].id)
+        .then(response => response.json())
+        .then(item => {
+          const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:cart[i].quantity,additional:cart[i].additional,key:cart[i].id,price:item[0].price}
+          onChangeOrderList(cart => [...cart,newitem] );
+        })
+      }
+    })
+    .catch(error => console.log(error))
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getOrderCart()
+    }, [payment])
+  );
   return (
 
     <Gradient>
@@ -48,14 +71,14 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
                 <Text style={styles.saveFont}>Save</Text>
               </TouchableOpacity>
             </View>
-          <Text style={globalStyles.fontHeader}>{payment.customer_fname} {payment.customer_lname}</Text>
+          <Text style={globalStyles.fontHeader}>{payment.user_fname} {payment.user_lname}</Text>
           <View style={globalStyles.underline}></View>
         </View>
 
         <View style={styles.cartContainer}>
           <View style={styles.orderTime}>
-            <Text style={styles.orderTimeFont}>รหัสคำสั่งซื้อ : {payment.customer_id}</Text>
-            <Text style={styles.orderTimeFont}>เวลา : {payment.order_time}</Text>
+            <Text style={styles.orderTimeFont}>รหัสคำสั่งซื้อ : {payment.user_id}</Text>
+            <Text style={styles.orderTimeFont}>เวลา : {payment.datetime}</Text>
           </View>
           <View style={styles.orderSummary}>
             <FlatList
@@ -71,10 +94,10 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
           </View>
           <View style={styles.moreDetail}>
             <View style={styles.topic}>
-              <Text style={styles.topicFont}>รายละเอียด</Text>
+              <Text style={styles.topicFont}>รวม {payment.price} บาท</Text>
             </View>
             <View style={styles.detail}>
-              <Text style={styles.detailFont}>บลาๆๆ</Text>
+              <Text style={styles.detailFont}></Text>
             </View>
           </View>
         </View>

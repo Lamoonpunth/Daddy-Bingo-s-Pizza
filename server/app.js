@@ -391,7 +391,6 @@ app.post('/addrecommend',async(req,res)=> {
 app.get('/getrecommend',async(req,res)=>{
   try{
     const recommend = await Recommend.find({})
-    console.log("getmenu")
     res.json(recommend)
   }
   catch(error){
@@ -462,12 +461,51 @@ app.post('/checkout',async(req,res)=>{
       adr_lat : "0",
       adr_lon  : "0",
       adr_dis : 0,
+      user_fname : req.body.user_fname,
+      user_lname : req.body.user_lname,
+      price : req.body.price,
+      address : req.body.address,
+      province : req.body.province,
+      district : req.body.district,
+      subdistrict : req.body.subdistrict,
+      postcode:req.body.postcode,
     })
     res.json(order)
   }
   catch(error){
     console.log(error)
   }
+})
+
+app.get('/getorder',async(req,res) =>{
+  try{
+    const order = await Order.find({_id:req.query._id})
+    res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/getordercart',async(req,res) =>{
+  try{
+    const order = await Order.findOne({_id:req.query._id})
+    console.log(order.cart)
+    res.json(order.cart)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+app.get('/getwaitingforpayment',async(req,res)=>{
+  try{
+    const order = await Order.find({status: "waiting for payment"})
+    res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
+
 })
 
 app.post('/paymentcheck',async(req,res)=>{
@@ -620,6 +658,24 @@ app.post('/usercheck', (req,res) => {
       res.json(message)
   });
 });
+
+app.get('/getuserdata',async(req,res) => {
+  try{
+  const user =  await User.findOne({_id: req.query._id})
+  res.json({
+    address:user.address,
+    province:user.province,
+    district:user.district,
+    subdistrict:user.subdistrict,
+    postcode:user.postcode,
+    fname:user.fname,
+    lname:user.lname,
+  })
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
