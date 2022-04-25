@@ -12,7 +12,26 @@ const {height, width} = Dimensions.get('screen');
 
 
 export default function TabOneScreen({navigation,route}: {navigation:any,route:any}) {
-
+ 
+  function isNumeric(val:string) {
+    return /^-?\d+$/.test(val);
+  }
+  function hasWhiteSpace(s:string) {
+    return /\s/g.test(s);
+  }
+  function isContainsSpecialChars(str:string) {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(str);
+  }
+  function isContainsSpecialChars2(str:string) {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\?~]/;
+    return specialChars.test(str);
+  }
+  function  isEnglishAndThai(str:string) {
+    const english = /^[A-Za-z0-9]*$/;
+    const thai = /^[ก-๙]*$/;
+    return !(english.test(str) || thai.test(str));
+  }
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
 
@@ -52,45 +71,101 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
   //const Username=navigation.getParam("username")
   //const Password=navigation.getParam("password")
   const onSaveButton = () => {
-    alert('Hello How are you? I am under the water pls help me.');
+    //alert('Hello How are you? I am under the water pls help me.');
 
     var selectedSex
     if (checkboxBoy)selectedSex = 1
     else if (checkboxGirl)selectedSex = 2
     else selectedSex = 0
 
+    if( firstname == ''){
+      alert("Please Enter Firstname")
+    }
+    else if (isNumeric(firstname) || firstname.length < 2 || firstname.length > 25 || hasWhiteSpace(firstname) || isContainsSpecialChars(firstname) || isEnglishAndThai(firstname)) {
+      alert("Firstname must be only thai or english character with between 2 to 25 character")
+    }
+    else if( lastname == ''){
+      alert("Please Enter Lastname")
+    }
+    else if (isNumeric(lastname) || lastname.length < 2 || lastname.length > 25 || hasWhiteSpace(lastname) || isContainsSpecialChars(lastname) || isEnglishAndThai(lastname)) {
+      alert("Lastname must be only thai or english character with between 2 to 25 character")
+    }      
+    else if(isEnglishAndThai(firstname+lastname)){
+      alert("Firstname and Lastname must be only thai or english character with between 2 to 25 character")
+    }
+    else if ( selectedDate=='' || selectedMonth== ''){
+      alert("Please select birthmonth and birthyear")
+    }   
+    //บัค
+    // else if (parseInt(selectedDate)<=2007) {
+    //   alert("User age must be greater than or equal to 15")
+    // }    
+    else if( phone == ''){
+      alert("Please Enter Phone Number")
+    }
+      
+    else if (phone.length != 10 || !isNumeric(phone) ) {
+      alert("Phone must be 10 digit")
+    }     
+    else if (selectedSex===0) { 
+      alert("Please select gender")
+    }
+    else if (address=='') {
+      alert("Please enter address")
+    }   
+    else if (address.length > 250 || isContainsSpecialChars2(address)) {
+      alert("Please select province")
+    }
+    else if (selectedProvince=='') {
+      alert("Please select province")
+    }
+    else if (selectedDistrict=='') {
+      alert("Please select district")
+    }
+    else if (selectedSubDistrict=='') {
+      alert("Please select sub district")
+    }         
+    else if(selectedZipCode==''){
+      alert("Please Enter Zipcode")
+    }       
+    else if(selectedZipCode.length != 5 || !isNumeric(selectedZipCode) || hasWhiteSpace(selectedZipCode) || isContainsSpecialChars(selectedZipCode)){
+      alert("Zipcode must be 5 digit")
+    }
+    
+    else {      
+          const controller = new AbortController()
+          // 1 second timeout:
+          const timeoutId = setTimeout(() => controller.abort(), 1000)
+          const target =  "http://10.0.2.2:3000/register"
+          fetch(target,{
+          method:'post',
+          headers:{
+              'Content-Type': 'application/json'
+          },
+          signal:controller.signal,
+          body : JSON.stringify({
+            "username" : Username,
+            "password" : Password,
+            "fname" : firstname,
+            "lname" : lastname,
+            "phonenumber" : phone,
+            "birthdatem" : selectedMonth,
+            "birthdatey" : selectedDate,
+            "sex" : selectedSex,
+            "address" : address,
+            "province" : selectedProvince,
+            "district" : selectedDistrict,
+            "subdistrict" : selectedSubDistrict,
+            "postcode" : selectedZipCode,
+            "cart" :[]
+          })
+        })
+        .then(res=>res.json())
+        .then(data=>{console.log(data); alert("register success")})
+        .catch(error=>{alert("Cannot connect to server")
+        })
+    }
 
-    const controller = new AbortController()
-
-    // 1 second timeout:
-    const timeoutId = setTimeout(() => controller.abort(), 1000)
-    const target =  "http://10.0.2.2:3000/register"
-    fetch(target,{
-    method:'post',
-    headers:{
-        'Content-Type': 'application/json'
-    },
-    signal:controller.signal,
-    body : JSON.stringify({
-      "username" : Username,
-      "password" : Password,
-      "fname" : firstname,
-      "lname" : lastname,
-      "phonenumber" : phone,
-      "birthdatem" : selectedMonth,
-      "birthdatey" : selectedDate,
-      "sex" : selectedSex,
-      "address" : address,
-      "province" : selectedProvince,
-      "district" : selectedDistrict,
-      "subdistrict" : selectedSubDistrict,
-      "postcode" : selectedZipCode,
-      "cart" :[]
-    })
-  })
-  .then(res=>res.json())
-  .then(data=>{console.log(data)})
-  .catch(error=>{alert("Cannot connect to server")})
   }
 
   const getProvinceList = async() =>{
