@@ -246,6 +246,17 @@ app.get('/getPizza',async(req,res)=>{
   }
 })
 
+app.post('/removeMenu',async(req,res)=>{
+  try{
+    Menu.find({ "_id":req.body._id }).deleteOne().exec();
+    res.json("removed")
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+)
+
 app.post('/addToCart',async(req,res) =>{
     try{
       const user = await User.findOne({"_id":req.body._id})
