@@ -35,6 +35,14 @@ export const globalStyles = StyleSheet.create({
         width:40,
         height:25
     },
+    addIcon: {
+        width:25,
+        height:25
+    },
+    addImageIcon: {
+        width:25,
+        height:25,
+    },
     linearGradient: {
         flex: 1,
         flexDirection:'column',

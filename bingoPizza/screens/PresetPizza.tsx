@@ -13,11 +13,9 @@ import {
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-import { useFocusEffect } from '@react-navigation/native';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
-import { color } from 'react-native-reanimated';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
