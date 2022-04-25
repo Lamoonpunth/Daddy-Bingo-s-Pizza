@@ -302,7 +302,16 @@ app.get('/getAppetizer',async(req,res)=>{
     console.log(error)
   }
 })
-
+app.get('/getPasta',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"pasta"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 app.get('/getDrink',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"drink"})
@@ -313,7 +322,26 @@ app.get('/getDrink',async(req,res)=>{
     console.log(error)
   }
 })
-
+app.get('/getDessert',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"dessert"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+app.get('/getÀ la carte',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"À la carte"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 app.get('/getID',async(req,res)=>{
   try{
     const menu = await Menu.find({"_id":req.query.id})
