@@ -19,7 +19,10 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
-  
+  const [topping, onChangeTopping] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
+  ]);
+
   const [dough, onChangeDough] = React.useState([
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
@@ -40,14 +43,30 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
+  const [selectedTopping, setTopping] = React.useState('Hawaiian')
   const [selectedSize, setSize] = React.useState('Thick');
   const [selectedDough, setDough] = React.useState('Thick');
   const [selectedCrust, setCrust] = React.useState('None');
   const [selectedSauce, setSauce] = React.useState('Tomato-Based');
   const [selectedPackage, setPackage] = React.useState('Thick');
 
+  const onSelectedTopping = (type:any,item:any,index:any) =>{
+    setTopping(type);
+    const newArrData = topping.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeTopping(newArrData);
+  }
+
   const onSelectedSize = (type:any,item:any,index:any) =>{
-    setDough(type);
+    setSize(type);
     const newArrData = size.map((e, index) =>{
       if (item._id == e._id){
         return {
@@ -186,8 +205,47 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
           <View style={styles.cartContainer}>
             
             <View style={styles.detailBox}>
-              <Text style={styles.pizzaName}>Pizza Name</Text>
+              <Text style={styles.pizzaName}>{selectedTopping}</Text>
               <Text style={styles.pizzaDetail}>Details</Text>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <View style={styles.optionHeader}>
+                <Text style={styles.optionFont}>Topping</Text>
+              </View>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={topping}
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedTopping(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                          </Text>
+                        </View>
+                      </ImageBackground>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
             </View>
 
             <View style={styles.optionsBox}>
@@ -202,7 +260,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedSize(item.name,item,index)}>
+                    onPress={() => onSelectedSize(item.name,item,index)}
+                    key={item._id}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -240,7 +299,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedDough(item.name,item,index)}>
+                    onPress={() => onSelectedDough(item.name,item,index)}
+                    key={item._id}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -278,7 +338,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedCrust(item.name,item,index)}>
+                    onPress={() => onSelectedCrust(item.name,item,index)}
+                    key={item._id}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -316,7 +377,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedSauce(item.name,item,index)}>
+                    onPress={() => onSelectedSauce(item.name,item,index)}
+                    key={item._id}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -354,7 +416,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedPackage(item.name,item,index)}>
+                    onPress={() => onSelectedPackage(item.name,item,index)}
+                    key={item._id}>
                       <ImageBackground source={require('../constants/images/profile.jpg')} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -416,7 +479,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-around',
     width:screenWidth,
-    height:screenHeight*1.6,
+    height:screenHeight*1.8,
     backgroundColor:'#FFD1D1',
     elevation: 10,
   },
