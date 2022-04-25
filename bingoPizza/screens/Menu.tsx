@@ -83,14 +83,9 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
     }, [type,userid])
   );
 
-  // useEffect(()=>{
-  //   const unsubscribe = navigation.addListener('focus', () => {
-  //   getMenuList()
-  //   });
-  //   // Return the function to unsubscribe from the event so it gets removed on unmount
-  //   return unsubscribe;
-  //   },[navigation])
-
+  const onMake = () =>{
+    navigation.navigate('PresetPizza')
+  }
 
   return (
 
@@ -105,13 +100,17 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
           <View style={globalStyles.underline}></View>
         </View>
 
-            <View style={styles.cartContainer}>
-              <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
-                {renderMenuBox()}
-              </ScrollView>
-            </View>
-        
+        <View style={styles.cartContainer}>
+          <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
+            {renderMenuBox()}
+          </ScrollView>
+          {type=='Pizza'?
+            <TouchableOpacity style={styles.makeBox} onPress={onMake}>
+              <Text style={styles.makeFont}>Make your own</Text>
+            </TouchableOpacity>
+          :null}
         </View>
+      </View>
     </Gradient>
   );
 
@@ -243,4 +242,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#FF6D6D',
     borderRadius: 50,
   },
+  makeBox:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    width: screenWidth*0.4,
+    height: screenHeight * 0.05,
+    borderRadius: 10,
+    backgroundColor:'#FF6D7D',
+    marginBottom:10,
+    elevation: 12,
+  },
+  makeFont: {
+    fontSize:18,
+    color:'white',
+  }
 });

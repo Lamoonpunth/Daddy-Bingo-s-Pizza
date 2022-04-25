@@ -30,10 +30,7 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
       <Text style={styles.menuFont} >{title}</Text>
     </View>
   )
-  // const renderItem = ({item}:{item:any}) => (    
-  //   <Item title={item}/>
-  // );
-
+  
   const renderItem = ({ item }: { item: any }) => (
     <Item title={item.title} />
   );

@@ -29,9 +29,9 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     {}
   ]);
   const [recommend, onClickRec] = React.useState([
-    {menu:'Pizza1' ,key:'1'},
-    {menu:'Pizza2' ,key:'2'},
-    {menu:'Pizza3' ,key:'3'},
+    {key:1,name:'mexicangreenwave', img_path:'mexicangreenwave.png'},
+    {key:2,name:'pepperonipizza', img_path:'pepperonipizza.png'},
+    {key:3,name:'plaincheesepizza', img_path:'plaincheesepizza.png'},
   ]);
   const [category, onClickCate] = React.useState([
     {type:'Appetizer',key:'0',img_path:require('../assets/images/Category/Appetizer.jpg')},
@@ -59,17 +59,8 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickCategory= (type:any)=>{
-    if (type=='Pizza'){
-      navigation.navigate('Pizza',{type:type,userid:userid});
-    }
-    else{
-      navigation.navigate('Menu',{type:type,userid:userid});
-    }
+    navigation.navigate('Menu',{type:type,userid:userid});
   }
-
-  // useEffect(()=>{
-  // getMenuList
-  // },[])
 
   return (
     <Gradient>
@@ -109,7 +100,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
                 data={recommend}
                 renderItem={({item}) => (
                   <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={onClickRecommend}>
-                    <Image source={require('../assets/images/pooh.jpg')} style={styles.foodImage} />
+                    <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage} />
                   </TouchableOpacity>
                 )}
               /> 

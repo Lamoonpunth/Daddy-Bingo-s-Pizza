@@ -7,7 +7,7 @@ import OrderTab from "../screens/OrderTab";
 import { OrderDrawer } from "./OrderDrawer";
 import FoodCart from "../screens/FoodCart";
 import Menu from "../screens/Menu";
-import Pizza from "../screens/Pizza";
+import Profile from "../screens/Profile";
 import PresetPizza from "../screens/PresetPizza";
 import MoreTab from "../screens/MoreTab";
 import Subscription from "../screens/SubscriptionTab";
@@ -24,9 +24,9 @@ function HomeOrder(){
             <Order.Screen name='Home' component={OrderTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Cart' component={FoodCart} options={{swipeEnabled:false}}/>
             <Order.Screen name='Menu' component={Menu} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Profile' component={Profile} options={{swipeEnabled:false}}/>
             <Order.Screen name='More' component={MoreTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Sub' component={Subscription} options={{swipeEnabled:false}}/>
-            <Order.Screen name='Pizza' component={Pizza} options={{swipeEnabled:false}}/>
             <Order.Screen name='PresetPizza' component={PresetPizza} options={{swipeEnabled:false}}/>
             <Order.Screen name='OrderSummary' component={OrderSummary} options={{swipeEnabled:false}}/>
         </Order.Navigator>

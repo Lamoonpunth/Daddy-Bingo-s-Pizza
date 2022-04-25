@@ -14,8 +14,6 @@ import EditAddRecommend from '../screen/admin/edit/EditAddRecommend';
 import Menu from '../screen/admin/Menu';
 import EditAddMenu from '../screen/admin/edit/EditAddMenu';
 import EditMore from '../screen/admin/edit/EditMore';
-import EditPresetPizza from '../screen/admin/edit/EditPresetPizza';
-import EditPizza from '../screen/admin/edit/EditPizza';
 
 import TaskOrder from "../screen/chef/TaskOrder";
 import RiderTask from "../screen/rider/RiderTask";
@@ -38,8 +36,6 @@ function AdminNavigator() {
             <Drawer.Screen name='AddMenu' component={EditAddMenu} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='EditMore' component={EditMore} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Ingredients' component={EditIngredients} options={{swipeEnabled:false,}}/>
-            <Drawer.Screen name='Pizza' component={EditPizza} options={{swipeEnabled:false,}}/>
-            <Drawer.Screen name='PresetPizza' component={EditPresetPizza} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Log Out' component={LogIn}/>
         </Drawer.Navigator>
     )

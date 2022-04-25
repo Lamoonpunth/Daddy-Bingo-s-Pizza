@@ -32,7 +32,7 @@ export default function Profile({navigation}:{navigation:any}) {
         <View style={styles.header}>
           <View style={styles.iconContainer} >
             <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
-              <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
+              <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon} />
             </TouchableOpacity>
           </View>
           <Text style={globalStyles.fontHeader}>Your Profile</Text>
@@ -44,7 +44,7 @@ export default function Profile({navigation}:{navigation:any}) {
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Name</Text>
                 <TouchableOpacity >
-                  <Image source={require('../../../assets/images/edit.png')}/>  
+                  <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
               <Text></Text>
@@ -53,7 +53,7 @@ export default function Profile({navigation}:{navigation:any}) {
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Email</Text>
                 <TouchableOpacity >
-                  <Image source={require('../../../assets/images/edit.png')}/>  
+                  <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
             </View>
@@ -61,7 +61,7 @@ export default function Profile({navigation}:{navigation:any}) {
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Contact</Text>
                 <TouchableOpacity >
-                  <Image source={require('../../../assets/images/edit.png')}/>  
+                  <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
             </View>
@@ -69,7 +69,7 @@ export default function Profile({navigation}:{navigation:any}) {
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Address</Text>
                 <TouchableOpacity >
-                  <Image source={require('../../../assets/images/edit.png')}/>  
+                  <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
             </View>

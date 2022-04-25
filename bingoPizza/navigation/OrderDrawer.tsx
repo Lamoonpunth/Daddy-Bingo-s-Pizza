@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export function OrderDrawer({navigation}:{navigation:any},props:any){
 
     const onProfile = () => {
-        
+        navigation.navigate("Profile");
     }
 
     const onSubscription = () => {
@@ -20,10 +20,6 @@ export function OrderDrawer({navigation}:{navigation:any},props:any){
     }
 
     const onAddress = () => {
-        
-    }
-
-    const onSettings = () => {
         
     }
 
@@ -45,9 +41,6 @@ export function OrderDrawer({navigation}:{navigation:any},props:any){
             </TouchableOpacity>
             <TouchableOpacity onPress={onService}>
                 <Text style={styles.itemFont}>Service</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Text style={styles.itemFont}>Settings</Text>
             </TouchableOpacity>
             <TouchableOpacity>
                 <Text style={styles.itemFont} onPress={onLogOut}>Log Out</Text>

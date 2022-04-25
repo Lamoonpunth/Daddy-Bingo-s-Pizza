@@ -56,12 +56,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   }
 
   const onClickCategory= (type:any)=>{
-    if (type=='Pizza'){
-      navigation.navigate('Pizza');
-    }
-    else{
-      navigation.navigate('Menu',{type:type,userid:userid});
-    }
+    navigation.navigate('Menu',{type:type,userid:userid});
   }
 
   const onEditPromo = () =>{
