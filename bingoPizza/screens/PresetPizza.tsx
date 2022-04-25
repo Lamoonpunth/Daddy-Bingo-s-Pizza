@@ -18,6 +18,7 @@ import { globalStyles } from '../styles/globalStyles';
 
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
+  
   const [dough, onChangeDough] = React.useState([
     { type: 'Thick', icon: '1', price:50 , key: '1' },
     { type: 'Thin', icon: '2', price:40 , key: '2' },

@@ -5,6 +5,7 @@ require('./model/menu')
 require('./model/appetizer')
 require('./model/order')
 require('./model/recommend')
+require('./model/pizzaoption')
 require('dotenv').config()
 const express = require('express');
 const app = express();
@@ -29,6 +30,7 @@ const Menu = mongoose.model("menu")
 const Appetizer = mongoose.model("appetizer")
 const Order = mongoose.model("order")
 const Recommend = mongoose.model("recommend")
+const Pizzaoption = mongoose.model("pizzaoption")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -173,24 +175,110 @@ app.post('/addmenu',async(req,res) =>{
   }
 })
 
-app.post('/addappetizer',async(req,res) =>{
+//addpizzaoption
+app.post('/addpizzaoption',async(req,res) =>{
   try{
     //img_path from upload single
-    const {name,price,ingr_need,description,img_path} = req.body;
-    const appetizer = await Appetizer.create({
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.create({
       name:name,
+      type:type,
       price:price,
-      ingr_need:ingr_need,
-      description:description,
-      img_path:img_path
+      img_path:img_path,
+      extra:extra
     })
-    res.json(appetizer)
+    res.json(pizzaoption)
   }
-
   catch(err){
     console.log(err)
   }
 })
+
+//getsize
+app.get('/getSize',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.find({type:"Size"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getDough',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.find({type:"Dough"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getCrust',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.find({type:"Crust"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getSauce',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.find({type:"Sauce"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getPackage',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.find({type:"Package"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+//addpresetpizza
+app.post('/addpizza',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,img_path,size,dough,crust,sauce,package} = req.body;
+    const menu = await Menu.create({
+      name:name,
+      type:"PresetPizza",
+      price:null,
+      ingr_need:null,
+      description:null,
+      img_path:img_path,
+      size: size,
+      dough: dough,
+      crust: crust,
+      sauce: sauce,
+      package: package      
+    })
+    res.json(menu)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
 
 
 app.get('/getmenu',async(req,res)=>{

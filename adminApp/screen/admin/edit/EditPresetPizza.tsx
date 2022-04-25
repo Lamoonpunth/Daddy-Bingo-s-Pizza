@@ -8,10 +8,9 @@ import {
   FlatList, 
   Dimensions,  
   TouchableOpacity } from 'react-native'
-
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-
+import { useFocusEffect } from '@react-navigation/native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Gradient from '../../../styles/Gradient';
 import { globalStyles } from '../../../styles/globalStyles';
@@ -19,26 +18,26 @@ import { globalStyles } from '../../../styles/globalStyles';
 export default function EditPresetPizza({navigation,route}: {navigation:any,route:any}) {
 
   const [dough, onChangeDough] = React.useState([
-    { type: 'Thick', icon: '1', price:50 , key: '1' },
-    { type: 'Thin', icon: '2', price:40 , key: '2' },
+    { name: '', icon: '', price:0 , _id: 0 }
   ]);
 
   const [crust, onChangeCrust] = React.useState([
-    { type: 'None', icon: '3', price:0 , key: '1' },
-    { type: 'Sausage', icon: '4', price:30 , key: '2' },
-    { type: 'Cheese', icon: '5', price:60 , key: '3' },
+    { name: '', icon: '', price:0 , _id: 0 }
   ]);
 
   const [sauce, onChangeSauce] = React.useState([
-    { type: 'Tomato-Based', icon: '6', price:50 , key: '1' },
-    { type: 'Pesto', icon: '7', price:60 , key: '2' },
-    { type: 'BBQ', icon: '8', price:50 , key: '3' },
+    { name: '', icon: '', price:0 , _id: 0 }
   ]);
 
   const [pack, onChangePackage] = React.useState([
-    { type: 'Thick', icon: '1', price:50 , key: '1' },
-    { type: 'Thin', icon: '2', price:40 , key: '2' },
+    { name: '', icon: '', price:0 , _id: 0 }
   ]);
+
+  
+
+
+
+
 
   /*********************** checkbox state ******************************* */
   const [xsstate, setXSState] = React.useState(false);
@@ -123,6 +122,53 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
   const addToCart = () =>{
     
   }
+  
+
+  const getSize = () =>{
+    
+  }
+
+  const getDough = () =>{
+    fetch("http://10.0.2.2:3000/getDough")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeDough(json)})
+  }
+  const getCrust = () =>{
+    fetch("http://10.0.2.2:3000/getCrust")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeCrust(json)})
+  }
+  const getSauce = () =>{
+    fetch("http://10.0.2.2:3000/getSauce")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeSauce(json)})
+  }
+  const getPackage = () =>{
+    fetch("http://10.0.2.2:3000/getPackage")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangePackage(json)})
+  }
+  const renderall = () =>{
+    getSize()
+    getDough()
+    getCrust()
+    getSauce()
+    getPackage()
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+        renderall()
+      //checkItemInCart()
+    }, [])
+  );
+  
+
+
 
   return (
     <Gradient>
@@ -248,8 +294,8 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
                   horizontal={true}
                   data={dough}
                   renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedDough}>
-                      <Text>{item.type}</Text>
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedDough} key={item._id}>
+                      <Text>{item.name}</Text>
                     </TouchableOpacity>
                   )}
                 />
@@ -266,8 +312,8 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
                   showsHorizontalScrollIndicator={false}
                   data={crust}
                   renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedCrust}>
-                      <Text>{item.type}</Text>
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedCrust} key={item._id}>
+                      <Text>{item.name}</Text>
                     </TouchableOpacity>
                   )}
                 />
@@ -284,8 +330,8 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
                   showsHorizontalScrollIndicator={false}
                   data={sauce}
                   renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedSauce}>
-                      <Text>{item.type}</Text>
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedSauce} key={item._id}>
+                      <Text>{item.name}</Text>
                     </TouchableOpacity>
                   )}
                 />
@@ -302,8 +348,8 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
                   showsHorizontalScrollIndicator={false}
                   data={pack}
                   renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedPackage}>
-                      <Text>{item.type}</Text>
+                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedPackage} key={item._id}>
+                      <Text>{item.name}</Text>
                     </TouchableOpacity>
                   )}
                 />
