@@ -31,9 +31,14 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     {num:'Order4' ,key:'8'},
     
   ]);
-  
-    const onCheckOut = () => {
-      alert('จะกินมั้ย กินก็จ่าย');
+    const onReject = () => {
+     navigation.navigate('TaskDeny')
+    }
+    const onAccept = () => {
+      navigation.navigate('TaskPrepare')
+     }
+    const onLogOut = () => {
+      navigation.navigate('Log Out')
     }
     const onClickAdminIcon = () =>{
       navigation.openDrawer();
@@ -61,7 +66,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
 
             <View style={styles.TaskTrack}>
               <View style={styles.flatContainer}>
-                <FlatList   
+                <FlatList
                   numColumns={1}
                   data={Task}
                   renderItem={({item}) => (
@@ -69,10 +74,10 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                       <Text style={styles.taskFont}>{item.num}</Text>
                       <View style ={styles.bottontoleftside}>  
                         <View style = {styles.forrowview}>
-                          <TouchableOpacity style={styles.ac_rjbox} onPress={onCheckOut}>
+                          <TouchableOpacity style={styles.ac_rjbox} onPress={onReject}>
                             <Text style={styles.normalFont}>reject</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity style={styles.acbox} onPress={onCheckOut}>
+                          <TouchableOpacity style={styles.acbox} onPress={onAccept}>
                             <Text style={styles.normalFont}>accept</Text>
                           </TouchableOpacity>
                         </View>
@@ -84,7 +89,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                 
             </View>
 
-            <TouchableOpacity style={styles.LogoutBox} onPress={onCheckOut}>
+            <TouchableOpacity style={styles.LogoutBox} onPress={onLogOut}>
               <Text style={styles.checkoutFont}>Log out</Text>
             </TouchableOpacity>
 

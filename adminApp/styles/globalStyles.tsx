@@ -24,6 +24,7 @@ export const globalStyles = StyleSheet.create({
         borderRadius: 30,
         backgroundColor: 'white',
         elevation: 12,
+        
     },
     underline: {
         backgroundColor:'white',

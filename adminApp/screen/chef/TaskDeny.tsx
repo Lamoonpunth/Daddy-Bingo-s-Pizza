@@ -25,8 +25,8 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
   const UselessTextInputMultiline = () => {
     const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
   }
-  const onCheckOut = () => {
-    alert('จะกินมั้ย กินก็จ่าย');
+  const onSend = () => {
+    navigation.navigate('TaskOrder')
   }
   const onClickAdminIcon = () => {
     navigation.openDrawer();
@@ -62,7 +62,7 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.Sendbox} onPress={onCheckOut}>
+        <TouchableOpacity style={styles.Sendbox} onPress={onSend}>
           <Text style={styles.checkoutFont}>Send</Text>
         </TouchableOpacity>
 
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: screenWidth * .89,
-    borderWidth: 1,
+   // borderWidth: 1,
     height: screenHeight * .3,
 
     backgroundColor: '#fff',
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   Ingredient: {
     marginVertical: 4,
     borderRadius: 20,
-    borderWidth: 2,
+   // borderWidth: 2,
     borderColor: 'gray',
     backgroundColor: 'white',
     width: screenWidth * 0.85,
@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     width: screenWidth * 0.85,
     height: screenHeight * 0.28,
     margin: 1,
-    borderWidth: 1,
+   // borderWidth: 1,
     padding: 10,
   },
   normalFont: {
