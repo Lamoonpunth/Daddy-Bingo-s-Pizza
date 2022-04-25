@@ -11,6 +11,15 @@ const UserSchema = new mongoose.Schema({
     adr_lat : {type:String, default: null},
     adr_lon  : {type:String, default: null},
     adr_dis : {type:Number, default: null},
+    bill_img : {type:String , default: null},
+    user_fname : {type:String , default:null},
+    user_lname : {type:String ,default: null},
+    price : {type:Number , default : null},
+    province : {type:String , default :null},
+    district : {type:String , default :null},
+    subdistrict : {type:String , default :null},
+    postcode : {type:String , default :null},
+
 });
 
 mongoose.model('order', UserSchema);

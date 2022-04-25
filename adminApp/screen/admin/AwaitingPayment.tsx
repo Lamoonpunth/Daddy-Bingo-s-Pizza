@@ -31,11 +31,21 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
     {customer_id:4, order_time:12.58, customer_fname:'โอ๊ต', customer_lname:'กระโดดยาง', payment: 1500, transaction:'incomplete', },
     {customer_id:5, order_time:13.11, customer_fname:'โอ', customer_lname:'เยอรมัน', payment: 1500, transaction:'complete', },
   ])
-
   const onClickInfo = (item:any) =>{
     navigation.navigate('PaymentInfo',{payment:item})
   }
 
+  const getWaitforpayment = () =>{
+      fetch('http://10.0.2.2:3000/getwaitingforpayment')
+        .then(response => response.json())
+        .then(order => {onChangeAwaiting(order)})
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getWaitforpayment()
+    }, [])
+  );
   return (
 
     <Gradient>
@@ -56,13 +66,13 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
           <FlatList
             data={awaitingPayment}
             renderItem={({item}) => (
-              <TouchableOpacity key={item.customer_id} style={styles.touch} onPress={() => onClickInfo(item)}>
+              <TouchableOpacity key={item.user_id} style={styles.touch} onPress={() => onClickInfo(item)}>
                 <ImageBackground style={styles.awaiting} imageStyle={{borderRadius:30, opacity:0.25}} source={require('../../assets/images/Category/Pizza.jpg')}>
                   <View style={styles.customerDetail}>
-                    <Text style={styles.detailFont}>{item.customer_id}.{item.customer_fname} {item.customer_lname}</Text>
+                    <Text style={styles.detailFont}>{}{item.user_fname}{item.user_lname}</Text>
                   </View>
                   <View style={styles.checkPayment}>
-                    <Text style={styles.detailFont}>{item.payment} Baht</Text>
+                    <Text style={styles.detailFont}>{item.price} Baht</Text>
                     
                     {item.transaction == 'complete'?
                       <View style={styles.status}>

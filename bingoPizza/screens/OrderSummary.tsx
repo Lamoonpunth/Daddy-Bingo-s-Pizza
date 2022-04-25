@@ -35,7 +35,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
     const [shipping, setShipping] = React.useState('Nan');
     const [discount, setDiscount] = React.useState('Nan');
     const [total, setTotal] = React.useState(0);
-
+    const [user,setUser] = React.useState();
 
     const onClickBack = () =>{
         navigation.goBack();
@@ -61,7 +61,14 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
             headers:{'Content-Type': 'application/json'},
             body:JSON.stringify({
             userid:userid,
-            cart:rawCart
+            cart:rawCart,
+            user_fname:user.fname,
+            user_lname:user.lname,
+            price:total,
+            province:user.province,
+            district:user.district,
+            subdistrict:user.subdistrict,
+            postcode:user.postcode
             })
         })
         .then(response => response.json())
@@ -98,16 +105,23 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
         console.log(sum)
         setTotal(sum)
     }
-
+    const getUser = () =>{
+        fetch("http://10.0.2.2:3000/getuserdata?_id="+userid)
+        .then(response => response.json())
+        .then(userdata => setUser(userdata))
+    }
     useFocusEffect(
         React.useCallback(() => {
+            getUser()
             getRawCart()
+            console.log(user)
         }, [])
       );
 
     useFocusEffect(
         React.useCallback(() => {
             setSum()
+            getUser()
         }, [cart])
       );
     return (
