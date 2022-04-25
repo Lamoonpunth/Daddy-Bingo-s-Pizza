@@ -11,7 +11,9 @@ export const globalStyles = StyleSheet.create({
         color:'white',
     },
     fontNormal:{
-        fontSize: 18
+        fontSize: 22,
+        fontWeight:'900',
+        color:'black'
     },
     fontLogIn:{
         fontSize: 12,
@@ -27,12 +29,20 @@ export const globalStyles = StyleSheet.create({
         backgroundColor:'white',
         width: width*0.6,
         height: 2.5,
-        marginTop:10,
+        marginTop:5,
         borderRadius:50,
         elevation: 50
     },
     backIcon: {
         width:40,
+        height:25
+    },
+    addIcon: {
+        width:25,
+        height:25
+    },
+    addImageIcon: {
+        width:25,
         height:25
     },
     linearGradient: {

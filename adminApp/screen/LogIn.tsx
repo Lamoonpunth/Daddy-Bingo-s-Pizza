@@ -83,7 +83,7 @@ export default function LogIn({navigation}: {navigation: any}) {
             }
             else
             {
-              navigation.navigate('Admin');
+              navigation.navigate('Admin', {screen:'Home', params:{userid:data}});
             }
           }).catch(error=>alert(error))
           }

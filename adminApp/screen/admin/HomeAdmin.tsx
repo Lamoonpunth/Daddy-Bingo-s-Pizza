@@ -18,7 +18,7 @@ const screenHeight = Dimensions.get('screen').height;
 
 export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
   
-  //const {userid} = route.params;
+  const {userid} = route.params;
   const [userType, onChangeUserType] = React.useState('Delivery');
   /*ตัวเลือกของswitch selector*/ 
 
@@ -26,9 +26,9 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     {}
   ]);
   const [recommend, onClickRec] = React.useState([
-    {menu:'Pizza1' ,key:'1'},
-    {menu:'Pizza2' ,key:'2'},
-    {menu:'Pizza3' ,key:'3'},
+    {menu:'Pizza1' ,key:'1',img_path:require('../../assets/images/Category/Appetizer.jpg')},
+    {menu:'Pizza2' ,key:'2',img_path:require('../../assets/images/Category/Appetizer.jpg')},
+    {menu:'Pizza3' ,key:'3',img_path:require('../../assets/images/Category/Appetizer.jpg')},
   ]);
   const [category, onClickCate] = React.useState([
     {type:'Appetizer',key:'0',img_path:require('../../assets/images/Category/Appetizer.jpg')},
@@ -60,8 +60,12 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
       navigation.navigate('Pizza');
     }
     else{
-      //navigation.navigate('Menu',{type:type,userid:userid});
+      navigation.navigate('Menu',{type:type,userid:userid});
     }
+  }
+
+  const onEditPromo = () =>{
+
   }
 
   // useEffect(()=>{
@@ -81,7 +85,8 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
         </View>
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
-            <TouchableOpacity style={styles.promoBox}>
+            <TouchableOpacity style={styles.promoBox} onPress={onEditPromo}>
+
             </TouchableOpacity>
           </View>
           <View style={styles.recommendcontainer}>
@@ -91,7 +96,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
               </Text>
               <TouchableOpacity>
                 <Text style={{fontSize:18, color:'#343434'}}>
-                  See All
+                  Edit
                 </Text>
               </TouchableOpacity>
             </View>
@@ -102,18 +107,19 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
                 style={{width:screenWidth}}
                 data={recommend}
                 renderItem={({item}) => (
-                  <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={onClickRecommend}>
+                  <TouchableOpacity style={styles.menuIcon} onPress={onClickRecommend}>
                     <Image source={require('../../assets/images/pooh.jpg')} style={styles.foodImage} />
                   </TouchableOpacity>
                 )}
-              /> 
+              />
+              
             </View>
           </View>
           <View style={styles.textBox2}>
             <Text style={globalStyles.fontNormal}>
               Categories
             </Text>
-          </View> 
+          </View>
           <ScrollView horizontal={true}>
             <FlatList
               style={{width:screenWidth}}
@@ -163,7 +169,7 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     //borderWidth:1,
     width:screenWidth*0.85,
-    height:screenWidth*0.075,
+    height:screenWidth*0.125,
     backgroundColor:'transparent',
   },
   userIcon: {
