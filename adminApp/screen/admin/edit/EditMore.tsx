@@ -37,7 +37,16 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
     }
 
     const onRemove = () =>{
-        
+        console.log(item)
+        fetch("http://10.0.2.2:3000/removeMenu",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                _id: item._id
+            })
+        })
+        .then(response => response.json())
+        .then(json=> {console.log(json)})
     }
 
     useFocusEffect(
@@ -71,11 +80,11 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
                     </View>
                     <View style={styles.selected}>
                         {edit == ''?
-                        <TouchableOpacity style={styles.remove} onPress={onUpdate} disabled={true}>
+                        <TouchableOpacity style={styles.remove} onPress={onRemove}>
                             <Text style={styles.removeFont}>Remove this menu</Text> 
                         </TouchableOpacity>
                         :
-                        <TouchableOpacity style={styles.addtocart} onPress={onRemove}>
+                        <TouchableOpacity style={styles.addtocart} onPress={onUpdate}>
                            <Text style={styles.addFont}>Update menu</Text> 
                         </TouchableOpacity>
                         }

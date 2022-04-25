@@ -262,13 +262,24 @@ app.post('/removemenu',async(req,res)=>{
 
 app.post('/addrecommend',async(req,res)=> {
   try{
-    const reccomend = await Recommend.create({menuid:req.body.menuid})
-    reccomend.save()
-    res.json(reccomend)
+    const recommend = await Recommend.create({menuid:req.body.menuid})
+    recommend.save()
+    res.json(recommend)
   }
   catch(error){
     console.log(error)
     res.json(error)
+  }
+})
+
+app.get('/getrecommend',async(req,res)=>{
+  try{
+    const recommend = await Recommend.find({})
+    console.log("getmenu")
+    res.json(recommend)
+  }
+  catch(error){
+    console.log(error)
   }
 })
 
