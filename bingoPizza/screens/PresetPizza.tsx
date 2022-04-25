@@ -13,7 +13,7 @@ import {
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-
+import { useFocusEffect } from '@react-navigation/native';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
@@ -138,7 +138,50 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const addToCart = () =>{
     
   }
+  const getSize = () =>{
+    fetch("http://10.0.2.2:3000/getSize")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeSize(json)})
+  }
+  const getDough = () =>{
+    fetch("http://10.0.2.2:3000/getDough")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeDough(json)})
+  }
+  const getCrust = () =>{
+    fetch("http://10.0.2.2:3000/getCrust")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeCrust(json)})
+  }
+  const getSauce = () =>{
+    fetch("http://10.0.2.2:3000/getSauce")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeSauce(json)})
+  }
+  const getPackage = () =>{
+    fetch("http://10.0.2.2:3000/getPackage")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangePackage(json)})
+  }
+  const renderall = () =>{
+    getSize()
+    getDough()
+    getCrust()
+    getSauce()
+    getPackage()
+  }
 
+  useFocusEffect(
+    React.useCallback(() => {
+        renderall()
+      //checkItemInCart()
+    }, [])
+  );
   return (
     <Gradient>
       <View style={styles.container}>
@@ -185,7 +228,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -223,7 +266,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -261,7 +304,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -299,7 +342,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -337,7 +380,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.type}
+                            {item.name}
                           </Text>
                         </View>
                       </ImageBackground>
