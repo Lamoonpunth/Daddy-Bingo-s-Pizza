@@ -21,6 +21,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
     }
 
     const [image, setImage] = useState(null);
+    const [isUpload , setIsUpload] = React.useState(false);
 
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -40,6 +41,13 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
 
     const {price} = route.params;
     console.log(price)
+
+    useEffect(() => {
+        if (isUpload){
+            navigation.navigate('OrderAwait');
+        }
+    });
+
     return (
         <Gradient>
             <View style={styles.container}>
@@ -55,9 +63,9 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                     <Text style={styles.insertFont}>Insert transaction</Text>
                     <View style={styles.upload}>
                         <TouchableOpacity style={styles.insertButton} onPress={pickImage}>
-                            <Text>Upload</Text>
+                            <Text style={styles.uploadFont}>Upload</Text>
                         </TouchableOpacity>   
-                        <Text>Image name</Text> 
+                        <Text style={styles.imageNameFont}>Image name</Text> 
                     </View>
                     
                 </View>
@@ -121,5 +129,13 @@ const styles = StyleSheet.create({
         width: width*0.2,
         backgroundColor:'#FF6D6D',
         borderRadius:10,
-    }
+    },
+    uploadFont: {
+        fontSize:14,
+        color:'white',
+    },
+    imageNameFont: {
+        fontSize:16,
+        color:'black',
+    },
 })

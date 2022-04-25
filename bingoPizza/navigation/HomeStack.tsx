@@ -14,6 +14,7 @@ import MoreTab from "../screens/MoreTab";
 import Subscription from "../screens/SubscriptionTab";
 import SubscriptionSummary from "../screens/SubscriptionSummary";
 import Transaction from "../screens/Transaction";
+import OrderAwait from "../screens/OrderAwait";
 import OrderSummary from "../screens/OrderSummary";
 
 import 'react-native-gesture-handler';
@@ -35,6 +36,7 @@ function HomeOrder(){
             <Order.Screen name='PresetPizza' component={PresetPizza} options={{swipeEnabled:false}}/>
             <Order.Screen name='OrderSummary' component={OrderSummary} options={{swipeEnabled:false}}/>
             <Order.Screen name='Transaction' component={Transaction} options={{swipeEnabled:false}}/>
+            <Order.Screen name='OrderAwait' component={OrderAwait} options={{swipeEnabled:false}}/>
         </Order.Navigator>
     )
 };
