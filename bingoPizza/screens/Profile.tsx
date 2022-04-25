@@ -3,7 +3,6 @@ import { StyleSheet,
     Text,
     View,
     Image,
-    Alert,
     TextInput,
     Dimensions,
     ScrollView,
@@ -13,11 +12,10 @@ import { StyleSheet,
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-import Gradient from '../../../styles/Gradient';
-import { globalStyles } from '../../../styles/globalStyles';
-import Dialog from "react-native-dialog";
+import Gradient from '../styles/Gradient';
+import { globalStyles } from '../styles/globalStyles';
 
-export default function EditProfile({navigation}:{navigation:any}) {
+export default function Profile({navigation}:{navigation:any}) {
 
   const [name, onChangeName] = React.useState('Default');
   const [email, onChangeEmail] = React.useState('Default');
@@ -28,17 +26,13 @@ export default function EditProfile({navigation}:{navigation:any}) {
     navigation.goBack();
   }
 
-  const onSave = () =>{
-    
-  }
-
   return (
     <Gradient>
       <View style={styles.container}>
         <View style={styles.header}>
           <View style={styles.iconContainer} >
             <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
-              <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
+              <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon} />
             </TouchableOpacity>
           </View>
           <Text style={globalStyles.fontHeader}>Your Profile</Text>
@@ -49,49 +43,35 @@ export default function EditProfile({navigation}:{navigation:any}) {
             <View style={styles.box1}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Name</Text>
-                <View>
-                  <Image source={require('../../../assets/images/edit.png')}/>  
-                </View>
+                <TouchableOpacity >
+                  <Image source={require('../assets/images/edit.png')}/>  
+                </TouchableOpacity>
               </View>
-              <TextInput 
-                style={styles.detailFont}
-                placeholder={name}
-                value={name}
-                onChangeText={onChangeName}
-              />
+              <Text></Text>
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Email</Text>
-                <View >
-                  <Image source={require('../../../assets/images/edit.png')}/>  
-                </View>
+                <TouchableOpacity >
+                  <Image source={require('../assets/images/edit.png')}/>  
+                </TouchableOpacity>
               </View>
-              <TextInput 
-                style={styles.detailFont}
-                placeholder={email}
-                value={email}
-                onChangeText={onChangeEmail}
-              />
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Contact</Text>
-                <View >
-                  <Image source={require('../../../assets/images/edit.png')}/>  
-                </View>
+                <TouchableOpacity >
+                  <Image source={require('../assets/images/edit.png')}/>  
+                </TouchableOpacity>
               </View>
-              <TextInput 
-                style={styles.detailFont}
-                placeholder={contact}
-                value={contact}
-                onChangeText={onChangeContact}
-              />
             </View>
-            <View style={styles.saveBox}>
-              <TouchableOpacity style={styles.save} onPress={onSave}>
-                <Text style={styles.saveFont}>Save</Text>
-              </TouchableOpacity>
+            <View style={styles.box2}>
+              <View style={styles.topicBox}>
+                <Text style={styles.topicFont}>Address</Text>
+                <TouchableOpacity >
+                  <Image source={require('../assets/images/edit.png')}/>  
+                </TouchableOpacity>
+              </View>
             </View>
           </ScrollView>
         </View>
@@ -122,7 +102,6 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     borderColor: 'rgba(0,0,0,0.2)',
     alignItems: 'center',
-    justifyContent:'center',
     paddingVertical:30,
     width: screenWidth * .9,
     height: screenHeight * .7,
@@ -153,41 +132,17 @@ const styles = StyleSheet.create({
     fontSize:20,
     color:'white'
   },
-  detailFont: {
-    textAlign:'left',
-    fontSize:18,
-    color:'white',
-    width: screenWidth * .7,
-    height: 50,
-  },
   editButton: {
     width:50,
     height:50,
   },
-  saveBox: {
-    flexDirection:'row',
+  box2: {
+    flexDirection:'column',
     alignItems:'center',
-    justifyContent:'flex-end',
     width: screenWidth * .8,
     marginVertical:10,
-    paddingHorizontal:20,
-    height: 100,
-    backgroundColor:'transparent',
-    borderRadius:10,
-  },
-  save: {
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
-    width: screenWidth * .3,
-    marginVertical:10,
-    height: 50,
+    height: 200,
     backgroundColor:'#FF6D6D',
     borderRadius:10,
-    elevation:10
-  },
-  saveFont: {
-    fontSize:18,
-    color:'white',
   }
 });

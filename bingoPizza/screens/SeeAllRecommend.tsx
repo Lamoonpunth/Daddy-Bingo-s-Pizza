@@ -17,12 +17,13 @@ import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 import { color } from 'react-native-reanimated';
 
-export default function Pizza({navigation,route}: {navigation:any,route:any}) {
-
-  const [pizza,setPizza] = React.useState([
-    {key:1,name:'mexicangreenwave',size:'M',dough:'Thick',crust:'None',sauce:'Tomato-Based',package:'Normal',img_path:'mexicangreenwave.png'},
-    {key:2,name:'pepperonipizza',size:'L',dough:'Thin',crust:'Sausage',sauce:'BBQ',package:'Normal',img_path:'pepperonipizza.png'},
-    {key:3,name:'plaincheesepizza',size:'S',dough:'Thick',crust:'None',sauce:'Tomato-Based',package:'Normal',img_path:'plaincheesepizza.png'},
+export default function SeeAllRecommend({navigation,route}: {navigation:any,route:any}) {
+  
+  const { userid } = route.params;
+  const [recommend,setRecommend] = React.useState([
+    {key:1,name:'mexicangreenwave', img_path:'mexicangreenwave.png'},
+    {key:2,name:'pepperonipizza', img_path:'pepperonipizza.png'},
+    {key:3,name:'plaincheesepizza', img_path:'plaincheesepizza.png'},
   ]);
 
   const onSelected = () =>{
@@ -33,8 +34,8 @@ export default function Pizza({navigation,route}: {navigation:any,route:any}) {
     navigation.goBack()
   }
 
-  const onMake = () =>{
-    navigation.navigate('PresetPizza')
+  const onMoreButton = () => {
+    //navigation.navigate('More');
   }
 
   return (
@@ -42,31 +43,33 @@ export default function Pizza({navigation,route}: {navigation:any,route:any}) {
       <View style={styles.container}>
 
         <View style={styles.header}>
-            <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
-                <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
-            </TouchableOpacity>
-            <Text style={globalStyles.fontHeader}>Pizza</Text>
+            <View style={styles.iconContainer} >
+                <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
+                  <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon} />
+                </TouchableOpacity>
+            </View>
+            <Text style={globalStyles.fontHeader}>Recommend</Text>
             <View style={globalStyles.underline}></View>  
         </View>
 
         <View style={styles.cartContainer}>
           <FlatList
-            data={pizza}
+            data={recommend}
             renderItem={({item}) => (
-              <TouchableOpacity style={styles.menu} key={item.key} onPress={onSelected}>
+              <View style={styles.menu} key={item.key}>
                   <View style={styles.boxImage}>
                     <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
                   </View>
                   <View style={styles.boxDetails}>
                     <Text style={styles.pizzaFont}>{item.name}</Text>
                     <Text style={styles.pizzaFont}>5000</Text>
+                    <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton()}>
+                      <Text style={{ fontSize: 18, color: '#FF6D7D' }}>More</Text>
+                    </TouchableOpacity>
                   </View>
-              </TouchableOpacity>
+              </View>
               )}
           />
-          <TouchableOpacity style={styles.makeBox} onPress={onMake}>
-              <Text style={styles.makeFont}>Make your own</Text>
-          </TouchableOpacity>
         </View>
 
         
@@ -90,7 +93,8 @@ const styles = StyleSheet.create({
   iconContainer: {
     width:screenWidth*0.9,
     flexDirection:'row',
-    alignItems:'flex-start'
+    alignItems:'center',
+    justifyContent:'space-between',
   },
   cartContainer: {
     padding:20,
@@ -144,12 +148,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 4,
   },
-  buttonBox:{
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'center',
+  remove:{
+    flexDirection:'row-reverse',
     width: screenHeight*0.2,
-    height: screenHeight * 0.05,
+    height: 50,
+    padding: 10,
   },
   addBox:{
     flexDirection:'column',
@@ -161,19 +164,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 12,
   },
-  makeBox:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
-    width: screenWidth*0.4,
+  moreBox: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: screenHeight * 0.1,
     height: screenHeight * 0.05,
     borderRadius: 10,
-    backgroundColor:'#FF6D7D',
-    marginTop:10,
+    backgroundColor: 'white',
     elevation: 12,
   },
-  makeFont: {
-    fontSize:18,
-    color:'white',
-  }
 });

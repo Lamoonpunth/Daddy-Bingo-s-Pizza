@@ -7,33 +7,32 @@ import {View,
     Dimensions,
     ImageBackground,
     } from 'react-native';
+import {DrawerContentScrollView,
+    DrawerItem,
+    } from '@react-navigation/drawer';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export function OrderDrawer({navigation}:{navigation:any},props:any){
+export function DrawerMenu({navigation}:{navigation:any},props:any){
 
     const onProfile = () => {
-        navigation.navigate("Profile");
-    }
-
-    const onSubscription = () => {
-        navigation.navigate("Sub");
+        navigation.navigate('Profile')
     }
 
     const onService = () => {
-        
+        navigation.navigate('Service')
     }
 
-    const onAddress = () => {
-        
+    const onIngredients = () => {
+        navigation.navigate('Ingredients')
     }
 
     const onLogOut = () => {
         Alert.alert(
             "Are you sure?",
-            "",
+            "Have a good day sir.",
             [
               {
                 text: "Cancel",
@@ -43,35 +42,31 @@ export function OrderDrawer({navigation}:{navigation:any},props:any){
               { text: "Log Out", onPress: () => navigation.pop()}
             ]
           ); 
+        //
     }
     
     return(
         <View style={styles.menuContainer}>
-            <ImageBackground style={styles.profile} source={require('../constants/images/profile.jpg')}>
+            <ImageBackground style={styles.profile} source={require('../assets/images/ricardo.jpg')}>
             </ImageBackground>
             <View style={styles.optionsBox}>
                 <TouchableOpacity onPress={onProfile} style={styles.option}>
                     <Image source={require('../assets/images/user_icon.png')} style={styles.optionImage}/>
                     <Text style={styles.itemFont}>Profile</Text>    
                 </TouchableOpacity>
-                <TouchableOpacity onPress={onSubscription} style={styles.option}>
-                    <Image source={require('../assets/images/subscription.png')} style={styles.optionImage}/>
-                    <Text style={styles.itemFont}>Subscription</Text>    
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onAddress} style={styles.option}>
-                    <Image source={require('../assets/images/address_icon.png')} style={styles.optionImage}/>
-                    <Text style={styles.itemFont}>Address</Text>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={onService} style={styles.option}>
                     <Image source={require('../assets/images/service.png')} style={styles.optionImage}/>
                     <Text style={styles.itemFont}>Service</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.option} onPress={onLogOut}>
+                <TouchableOpacity onPress={onIngredients} style={styles.option}>
+                    <Image source={require('../assets/images/ingredients.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Ingredients</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.option}>
                     <Image source={require('../assets/images/logout.png')} style={styles.optionImage}/>
-                    <Text style={styles.itemFont}>Log Out</Text>
-                </TouchableOpacity>    
+                    <Text style={styles.itemFont} onPress={onLogOut}>Log Out</Text>
+                </TouchableOpacity>
             </View>
-            
         </View>
     );
 }

@@ -4,6 +4,8 @@ require('./model/user-admin')
 require('./model/menu')
 require('./model/appetizer')
 require('./model/order')
+require('./model/recommend')
+require('./model/pizzaoption')
 require('dotenv').config()
 const express = require('express');
 const app = express();
@@ -27,6 +29,8 @@ const Admin= mongoose.model("user-admin")
 const Menu = mongoose.model("menu")
 const Appetizer = mongoose.model("appetizer")
 const Order = mongoose.model("order")
+const Recommend = mongoose.model("recommend")
+const Pizzaoption = mongoose.model("pizzaoption")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -171,24 +175,110 @@ app.post('/addmenu',async(req,res) =>{
   }
 })
 
-app.post('/addappetizer',async(req,res) =>{
+//addpizzaoption
+app.post('/addpizzaoption',async(req,res) =>{
   try{
     //img_path from upload single
-    const {name,price,ingr_need,description,img_path} = req.body;
-    const appetizer = await Appetizer.create({
+    const {name,type,price,img_path,extra} = req.body;
+    const pizzaoption = await Pizzaoption.create({
       name:name,
+      type:type,
       price:price,
-      ingr_need:ingr_need,
-      description:description,
-      img_path:img_path
+      img_path:img_path,
+      extra:extra
     })
-    res.json(appetizer)
+    res.json(pizzaoption)
   }
-
   catch(err){
     console.log(err)
   }
 })
+
+app.get('/getTopping',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Topping"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getSize',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Size"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getDough',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Dough"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getCrust',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Crust"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getSauce',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Sauce"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.get('/getPackage',async(req,res) =>{
+  try{
+    const pizzaoption = await Pizzaoption.find({type:"Package"})
+    res.json(pizzaoption)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+//addpresetpizza
+app.post('/addpizza',async(req,res) =>{
+  try{
+    //img_path from upload single
+    const {name,img_path,size,dough,crust,sauce,package} = req.body;
+    const menu = await Menu.create({
+      name:name,
+      type:"PresetPizza",
+      price:null,
+      ingr_need:null,
+      description:null,
+      img_path:img_path,
+      size: size,
+      dough: dough,
+      crust: crust,
+      sauce: sauce,
+      package: package      
+    })
+    res.json(menu)
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
 
 
 app.get('/getmenu',async(req,res)=>{
@@ -212,7 +302,16 @@ app.get('/getAppetizer',async(req,res)=>{
     console.log(error)
   }
 })
-
+app.get('/getPasta',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"pasta"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 app.get('/getDrink',async(req,res)=>{
   try{
     const menu = await Menu.find({"type":"drink"})
@@ -223,7 +322,26 @@ app.get('/getDrink',async(req,res)=>{
     console.log(error)
   }
 })
-
+app.get('/getDessert',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"dessert"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+app.get('/getÀ la carte',async(req,res)=>{
+  try{
+    const menu = await Menu.find({"type":"À la carte"})
+    console.log("getmenu")
+    res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 app.get('/getID',async(req,res)=>{
   try{
     const menu = await Menu.find({"_id":req.query.id})
@@ -240,6 +358,41 @@ app.get('/getPizza',async(req,res)=>{
     const menu = await Menu.find({"type":"pizza"})
     console.log("getmenu")
     res.json(menu)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.post('/removemenu',async(req,res)=>{
+  try{
+    Menu.find({ "_id":req.body._id }).deleteOne().exec();
+    res.json("removed")
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+}
+)
+
+app.post('/addrecommend',async(req,res)=> {
+  try{
+    const recommend = await Recommend.create({menuid:req.body.menuid})
+    recommend.save()
+    res.json(recommend)
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+})
+
+app.get('/getrecommend',async(req,res)=>{
+  try{
+    const recommend = await Recommend.find({})
+    console.log("getmenu")
+    res.json(recommend)
   }
   catch(error){
     console.log(error)
