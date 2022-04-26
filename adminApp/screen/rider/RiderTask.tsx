@@ -32,7 +32,16 @@ export default function RiderTask({ navigation, route }: { navigation: any, rout
     
   ]);
     const onAccept = (item:any) => {
-      navigation.navigate('RiderDelivery',{order:item})
+      fetch("http://10.0.2.2:3000/rideraccept",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({
+            _id: item._id,
+        })
+      })
+      .then(response=>response.json())
+      .then(data => {console.log(data)
+        navigation.navigate('RiderDelivery',{order:item})})
      }
     const onLogOut = () => {
       Alert.alert(

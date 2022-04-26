@@ -20,7 +20,16 @@ export default function Delivery({navigation, route}:{navigation:any,route:any})
   const {order} = route.params;
 
   const onComplete = () =>{
-    
+    fetch("http://10.0.2.2:3000/riderdone",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
+      body:JSON.stringify({
+          _id: order._id,
+      })
+    })
+    .then(response=>response.json())
+    .then(data => {console.log(data)
+      navigation.navigate('RiderTask')})
   }
 
   return (

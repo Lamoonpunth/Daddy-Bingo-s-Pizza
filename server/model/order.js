@@ -15,6 +15,7 @@ const UserSchema = new mongoose.Schema({
     user_fname : {type:String , default:null},
     user_lname : {type:String ,default: null},
     price : {type:Number , default : null},
+    address : {type:String, default : null},
     province : {type:String , default :null},
     district : {type:String , default :null},
     subdistrict : {type:String , default :null},
