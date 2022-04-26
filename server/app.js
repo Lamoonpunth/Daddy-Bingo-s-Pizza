@@ -401,7 +401,21 @@ app.post('/removemenu',async(req,res)=>{
 
 app.post('/addrecommend',async(req,res)=> {
   try{
-    const recommend = await Recommend.create({menuid:req.body.menuid})
+    const recommend = await Recommend.create({
+      menuid:req.body.menuid,
+      name : req.body.name,
+      type : req.body.type,
+      price: req.body.price,
+      ingr_need:req.body.ingr_need,
+      description:req.body.description,
+      img_path: req.body.img_path,
+      //onlypizza
+      size: req.body.size,
+      dough: req.body.dough,
+      crust: req.body.crust,
+      sauce: req.body.sauce,
+      package: req.body.package 
+    })
     recommend.save()
     res.json(recommend)
   }
@@ -421,6 +435,16 @@ app.get('/getrecommend',async(req,res)=>{
   }
 })
 
+app.post('/removerecommend',async(req,res)=>{
+  try
+  {
+    const recommend = await Recommend.find({ "_id":req.body._id }).deleteOne();
+    res.json(recommend)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 app.post('/addToCart',async(req,res) =>{
     try{
       const user = await User.findOne({"_id":req.body._id})
