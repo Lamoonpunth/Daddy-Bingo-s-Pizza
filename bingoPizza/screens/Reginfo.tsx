@@ -161,7 +161,7 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
           })
         })
         .then(res=>res.json())
-        .then(data=>{console.log(data); alert("register success")})
+        .then(data=>{console.log(data); alert("register success"),navigation.pop()})
         .catch(error=>{alert("Cannot connect to server")
         })
     }
