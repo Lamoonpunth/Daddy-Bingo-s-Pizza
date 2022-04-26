@@ -35,7 +35,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
 
         if (!result.cancelled) {
             setResult(result)
-            setImage(result.uri);
+            setImage("Uploaded");
         }
     };
 
@@ -103,8 +103,8 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                 <Image style={styles.transaction} source={{uri:"https://qrmango.com/promptpay/qr?pp_no=0808491161"+"&amount="+price+"&size=300"}}/>
                 <View style={styles.insertBox}>
                     <Text style={styles.insertFont}>Insert transaction</Text>
+                    <Text style={styles.imageNameFont}>{image}</Text> 
                     <View style={styles.upload}>
-                        <Text style={styles.imageNameFont}>{image}</Text> 
                         <TouchableOpacity style={styles.insertButton} onPress={pickImage}>
                             <Text style={styles.uploadFont}>Upload</Text>
                         </TouchableOpacity>
@@ -150,11 +150,12 @@ const styles = StyleSheet.create({
     },
     insertBox: {
         padding:15,
-        height: width*0.4,
+        height: width*0.65,
         width: width*0.8,
         backgroundColor:'white',
         alignItems:'center',
         justifyContent:'space-evenly',
+        elevation:10,
         borderRadius:10,
     },
     insertFont: {

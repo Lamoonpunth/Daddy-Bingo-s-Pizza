@@ -1,8 +1,9 @@
-import React,{useEffect, useState}  from 'react';
+import React,{useEffect, useState, useRef}  from 'react';
 import { StyleSheet,
     Text,
     View,
     Image,
+    Animated,
     FlatList,
     Dimensions,
     ScrollView,
@@ -30,6 +31,11 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
         {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
         
     ])
+    /**************Animation**************/
+    const progress = useRef(new Animated.Value(0)).current;
+    useEffect(() => {
+      Animated.timing(progress, {toValue:1, useNativeDriver:false, }).start();
+    })
 
   return (
     <Gradient>
@@ -80,9 +86,6 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
                 <View style={styles.nameBox}>
                     <Text style={styles.nameFont}>Arriving</Text>
                 </View>
-            </View>
-            <View style={styles.statusBlank}>
-
             </View>
         </View>
         <View style={styles.orderSummary}>
@@ -162,10 +165,12 @@ const styles = StyleSheet.create({
   },
   orderSummary: {
     flex:5,
-    backgroundColor:'transparent',
-    width:screenWidth,
+    backgroundColor:'#FF6D6D',
+    width:screenWidth*0.9,
     alignItems:'center',
     justifyContent:'center',
+    borderRadius:20,
+    elevation:10,
   },
   orderBox: {
     width:screenWidth*0.9,
@@ -181,17 +186,20 @@ const styles = StyleSheet.create({
     textAlign:'center',
     textAlignVertical:'center',
     flex:1/3,
-    width:screenWidth*0.25,
+    width:screenWidth*0.4,
     fontSize:20,
     color:'#FF6D6D',
     backgroundColor:'white',
     borderRadius:15,
   },
   orderFont: {
+    color:'white',
     paddingLeft:10,
-    fontSize:18,
+    fontSize:20,
   },
   orderHeadFont: {
-    fontSize:20,
+    color:'white',
+    textAlign:'center',
+    fontSize:22,
   },
 });
