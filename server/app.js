@@ -6,6 +6,8 @@ require('./model/appetizer')
 require('./model/order')
 require('./model/recommend')
 require('./model/pizzaoption')
+require('./model/user-rider')
+require('./model/user-chef')
 require('dotenv').config()
 const express = require('express');
 const app = express();
@@ -31,6 +33,8 @@ const Appetizer = mongoose.model("appetizer")
 const Order = mongoose.model("order")
 const Recommend = mongoose.model("recommend")
 const Pizzaoption = mongoose.model("pizzaoption")
+const Rider = mongoose.model("user-rider")
+const Chef = mongoose.model("user-chef")
 const mongoUri = process.env.DBURL;
   //mongodb connection
 mongoose.connect(mongoUri,{ 
@@ -683,6 +687,74 @@ app.post('/admingen',async(req,res) =>{
   
 
 });
+app.post('/ridergen',async(req,res) =>{
+  try{
+      //Get user input
+    const {username,password} = req.body;
+    //Encrypt user password+salt
+    const Salts = crypto.lib.WordArray.random(128/8);
+    encryptedPassword = await SHA256(password+Salts);
+
+    //Create user in database
+    const user = await Rider.create({
+      username:username,
+      password:encryptedPassword,
+      salt :Salts
+    })
+    // Create token 
+      const token = jwt.sign(
+        { user_id:user._id, username:username},
+        process.env.TOKEN_KEY,
+        { 
+          expiresIn: '1h'   
+        }
+      )
+    // save user token
+    user.token = token;
+    console.log('register success')
+    //return new user
+    res.status(201).json(user);
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+
+});
+app.post('/chefgen',async(req,res) =>{
+  try{
+      //Get user input
+    const {username,password} = req.body;
+    //Encrypt user password+salt
+    const Salts = crypto.lib.WordArray.random(128/8);
+    encryptedPassword = await SHA256(password+Salts);
+
+    //Create user in database
+    const user = await Chef.create({
+      username:username,
+      password:encryptedPassword,
+      salt :Salts
+    })
+    // Create token 
+      const token = jwt.sign(
+        { user_id:user._id, username:username},
+        process.env.TOKEN_KEY,
+        { 
+          expiresIn: '1h'   
+        }
+      )
+    // save user token
+    user.token = token;
+    console.log('register success')
+    //return new user
+    res.status(201).json(user);
+  }
+  catch(err){
+    console.log(err);
+  }
+  
+
+});
 app.post('/login-admin', async(req,res) => {
   try{
     //Get user input
@@ -693,6 +765,72 @@ app.post('/login-admin', async(req,res) => {
       }
     //Find user in database
     const user = await Admin.findOne({username:username});
+    if (user && (await SHA256 (password+user.salt).toString() === user.password)) {
+      //Create token
+      const token = jwt.sign(
+        { user_id:user._id, username:username},
+        process.env.TOKEN_KEY,
+        { 
+          expiresIn: '1h'   
+        }
+      )
+      //save user token
+      user.token = token;
+      //return new user
+      res.status(200).json(user);
+    }
+    else{
+      res.status(400).json("Invalid username or password");
+    }   
+  }catch(err){
+    console.log(err);
+  }
+
+});
+
+app.post('/login-chef', async(req,res) => {
+  try{
+    //Get user input
+    const {username,password} = req.body;
+    //Validate user input
+      if (!username || !password) {
+        return res.status(400).send("Please enter username and password");
+      }
+    //Find user in database
+    const user = await Chef.findOne({username:username});
+    if (user && (await SHA256 (password+user.salt).toString() === user.password)) {
+      //Create token
+      const token = jwt.sign(
+        { user_id:user._id, username:username},
+        process.env.TOKEN_KEY,
+        { 
+          expiresIn: '1h'   
+        }
+      )
+      //save user token
+      user.token = token;
+      //return new user
+      res.status(200).json(user);
+    }
+    else{
+      res.status(400).json("Invalid username or password");
+    }   
+  }catch(err){
+    console.log(err);
+  }
+
+});
+
+app.post('/login-rider', async(req,res) => {
+  try{
+    //Get user input
+    const {username,password} = req.body;
+    //Validate user input
+      if (!username || !password) {
+        return res.status(400).send("Please enter username and password");
+      }
+    //Find user in database
+    const user = await Rider.findOne({username:username});
     if (user && (await SHA256 (password+user.salt).toString() === user.password)) {
       //Create token
       const token = jwt.sign(

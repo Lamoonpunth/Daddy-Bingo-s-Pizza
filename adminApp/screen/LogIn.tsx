@@ -94,12 +94,128 @@ export default function LogIn({navigation}: {navigation: any}) {
         .catch(error=>{alert("Cannot connect to server")})
       }
       else if (ModeLogIn == 'Chef') {
-        alert('You are now logged in as Chef.');
-        navigation.navigate('Chef');
+        const controller = new AbortController()
+
+        // 1 second timeout:
+        const timeoutId = setTimeout(() => controller.abort(), 1000)
+        fetch("http://10.0.2.2:3000/online",{
+          method:"post",
+          signal:controller.signal
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data)
+          if (username=='' && password==''){
+            alert("Please enter your username and password.");
+          }
+          else if (username==''){
+            alert("Please enter your username.");
+          }
+          else if (password==''){
+            alert("Please enter your password.");
+          }
+          else{
+            const controller = new AbortController()
+      
+            // 1 second timeout:
+            const timeoutId = setTimeout(() => controller.abort(), 1000)
+      
+            const target =  "http://10.0.2.2:3000/login-chef"
+            fetch(target,{
+            method:'post',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            
+            signal:controller.signal,
+      
+            body: JSON.stringify({
+              "username" : username,
+              "password" : password
+            }
+            )
+          })
+          .then(res=>res.json())
+          
+          .then(data=>{
+            console.log(data)
+            if (data == "Invalid username or password")
+            {
+              alert(data)
+            }
+            else
+            {
+              navigation.navigate('Chef', {screen:'Home', params:{userid:data}});
+            }
+          }).catch(error=>alert(error))
+          }
+            onChangeUser('');
+            onChangePass('');
+    
+        })
+        .catch(error=>{alert("Cannot connect to server")})
       }
       else if (ModeLogIn == 'Rider'){
-        alert('You are now logged in as Rider');
-        navigation.navigate('Rider');
+        const controller = new AbortController()
+
+        // 1 second timeout:
+        const timeoutId = setTimeout(() => controller.abort(), 1000)
+        fetch("http://10.0.2.2:3000/online",{
+          method:"post",
+          signal:controller.signal
+        })
+        .then(res=>res.json())
+        .then(data=>{
+          console.log(data)
+          if (username=='' && password==''){
+            alert("Please enter your username and password.");
+          }
+          else if (username==''){
+            alert("Please enter your username.");
+          }
+          else if (password==''){
+            alert("Please enter your password.");
+          }
+          else{
+            const controller = new AbortController()
+      
+            // 1 second timeout:
+            const timeoutId = setTimeout(() => controller.abort(), 1000)
+      
+            const target =  "http://10.0.2.2:3000/login-rider"
+            fetch(target,{
+            method:'post',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            
+            signal:controller.signal,
+      
+            body: JSON.stringify({
+              "username" : username,
+              "password" : password
+            }
+            )
+          })
+          .then(res=>res.json())
+          
+          .then(data=>{
+            console.log(data)
+            if (data == "Invalid username or password")
+            {
+              alert(data)
+            }
+            else
+            {
+              navigation.navigate('Rider', {screen:'Home', params:{userid:data}});
+            }
+          }).catch(error=>alert(error))
+          }
+            onChangeUser('');
+            onChangePass('');
+    
+        })
+        .catch(error=>{alert("Cannot connect to server")})
       }
     }
     /*------------------------------------------------------------------------------------------------*/
