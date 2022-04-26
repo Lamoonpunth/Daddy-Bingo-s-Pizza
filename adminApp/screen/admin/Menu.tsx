@@ -104,16 +104,18 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
 
         <View style={styles.header}>
             <View style={styles.iconContainer} >
-              <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
+              <TouchableOpacity style={styles.backIcon} onPress={onBackButton}>
                 <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
               </TouchableOpacity>
-              <TouchableOpacity style={globalStyles.addIcon} onPress={onAddMenu}>
+
+              <Text style={styles.headerfont}>{type}</Text>
+
+              <TouchableOpacity style={styles.addIcon} onPress={onAddMenu}>
                 <Image source={require('../../assets/images/add.png')} style={globalStyles.addIcon}/>
               </TouchableOpacity>
               
             </View>
-          <Text style={globalStyles.fontHeader}>{type}</Text>
-          <View style={globalStyles.underline}></View>
+          <View style={styles.underline}></View>
         </View>
 
         <View style={styles.cartContainer}>
@@ -139,9 +141,26 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
+    
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  headerfont:{
+    fontSize: 42,
+    color:'white',
+    marginRight:screenWidth*.015,
+  },
+  backIcon: {
+    height:screenHeight*.03,
+    marginLeft:-screenWidth*.02,
+    marginRight:screenWidth*.03,
+  },
+  addIcon: {
+    width:screenWidth*0.1,
+    height:screenHeight*.03,
+    marginLeft:screenWidth*.03,
+    marginRight:-screenWidth*.02,
   },
   buttonBox: {
     flexWrap:'wrap',
@@ -262,5 +281,12 @@ const styles = StyleSheet.create({
     height: height * 6 / 100,
     backgroundColor: '#FF6D6D',
     borderRadius: 50,
+  },
+  underline:{
+    width:screenWidth*.7,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:screenHeight * .015,
+    marginBottom:-screenHeight *.02,
   },
 });

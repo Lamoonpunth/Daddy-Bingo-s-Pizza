@@ -53,13 +53,13 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
 
         <View style={styles.header}>
             <View style={styles.iconContainer} >
-              <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
+              <TouchableOpacity style={styles.backIcon} onPress={onBackButton}>
                 <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
               </TouchableOpacity>
+              <Text style={styles.headerfont}>Awaiting Payment</Text>
               
             </View>
-          <Text style={globalStyles.fontHeader}>Awaiting Payment</Text>
-          <View style={globalStyles.underline}></View>
+          <View style={styles.underline}></View>
         </View>
 
         <View style={styles.cartContainer}>
@@ -177,5 +177,23 @@ const styles = StyleSheet.create({
   statusFont: {
     fontSize:16,
     color:'white',
+  },
+  underline:{
+    width:screenWidth*.8,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:screenHeight * .015,
+    marginBottom:-screenHeight *.02,
+  },
+  headerfont:{
+    fontSize: 36,
+    color:'white',
+    marginRight:screenWidth*.16,
+  },
+  backIcon: {
+    height:screenHeight*.03,
+    width:screenWidth*.1,
+    marginLeft:-screenWidth*.04,
+    marginRight:screenWidth*.03,
   },
 });

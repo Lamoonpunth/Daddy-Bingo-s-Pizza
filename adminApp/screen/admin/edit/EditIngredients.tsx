@@ -43,12 +43,13 @@ export default function EditIngredients({navigation}:{navigation:any}) {
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
+          <TouchableOpacity style={styles.backIcon} onPress={() => {navigation.goBack()}}>
             <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
           </TouchableOpacity>
           <Text style={globalStyles.fontHeader}>Ingredients</Text>
-          <View style={globalStyles.underline}></View>  
         </View>
+
+        <View style={styles.underline}></View>  
 
         <View style={styles.ingredientContainer}>
           <View style={styles.flatContainer}>
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection:'column',
+    flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
   },
@@ -125,20 +126,23 @@ const styles = StyleSheet.create({
     marginVertical:5,
     borderRadius:50,
     borderWidth:1,
-    borderColor:'gray',
     backgroundColor:'white',
     width:screenWidth*0.8,
     height:screenHeight*0.22,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-evenly',
+    elevation:8,
+    borderColor: 'rgba(0,0,0,.1)'
   },
   boxImage: {
     borderRadius:20,
     backgroundColor:'white',
     width:screenHeight*0.125,
     height:screenHeight*0.125,
-    borderWidth:1
+    borderWidth:1,
+    elevation:8,
+    borderColor: 'rgba(0,0,0,.1)'
   },
   boxDetails: {
     backgroundColor:'transparent',
@@ -171,5 +175,17 @@ const styles = StyleSheet.create({
   moreFont:{
     fontSize: 18,
     color:'white',
+  },
+  backIcon: {
+    height:screenHeight*.03,
+    marginLeft:-screenWidth*.225,
+    marginRight:screenWidth*.1,
+  },
+  underline:{
+    width:screenWidth*.7,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:-screenHeight * .025,
+    marginBottom:-screenHeight *.02,
   },
 });

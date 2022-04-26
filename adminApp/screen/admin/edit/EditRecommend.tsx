@@ -212,6 +212,8 @@ const styles = StyleSheet.create({
   underline:{
     width:screenWidth*.7,
     height:screenHeight*0.0035,
-    backgroundColor:'white'
+    backgroundColor:'white',
+    marginTop:screenHeight * .015,
+    marginBottom:-screenHeight *.02,
   },
 });
