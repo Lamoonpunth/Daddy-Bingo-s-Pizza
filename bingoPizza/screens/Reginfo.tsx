@@ -63,6 +63,31 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
   const [listOfProvince,setListOfProvince] =React.useState([]);
   const [listOfDistrict,setListOfDistrict] =React.useState([]);
   const [listOfSubDistrict,setListOfSubDistrict] =React.useState([]);
+
+  const [Fnamestate, setFNameState] = React.useState(false);
+  const [Lnamestate, setLNameState] = React.useState(false);
+  const [MMstate, setMMState] = React.useState(false);
+  const [YYstate, setYYState] = React.useState(false);
+  const [Phonestate, setPhoneState] = React.useState(false);
+  const [Addrsstate, setAddrsState] = React.useState(false);
+  const [Provincestate, setProvinceState] = React.useState(false);
+  const [Districstate, setDistricState] = React.useState(false);
+  const [SubDistricstate, setSubDistricState] = React.useState(false);
+  const [Zipcodestate, setZipcodeState] = React.useState(false);
+
+  const resetState = () => {
+    setFNameState(false);
+    setLNameState(false);
+    setMMState(false);
+    setYYState(false);
+    setPhoneState(false);
+    setAddrsState(false);
+    setProvinceState(false);
+    setDistricState(false);
+    setSubDistricState(false);
+    setZipcodeState(false);
+  }
+
   
 
   const { Username } = route.params;
@@ -80,57 +105,116 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     else selectedSex = 0
 
     if( firstname == ''){
-      alert("Please Enter Firstname")
+      resetState();
+      setFNameState(true);
+      alert("Please Enter Firstname!")
     }
     else if (isNumeric(firstname) || firstname.length < 2 || firstname.length > 25 || hasWhiteSpace(firstname) || isContainsSpecialChars(firstname) || isEnglishAndThai(firstname)) {
-      alert("Firstname must be only thai or english character with between 2 to 25 character")
+      resetState();
+      setFNameState(true);
+      alert("Firstname must be only thai or english character with between 2 to 25 character!")
     }
     else if( lastname == ''){
-      alert("Please Enter Lastname")
+      resetState();
+      setLNameState(true);
+      alert("Please Enter Lastname!")
     }
     else if (isNumeric(lastname) || lastname.length < 2 || lastname.length > 25 || hasWhiteSpace(lastname) || isContainsSpecialChars(lastname) || isEnglishAndThai(lastname)) {
-      alert("Lastname must be only thai or english character with between 2 to 25 character")
+      resetState();
+      setLNameState(true);
+      alert("Lastname must be only thai or english character with between 2 to 25 character!")
     }      
     else if(isEnglishAndThai(firstname+lastname)){
-      alert("Firstname and Lastname must be only thai or english character with between 2 to 25 character")
+      resetState();
+      setFNameState(true);
+      setLNameState(true);
+      alert("Firstname and Lastname must be only thai or english character with between 2 to 25 character!")
     }
     else if ( selectedDate=='' || selectedMonth== ''){
-      alert("Please select birthmonth and birthyear")
+      resetState();
+      setMMState(true);
+      setYYState(true);
+      alert("Please select birthmonth and birthyear!")
     }   
     
     else if (presentYear- parseInt(selectedDate) < 15) {
-      alert("User age must be greater than or equal to 15")
+      resetState();
+      setYYState(true);
+      alert("User age must be greater than or equal to 15!")
     }    
     else if( phone == ''){
-      alert("Please Enter Phone Number")
+      resetState();
+      setPhoneState(true);
+      alert("Please Enter Phone Number!")
     }
       
-    else if (phone.length != 10 || !isNumeric(phone) ) {
-      alert("Phone must be 10 digit")
+    else if (phone.length != 10  ) {
+      resetState();
+      setPhoneState(true);
+      alert("Phone must be 10 digit!")
     }     
+    else if (!isNumeric(phone)) { 
+      resetState();
+      setPhoneState(true);
+      alert("Phone must be number only!")
+    }
     else if (selectedSex===0) { 
-      alert("Please select gender")
+      alert("Please select gender!")
     }
     else if (address=='') {
-      alert("Please enter address")
+      resetState();
+      setAddrsState(true)
+      alert("Please enter address!")
     }   
-    else if (address.length > 250 || isContainsSpecialChars2(address)) {
-      alert("Please select province")
+    else if (address.length > 250 ) {
+      resetState();
+      setProvinceState(true)
+      alert("Please select province!")
+    }
+    else if (isContainsSpecialChars2(address)) {
+      resetState();
+      setAddrsState(true)
+      alert("Address must be no speacial character!")
     }
     else if (selectedProvince=='') {
-      alert("Please select province")
+      resetState();
+      setProvinceState(true)
+      alert("Please select province!")
     }
     else if (selectedDistrict=='') {
-      alert("Please select district")
+      resetState();
+      setDistricState(true)
+      alert("Please select district!")
     }
     else if (selectedSubDistrict=='') {
-      alert("Please select sub district")
+      resetState();
+      setSubDistricState(true)
+      alert("Please select sub district!")
     }         
     else if(selectedZipCode==''){
-      alert("Please Enter Zipcode")
-    }       
-    else if(selectedZipCode.length != 5 || !isNumeric(selectedZipCode) || hasWhiteSpace(selectedZipCode) || isContainsSpecialChars(selectedZipCode)){
-      alert("Zipcode must be 5 digit")
+      resetState();
+      setZipcodeState(true)
+      alert("Please Enter Zipcode!")
+    }     
+    else if(hasWhiteSpace(selectedZipCode)){
+      resetState();
+      setZipcodeState(true)
+      alert("Zipcode must be no white space!")
+    }   
+    else if(isNumeric(selectedZipCode)){
+      resetState();
+      setZipcodeState(true)
+      alert("Zipcode must be number!")
+    } 
+    else if(isContainsSpecialChars(selectedZipCode)){
+      resetState();
+      setZipcodeState(true)
+      alert("Zipcode must be no speacial character!")
+    } 
+    else if(selectedZipCode.length != 5){
+      resetState();
+      setZipcodeState(true)
+      alert("Zipcode must be 5 digit!")
     }
     
     else {      
@@ -266,13 +350,35 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
               source={require('../assets/images/user_icon.png')}
               />
             <TextInput
-              style={styles.input}
+              style={{
+                fontSize: 16,
+                width: width *.35,
+                height: height * 0.05,
+                margin: 8,
+                padding: 10,
+                borderRadius: 30,
+                borderWidth:1,
+                borderColor: Fnamestate? 'red' : 'white',
+                backgroundColor: 'white',
+                elevation: 12,
+              }}
               onChangeText={onChangeName}
               value={firstname}
               placeholder="First Name"
             />
             <TextInput
-              style={styles.input}
+              style={{
+                fontSize: 16,
+                width: width *.35,
+                height: height * 0.05,
+                margin: 8,
+                padding: 10,
+                borderRadius: 30,
+                borderWidth:1,
+                borderColor: Lnamestate? 'red' : 'white',
+                backgroundColor: 'white',
+                elevation: 12,
+              }}
               onChangeText={onChangeLast}
               value={lastname}
               placeholder="Last name"
@@ -287,7 +393,17 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
                 source={require('../assets/images/birthdate_icon.png')}
               />
 
-              <View style={styles.pickerboxinside}>
+              <View style={{
+                  alignItems:'center',
+                  justifyContent:'center',
+                  width:width*.35,
+                  height:height*0.055,
+                  borderWidth:1,
+                  borderColor: MMstate? 'red' : 'white',
+                  backgroundColor:'white',
+                  borderRadius:50,
+                  elevation: 12,
+                }}>
                 <Picker style={styles.pickermonth}
                   selectedValue={selectedMonth}
                   dropdownIconColor='#FF6D6D'
@@ -313,7 +429,17 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
               <Text style={{fontSize: 30}}>/</Text>
               
-              <View style={styles.pickerboxinside2}>
+              <View style={{
+                  alignItems:'center',
+                  justifyContent:'center',
+                  width:width*.35,
+                  height:height*0.055,
+                  borderWidth:1,
+                  borderColor: YYstate? 'red' : 'white',
+                  backgroundColor:'white',
+                  borderRadius:50,
+                  elevation: 12,
+                }}>
                 <Picker style={styles.pickeryear}
                   selectedValue={selectedDate}
                   dropdownIconColor='#FF6D6D'
@@ -414,7 +540,18 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
                 source={require('../assets/images/phone_icon.png')}
               />
               <TextInput
-                style={styles.input}
+                style={{
+                  fontSize: 16,
+                  width: width *.35,
+                  height: height * 0.05,
+                  margin: 8,
+                  padding: 10,
+                  borderRadius: 30,
+                  borderWidth:1,
+                  borderColor: Phonestate? 'red' : 'white',
+                  backgroundColor: 'white',
+                  elevation: 12,
+                }}
                 onChangeText={onChangeNumber}
                 value={phone}
                 placeholder="Phone number"
@@ -457,7 +594,18 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
               source={require('../assets/images/address_icon.png')}
             />
             <TextInput
-              style={styles.input2}
+              style={{
+                fontSize: 16,
+                width: width *.80,
+                height: height * 0.055,
+                margin: 8,
+                padding: 10,
+                borderRadius: 30,
+                borderWidth:1,
+                borderColor: Addrsstate? 'red' : 'white',
+                backgroundColor: 'white',
+                elevation: 12,
+              }}
               onChangeText={onChangeAddr}
               value={address}
               placeholder="Address"
@@ -467,7 +615,18 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
           <View style={styles.box1}>
             <Text>         </Text>
-            <View style={styles.pickerboxProvince}>
+            <View style={{
+                alignItems:'center',
+                justifyContent:'center',
+                width:width*.6,
+                height:height*0.055,
+                backgroundColor:'white',
+                borderRadius:50,
+                borderWidth:1,
+                borderColor: Provincestate? 'red' : 'white',
+                elevation: 12,
+                margin: 6
+              }}>
               <Picker style={styles.pickerProvince}
                 selectedValue={selectedProvince}
                 dropdownIconColor='#FF6D6D'
@@ -486,7 +645,18 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
           <View style={styles.box1}>
             <Text>         </Text>
-            <View style={styles.pickerboxDistrict}>
+            <View style={{
+                alignItems:'center',
+                justifyContent:'center',
+                width:width*.6,
+                height:height*0.055,
+                backgroundColor:'white',
+                borderRadius:50,
+                borderWidth:1,
+                borderColor: Districstate? 'red' : 'white',
+                elevation: 12,
+                margin: 6
+              }}>
               <Picker style={styles.pickerDistrict}
                 selectedValue={selectedDistrict}
                 dropdownIconColor='#FF6D6D'
@@ -504,7 +674,18 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
           <View style={styles.box1}>
             <Text>         </Text>
-            <View style={styles.pickerboxSubDistrict}>
+            <View style={{
+                alignItems:'center',
+                justifyContent:'center',
+                width:width*.5,
+                height:height*0.055,
+                backgroundColor:'white',
+                borderRadius:50,
+                borderWidth:1,
+                borderColor: SubDistricstate? 'red' : 'white',
+                elevation: 12,
+                margin: 6
+              }}>
               <Picker style={styles.pickerSubDistrict}
                 selectedValue={selectedSubDistrict}
                 dropdownIconColor='#FF6D6D'
@@ -517,7 +698,18 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
               </Picker>
             </View>
             <Text> </Text>
-            <View style={styles.zipcode}>
+            <View style={{
+                alignItems:'center',
+                justifyContent:'center',
+                width:width*.2,
+                height:height*0.055,
+                backgroundColor:'white',
+                borderRadius:50,
+                borderWidth:1,
+                borderColor: Zipcodestate? 'red' : 'white',
+                elevation: 12,
+                margin: 6
+              }}>
               <TextInput
                 style={{fontSize:14}}
                 onChangeText={setSelectedZipCode}
@@ -612,7 +804,9 @@ const styles = StyleSheet.create({
     height:height*6/100,
     backgroundColor:'#FF6D6D',
     borderRadius:50,
-    marginRight:70
+    marginRight:70,
+    elevation:4,
+    
   },
   box1: {
     flexDirection: "row",
