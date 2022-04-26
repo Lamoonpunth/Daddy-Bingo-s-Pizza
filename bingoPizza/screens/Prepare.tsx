@@ -26,7 +26,8 @@ export default function Prepare({navigation, route}:{navigation:any,route:any}) 
   const [orderList, setOrderList] = useState([
     {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
   ])
-
+  const {cart} =route.params;
+  const {user} =route.params;
   const prepare = useRef(
     new Animated.Value(0)
   ).current;
@@ -43,9 +44,14 @@ export default function Prepare({navigation, route}:{navigation:any,route:any}) 
       ]),
     ).start();
     setTimeout(()=> {
-      navigation.navigate('Delivery');
+      navigation.navigate('Delivery',{cart:cart,user:user});
      }, 10000);
   });
+  useFocusEffect(
+    React.useCallback(() => {
+      setOrderList(cart)
+    }, [])
+  );
 
   return (
     <Gradient>
