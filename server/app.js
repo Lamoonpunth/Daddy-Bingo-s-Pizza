@@ -492,6 +492,7 @@ app.post('/checkout',async(req,res)=>{
       district : req.body.district,
       subdistrict : req.body.subdistrict,
       postcode:req.body.postcode,
+      bill_img:req.body.bill_img
     })
     res.json(order)
   }
@@ -713,7 +714,7 @@ const upload = multer({storage: fileStorageEngine});
 
 app.post('/uploadSingle', upload.single('image'), (req, res) => {
   console.log(req.file);
-  res.send(req.file.path);
+  res.send(req.file);
 });
 
 app.get('/getImage/:fileName', (req, res) => {
