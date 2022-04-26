@@ -76,7 +76,6 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
                     </TouchableOpacity>
                     <Text style={globalStyles.fontHeader}>ตะกร้าของคุณ</Text>
-                    
                 </View>
                 <View style={styles.cartContainer}>
                   <View style={styles.flatContainer}>
@@ -125,11 +124,13 @@ const styles = StyleSheet.create({
     },
     header: {
       width: screenWidth*.9,
-      height: screenHeight*.075,
+      height: screenHeight*.3,
       flexDirection:'row',
       alignItems:'center',
       justifyContent:'center',
       marginTop:-screenHeight* .2,
+      marginBottom:-screenHeight*.05
+
     },
     iconContainer: {
       borderColor:'black',
