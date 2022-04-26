@@ -22,7 +22,7 @@ import { DrawerItem } from "@react-navigation/drawer";
 export default function TransactionInfo({ navigation, route }: { navigation: any, route: any }) {
 
   const {payment} = route.params;
-
+  console.log(payment)
   const onBackButton = () =>{
     navigation.navigate('PaymentInfo',{payment:payment});
   }
@@ -43,7 +43,7 @@ export default function TransactionInfo({ navigation, route }: { navigation: any
         </View>
 
         <View style={styles.cartContainer}>
-          <Image source={{uri:"http://10.0.2.2:3000/getImage"+payment._id}} style={styles.transaction}/>
+          <Image source={{uri:"http://10.0.2.2:3000/getImage/"+payment.bill_img}} style={styles.transaction}/>
         </View>
         
         </View>
