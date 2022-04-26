@@ -101,7 +101,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
             <TouchableOpacity style={styles.promoBox} onPress={onEditPromo}>
-              <Image source = {{uri:"http://10.0.2.2:3000/getImage/Promotion_2.jpg"}} style={styles.foodImage}/>
+              <ImageBackground source = {{uri:"http://10.0.2.2:3000/getImage/Promotion_2.jpg"}} style={styles.promoImage} imageStyle={{borderRadius:50}}/>
             </TouchableOpacity>
           </View>
           <View style={styles.recommendcontainer}>
@@ -213,11 +213,17 @@ const styles = StyleSheet.create({
     height:screenWidth*0.125,
   },
   promoBox:{
+    alignItems:'center',
+    justifyContent:'center',
     backgroundColor:'white',
     width:screenWidth*0.85,
     height:screenHeight*0.3,
     borderRadius:50,
     elevation: 10,
+  },
+  promoImage:{
+    width:screenWidth*0.6,
+    height:screenHeight*0.3,
   },
   /*----------------------------------------------Recommend-------------------------------------------*/
   recommendcontainer: {
