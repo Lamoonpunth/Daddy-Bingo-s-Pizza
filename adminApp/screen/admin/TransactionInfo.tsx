@@ -24,6 +24,14 @@ export default function TransactionInfo({ navigation, route }: { navigation: any
   const {payment} = route.params;
   console.log(payment)
   const onBackButton = () =>{
+    fetch("http://10.0.2.2:3000/kitchenaccept",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
+      body:JSON.stringify({
+          _id: payment._id,
+      })
+    })
+
     navigation.navigate('PaymentInfo',{payment:payment});
   }
 

@@ -35,6 +35,16 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
   ]);
  
   const onSendOut = () => {
+    fetch("http://10.0.2.2:3000/kitchendone",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
+      body:JSON.stringify({
+          _id: order._id,
+      })
+    })
+    .then(response=>response.json())
+    .then(data => {console.log(data)
+    navigation.navigate('TaskOrder')})
     alert('จะกินมั้ย กินก็จ่าย');
   }
 

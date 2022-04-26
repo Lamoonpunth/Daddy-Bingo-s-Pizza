@@ -37,7 +37,16 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
      navigation.navigate('TaskDeny')
     }
     const onAccept = (item:any) => {
-      navigation.navigate('TaskPrepare',{order:item})
+      fetch("http://10.0.2.2:3000/kitchenaccept",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({
+            _id: item._id,
+        })
+      })
+      .then(response=>response.json())
+      .then(data => {console.log(data)
+        navigation.navigate('TaskPrepare',{order:item})})
      }
     const onLogOut = () => {
       Alert.alert(
