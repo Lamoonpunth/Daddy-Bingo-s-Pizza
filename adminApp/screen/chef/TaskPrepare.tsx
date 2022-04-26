@@ -96,7 +96,7 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
             <TouchableOpacity style={styles.iconContainer} onPress={() => { navigation.goBack() }}>
               <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
             </TouchableOpacity>
-            <Text style={globalStyles.fontHeader}>Ingredient</Text>
+            <Text style={globalStyles.fontHeader}>Preparing</Text>
           </View>
           <View style={styles.TaskTrack}>
             <View style={styles.flatContainer}>

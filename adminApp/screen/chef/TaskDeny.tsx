@@ -27,7 +27,7 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
   }
   const onSend = () => {
     navigation.navigate('TaskOrder')
-    onChangedeny('')
+    onChangedeny(denyText)
   }
   const onClickAdminIcon = () => {
     navigation.openDrawer();
@@ -53,6 +53,8 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
             multiline={true}
             numberOfLines={13}
             maxLength ={400}
+            onChangeText={onChangedeny}
+            value={denyText}
             placeholder="type reason"
           />
 
@@ -78,16 +80,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    marginRight:75,
-    marginTop:20,
+    marginTop:screenHeight*.04,
+    marginBottom:screenHeight*.02,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconContainer: {
-    width: screenWidth * 0.2,
-    flexDirection: 'row',
-    alignItems: 'flex-start'
+    width: screenWidth * 0.15,
   },
   TaskTrack: {
     borderColor: 'rgba(0,0,0,0.2)',
