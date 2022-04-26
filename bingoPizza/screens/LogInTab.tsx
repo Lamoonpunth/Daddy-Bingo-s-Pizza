@@ -45,7 +45,14 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
   /*********************************LogIn*********************************/
   const [Username, onChangeText] = React.useState('');
   const [Password, onChangePass] = React.useState('');
+
+  const[lusernamestate, setLUsernameState] = React.useState(false);
+  const[luserpassstate, setLUserPassState] = React.useState(false);
+
   const onSubmitButton = () => {
+    setSUsernameState(false);
+    setSUserPassState(false);
+    setSUserCPassState(false);
     const controller = new AbortController()
 
     // 1 second timeout:
@@ -59,12 +66,18 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
 
       console.log(data)
       if (Username=='' && Password==''){
+        setLUsernameState(true);
+        setLUserPassState(true);
         alert("Please enter your username and password.");
       }
       else if (Username==''){
+        setLUsernameState(true);
+        setLUserPassState(false);
         alert("Please enter your username.");
       }
       else if (Password==''){
+        setLUsernameState(false);
+        setLUserPassState(true);
         alert("Please enter your password.");
       }
       else{
@@ -93,12 +106,15 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
       .then(data=>{
         if (data == "Invalid username or password")
         {
+          setLUsernameState(true);
+          setLUserPassState(true);
           alert(data)
         }
         else
         {
+          setLUsernameState(false);
+          setLUserPassState(false);
           navigation.navigate('Order', {screen:'Home', params:{userid:data}});
-          //navigation.navigate('Order',);
         }
       }).catch(error=>alert(error))
       
@@ -121,11 +137,17 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
   const [password, onChangeSignPass] = React.useState('');
   const [confirm, onConfirm] = React.useState('');
 
+  const[Susernamestate, setSUsernameState] = React.useState(false);
+  const[Suserpassstate, setSUserPassState] = React.useState(false);
+  const[SuserCpassstate, setSUserCPassState] = React.useState(false);
+  
   function isPerfect(str:any) {
     return /[a-z]/.test(str) && /[A-Z]/.test(str) && /[0-9]/.test(str);
   }
 
   const onSignUpButton = () => {
+    setLUsernameState(false);
+    setLUserPassState(false);
     const controller = new AbortController()
 
     // 1 second timeout:
@@ -151,32 +173,62 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
     .then(res=>res.json())
     .then(data=>{
       console.log(data)
-      if (username=='' && password==''){
+      if (username=='' && password=='' && confirm==''){
+        setSUsernameState(true);
+        setSUserPassState(true);
+        setSUserCPassState(true);
         alert("Please enter your username and password.");
       }
       else if (username==''){
+        setSUsernameState(true);
+        setSUserPassState(false);
+        setSUserCPassState(false);
         alert("Please enter your username.");
       }
       else if (password==''){
+        setSUsernameState(false);
+        setSUserPassState(true);
+        setSUserCPassState(false);
         alert("Please enter your password.");
       }
+      else if (confirm==''){
+        setSUsernameState(false);
+        setSUserPassState(false);
+        setSUserCPassState(true);
+        alert("Please enter your confirm password.");
+      }
       else if(password != confirm){
+        setSUsernameState(false);
+        setSUserPassState(false);
+        setSUserCPassState(true);
         alert("Please match your password.");
       }
       else if(data === "user doesn't exist"){
         if (password.length < 8){
+          setSUsernameState(false);
+          setSUserPassState(true);
+          setSUserCPassState(true);
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
         else if (isPerfect(password) == true){
+          setSUsernameState(false);
+          setSUserPassState(false);
+          setSUserCPassState(false);
           console.log(username)
           console.log(password)
           navigation.navigate('Register',{Username:username,Password:crypto.MD5(password)});
         }
         else{
+          setSUsernameState(false);
+          setSUserPassState(true);
+          setSUserCPassState(true);
           alert('password must be longer than 8 character, have Uppercase and Lowercase and number');
         }
       }
       else{
+        setSUsernameState(true);
+        setSUserPassState(false);
+        setSUserCPassState(false);
         alert("user exist");
       }
     }
@@ -217,13 +269,35 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
             /*********************************LogIn*********************************/
             <View style={styles.logincontainer}>
               <TextInput
-                style={styles.input}
+                style={{
+                  fontSize: 12,
+                  width: width *.6,
+                  height: height * 0.055,
+                  margin: 8,
+                  padding: 10,
+                  borderRadius: 30,
+                  borderWidth:1,
+                  borderColor: lusernamestate? 'red' : 'white',
+                  backgroundColor:'white',
+                  elevation: 12,
+                }}
                 onChangeText={onChangeText}
                 value={Username}
                 placeholder="Username"
               />
               <TextInput
-                style={styles.input}
+                style={{
+                  fontSize: 12,
+                  width: width *.6,
+                  height: height * 0.055,
+                  margin: 8,
+                  padding: 10,
+                  borderRadius: 30,
+                  borderWidth:1,
+                  borderColor: luserpassstate? 'red' : 'white',
+                  backgroundColor: 'white',
+                  elevation: 12,
+                }}
                 onChangeText={onChangePass}
                 value={Password}
                 placeholder="Password"
@@ -247,14 +321,36 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
           :
           <View style={styles.signupcontainer}>
             <TextInput
-              style={styles.input}
+              style={{
+                fontSize: 12,
+                width: width *.6,
+                height: height * 0.055,
+                margin: 8,
+                padding: 10,
+                borderRadius: 30,
+                borderWidth:1,
+                borderColor: Susernamestate? 'red' : 'white',
+                backgroundColor: 'white',
+                elevation: 12,
+              }}
               onChangeText={onChangeSignUser}
               value={username}
               placeholder="Username"
 
             />
             <TextInput
-              style={styles.input}
+              style={{
+                fontSize: 12,
+                width: width *.6,
+                height: height * 0.055,
+                margin: 8,
+                padding: 10,
+                borderRadius: 30,
+                borderWidth:1,
+                borderColor: Suserpassstate? 'red' : 'white',
+                backgroundColor: 'white',
+                elevation: 12,
+              }}
               onChangeText={onChangeSignPass}
               value={password}
               placeholder="Password"
@@ -262,7 +358,18 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
               
             />
             <TextInput
-              style={styles.input}
+              style={{
+                fontSize: 12,
+                width: width *.6,
+                height: height * 0.055,
+                margin: 8,
+                padding: 10,
+                borderRadius: 30,
+                borderWidth:1,
+                borderColor: SuserCpassstate? 'red' : 'white',
+                backgroundColor: 'white',
+                elevation: 12,
+              }}
               onChangeText={onConfirm}
               value={confirm}
               placeholder="Confirm password"
