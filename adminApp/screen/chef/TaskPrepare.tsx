@@ -3,6 +3,7 @@ import {
   View,
   Text,
   Image,
+  Alert,
   Dimensions,
   StyleSheet,
   FlatList,
@@ -36,9 +37,30 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
   const onCheckOut = () => {
     alert('จะกินมั้ย กินก็จ่าย');
   }
+
+  const onClickPrepare = () =>{
+    alert('nothing');
+  }
+
   const onClickAdminIcon = () => {
     navigation.openDrawer();
   }
+
+  const onLogOut = () => {
+    Alert.alert(
+      "Are you sure?",
+      "Have a good day sir.",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel"),
+          style: "cancel"
+        },
+        { text: "Log Out", onPress: () => navigation.pop()}
+      ]
+    );
+  }
+
   const getOrderCart = () =>{
     onClickIng([])
     console.log(order._id)
@@ -71,7 +93,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
             </TouchableOpacity>
           </View>
           <View style={styles.header}>
-
             <TouchableOpacity style={styles.iconContainer} onPress={() => { navigation.goBack() }}>
               <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
             </TouchableOpacity>
@@ -80,35 +101,24 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
           <View style={styles.TaskTrack}>
             <View style={styles.flatContainer}>
               <FlatList
-
+                showsVerticalScrollIndicator={false}
                 numColumns={1}
                 data={Ingredient}
                 renderItem={({ item }) => (
-                /*  <Item
-                  id={item.key}
-                  title={item.num}
-                  selected={!!selected.get(item.key)}
-                  onSelect={onSelect}
-                />*/
-                  <TouchableOpacity style={styles.Ingredient} key={item.key} onPress={() => onClickIngredient(item.key)}>
+                  <TouchableOpacity style={styles.Ingredient} key={item.key} onPress={() => onClickPrepare(item.key)}>
                     <View style={styles.forrowview}>
-                      <Image source={{uri:get+item.img_path}} style={{
-                        width: 120,
-                        height: 120
-                      }} />
+                      <Image source={{uri:get+item.img_path}} style={styles.forrowview} />
                     </View>
-                    <Text>{item.name} x{item.quantity}</Text>
-                    <Text>{item.description}</Text>
+                    <View style={styles.textContainer}>
+                      <Text style={styles.prepareFont}>{item.name} x{item.quantity}</Text>
+                    </View>
                   </TouchableOpacity>
-
                 )}
-
               />
             </View>
-
           </View>
 
-          <TouchableOpacity style={styles.LogoutBox} onPress={onCheckOut}>
+          <TouchableOpacity style={styles.LogoutBox} onPress={onLogOut}>
             <Text style={styles.checkoutFont}>Log out</Text>
           </TouchableOpacity>
 
@@ -120,11 +130,11 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
 
   const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      //borderWidth: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
+      paddingVertical:50,
+      width:screenWidth,
+      height:screenHeight,
+      alignItems:'center',
+      justifyContent:'space-evenly',
       backgroundColor: 'transparent',
     },
     header: {
@@ -135,7 +145,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     iconContainer: {
       width: screenWidth * 0.1,
       flexDirection: 'row',
-      borderWidth: 1,
       alignItems: 'flex-start'
     },
     TaskTrack: {
@@ -143,7 +152,7 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       alignItems: 'center',
       justifyContent: 'center',
       width: screenWidth * .9,
-      height: screenHeight * .75,
+      height: screenHeight * 0.6,
       backgroundColor: '#fff',
       borderRadius: 50,
       elevation: 10,
@@ -152,37 +161,9 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       flexDirection: 'row',
       alignItems: 'flex-start',
       justifyContent: 'center',
-      width: screenWidth * .89,
-      //borderWidth: 1,
-      height: screenHeight * .65,
-
+      width: screenWidth * .8,
+      height: screenHeight * .5,
       backgroundColor: '#fff',
-    },
-
-    boxImage: {
-      borderRadius: 20,
-      backgroundColor: 'white',
-      width: screenHeight * 0.125,
-      height: screenHeight * 0.125,
-      borderWidth: 1
-    },
-    boxDetails: {
-      backgroundColor: 'transparent',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      width: screenHeight * 0.2,
-      height: screenHeight * 0.2,
-    },
-    serviceFont: {
-      fontSize: 18,
-      width: screenHeight * 0.2,
-      height: screenHeight * 0.05,
-      margin: 8,
-      padding: 10,
-      borderRadius: 10,
-      backgroundColor: 'white',
-      elevation: 12,
     },
     LogoutBox: {
       flexDirection: 'column',
@@ -203,7 +184,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     adminBox: {
       flexWrap: 'wrap',
       flexDirection: 'row',
-      borderWidth: 1,
       width: screenWidth * 0.85,
       height: screenWidth * 0.125
     },
@@ -220,52 +200,27 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       borderWidth: 2,
       borderColor: 'gray',
       backgroundColor: 'white',
-      width: screenWidth * 0.85,
+      width: screenWidth * 0.8,
       height: screenHeight * 0.15,
       alignItems: "center",
       justifyContent: 'flex-start',
       flexDirection: 'row',
-
-
+    },
+    textContainer: {
+      paddingVertical:10,
+      paddingLeft:10,
+      width: screenWidth * 0.45,
+      height: screenHeight * 0.15,
     },
     forrowview: {
       width: screenWidth * 0.3,
-      height: screenWidth * 0.25,
-      flexDirection: 'row',
-      borderWidth: 1,
+      height: screenHeight * 0.1,
       alignItems: 'center',
-      justifyContent: 'space-evenly',
-      marginVertical: 1,
-      marginHorizontal: 1,
-    },
-    bottontoleftside: {
-      width: screenWidth * 0.85,
-      height: screenHeight * 0.05,
-      // borderWidth:1,
-      alignItems: 'flex-end',
       justifyContent: 'center',
-
+      borderRadius:20,
     },
-    ac_rjbox: {
-      flexDirection: 'row',
-      borderWidth: 1,
-      width: screenWidth * 0.15,
-      height: screenWidth * .05,
-      justifyContent: 'center',
-      borderRadius: 50,
-    },
-    acbox: {
-      flexDirection: 'row',
-      borderWidth: 1,
-      width: screenWidth * 0.15,
-      height: screenWidth * .05,
-      justifyContent: 'center',
-      backgroundColor: '#FF6D7D',
-      borderRadius: 50,
-
-    },
-    normalFont: {
-      fontSize: 11,
+    prepareFont: {
+      fontSize: 18,
       color: '#330000',
     },
 

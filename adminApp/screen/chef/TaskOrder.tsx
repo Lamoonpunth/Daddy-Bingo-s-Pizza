@@ -3,6 +3,7 @@ import {
     View ,
     Text,
     Image,
+    Alert,
     Dimensions,
     StyleSheet,
     FlatList,
@@ -39,8 +40,20 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
       navigation.navigate('TaskPrepare',{order:item})
      }
     const onLogOut = () => {
-      navigation.navigate('Log Out')
+      Alert.alert(
+        "Are you sure?",
+        "Have a good day sir.",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel"),
+            style: "cancel"
+          },
+          { text: "Log Out", onPress: () => navigation.pop()}
+        ]
+      );
     }
+    
     const onClickAdminIcon = () =>{
       navigation.openDrawer();
     }

@@ -42,11 +42,12 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
           </TouchableOpacity>
         </View>
         <View style={styles.header}>
-
-          <TouchableOpacity style={styles.iconContainer} onPress={() => { navigation.goBack() }}>
-            <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
+          <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
+              <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon }/> 
           </TouchableOpacity>
-          <Text style={globalStyles.fontHeader}>Deny Order</Text>
+          <Text style={globalStyles.fontHeader}>Task Denied</Text> 
+          <View style={styles.iconContainer}>
+          </View>
         </View>
         <View style={styles.TaskTrack}>
           <View style={styles.flatContainer}>
@@ -76,22 +77,22 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    //borderWidth: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    paddingVertical:50,
+    width:screenWidth,
+    height:screenHeight,
+    alignItems:'center',
+    justifyContent:'space-evenly',
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width:screenWidth*.8,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between',
   },
   iconContainer: {
     width: screenWidth * 0.1,
     flexDirection: 'row',
-    borderWidth: 1,
     alignItems: 'flex-start'
   },
   TaskTrack: {
@@ -110,9 +111,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     width: screenWidth * .89,
-   // borderWidth: 1,
     height: screenHeight * .3,
-
     backgroundColor: '#fff',
   },
 
@@ -121,7 +120,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     width: screenHeight * 0.125,
     height: screenHeight * 0.125,
-    borderWidth: 1
   },
   boxDetails: {
     backgroundColor: 'transparent',
@@ -158,11 +156,10 @@ const styles = StyleSheet.create({
   },
   //--------------------แถบบน--------------------//
   adminBox: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    borderWidth: 1,
-    width: screenWidth * 0.85,
-    height: screenWidth * 0.125
+    flexWrap:'wrap',
+      flexDirection:'row',
+      width:screenWidth*0.85,
+      height:screenWidth*0.125
   },
   adminIcon: {
     borderRadius: 50,
@@ -174,7 +171,6 @@ const styles = StyleSheet.create({
   Ingredient: {
     marginVertical: 4,
     borderRadius: 20,
-   // borderWidth: 2,
     borderColor: 'gray',
     backgroundColor: 'white',
     width: screenWidth * 0.85,
@@ -182,15 +178,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'flex-start',
     flexDirection: 'row',
-
-
   },
   input: {
     width: screenWidth * 0.85,
     height: screenHeight * 0.28,
     margin: 1,
-   // borderWidth: 1,
     padding: 10,
+    fontSize:20
   },
   normalFont: {
     fontSize: 11,
