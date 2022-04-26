@@ -94,7 +94,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                   numColumns={1}
                   data={Task}
                   renderItem={({item}) => (
-                    <View style={styles.taskOrder}  key={item._id} /*onPress={()=>onClickTask(item.num)}*/>
+                    <View style={styles.taskOrder}  key={item._id}>
                       <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>
                       <View style ={styles.bottontoleftside}>  
                         <View style = {styles.forrowview}>

@@ -23,15 +23,17 @@ import TaskOrder from "../screen/chef/TaskOrder";
 import TaskDeny from '../screen/chef/TaskDeny';
 import TaskPrepare from '../screen/chef/TaskPrepare';
 
-import RiderTask from "../screen/rider/RiderTask";
+import RiderTask from '../screen/rider/RiderTask';
 
 import 'react-native-gesture-handler';
 import { DrawerMenu } from './DrawerAdmin';
 import { DrawerChef } from './DrawerChef';
+import { DrawerRider } from './DrawerRider';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Chef = createDrawerNavigator();
+const Rider = createDrawerNavigator();
 
 function AdminNavigator() {
     return (
@@ -65,12 +67,21 @@ function ChefNavigator() {
     )
 };
 
+function RiderNavigator() {
+    return (
+        <Rider.Navigator initialRouteName='RiderTask' screenOptions={{headerShown:false}} drawerContent={props => <DrawerRider{...props}/>}>
+            <Rider.Screen name='RiderTask' component={RiderTask}/>
+            <Rider.Screen name='Log Out' component={LogIn}/>
+        </Rider.Navigator>
+    )
+};
+
 export const HomeStack = () => (
     <Stack.Navigator screenOptions={{headerShown:false}} >
         <Stack.Screen name='LogIn' component={LogIn}/>
         <Stack.Screen name='Admin' component={AdminNavigator}/>
         <Stack.Screen name='Chef'  component={ChefNavigator}/>
-        <Stack.Screen name='Rider' component={RiderTask}/>  
+        <Stack.Screen name='Rider' component={RiderNavigator}/>  
     </Stack.Navigator>
 );
 

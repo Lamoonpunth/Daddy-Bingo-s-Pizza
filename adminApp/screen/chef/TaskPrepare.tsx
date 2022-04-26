@@ -34,31 +34,26 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
 
   ]);
  
-  const onCheckOut = () => {
+  const onSendOut = () => {
     alert('จะกินมั้ย กินก็จ่าย');
-  }
-
-  const onClickPrepare = () =>{
-    alert('nothing');
   }
 
   const onClickAdminIcon = () => {
     navigation.openDrawer();
   }
 
-  const onLogOut = () => {
-    Alert.alert(
-      "Are you sure?",
-      "Have a good day sir.",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel"),
-          style: "cancel"
-        },
-        { text: "Log Out", onPress: () => navigation.pop()}
-      ]
-    );
+  const onSelectedPrepare = (item:any,index:any) =>{
+    const newArrData = Ingredient.map((e, index) =>{
+      if (item.key == e.key){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onClickIng(newArrData);
   }
 
   const getOrderCart = () =>{
@@ -104,13 +99,17 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
                 showsVerticalScrollIndicator={false}
                 numColumns={1}
                 data={Ingredient}
-                renderItem={({ item }) => (
-                  <TouchableOpacity style={styles.Ingredient} key={item.key} onPress={() => onClickPrepare(item.key)}>
+                renderItem={({ item , index}) => (
+                  <TouchableOpacity 
+                  style={[styles.Ingredient,{backgroundColor:item.selected? '#FF6D6D':'white'}]} 
+                  key={item.key} 
+                  onPress={() => onSelectedPrepare(item,index)}>
                     <View style={styles.forrowview}>
                       <Image source={{uri:get+item.img_path}} style={styles.forrowview} />
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.prepareFont}>{item.name} x{item.quantity}</Text>
+                      <Text style={styles.prepareFont}>{item.description}</Text>
                     </View>
                   </TouchableOpacity>
                 )}
@@ -118,8 +117,8 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
             </View>
           </View>
 
-          <TouchableOpacity style={styles.LogoutBox} onPress={onLogOut}>
-            <Text style={styles.checkoutFont}>Log out</Text>
+          <TouchableOpacity style={styles.LogoutBox} onPress={onSendOut}>
+            <Text style={styles.checkoutFont}>Send out delivery</Text>
           </TouchableOpacity>
 
         </View>
@@ -199,7 +198,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       borderRadius: 20,
       borderWidth: 2,
       borderColor: 'gray',
-      backgroundColor: 'white',
       width: screenWidth * 0.8,
       height: screenHeight * 0.15,
       alignItems: "center",
@@ -207,7 +205,7 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       flexDirection: 'row',
     },
     textContainer: {
-      paddingVertical:10,
+      paddingVertical:5,
       paddingLeft:10,
       width: screenWidth * 0.45,
       height: screenHeight * 0.15,
@@ -220,7 +218,7 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       borderRadius:20,
     },
     prepareFont: {
-      fontSize: 18,
+      fontSize: 15,
       color: '#330000',
     },
 
