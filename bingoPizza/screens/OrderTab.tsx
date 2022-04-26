@@ -55,8 +55,8 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
 
   }
 
-  const onClickRecommend = () =>{
-    
+  const onClickRecommend = (item:any) =>{
+    navigation.navigate('More', { item: item, userid: userid });
   }
 
   const onSeeAllRecommend = (type:any) =>{
@@ -113,7 +113,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
                 style={{width:screenWidth}}
                 data={recommend}
                 renderItem={({item}) => (
-                  <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={onClickRecommend}>
+                  <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={() => onClickRecommend(item)}>
                     <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage} />
                   </TouchableOpacity>
                 )}

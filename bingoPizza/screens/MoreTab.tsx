@@ -25,8 +25,12 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
     const [isInCart, setIsInCart] = React.useState(false);
 
     const onBackButton = () =>{
-        navigation.navigate('Menu',{"type":type,userid:userid});
-        
+        if(type == null){
+            navigation.goBack();
+        }
+        else{
+            navigation.navigate('Menu',{"type":type,userid:userid});   
+        }  
     }
 
     const onAddToCart = () =>{
