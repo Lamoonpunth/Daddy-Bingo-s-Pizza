@@ -20,7 +20,6 @@ import Gradient from "../../../styles/Gradient";
 export default function EditMore({navigation,route}:{navigation:any,route:any}) {
 
     const {item} = route.params;
-    console.log(item);
     const {type} = route.params;
     const {userid} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
@@ -35,7 +34,21 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
     }
 
     const onUpdate = () =>{
-
+        console.log(item)
+        fetch("http://10.0.2.2:3000/updatemenu",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                _id: item._id,
+                description:edit,
+                price:editPrice
+            })
+        })
+        .then(response => response.json())
+        .then(json=> {console.log(json)
+        onEdit('')
+        onEditPrice('')
+        navigation.navigate('Menu',{"type":type,userid:userid})})
     }
 
     const onRemove = () =>{
@@ -53,7 +66,6 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
 
     useFocusEffect(
         React.useCallback(() => {
-            console.log(item.name)
           //checkItemInCart()
         }, [item,userid])
       );
