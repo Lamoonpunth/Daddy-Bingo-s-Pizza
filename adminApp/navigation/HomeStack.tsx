@@ -24,7 +24,7 @@ import TaskDeny from '../screen/chef/TaskDeny';
 import TaskPrepare from '../screen/chef/TaskPrepare';
 
 import RiderTask from '../screen/rider/RiderTask';
-
+import RiderDelivery from '../screen/rider/RiderDelivery'
 import 'react-native-gesture-handler';
 import { DrawerMenu } from './DrawerAdmin';
 import { DrawerChef } from './DrawerChef';
@@ -71,6 +71,7 @@ function RiderNavigator() {
     return (
         <Rider.Navigator initialRouteName='RiderTask' screenOptions={{headerShown:false}} drawerContent={props => <DrawerRider{...props}/>}>
             <Rider.Screen name='RiderTask' component={RiderTask}/>
+            <Rider.Screen name='RiderDelivery' component={RiderDelivery}/>
             <Rider.Screen name='Log Out' component={LogIn}/>
         </Rider.Navigator>
     )

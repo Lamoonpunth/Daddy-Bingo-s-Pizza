@@ -619,7 +619,16 @@ app.post('/kitchendone',async(req,res)=>{
     console.log(error)
   }
 })
+app.get('/getwaitingforrider',async(req,res)=>{
+  try{
+    const order = await Order.find({status: "waiting for rider"})
+    res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
 
+})
 app.post('/rideraccept',async(req,res)=>{
   try{
     await Order.updateMany({"_id":req.body._id},{$set:{status: "delivering order"}})

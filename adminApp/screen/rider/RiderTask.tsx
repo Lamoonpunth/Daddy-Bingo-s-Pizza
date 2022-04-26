@@ -32,7 +32,7 @@ export default function RiderTask({ navigation, route }: { navigation: any, rout
     
   ]);
     const onAccept = (item:any) => {
-      navigation.navigate('TaskPrepare',{order:item})
+      navigation.navigate('RiderDelivery',{order:item})
      }
     const onLogOut = () => {
       Alert.alert(
@@ -53,14 +53,14 @@ export default function RiderTask({ navigation, route }: { navigation: any, rout
       navigation.openDrawer();
     }
 
-    const getWaitforkitchen = () =>{
-      fetch('http://10.0.2.2:3000/getwaitingforkitchen')
+    const getWaitfordelivery = () =>{
+      fetch('http://10.0.2.2:3000/getwaitingforrider')
       .then(response => response.json())
       .then(order => {onClickTask(order)})
     }
       useFocusEffect(
       React.useCallback(() => {
-        getWaitforkitchen()
+        getWaitfordelivery()
       }, [])
     );
     return(
