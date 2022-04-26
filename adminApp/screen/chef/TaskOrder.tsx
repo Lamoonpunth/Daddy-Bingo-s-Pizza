@@ -15,6 +15,7 @@ const screenHeight = Dimensions.get('screen').height;
 
 import { globalStyles } from '../../styles/globalStyles';
 import Gradient from '../../styles/Gradient';
+import { useFocusEffect } from '@react-navigation/native';
 //import { FlatList } from "react-native-gesture-handler";
 
 
@@ -34,8 +35,8 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     const onReject = () => {
      navigation.navigate('TaskDeny')
     }
-    const onAccept = () => {
-      navigation.navigate('TaskPrepare')
+    const onAccept = (item:any) => {
+      navigation.navigate('TaskPrepare',{order:item})
      }
     const onLogOut = () => {
       navigation.navigate('Log Out')
@@ -44,6 +45,16 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
       navigation.openDrawer();
     }
 
+    const getWaitforkitchen = () =>{
+      fetch('http://10.0.2.2:3000/getwaitingforkitchen')
+      .then(response => response.json())
+      .then(order => {onClickTask(order)})
+    }
+      useFocusEffect(
+      React.useCallback(() => {
+        getWaitforkitchen()
+      }, [])
+    );
     return(
         <Gradient>
           <View style={styles.container}>
@@ -70,14 +81,14 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                   numColumns={1}
                   data={Task}
                   renderItem={({item}) => (
-                    <View style={styles.taskOrder}  key={item.key} /*onPress={()=>onClickTask(item.num)}*/>
-                      <Text style={styles.taskFont}>{item.num}</Text>
+                    <View style={styles.taskOrder}  key={item._id} /*onPress={()=>onClickTask(item.num)}*/>
+                      <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>
                       <View style ={styles.bottontoleftside}>  
                         <View style = {styles.forrowview}>
                           <TouchableOpacity style={styles.ac_rjbox} onPress={onReject}>
                             <Text style={styles.normalFont}>reject</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity style={styles.acbox} onPress={onAccept}>
+                          <TouchableOpacity style={styles.acbox} onPress={() =>onAccept(item)}>
                             <Text style={styles.normalFont}>accept</Text>
                           </TouchableOpacity>
                         </View>

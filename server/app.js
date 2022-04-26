@@ -264,7 +264,7 @@ app.post('/addpizza',async(req,res) =>{
       type:"pizza",
       price:price,
       ingr_need:null,
-      description:"topping"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
+      description:"topping:"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
       img_path:img_path,
       size: size,
       dough: dough,
@@ -288,7 +288,7 @@ app.post('/adduserpizza',async(req,res) =>{
       type:"userPizza",
       price:price,
       ingr_need:null,
-      description:"topping"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
+      description:"topping:"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
       img_path:img_path,
       size: size,
       dough: dough,
@@ -536,6 +536,17 @@ app.post('/paymentcheck',async(req,res)=>{
   try{
     await Order.updateMany({"_id":req.body._id},{$set:{status: "waiting for kitchen"}})
     res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+
+})
+
+app.get('/getwaitingforkitchen',async(req,res)=>{
+  try{
+    const order = await Order.find({status: "waiting for kitchen"})
+    res.json(order)
   }
   catch(error){
     console.log(error)
