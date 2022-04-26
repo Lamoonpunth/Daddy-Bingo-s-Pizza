@@ -13,6 +13,8 @@ import { StyleSheet,
 
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
+import { useFocusEffect } from '@react-navigation/native';
+import { interpolateColor, useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 
 const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
@@ -20,72 +22,186 @@ const screenHeight = Dimensions.get('screen').height;
 
 export default function OrderAwait({navigation, route}:{navigation:any,route:any}) {
   
-    const [status, onChangeStatus] = React.useState([
-        {status:'Queueing'},
-        {status:'Preparing'},
-        {status:'Delivering'},
-        {status:'Arriving'},
-    ])
-
     const [orderlist, onChangeOrderList] = React.useState([
         {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
         
     ])
-    /**************Animation**************/
-    const progress = useRef(new Animated.Value(0)).current;
-    useEffect(() => {
-      Animated.timing(progress, {toValue:1, useNativeDriver:false, }).start();
-    })
+
+    const queue = useRef(
+      new Animated.Value(0)
+    ).current;
+    const queueIcon = useRef(
+      new Animated.Value(60)
+    ).current;
+    const queueText = useRef(
+      new Animated.Value(-60)
+    ).current;
+    const prepare = useRef(
+      new Animated.Value(0)
+    ).current;
+    const prepareIcon = useRef(
+      new Animated.Value(60)
+    ).current;
+    const prepareText = useRef(
+      new Animated.Value(-60)
+    ).current;
+    const delivery = useRef(
+      new Animated.Value(0)
+    ).current;
+    const deliveryIcon = useRef(
+      new Animated.Value(60)
+    ).current;
+    const deliveryText = useRef(
+      new Animated.Value(-60)
+    ).current;
+    const arrive = useRef(
+      new Animated.Value(0)
+    ).current;
+    const arriveIcon = useRef(
+      new Animated.Value(60)
+    ).current;
+    const arriveText = useRef(
+      new Animated.Value(-60)
+    ).current;
+
+    useFocusEffect(() => {
+      Animated.sequence([
+        Animated.parallel([
+          Animated.timing(queueText,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(queueIcon,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(queue,{
+            toValue:1, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(prepareText,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(prepareIcon,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(prepare,{
+            toValue:1, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(deliveryText,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(deliveryIcon,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(delivery,{
+            toValue:1, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(arriveText,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(arriveIcon,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(arrive,{
+            toValue:1, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(queueText,{
+            toValue:-60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(queueIcon,{
+            toValue:60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(queue,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(prepareText,{
+            toValue:-60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(prepareIcon,{
+            toValue:60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(prepare,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(deliveryText,{
+            toValue:-60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(deliveryIcon,{
+            toValue:60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(delivery,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+        ]),
+        Animated.parallel([
+          Animated.timing(arriveText,{
+            toValue:-60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(arriveIcon,{
+            toValue:60, delay:50, useNativeDriver:true
+          }),
+          Animated.timing(arrive,{
+            toValue:0, delay:50, useNativeDriver:true
+          }),
+        ]),
+      ]).start();
+      setTimeout(()=> {
+        navigation.navigate('Queue');
+       }, 5500);
+    },);
 
   return (
     <Gradient>
       <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.headerFont}>{status[0].status}</Text>
+            <Text style={styles.headerFont}>Delivery</Text>
         </View>
         <View style={styles.status}>
             <View style={styles.statusBar}>
                 <View style={styles.statusIcon}>
-                    <View style={{
-                      alignItems:'center',
-                      justifyContent:'center',
-                      width:screenWidth*0.25,
-                      height:screenWidth*0.25,
-                      backgroundColor:'white',
-                      borderRadius:50,
-                    }}>
+                    <Animated.View style={[styles.iconBox,{opacity:queue,transform:[{translateX:queueIcon}]}]}>
                         <Image source={require('../assets/images/OrderAwait/queueing.png')}/>
-                    </View>
+                    </Animated.View>
                 </View>
                 <View style={styles.statusIcon}>
-                    <View style={styles.iconBox}>
+                    <Animated.View style={[styles.iconBox,{opacity:prepare,transform:[{translateX:prepareIcon}]}]}>
                         <Image source={require('../assets/images/OrderAwait/preparing.png')}/>
-                    </View>
+                    </Animated.View>
                 </View>
                 <View style={styles.statusIcon}>
-                    <View style={styles.iconBox}>
+                    <Animated.View style={[styles.iconBox,{opacity:delivery,transform:[{translateX:deliveryIcon}]}]}>
                         <Image source={require('../assets/images/OrderAwait/delivering.png')}/>
-                    </View>
+                    </Animated.View>
                 </View>
                 <View style={styles.statusIcon}>
-                    <View style={styles.iconBox}>
+                    <Animated.View style={[styles.iconBox,{opacity:arrive,transform:[{translateX:arriveIcon}]}]}>
                         <Image style={styles.image} source={require('../assets/images/OrderAwait/arriving.png')}/>
-                    </View>
+                    </Animated.View>
                 </View>
             </View>
             <View style={styles.statusName}>
-                <View style={styles.nameBox}>
+                <Animated.View style={[styles.nameBox,{opacity:queue,transform:[{translateX:queueText}]}]}>
                     <Text style={styles.nameFont}>Queueing</Text>
-                </View>
-                <View style={styles.nameBox}>
+                </Animated.View>
+                <Animated.View style={[styles.nameBox,{opacity:prepare,transform:[{translateX:prepareText}]}]}>
                     <Text style={styles.nameFont}>Preparing</Text>
-                </View>
-                <View style={styles.nameBox}>
+                </Animated.View>
+                <Animated.View style={[styles.nameBox,{opacity:delivery,transform:[{translateX:deliveryText}]}]}>
                     <Text style={styles.nameFont}>Delivering</Text>
-                </View>
-                <View style={styles.nameBox}>
+                </Animated.View>
+                <Animated.View style={[styles.nameBox,{opacity:arrive,transform:[{translateX:arriveText}]}]}>
                     <Text style={styles.nameFont}>Arriving</Text>
-                </View>
+                </Animated.View>
             </View>
         </View>
         <View style={styles.orderSummary}>
@@ -111,6 +227,11 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     paddingTop:30
   },
+  sqaure: {
+    width:20,
+    height:20,
+    backgroundColor:'blue',
+  },
   header: {
     flex:2,
     backgroundColor:'#FF6D6D',
@@ -118,7 +239,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     width:screenWidth*0.9,
     borderRadius:20,
-    elevation:10
+    elevation:10,
   },
   status: {
     flex:13,

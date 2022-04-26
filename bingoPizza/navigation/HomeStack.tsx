@@ -16,6 +16,10 @@ import SubscriptionSummary from "../screens/SubscriptionSummary";
 import Transaction from "../screens/Transaction";
 import OrderAwait from "../screens/OrderAwait";
 import OrderSummary from "../screens/OrderSummary";
+import Queue from "../screens/Queue";
+import Prepare from "../screens/Prepare";
+import Delivery from "../screens/Delivery";
+import Arrive from "../screens/Arrive";
 
 import 'react-native-gesture-handler';
 
@@ -37,6 +41,10 @@ function HomeOrder(){
             <Order.Screen name='OrderSummary' component={OrderSummary} options={{swipeEnabled:false}}/>
             <Order.Screen name='Transaction' component={Transaction} options={{swipeEnabled:false}}/>
             <Order.Screen name='OrderAwait' component={OrderAwait} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Queue' component={Queue} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Prepare' component={Prepare} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Delivery' component={Delivery} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Arrive' component={Arrive} options={{swipeEnabled:false}}/>
         </Order.Navigator>
     )
 };
