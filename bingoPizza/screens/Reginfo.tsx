@@ -32,6 +32,7 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     const thai = /^[ก-๙]*$/;
     return !(english.test(str) || thai.test(str));
   }
+  const presentYear = new Date().getFullYear();
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
 
@@ -96,10 +97,10 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     else if ( selectedDate=='' || selectedMonth== ''){
       alert("Please select birthmonth and birthyear")
     }   
-    //บัค
-    // else if (parseInt(selectedDate)<=2007) {
-    //   alert("User age must be greater than or equal to 15")
-    // }    
+    
+    else if (presentYear- parseInt(selectedDate) < 15) {
+      alert("User age must be greater than or equal to 15")
+    }    
     else if( phone == ''){
       alert("Please Enter Phone Number")
     }
