@@ -160,6 +160,7 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     }
     else if (selectedSex===0) { 
       alert("Please select gender!")
+      resetState()
     }
     else if (address=='') {
       resetState();
@@ -201,7 +202,7 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
       setZipcodeState(true)
       alert("Zipcode must be no white space!")
     }   
-    else if(isNumeric(selectedZipCode)){
+    else if(!isNumeric(selectedZipCode)){
       resetState();
       setZipcodeState(true)
       alert("Zipcode must be number!")
