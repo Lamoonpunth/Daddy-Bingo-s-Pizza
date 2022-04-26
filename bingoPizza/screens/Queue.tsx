@@ -26,7 +26,8 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
   const [orderList, setOrderList] = useState([
     {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
   ])
-
+  const {cart} = route.params;
+  const {user} = route.params;
   const [address,setAddress] = useState([
     {
       username : 'Username',
@@ -62,9 +63,15 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
       ]),
     ).start();
     setTimeout(()=> {
-      navigation.navigate('Prepare');
+      navigation.navigate('Prepare',{cart:cart,user:user});
      }, 10000);
   });
+  useFocusEffect(
+    React.useCallback(() => {
+      setOrderList(cart)
+      setAddress(user)
+    }, [])
+  );
 
   return (
     <Gradient>
@@ -96,7 +103,7 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
                 />
               </View>
               <View style={styles.addressBox}>
-                <Text style={styles.addressFont}>Address</Text>
+                <Text style={styles.addressFont}>{user.address} {user.province} {user.district} {user.subdistrict}</Text>
               </View>
             </View>
         </View>

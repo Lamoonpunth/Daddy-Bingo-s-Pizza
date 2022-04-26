@@ -21,7 +21,7 @@ export default function Delivery({navigation, route}:{navigation:any,route:any})
       navigation.navigate('Arrive');
      }, 10000);
   });
-
+  
   return (
     <Gradient>
       <View style={styles.container}>

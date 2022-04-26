@@ -85,7 +85,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
     }
     const onConfirm = () =>{
         handleupload(result);
-        navigation.navigate("OrderAwait");
+        navigation.navigate("OrderAwait",{cart:cart,user:user});
     }
 
     const {price} = route.params;

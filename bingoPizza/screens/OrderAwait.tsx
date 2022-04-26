@@ -21,7 +21,8 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function OrderAwait({navigation, route}:{navigation:any,route:any}) {
-  
+    const {cart} = route.params;
+    const {user} = route.params;
     const [orderlist, onChangeOrderList] = React.useState([
         {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
         
@@ -156,9 +157,14 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
         ]),
       ]).start();
       setTimeout(()=> {
-        navigation.navigate('Queue');
+        navigation.navigate('Queue',{cart:cart,user:user});
        }, 5500);
     },);
+    useFocusEffect(
+      React.useCallback(() => {
+        onChangeOrderList(cart)
+      }, [])
+    );
 
   return (
     <Gradient>
