@@ -13,6 +13,7 @@ import { StyleSheet,
 import SwitchSelector from "react-native-switch-selector";
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
+import { useFocusEffect } from '@react-navigation/native';
 const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
@@ -65,7 +66,16 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   const onClickCategory= (type:any)=>{
     navigation.navigate('Menu',{type:type,userid:userid});
   }
-
+  const getRecommendList = () =>{
+    fetch("http://10.0.2.2:3000/getrecommend")
+    .then(response=>response.json())
+    .then(list => onClickRec(list))
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getRecommendList()
+    }, [])
+  );
   return (
     <Gradient>
       <View style={styles.container}>
