@@ -36,8 +36,8 @@ export default function Profile({navigation}:{navigation:any}) {
             </TouchableOpacity>
           </View>
           <Text style={globalStyles.fontHeader}>Your Profile</Text>
-          <View style={globalStyles.underline}></View>
         </View>
+        <View style={globalStyles.underline}></View>
         <View style={styles.detail}>
           <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
             <View style={styles.box1}>
@@ -88,12 +88,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom:-screenHeight*.05,
+    marginLeft:-screenWidth*.2,
+
   },
   iconContainer: {
-    width: screenWidth * 0.9,
+    width: screenWidth * 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'space-between',

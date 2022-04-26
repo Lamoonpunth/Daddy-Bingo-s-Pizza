@@ -53,13 +53,14 @@ export default function SeeAllRecommend({navigation,route}: {navigation:any,rout
 
         <View style={styles.header}>
             <View style={styles.iconContainer} >
-                <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
+                <TouchableOpacity style={styles.backIcon} onPress={onBackButton}>
                   <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon} />
                 </TouchableOpacity>
+                <Text style={styles.fontHeader}>Recommend</Text>
+
             </View>
-            <Text style={globalStyles.fontHeader}>Recommend</Text>
-            <View style={globalStyles.underline}></View>  
         </View>
+        <View style={styles.underline}></View>  
 
         <View style={styles.cartContainer}>
           <FlatList
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   iconContainer: {
-    width:screenWidth*0.9,
+    width:screenWidth*0.75,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
@@ -183,4 +184,21 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     elevation: 12,
   },
+  backIcon: {
+    marginLeft:-screenWidth*.1,
+    marginRight:screenWidth*.1,
+  },
+  underline:{
+    width:screenWidth*.7,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:-screenHeight * .045,
+    marginBottom:-screenHeight *.03,
+  },
+  fontHeader:{
+    fontSize: 42,
+    color:'white',
+    marginLeft:-screenWidth*.04,
+    marginRight:screenWidth*.1,
+  }
 });

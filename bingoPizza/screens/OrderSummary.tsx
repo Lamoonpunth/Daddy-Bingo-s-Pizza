@@ -26,14 +26,14 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
       ]);
     const [rawCart,setRawCart] = React.useState([])
     const [totalPrice,setPrice] = React.useState(0)
-    const [choosepayment1, setChoosePayment1] = React.useState(false);
+    const [choosepayment1, setChoosePayment1] = React.useState(true);
     const [choosepayment2, setChoosePayment2] = React.useState(false);
 
-    const [subtotal, setSubtotal] = React.useState('Nan');
-    const [service, setSetvice] = React.useState('Nan');
-    const [tax, setTax] = React.useState('Nan');
-    const [shipping, setShipping] = React.useState('Nan');
-    const [discount, setDiscount] = React.useState('Nan');
+    const [subtotal, setSubtotal] = React.useState(0);
+    const [service, setSetvice] = React.useState(0);
+    const [tax, setTax] = React.useState(0);
+    const [shipping, setShipping] = React.useState(15);
+    const [discount, setDiscount] = React.useState(0);
     const [total, setTotal] = React.useState(0);
     const [user,setUser] = React.useState();
 
@@ -46,8 +46,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
         setChoosePayment2(false);
     }
     const onMasterVisaChooseButton = () =>{
-        setChoosePayment2(!choosepayment2);
-        setChoosePayment1(false);
+
     }
 
     const onApplyButton = () =>{
@@ -99,11 +98,14 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
     }
 
     const setSum = () =>{
-        let sum = 0
+        let sum = 0, total = 0
         for (let i = 0; i < cart.length; i++) {
             sum += cart[i].price;
+            total += cart[i].price;
           }
+        sum += shipping;
         console.log(sum)
+        setSubtotal(total)
         setTotal(sum)
     }
     const getUser = () =>{
@@ -177,12 +179,12 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                         alignItems: "center",
                         justifyContent: "center",
                         borderRadius: 15,
-                        backgroundColor: choosepayment2 ? "#FF6D6D" : "#fff",
+                        backgroundColor: choosepayment2 ? "#FF6D6D" : "gray",
                         elevation:10,
                         marginRight:10,
                     }}
-                    onPress={onMasterVisaChooseButton}>
-                        <Text style={{ color: choosepayment2? "#fff":"#FF6D6D",fontSize: 16, }}>Master/Visa</Text>
+                    onPress={onMasterVisaChooseButton} disabled={true}>
+                        <Text style={{ color: choosepayment2? "#fff":"#fff",fontSize: 16, }}>Master/Visa</Text>
                 </TouchableOpacity>
 
                 </View>
@@ -276,7 +278,6 @@ const styles = StyleSheet.create({
     },
     orderlistspace:{
         borderColor: 'black',
-        borderWidth:1,
         height: height*.225,
         width: width*.75,
         
