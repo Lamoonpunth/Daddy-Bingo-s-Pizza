@@ -398,7 +398,18 @@ app.post('/removemenu',async(req,res)=>{
   }
 }
 )
-
+app.post('/updatemenu',async(req,res)=>{
+  try{
+    await Menu.updateMany({ "_id":req.body._id},{$set:{"description":req.body.description}});
+    await Menu.updateMany({ "_id":req.body._id},{$set:{"price":req.body.price}});
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+}
+)
 app.post('/addrecommend',async(req,res)=> {
   try{
     const recommend = await Recommend.create({
