@@ -34,8 +34,8 @@ export default function SeeAllRecommend({navigation,route}: {navigation:any,rout
     navigation.goBack()
   }
 
-  const onMoreButton = () => {
-    //navigation.navigate('More');
+  const onMoreButton = (item:any) => {
+    navigation.navigate('More',{ item: item, userid: userid });
   }
   const getRecommendList = () =>{
     fetch("http://10.0.2.2:3000/getrecommend")
@@ -72,7 +72,7 @@ export default function SeeAllRecommend({navigation,route}: {navigation:any,rout
                   <View style={styles.boxDetails}>
                     <Text style={styles.pizzaFont}>{item.name}</Text>
                     <Text style={styles.pizzaFont}>{item.price}</Text>
-                    <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton()}>
+                    <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(item)}>
                       <Text style={{ fontSize: 18, color: '#FF6D7D' }}>More</Text>
                     </TouchableOpacity>
                   </View>
