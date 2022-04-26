@@ -7,112 +7,151 @@ import {
   ScrollView, 
   FlatList, 
   Dimensions,  
-  TouchableOpacity } from 'react-native'
+  ImageBackground,
+  TouchableOpacity 
+  } from 'react-native'
+
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-import { useFocusEffect } from '@react-navigation/native';
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import Gradient from '../../../styles/Gradient';
 import { globalStyles } from '../../../styles/globalStyles';
+import { useFocusEffect } from '@react-navigation/native';
+const get = 'http://10.0.2.2:3000/getImage/'
+export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
-export default function EditPresetPizza({navigation,route}: {navigation:any,route:any}) {
-
-  const [dough, onChangeDough] = React.useState([
-    { name: '', icon: '', price:0 , _id: 0 }
+  const [topping, onChangeTopping] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
   ]);
 
+  const [dough, onChangeDough] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
+  
   const [crust, onChangeCrust] = React.useState([
-    { name: '', icon: '', price:0 , _id: 0 }
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
   const [sauce, onChangeSauce] = React.useState([
-    { name: '', icon: '', price:0 , _id: 0 }
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
   const [pack, onChangePackage] = React.useState([
-    { name: '', icon: '', price:0 , _id: 0 }
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
-  
+  const [size, onChangeSize] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
 
-
-
-
-
-  /*********************** checkbox state ******************************* */
-  const [xsstate, setXSState] = React.useState(false);
-  const [sstate, setSState] = React.useState(false);
-  const [mstate, setMState] = React.useState(false);
-  const [lstate, setLState] = React.useState(false);
-  const [xlstate, setXLState] = React.useState(false);
- /************************ Price Each Size ****************************** */
-  const [xsprice, setXSPrice] = React.useState('Nan');
-  const [sprice, setSPrice] = React.useState('Nan');
-  const [mprice, setMPrice] = React.useState('Nan');
-  const [lprice, setLPrice] = React.useState('Nan');
-  const [xlprice, setXLPrice] = React.useState('Nan');
-
+  const [selectedTopping, setTopping] = React.useState('Bacon')
+  const [selectedSize, setSize] = React.useState('XS');
   const [selectedDough, setDough] = React.useState('Thick');
   const [selectedCrust, setCrust] = React.useState('None');
   const [selectedSauce, setSauce] = React.useState('Tomato-Based');
-  const [selectedPackage, setPackage] = React.useState('Thick');
+  const [selectedPackage, setPackage] = React.useState('Normal');
 
-  /*********************** Set Checkbox State ********************************* */
-  const onXSTick = () => {
-    setXSState(!xsstate)
-    setSState(false)
-    setMState(false)
-    setLState(false)
-    setXLState(false)
+  const [selectedToppingPrice, setToppingPrice] = React.useState(0)
+  const [selectedSizePrice, setSizePrice] = React.useState(99);
+  const [selectedDoughPrice, setDoughPrice] = React.useState(50);
+  const [selectedCrustPrice, setCrustPrice] = React.useState(0);
+  const [selectedSaucePrice, setSaucePrice] = React.useState(50);
+  const [selectedPackagePrice, setPackagePrice] = React.useState(0);
+  const [selectedToppingImage, setToppingImage] = React.useState("PizzaBacon.jpg")
+  const onSelectedTopping = (type:any,item:any,index:any) =>{
+    setTopping(type);
+    setToppingPrice(item.price)
+    setToppingImage(item.img_path)
+    const newArrData = topping.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeTopping(newArrData);
   }
 
-  const onSTick = () => {
-    setXSState(false)
-    setSState(!sstate)
-    setMState(false)
-    setLState(false)
-    setXLState(false)
+  const onSelectedSize = (type:any,item:any,index:any) =>{
+    setSize(type);
+    setSizePrice(item.price)
+    const newArrData = size.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeSize(newArrData);
   }
 
-  const onMTick = () => {
-    setXSState(false)
-    setSState(false)
-    setMState(!mstate)
-    setLState(false)
-    setXLState(false)
-  }
-
-  const onLTick = () => {
-    setXSState(false)
-    setSState(false)
-    setMState(false)
-    setLState(!lstate)
-    setXLState(false)
-  }
-
-  const onXLTick = () => {
-    setXSState(false)
-    setSState(false)
-    setMState(false)
-    setLState(false)
-    setXLState(!xlstate)
-  }
-
-
-  const onSelectedDough = (type:any) =>{
+  const onSelectedDough = (type:any,item:any,index:any) =>{
     setDough(type);
+    setDoughPrice(item.price)
+    const newArrData = dough.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeDough(newArrData);
   }
 
-  const onSelectedCrust = (type:any) =>{
+  const onSelectedCrust = (type:any,item:any,index:any) =>{
     setCrust(type) ;
+    setCrustPrice(item.price)
+    const newArrData = crust.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeCrust(newArrData);
   }
 
-  const onSelectedSauce = (type:any) =>{
+  const onSelectedSauce = (type:any,item:any,index:any) =>{
     setSauce(type);
+    setSaucePrice(item.price)
+    const newArrData = sauce.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeSauce(newArrData);
   }
 
-  const onSelectedPackage = (type:any) =>{
+  const onSelectedPackage = (type:any,item:any,index:any) =>{
     setPackage(type);
+    setPackagePrice(item.price)
+    const newArrData = pack.map((e, index) =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangePackage(newArrData);
   }
 
   const onBackButton = () =>{
@@ -120,14 +159,50 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
   }
 
   const addToCart = () =>{
+    alert("add to menu")
+    fetch("http://10.0.2.2:3000/addpizza",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
     
-  }
-  
+      body:JSON.stringify({    
+        name:selectedTopping,
+        type:"pizza",
+        price:selectedToppingPrice+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice,
+        ingr_need:null,
+        description:null,
+        img_path:selectedToppingImage,
+        size: selectedSize,
+        dough: selectedDough,
+        crust: selectedCrust,
+        sauce: selectedSauce,
+        package: selectedPackage})
+      }
 
+    )
+    .then(response=>response.json())
+    .then(userpizza=>{
+      console.log(userpizza)
+      fetch("http://10.0.2.2:3000/addToCart",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({_id:userid,itemid:userpizza._id,quantity:1,additional:"-"})
+    })
+    .then(response => response.json())
+    .then(data => {console.log(data)})
+    })
+  }
+  const getTopping = () =>{
+    fetch("http://10.0.2.2:3000/getTopping")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeTopping(json)})
+  }
   const getSize = () =>{
-    
+    fetch("http://10.0.2.2:3000/getSize")
+    .then(response=>response.json())
+    .then(json=>{console.log(json)
+    onChangeSize(json)})
   }
-
   const getDough = () =>{
     fetch("http://10.0.2.2:3000/getDough")
     .then(response=>response.json())
@@ -153,6 +228,7 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
     onChangePackage(json)})
   }
   const renderall = () =>{
+    getTopping()
     getSize()
     getDough()
     getCrust()
@@ -166,136 +242,138 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
       //checkItemInCart()
     }, [])
   );
-  
-
-
-
   return (
     <Gradient>
       <View style={styles.container}>
         <ScrollView>
-          <View style={styles.header}>
+          <ImageBackground source={require('../../../assets/images/Category/Pizza.jpg')} style={styles.header} imageStyle={{opacity:0.4}}>
               <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
                   <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
               </TouchableOpacity>
               <Text style={globalStyles.fontHeader}>Preset Pizza</Text>
-          </View>
+          </ImageBackground>
 
           <View style={styles.cartContainer}>
             
             <View style={styles.detailBox}>
-              <Text style={styles.pizzaName}>Pizza Name</Text>
+              <Text style={styles.pizzaName}>{selectedTopping}</Text>
               <Text style={styles.pizzaDetail}>Details</Text>
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
-                <Text style={styles.optionFont}>Size</Text>
-              </View>
-
-              <View style={styles.sizecheckbox}>
-                <View style={styles.sizecheckbutton}>
-                  <Text style={{fontSize:16,}}>XS</Text>
-                  <BouncyCheckbox
-                    style={{margin:12,}}
-                    size={40}
-                    fillColor="#FF6D7D"
-                    unfillColor="#FFFFFF"
-                    disableText={true}
-                    iconStyle={{ borderColor: "#FF6D7D" }}
-                    disableBuiltInState
-                    isChecked={xsstate}
-                    onPress={() => onXSTick()}
-                  />
-                  <Text style={{fontSize:14,}}>8''</Text>
-                  <Text style={{color: xsstate? 'black':'transparent',fontSize:14,}}>${xsprice}</Text>
-                </View>
-
-                <View style={styles.sizecheckbutton}>
-                  <Text style={{fontSize:16,}}>S</Text>
-                  <BouncyCheckbox
-                    style={{margin:12,}}
-                    size={40}
-                    fillColor="#FF6D7D"
-                    unfillColor="#FFFFFF"
-                    disableText={true}
-                    iconStyle={{ borderColor: "#FF6D7D" }}
-                    disableBuiltInState
-                    isChecked={sstate}
-                    onPress={() => onSTick()}
-                  />
-                  <Text style={{fontSize:14,}}>10''</Text>
-                  <Text style={{color: sstate? 'black':'transparent',fontSize:14,}}>${sprice}</Text>
-                </View>
-
-                <View style={styles.sizecheckbutton}>
-                  <Text style={{fontSize:16,}}>M</Text>
-                  <BouncyCheckbox
-                    style={{margin:12,}}
-                    size={40}
-                    fillColor="#FF6D7D"
-                    unfillColor="#FFFFFF"
-                    disableText={true}
-                    iconStyle={{ borderColor: "#FF6D7D" }}
-                    disableBuiltInState
-                    isChecked={mstate}
-                    onPress={() => onMTick()}
-                  />
-                  <Text style={{fontSize:14,}}>12''</Text>
-                  <Text style={{color: mstate? 'black':'transparent',fontSize:14,}}>${mprice}</Text>
-                </View>
-
-                <View style={styles.sizecheckbutton}>
-                  <Text style={{fontSize:16,}}>L</Text>
-                  <BouncyCheckbox
-                    style={{margin:12,}}
-                    size={40}
-                    fillColor="#FF6D7D"
-                    unfillColor="#FFFFFF"
-                    disableText={true}
-                    iconStyle={{ borderColor: "#FF6D7D" }}
-                    disableBuiltInState
-                    isChecked={lstate}
-                    onPress={() => onLTick()}
-                    
-                  />
-                  <Text style={{fontSize:14,}}>14''</Text>
-                  <Text style={{color: lstate? 'black':'transparent',fontSize:14,}}>${lprice}</Text>
-                </View>
-
-                <View style={styles.sizecheckbutton}>
-                  <Text style={{fontSize:16,}}>XL</Text>
-                  <BouncyCheckbox
-                    style={{margin:12,}}
-                    size={40}
-                    fillColor="#FF6D7D"
-                    unfillColor="#FFFFFF"
-                    disableText={true}
-                    iconStyle={{ borderColor: "#FF6D7D" }}
-                    disableBuiltInState
-                    isChecked={xlstate}
-                    onPress={() => onXLTick()}
-                  />
-                  <Text style={{fontSize:14,}}>16''</Text>
-                  <Text style={{color: xlstate? 'black':'transparent',fontSize:14,}}>${xlprice}</Text>
-                </View>
-
-                
+              <ImageBackground source={require('../../../assets/images/topping.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
+                <Text style={styles.optionFont}>Topping</Text>
+              </ImageBackground>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={topping}
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedTopping(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                            {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
+                    </TouchableOpacity>
+                  )}
+                />
               </View>
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
-                <Text style={styles.optionFont}>Dough</Text>
+              <ImageBackground source={require('../../../assets/images/size.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
+                <Text style={styles.optionFont}>Size</Text>
+              </ImageBackground>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={size}
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedSize(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                            {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
+                    </TouchableOpacity>
+                  )}
+                />
               </View>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <ImageBackground source={require('../../../assets/images/dough.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
+                <Text style={styles.optionFont}>Dough</Text>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={dough}
-                  renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedDough} key={item._id}>
-                      <Text>{item.name}</Text>
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedDough(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                            {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
                     </TouchableOpacity>
                   )}
                 />
@@ -303,17 +381,39 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../../../assets/images/crust.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Crust</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
-                  horizontal={true}
                   showsHorizontalScrollIndicator={false}
+                  horizontal={true}
                   data={crust}
-                  renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedCrust} key={item._id}>
-                      <Text>{item.name}</Text>
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedCrust(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                            {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
                     </TouchableOpacity>
                   )}
                 />
@@ -321,17 +421,39 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../../../assets/images/sauce.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Sauce</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
-                  horizontal={true}
                   showsHorizontalScrollIndicator={false}
+                  horizontal={true}
                   data={sauce}
-                  renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedSauce} key={item._id}>
-                      <Text>{item.name}</Text>
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedSauce(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                            {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
                     </TouchableOpacity>
                   )}
                 />
@@ -339,17 +461,39 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
             </View>
 
             <View style={styles.optionsBox}>
-              <View style={styles.optionHeader}>
+              <ImageBackground source={require('../../../assets/images/package.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
                 <Text style={styles.optionFont}>Package</Text>
-              </View>
+              </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
-                  horizontal={true}
                   showsHorizontalScrollIndicator={false}
+                  horizontal={true}
                   data={pack}
-                  renderItem={({item}) => (
-                    <TouchableOpacity style={styles.optionBox} onPress={onSelectedPackage} key={item._id}>
-                      <Text>{item.name}</Text>
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedPackage(item.name,item,index)}
+                    key={item._id}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.4
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}
+                            {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
                     </TouchableOpacity>
                   )}
                 />
@@ -360,6 +504,7 @@ export default function EditPresetPizza({navigation,route}: {navigation:any,rout
         </ScrollView>
         <TouchableOpacity style={styles.checkoutBox} onPress={addToCart}>
           <Text style={styles.checkoutFont}>Add to cart</Text>
+          <Text style={styles.checkoutFont}>{selectedToppingPrice+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice}</Text>
         </TouchableOpacity>   
       </View>
     </Gradient>
@@ -392,7 +537,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-around',
     width:screenWidth,
-    height:screenHeight*1.6,
+    height:screenHeight*1.8,
     backgroundColor:'#FFD1D1',
     elevation: 10,
   },
@@ -457,6 +602,36 @@ const styles = StyleSheet.create({
   optionBox: {
     alignItems:'center',
     justifyContent:'center',
+    backgroundColor: 'transparent',
+    width:screenWidth*0.5,
+    height:screenHeight*0.15,
+    marginHorizontal:10,
+    borderRadius:20,
+    elevation:5
+  },
+  crustBox: {
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'white',
+    width:screenWidth*0.5,
+    height:screenHeight*0.15,
+    marginHorizontal:10,
+    borderRadius:20,
+    elevation:5
+  },
+  sauceBox: {
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'white',
+    width:screenWidth*0.5,
+    height:screenHeight*0.15,
+    marginHorizontal:10,
+    borderRadius:20,
+    elevation:5
+  },
+  packageBox: {
+    alignItems:'center',
+    justifyContent:'center',
     backgroundColor:'white',
     width:screenWidth*0.5,
     height:screenHeight*0.15,
@@ -465,9 +640,9 @@ const styles = StyleSheet.create({
     elevation:5
   },
   checkoutBox:{
-    flexDirection:'column',
+    flexDirection:'row',
     alignItems:'center',
-    justifyContent:'center',
+    justifyContent:'space-evenly',
     width: screenWidth,
     height: screenHeight * 0.075,
     //borderRadius: 5,

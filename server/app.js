@@ -261,7 +261,7 @@ app.post('/addpizza',async(req,res) =>{
     const {name,price,img_path,size,dough,crust,sauce,package} = req.body;
     const menu = await Menu.create({
       name:name,
-      type:"Pizza",
+      type:"pizza",
       price:price,
       ingr_need:null,
       description:"topping"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
