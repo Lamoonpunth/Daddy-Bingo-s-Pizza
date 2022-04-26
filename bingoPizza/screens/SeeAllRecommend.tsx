@@ -71,7 +71,7 @@ export default function SeeAllRecommend({navigation,route}: {navigation:any,rout
                   </View>
                   <View style={styles.boxDetails}>
                     <Text style={styles.pizzaFont}>{item.name}</Text>
-                    <Text style={styles.pizzaFont}>5000</Text>
+                    <Text style={styles.pizzaFont}>{item.price}</Text>
                     <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton()}>
                       <Text style={{ fontSize: 18, color: '#FF6D7D' }}>More</Text>
                     </TouchableOpacity>
