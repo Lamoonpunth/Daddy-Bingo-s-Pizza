@@ -81,16 +81,15 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
         <Gradient>
           <View style={styles.container}>
 
-            <View style={styles.adminBox}>
-              <TouchableOpacity onPress={onClickAdminIcon}>
-                <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
-              </TouchableOpacity>
-            </View>
+            
 
             <View style={styles.header}>
-                <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
-                    <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon }/> 
+              <View style={styles.adminBox}>
+                <TouchableOpacity onPress={onClickAdminIcon}>
+                  <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
                 </TouchableOpacity>
+              </View>
+
                 <Text style={globalStyles.fontHeader}>TASK</Text> 
                 <View style={styles.iconContainer}>
 
@@ -108,10 +107,10 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                       <View style ={styles.bottontoleftside}>  
                         <View style = {styles.forrowview}>
                           <TouchableOpacity style={styles.ac_rjbox} onPress={onReject}>
-                            <Text style={styles.normalFont}>reject</Text>
+                            <Text style={styles.normalFont1}>Deny</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity style={styles.acbox} onPress={() =>onAccept(item)}>
-                            <Text style={styles.normalFont}>accept</Text>
+                          <TouchableOpacity style={styles.acbox} onPress={onAccept}>
+                            <Text style={styles.normalFont2}>Accept</Text>
                           </TouchableOpacity>
                         </View>
                       </View>
@@ -205,7 +204,7 @@ const styles = StyleSheet.create({
     adminBox: {
       flexWrap:'wrap',
       flexDirection:'row',
-      width:screenWidth*0.85,
+      width:screenWidth*0.15,
       height:screenWidth*0.125
     },
     adminIcon: {
@@ -218,7 +217,6 @@ const styles = StyleSheet.create({
     taskOrder: {
       marginVertical:4,
       borderRadius:20,
-      borderWidth:2,
       borderColor:'gray',
       backgroundColor:'white',
       width:screenWidth*0.85,
@@ -226,6 +224,7 @@ const styles = StyleSheet.create({
       flexDirection:'column',
       alignItems:'flex-start',
       justifyContent:'center',
+      elevation:8,
       
     },
     taskFont: {
@@ -252,25 +251,30 @@ const styles = StyleSheet.create({
     },
     ac_rjbox: {
       flexDirection:'row',
-      borderWidth:1,
       width:screenWidth*0.2,
       height:25,
       justifyContent: 'center',
       borderRadius:50,
+      backgroundColor:'white',
+      elevation:8,
     },
     acbox: {
       flexDirection:'row',
-      borderWidth:1,
       width:screenWidth*0.2,
       height:25,
       justifyContent: 'center',
       backgroundColor: '#FF6D7D',
       borderRadius:50,
+      elevation:8,
 
     },
-    normalFont:{
-      fontSize: 18,
-      color:'#330000',
+    normalFont1:{
+      fontSize: 16,
+      color:'#FF6D7D',
+    },
+    normalFont2:{
+      fontSize: 16,
+      color:'#fff',
     },
     
 });

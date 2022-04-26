@@ -36,11 +36,7 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
   return (
     <Gradient>
       <View style={styles.container}>
-        <View style={styles.adminBox}>
-          <TouchableOpacity onPress={onClickAdminIcon}>
-            <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon} />
-          </TouchableOpacity>
-        </View>
+       
         <View style={styles.header}>
           <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
               <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon }/> 
@@ -57,10 +53,8 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
             multiline={true}
             numberOfLines={13}
             maxLength ={400}
-
-            placeholder="useless placeholder"
-            keyboardType="numeric"/>
-          
+            placeholder="type reason"
+          />
 
           </View>
         </View>
@@ -77,21 +71,21 @@ export default function TaskDeny({ navigation }: { navigation: any }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical:50,
-    width:screenWidth,
-    height:screenHeight,
-    alignItems:'center',
-    justifyContent:'space-evenly',
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
     backgroundColor: 'transparent',
   },
   header: {
-    width:screenWidth*.8,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
+    marginRight:75,
+    marginTop:20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconContainer: {
-    width: screenWidth * 0.1,
+    width: screenWidth * 0.2,
     flexDirection: 'row',
     alignItems: 'flex-start'
   },
@@ -110,8 +104,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: screenWidth * .89,
-    height: screenHeight * .3,
+    width: screenWidth * .8,
+    height: screenHeight * .2,
+    elevation:10,
     backgroundColor: '#fff',
   },
 
@@ -180,9 +175,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   input: {
-    width: screenWidth * 0.85,
-    height: screenHeight * 0.28,
+    width: screenWidth * 0.8,
+    height: screenHeight * 0.2,
     margin: 1,
+    borderWidth: 1,
     padding: 10,
     fontSize:20
   },
