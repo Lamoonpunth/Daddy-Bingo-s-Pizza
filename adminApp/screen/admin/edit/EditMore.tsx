@@ -20,12 +20,14 @@ import Gradient from "../../../styles/Gradient";
 export default function EditMore({navigation,route}:{navigation:any,route:any}) {
 
     const {item} = route.params;
+    console.log(item);
     const {type} = route.params;
     const {userid} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
     const [isInCart, setIsInCart] = React.useState(false);
 
     const [edit, onEdit] = React.useState('');
+    const [editPrice, onEditPrice] = React.useState('');
 
     const onBackButton = () =>{
         navigation.navigate('Menu',{"type":type,userid:userid});
@@ -72,11 +74,17 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
                     <View style={styles.detail}>
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                             <TextInput 
+                                multiline
                                 style={styles.descriptionFont} 
                                 placeholder={item.description}
                                 value={edit} 
                                 onChangeText={onEdit}/>
                         </ScrollView>
+                        <TextInput 
+                            style={styles.descriptionFont} 
+                            placeholder={'ราคา '+String(item.price)}
+                            value={editPrice} 
+                            onChangeText={onEditPrice}/>
                     </View>
                     <View style={styles.selected}>
                         {edit == ''?
@@ -133,6 +141,8 @@ const styles = StyleSheet.create({
         borderRadius:50,
     },
     detail: {
+        alignItems:'center',
+        justifyContent:'center',
         width:screenWidth*.8,
         height:screenHeight*.3,
         //borderWidth:1,
