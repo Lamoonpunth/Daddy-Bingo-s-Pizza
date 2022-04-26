@@ -9,6 +9,7 @@ import { StyleSheet,
 import Gradient from '../../styles/Gradient';
 import { globalStyles } from '../../styles/globalStyles';
 import { useFocusEffect } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
@@ -17,6 +18,11 @@ const screenHeight = Dimensions.get('screen').height;
 export default function Delivery({navigation, route}:{navigation:any,route:any}) {
 
   const {order} = route.params;
+
+  const onComplete = () =>{
+    
+  }
+
   return (
     <Gradient>
       <View style={styles.container}>
@@ -35,8 +41,6 @@ export default function Delivery({navigation, route}:{navigation:any,route:any})
                 Rider Name
               </Text>
             </View>
-            <Text  style={globalStyles.underline}>
-              </Text>
             <View style={styles.detail}>
               <Text  style={styles.orderFont}>
                 Estimated Time
@@ -47,6 +51,9 @@ export default function Delivery({navigation, route}:{navigation:any,route:any})
               <Text  style={styles.orderFont}>
                 {order.address} {order.province} {order.district} {order.subdistrict}
               </Text>
+              <TouchableOpacity style={styles.complete} onPress={onComplete}>
+                <Text style={{fontSize:16}}>Complete</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -123,6 +130,14 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'space-evenly',
+  },
+  complete: {
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'white',
+    width:screenWidth*0.3,
+    height:screenHeight*0.05,
+    borderRadius:20
   },
   /*************************************Font*********************************/
   headerFont: {
