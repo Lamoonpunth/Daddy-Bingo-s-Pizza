@@ -31,7 +31,14 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
   }
 
   const onComplete = () =>{
-    
+    fetch("http://10.0.2.2:3000/paymentcheck",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json'},
+                body:JSON.stringify({_id:payment._id})
+      }
+    )
+    .then(response=>response.json())
+    .then(json=>console.log(json))
   }
 
   const getOrderCart = () =>{

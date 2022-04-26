@@ -261,10 +261,10 @@ app.post('/addpizza',async(req,res) =>{
     const {name,price,img_path,size,dough,crust,sauce,package} = req.body;
     const menu = await Menu.create({
       name:name,
-      type:"Pizza",
+      type:"pizza",
       price:price,
       ingr_need:null,
-      description:"topping"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
+      description:"topping:"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
       img_path:img_path,
       size: size,
       dough: dough,
@@ -288,7 +288,7 @@ app.post('/adduserpizza',async(req,res) =>{
       type:"userPizza",
       price:price,
       ingr_need:null,
-      description:"topping"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
+      description:"topping:"+name+" size:"+size+" dough:"+dough+" crust:"+crust+" sauce:"+sauce+" package:"+package,
       img_path:img_path,
       size: size,
       dough: dough,
@@ -401,7 +401,21 @@ app.post('/removemenu',async(req,res)=>{
 
 app.post('/addrecommend',async(req,res)=> {
   try{
-    const recommend = await Recommend.create({menuid:req.body.menuid})
+    const recommend = await Recommend.create({
+      menuid:req.body.menuid,
+      name : req.body.name,
+      type : req.body.type,
+      price: req.body.price,
+      ingr_need:req.body.ingr_need,
+      description:req.body.description,
+      img_path: req.body.img_path,
+      //onlypizza
+      size: req.body.size,
+      dough: req.body.dough,
+      crust: req.body.crust,
+      sauce: req.body.sauce,
+      package: req.body.package 
+    })
     recommend.save()
     res.json(recommend)
   }
@@ -421,6 +435,16 @@ app.get('/getrecommend',async(req,res)=>{
   }
 })
 
+app.post('/removerecommend',async(req,res)=>{
+  try
+  {
+    const recommend = await Recommend.find({ "_id":req.body._id }).deleteOne();
+    res.json(recommend)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 app.post('/addToCart',async(req,res) =>{
     try{
       const user = await User.findOne({"_id":req.body._id})
@@ -492,6 +516,7 @@ app.post('/checkout',async(req,res)=>{
       district : req.body.district,
       subdistrict : req.body.subdistrict,
       postcode:req.body.postcode,
+      bill_img:req.body.bill_img
     })
     res.json(order)
   }
@@ -535,6 +560,17 @@ app.post('/paymentcheck',async(req,res)=>{
   try{
     await Order.updateMany({"_id":req.body._id},{$set:{status: "waiting for kitchen"}})
     res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+
+})
+
+app.get('/getwaitingforkitchen',async(req,res)=>{
+  try{
+    const order = await Order.find({status: "waiting for kitchen"})
+    res.json(order)
   }
   catch(error){
     console.log(error)
@@ -713,7 +749,7 @@ const upload = multer({storage: fileStorageEngine});
 
 app.post('/uploadSingle', upload.single('image'), (req, res) => {
   console.log(req.file);
-  res.send(req.file.path);
+  res.send(req.file);
 });
 
 app.get('/getImage/:fileName', (req, res) => {

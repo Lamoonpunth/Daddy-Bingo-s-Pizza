@@ -29,7 +29,27 @@ export default function EditAddRecommend({navigation,route}:{navigation:any,rout
     }
 
     const onAddMenu = (menu:any) =>{
-        
+        console.log(menu)
+        fetch("http://10.0.2.2:3000/addrecommend",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                menuid:menu._id,
+                name:menu.name,
+                type:menu.type,
+                price:menu.price,
+                ingr_need:menu.ingr_need,
+                description:menu.description,
+                img_path:menu.img_path,
+                size:menu.size,
+                dough:menu.dough,
+                crust:menu.crust,
+                sauce:menu.sauce,
+                package:menu.package
+            })
+        })
+        .then(response=>response.json())
+        .then(json=>console.log(json))
     }
 
     const Item = ({ title }: { title: any }) => (

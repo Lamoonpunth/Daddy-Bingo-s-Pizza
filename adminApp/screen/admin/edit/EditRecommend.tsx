@@ -16,7 +16,7 @@ const screenHeight = Dimensions.get('screen').height;
 import Gradient from '../../../styles/Gradient';
 import { globalStyles } from '../../../styles/globalStyles';
 import { color } from 'react-native-reanimated';
-
+import { useFocusEffect } from '@react-navigation/native';
 export default function EditRecommend({navigation,route}: {navigation:any,route:any}) {
 
   const [recommend,setRecommend] = React.useState([
@@ -33,16 +33,33 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
     navigation.goBack()
   }
 
-  const onRemove = () =>{
-    
-  }
+  const onRemove = (recommend:any) =>{
+    fetch("http://10.0.2.2:3000/removerecommend",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({_id:recommend._id})
+            
+  })
+  .then(response=>response.json())
+  .then(json=>console.log(json))
+  getRecommendList()
+}
 
   const onAddRecommend = () =>{
     navigation.navigate('AddRecommend');
   }
   
   
-
+  const getRecommendList = () =>{
+    fetch("http://10.0.2.2:3000/getrecommend")
+    .then(response=>response.json())
+    .then(list => setRecommend(list))
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getRecommendList()
+    }, [])
+  );
   return (
     <Gradient>
       <View style={styles.container}>
@@ -70,8 +87,8 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
                   </View>
                   <View style={styles.boxDetails}>
                     <Text style={styles.pizzaFont}>{item.name}</Text>
-                    <Text style={styles.pizzaFont}>5000</Text>
-                    <TouchableOpacity style={styles.remove} onPress={onRemove}>
+                    <Text style={styles.pizzaFont}>{item.price}</Text>
+                    <TouchableOpacity style={styles.remove} onPress={()=>onRemove(item)}>
                       <Image source={require('../../../assets/images/trash-white.png')}/>
                     </TouchableOpacity>
                   </View>

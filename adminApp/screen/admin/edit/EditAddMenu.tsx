@@ -26,6 +26,7 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
     const [description, onDescription] = React.useState('');
     const [price, onPrice] = React.useState('');
     const [image, setImage] = useState(null);
+    const [result,setResult] = useState();
 
     const onBackButton = () =>{
         navigation.navigate('Menu',{"type":type,userid:userid});
@@ -38,6 +39,37 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
 
     const onAddMenu = () =>{
         alert('สินค้าชื่อ : '+ nameMenu + 'ราคา : '+ price);
+
+        var extension = result.uri.split(".")
+        extension.reverse()
+        let newfile = {
+            uri:result.uri,
+            type:`menu/${extension[0]}`,
+            name:`menu.${extension[0]}`
+        }
+        var formdata = new FormData();
+        formdata.append('image', newfile);
+        console.log(formdata)
+        fetch("http://10.0.2.2:3000/uploadSingle",{
+        method:"POST",
+        body:formdata,
+        })
+        .then(response=>response.json())
+        .then(file=>{        
+            fetch("http://10.0.2.2:3000/addmenu",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                "name":nameMenu,
+                "type":type,
+                "price":price,
+                "ingr_need":[],
+                "description":description,
+                "img_path":file.filename
+            })
+            }
+        )})
+
     }
 
     const pickImage = async () => {
@@ -51,17 +83,8 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
     
         console.log(result);    
         if (!result.cancelled) {
-          setImage(result.uri);         
-        const requestOptions = {
-            method: 'POST',
-            body:{  KEY:'image',
-                    VALUE: result.uri
-                },                  
-        };
-        const postUri = 'http://10.0.2.2:3000/uploadSingle' 
-        fetch(postUri, requestOptions)     
-
-
+          setImage(result.uri); 
+          setResult(result)
         }
       };
 
@@ -72,7 +95,7 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
                     <TouchableOpacity style={styles.iconContainer} onPress={() => {onBackButton()}}>
                         <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>   
                     </TouchableOpacity>
-                    <Text style={styles.fontHeader}>Add Menu</Text>
+                    <Text style={styles.fontHeader}>Add {type}</Text>
                     <View style={globalStyles.underline}></View>  
                 </View>
 

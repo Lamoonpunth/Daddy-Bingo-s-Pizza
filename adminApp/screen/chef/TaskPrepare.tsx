@@ -12,14 +12,15 @@ import {
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-
+const get = "http://10.0.2.2:3000/getImage/"
 import { globalStyles } from '../../styles/globalStyles';
 import Gradient from '../../styles/Gradient';
 //import { FlatList } from "react-native-gesture-handler";
 import Constants from 'expo-constants';
-
-export default function TaskPrepare({ navigation }: { navigation: any }) {
+import { useFocusEffect } from '@react-navigation/native';
+export default function TaskPrepare({ navigation,route }: { navigation: any ,route:any}) {
   
+  const {order} = route.params;
   const [Ingredient, onClickIng] = React.useState([
     { num: 'Order1', key: '1', img_path: require('../../assets/images/mexicangreenwave.png') },
     { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
@@ -38,7 +39,29 @@ export default function TaskPrepare({ navigation }: { navigation: any }) {
   const onClickAdminIcon = () => {
     navigation.openDrawer();
   }
-  
+  const getOrderCart = () =>{
+    onClickIng([])
+    console.log(order._id)
+    fetch("http://10.0.2.2:3000/getordercart?_id="+order._id)
+    .then(response => response.json())
+    .then(cart => {
+      console.log(cart)
+      for (let i = 0; i < cart.length; i++) {
+        fetch("http://10.0.2.2:3000/getID?id="+cart[i].id)
+        .then(response => response.json())
+        .then(item => {
+          const newitem = {name:item[0].name,img_path:item[0].img_path,quantity:cart[i].quantity,additional:cart[i].additional,key:cart[i].id,price:item[0].price,type:item[0].type,description:item[0].description}
+          onClickIng(cart => [...cart,newitem] );
+        })
+      }
+    })
+    .catch(error => console.log(error))
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getOrderCart()
+    }, [order])
+  );
     return (
       <Gradient>
         <View style={styles.container}>
@@ -69,12 +92,13 @@ export default function TaskPrepare({ navigation }: { navigation: any }) {
                 />*/
                   <TouchableOpacity style={styles.Ingredient} key={item.key} onPress={() => onClickIngredient(item.key)}>
                     <View style={styles.forrowview}>
-                      <Image source={item.img_path} style={{
+                      <Image source={{uri:get+item.img_path}} style={{
                         width: 120,
                         height: 120
                       }} />
                     </View>
-                    <Text>{item.num}</Text>
+                    <Text>{item.name} x{item.quantity}</Text>
+                    <Text>{item.description}</Text>
                   </TouchableOpacity>
 
                 )}

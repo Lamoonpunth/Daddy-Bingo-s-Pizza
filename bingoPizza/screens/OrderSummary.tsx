@@ -55,29 +55,30 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
     }
 
     const onCheckOutButton = () =>{
-        console.log(cart)
-        fetch("http://10.0.2.2:3000/checkout",{
-            method:"POST",
-            headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({
-            userid:userid,
-            cart:rawCart,
-            user_fname:user.fname,
-            user_lname:user.lname,
-            price:total,
-            province:user.province,
-            district:user.district,
-            subdistrict:user.subdistrict,
-            postcode:user.postcode
-            })
-        })
-        .then(response => response.json())
-        .then(json =>{
-            console.log(json)
-            console.log(total)
-            navigation.navigate('Transaction',{price:total});
-        })
-        .catch(error => console.log(error))
+        // console.log(cart)
+        // fetch("http://10.0.2.2:3000/checkout",{
+        //     method:"POST",
+        //     headers:{'Content-Type': 'application/json'},
+        //     body:JSON.stringify({
+        //     userid:userid,
+        //     cart:rawCart,
+        //     user_fname:user.fname,
+        //     user_lname:user.lname,
+        //     price:total,
+        //     province:user.province,
+        //     district:user.district,
+        //     subdistrict:user.subdistrict,
+        //     postcode:user.postcode
+        //     })
+        // })
+        // .then(response => response.json())
+        // .then(json =>{
+        //     console.log(json)
+        //     console.log(total)
+        //     navigation.navigate('Transaction',{price:total});
+        // })
+        // .catch(error => console.log(error))
+        navigation.navigate('Transaction',{price:total,cart:cart,rawCart:rawCart,user:user,userid:userid,total:total});
     }
     const getRawCart = async() =>{
         setTotal(0)

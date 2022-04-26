@@ -22,7 +22,8 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
 
     const [image, setImage] = useState(null);
     const [isUpload , setIsUpload] = React.useState(false);
-
+    const {cart,rawCart,user,userid,total} = route.params
+    const [result,setResult] = React.useState({});
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -32,15 +33,58 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
             quality: 1,
         });
 
-        console.log(result);
-
         if (!result.cancelled) {
-            setImage(result.uri);
+            setResult(result)
+            setImage("Uploaded");
         }
     };
 
+    const handleupload = (image) =>{
+        console.log(image.uri)
+        var extension = image.uri.split(".")
+        extension.reverse()
+        let newfile = {
+            uri:image.uri,
+            type:`bill/${extension[0]}`,
+            name:`bill.${extension[0]}`
+        }
+        var formdata = new FormData();
+        formdata.append('image', newfile);
+        console.log(formdata)
+        fetch("http://10.0.2.2:3000/uploadSingle",{
+        method:"POST",
+        body:formdata,
+        })
+        .then(response=>response.json())
+        .then(file=>{
+            console.log(file.filename)
+            fetch("http://10.0.2.2:3000/checkout",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json'},
+                body:JSON.stringify({
+                userid:userid,
+                cart:rawCart,
+                user_fname:user.fname,
+                user_lname:user.lname,
+                price:total,
+                province:user.province,
+                district:user.district,
+                subdistrict:user.subdistrict,
+                postcode:user.postcode,
+                bill_img:file.filename
+                })
+            })
+            .then(response => response.json())
+            .then(json =>{
+                console.log(json)
+            })
+            .catch(error => console.log(error))
+        })
+        .catch(error =>console.log(error))
+
+    }
     const onConfirm = () =>{
-        navigation.navigate('OrderAwait');
+        handleupload(result)
     }
 
     const {price} = route.params;
@@ -59,7 +103,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                 <Image style={styles.transaction} source={{uri:"https://qrmango.com/promptpay/qr?pp_no=0808491161"+"&amount="+price+"&size=300"}}/>
                 <View style={styles.insertBox}>
                     <Text style={styles.insertFont}>Insert transaction</Text>
-                    <Text style={styles.imageNameFont}>Image name</Text> 
+                    <Text style={styles.imageNameFont}>{image}</Text> 
                     <View style={styles.upload}>
                         <TouchableOpacity style={styles.insertButton} onPress={pickImage}>
                             <Text style={styles.uploadFont}>Upload</Text>

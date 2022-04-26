@@ -51,7 +51,12 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
     navigation.goBack()
   }
   const onAddMenu = () => {
+    if (type !== 'Pizza'){
     navigation.navigate('AddMenu',{type: type, userid: userid })
+    }
+    else{
+      navigation.navigate('AddPizza')
+    }
   }
   const renderMenuBox = () => {
     const get = 'http://10.0.2.2:3000/getImage/'

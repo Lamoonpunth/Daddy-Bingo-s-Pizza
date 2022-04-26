@@ -15,7 +15,7 @@ import { globalStyles } from '../../styles/globalStyles';
 const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
-
+import { useFocusEffect } from '@react-navigation/native';
 export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
   
   const {userid} = route.params;
@@ -62,7 +62,16 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   const onEditPromo = () =>{
 
   }
-
+  const getRecommendList = () =>{
+    fetch("http://10.0.2.2:3000/getrecommend")
+    .then(response=>response.json())
+    .then(list => onClickRec(list))
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getRecommendList()
+    }, [])
+  );
   // useEffect(()=>{
   // getMenuList
   // },[])
