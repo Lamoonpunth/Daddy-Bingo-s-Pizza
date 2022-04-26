@@ -16,7 +16,7 @@ const screenHeight = Dimensions.get('screen').height;
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 import { color } from 'react-native-reanimated';
-
+import { useFocusEffect } from '@react-navigation/native';
 export default function SeeAllRecommend({navigation,route}: {navigation:any,route:any}) {
   
   const { userid } = route.params;
@@ -37,7 +37,16 @@ export default function SeeAllRecommend({navigation,route}: {navigation:any,rout
   const onMoreButton = () => {
     //navigation.navigate('More');
   }
-
+  const getRecommendList = () =>{
+    fetch("http://10.0.2.2:3000/getrecommend")
+    .then(response=>response.json())
+    .then(list => setRecommend(list))
+  }
+  useFocusEffect(
+    React.useCallback(() => {
+      getRecommendList()
+    }, [])
+  );
   return (
     <Gradient>
       <View style={styles.container}>
