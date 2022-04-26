@@ -15,6 +15,7 @@ import { globalStyles } from '../../styles/globalStyles';
 const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
+import * as ImagePicker from 'expo-image-picker';
 import { useFocusEffect } from '@react-navigation/native';
 export default function HomeAdmin({navigation, route}:{navigation:any,route:any}) {
   
@@ -22,6 +23,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
   const [userType, onChangeUserType] = React.useState('Delivery');
   /*ตัวเลือกของswitch selector*/ 
 
+  const [promotionImage, setPromotionImage] = useState(null);
   const [promotion, onClickPromo] = React.useState([
     {}
   ]);
@@ -43,9 +45,21 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     navigation.openDrawer();
   }
 
-  const onClickPromotion = () =>{
-    
-  }
+  const onEditPromo = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setPromotionImage(result.uri);
+    }
+  };
 
   const onClickRecommend = () =>{
     
@@ -59,9 +73,6 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
     navigation.navigate('Menu',{type:type,userid:userid});
   }
 
-  const onEditPromo = () =>{
-
-  }
   const getRecommendList = () =>{
     fetch("http://10.0.2.2:3000/getrecommend")
     .then(response=>response.json())

@@ -30,6 +30,10 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
     navigation.navigate('Awaiting');
   }
 
+  const onTransInfo = () =>{
+    navigation.navigate('TransactionInfo',{payment:payment});
+  }
+
   const onComplete = () =>{
     fetch("http://10.0.2.2:3000/paymentcheck",{
                 method:"POST",
@@ -107,6 +111,9 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
           </View>
           <View style={styles.moreDetail}>
             <View style={styles.topic}>
+              <TouchableOpacity onPress={onTransInfo}>
+                <Text style={styles.transaction}>ดูใบเสร็จ</Text>
+              </TouchableOpacity>
               <Text style={styles.topicFont}>รวม {payment.price} บาท</Text>
             </View>
           </View>
@@ -203,7 +210,7 @@ const styles = StyleSheet.create({
     width: screenWidth * .85,
     height: 50,
     alignItems:'center',
-    justifyContent:'flex-end',
+    justifyContent:'space-between',
     paddingHorizontal:10,
   },
   topicFont: {
@@ -219,5 +226,9 @@ const styles = StyleSheet.create({
   },
   detailFont: {
     fontSize:18
+  },
+  transaction: {
+    color:'blue',
+    fontSize:20
   },
 });
