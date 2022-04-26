@@ -217,7 +217,8 @@ const styles = StyleSheet.create({
     taskOrder: {
       marginVertical:4,
       borderRadius:20,
-      borderColor:'gray',
+      borderWidth:1,
+      borderColor:'rgba(0,0,0,.1)',
       backgroundColor:'white',
       width:screenWidth*0.85,
       height:screenHeight*0.15,

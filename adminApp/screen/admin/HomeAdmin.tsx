@@ -95,7 +95,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
             <Image source={require('../../assets/images/user_icon.png')} style={styles.userIcon}/>  
           </TouchableOpacity>
           <View style={styles.userAddress}>
-            <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+            <Text style={globalStyles.fontNormal}>Administrater</Text>
           </View>
         </View>
         <ScrollView style={styles.scrollMainContainer}>

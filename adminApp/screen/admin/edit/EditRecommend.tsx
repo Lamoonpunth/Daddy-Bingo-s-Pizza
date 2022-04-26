@@ -66,15 +66,17 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
 
         <View style={styles.header}>
             <View style={styles.iconContainer} >
-                <TouchableOpacity style={globalStyles.backIcon} onPress={onBackButton}>
+                <TouchableOpacity style={styles.backIcon} onPress={onBackButton}>
                   <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
                 </TouchableOpacity>
-                <TouchableOpacity style={globalStyles.addIcon} onPress={onAddRecommend}>
+
+                <Text style={styles.headerfont}>Recommend</Text>
+
+                <TouchableOpacity style={styles.addIcon} onPress={onAddRecommend}>
                   <Image source={require('../../../assets/images/add.png')} style={globalStyles.addIcon}/>
                 </TouchableOpacity>
             </View>
-            <Text style={globalStyles.fontHeader}>Recommend</Text>
-            <View style={globalStyles.underline}></View>  
+            <View style={styles.underline}></View>  
         </View>
 
         <View style={styles.cartContainer}>
@@ -110,17 +112,35 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     backgroundColor: 'transparent',
   },
+  headerfont:{
+    fontSize: 42,
+    color:'white',
+    marginRight:screenWidth*.015,
+},
   header: {
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
   },
   iconContainer: {
-    width:screenWidth*0.9,
+    borderRadius:20,
+    width:screenWidth*.9,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between',
   },
+  backIcon: {
+    height:screenHeight*.03,
+    marginLeft:-screenWidth*.02,
+    marginRight:screenWidth*.03,
+  },
+  addIcon: {
+    width:screenWidth*0.1,
+    height:screenHeight*.03,
+    marginLeft:screenWidth*.03,
+    marginRight:-screenWidth*.02,
+  },
+
   cartContainer: {
     padding:20,
     borderColor:'rgba(0,0,0,0.2)',
@@ -188,5 +208,10 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: 'white',
     elevation: 12,
+  },
+  underline:{
+    width:screenWidth*.7,
+    height:screenHeight*0.0035,
+    backgroundColor:'white'
   },
 });
