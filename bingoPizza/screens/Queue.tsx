@@ -3,6 +3,7 @@ import { StyleSheet,
     Text,
     View,
     Image,
+    Easing,
     Animated,
     FlatList,
     Dimensions,
@@ -46,14 +47,19 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
   ])
 
   const queue = useRef(
-    new Animated.Value(10)
+    new Animated.Value(0)
   ).current;
 
   useFocusEffect(() => {
     Animated.loop(
-      Animated.spring(queue,{
-        toValue:0,delay:2500 ,useNativeDriver:true,
-      })
+      Animated.sequence([
+        Animated.timing(queue,{
+          toValue:1,duration:3000,easing: Easing.linear,useNativeDriver:true,
+        }),
+        Animated.timing(queue,{
+          toValue:0,duration:3000,easing: Easing.linear,useNativeDriver:true,
+        })
+      ]),
     ).start();
     setTimeout(()=> {
       navigation.navigate('Prepare');
