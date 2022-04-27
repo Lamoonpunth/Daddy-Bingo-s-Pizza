@@ -82,7 +82,7 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
         <View style={styles.cartContainer}>
           <FlatList
             data={recommend}
-            keyExtractor={(item:any) => item.key}
+            keyExtractor={(item:any) => item.name}
             renderItem={({item}) => (
               <View style={styles.menu} key={item.key}>
                   <View style={styles.boxImage}>

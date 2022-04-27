@@ -87,7 +87,7 @@ export default function EditAddRecommend({navigation,route}:{navigation:any,rout
             <FlatList
             horizontal={true}
             scrollEnabled={false}
-            keyExtractor={() => menu._id}
+            keyExtractor={(item) => item.id}
             data={[{ "id": menu._id, "title": menu.name }]}
             renderItem={renderItem}
             />

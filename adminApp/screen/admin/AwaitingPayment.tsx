@@ -65,7 +65,7 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
         <View style={styles.cartContainer}>
           <FlatList
             data={awaitingPayment}
-            keyExtractor={(item:any) => item.customer_id}
+            keyExtractor={(item:any) => item._id}
             renderItem={({item}) => (
               <TouchableOpacity style={styles.touch} onPress={() => onClickInfo(item)}>
                 <ImageBackground style={styles.awaiting} imageStyle={{borderRadius:30, opacity:0.25}} source={require('../../assets/images/Category/Pizza.jpg')}>
