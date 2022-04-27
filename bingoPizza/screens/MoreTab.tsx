@@ -43,7 +43,8 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
             body:JSON.stringify({_id:userid,itemid:item._id,quantity:orderNumber,additional:userNote})
         })
         .then(response => response.json())
-        .then(data => {console.log(data)})
+        .then(data => {console.log(data)
+        setUserNote('')})
     }
 
     const onAdd = () =>{
