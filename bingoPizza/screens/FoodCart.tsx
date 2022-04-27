@@ -7,6 +7,7 @@ import {
     Dimensions,
     StyleSheet,
     TouchableOpacity,
+    Touchable,
     } from "react-native";
 import { useFocusEffect } from '@react-navigation/native';
 const screenWidth = Dimensions.get('screen').width;
@@ -62,6 +63,9 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
       })
     }
 
+    const removeFromCart = () =>{
+        
+    }
 
     useFocusEffect(
       React.useCallback(() => {
@@ -85,7 +89,12 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                       renderItem={({item}) => (
                         <View style={styles.menu}>
                             <View style={styles.boxName}>
-                              <Text style={styles.nameFont}>{item.name}</Text>
+                              <View style={styles.boxAndButton}>
+                                <Text style={styles.nameFont}>{item.name}</Text>  
+                                <TouchableOpacity onPress={removeFromCart}>
+                                <Text style={styles.nameFont}>x</Text> 
+                                </TouchableOpacity>
+                              </View>
                               <View style={styles.underline}></View>
                             </View>
                             <View style={styles.boxMenu}>
@@ -178,8 +187,15 @@ const styles = StyleSheet.create({
       alignItems:'center',
       justifyContent:'center',
       height:60,
-      padding: 10,
       borderRadius: 10,
+      backgroundColor: 'transparent',
+    },
+    boxAndButton: {
+      flexDirection:'row',
+      width: screenWidth*0.7,
+      height:40,
+      alignItems:'center',
+      justifyContent:'space-between',
       backgroundColor: 'transparent',
     },
     underline: {
