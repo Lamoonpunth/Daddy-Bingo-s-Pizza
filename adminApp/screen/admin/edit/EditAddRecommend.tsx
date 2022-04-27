@@ -49,7 +49,9 @@ export default function EditAddRecommend({navigation,route}:{navigation:any,rout
             })
         })
         .then(response=>response.json())
-        .then(json=>console.log(json))
+        .then(json=>{console.log(json)
+            navigation.goBack()
+        })
     }
 
     const Item = ({ title }: { title: any }) => (
