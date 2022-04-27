@@ -63,8 +63,15 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
       })
     }
 
-    const removeFromCart = () =>{
-        
+    const removeFromCart = (item:any) =>{
+      fetch("http://10.0.2.2:3000/addToCart",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({_id:userid,itemid:item._id,quantity:0})
+    })
+    .then(response => response.json())
+    .then(data => {console.log(data)
+    getCartList()})
     }
 
     useFocusEffect(
@@ -91,7 +98,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                             <View style={styles.boxName}>
                               <View style={styles.boxAndButton}>
                                 <Text style={styles.nameFont}>{item.name}</Text>  
-                                <TouchableOpacity onPress={removeFromCart}>
+                                <TouchableOpacity onPress={() => removeFromCart(item)}>
                                 <Text style={styles.nameFont}>x</Text> 
                                 </TouchableOpacity>
                               </View>
