@@ -24,9 +24,10 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     return specialChars.test(str);
   }
   function isContainsSpecialChars2(str:string) {
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\?~]/;
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,<>\?~]/;
     return specialChars.test(str);
   }
+  
   function  isEnglish(str:string) {
     const english = /^[a-zA-Z0-9_ ]*$/;    
     return english.test(str);
@@ -204,12 +205,12 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     else if (address.length > 250 || address.length <2) {
       resetState();
       setProvinceState(true)
-      alert("Address must between 2 to 200 character!")
+      alert("Address must be between 2 to 200 character")
     }
     else if (isContainsSpecialChars2(address)) {
       resetState();
       setAddrsState(true)
-      alert("Address must be no special character!")
+      alert("Address cannot contains special character except / and .")
     }
     else if (selectedProvince=='') {
       resetState();
