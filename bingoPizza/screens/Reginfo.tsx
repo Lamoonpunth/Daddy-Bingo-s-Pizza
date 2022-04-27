@@ -24,14 +24,44 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
     return specialChars.test(str);
   }
   function isContainsSpecialChars2(str:string) {
-    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\?~]/;
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,<>\?~]/;
     return specialChars.test(str);
   }
-  function  isEnglishAndThai(str:string) {
-    const english = /^[A-Za-z0-9]*$/;
-    const thai = /^[ก-๙]*$/;
-    return !(english.test(str) || thai.test(str));
+  
+  function  isEnglish(str:string) {
+    const english = /^[a-zA-Z0-9_ ]*$/;    
+    return english.test(str);
   }
+  function isThai(str:string){
+    const thai = /^[ก-๙_ ]*$/;
+    return thai.test(str);
+  }
+  function isEnglishOrThai(str:string) {
+    return isEnglish(str)||isThai(str);  
+  }
+  function isEnglishOrThaiForFirstname(str:string) {
+    const english = /^[a-zA-Z0-9]*$/;
+    const thai = /^[ก-๙]*$/;
+    return english.test(str)||thai.test(str);  
+  }
+
+  function checkTwospace(str:string) {   
+      let check =false;
+            for (let i = 0; i < str.length; i++) {                
+              if (str.charAt(i) === ' '){
+                  if (check){
+                      return true;
+                  }
+                  check = true      
+              }
+              else{
+                  check = false
+              }
+            }
+            return false;
+    } 
+
+  
   const presentYear = new Date().getFullYear();
   const [firstname, onChangeName] = React.useState('');
   const [lastname, onChangeLast] = React.useState('');
@@ -108,33 +138,38 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
       resetState();
       setFNameState(true);
       alert("Please Enter Firstname!")
-    }
-    else if (isNumeric(firstname) || firstname.length < 2 || firstname.length > 25 || hasWhiteSpace(firstname) || isContainsSpecialChars(firstname) || isEnglishAndThai(firstname)) {
+    }  
+    else if (firstname.length < 2 || firstname.length > 25 || !isEnglishOrThaiForFirstname(firstname) ){
       resetState();
       setFNameState(true);
-      alert("Firstname must be only thai or english character with between 2 to 25 character!")
+      alert("Firstname must be only thai or english character with between 2 to 25 character")
     }
     else if( lastname == ''){
       resetState();
       setLNameState(true);
-      alert("Please Enter Lastname!")
+      alert("Please Enter Lastname")
     }
-    else if (isNumeric(lastname) || lastname.length < 2 || lastname.length > 25 || hasWhiteSpace(lastname) || isContainsSpecialChars(lastname) || isEnglishAndThai(lastname)) {
+    else if (checkTwospace(lastname)){
       resetState();
       setLNameState(true);
-      alert("Lastname must be only thai or english character with between 2 to 25 character!")
-    }      
-    else if(isEnglishAndThai(firstname+lastname)){
+      alert("Lastname must not have 2 space in a row")
+    }
+    else if (lastname.length < 2 || lastname.length > 25 || !isEnglishOrThai(lastname)) {
+      resetState();
+      setLNameState(true);
+      alert("Lastname must be only thai or english character with between 2 to 25 character")
+    }         
+    else if(!isEnglishOrThai(firstname+lastname)){
       resetState();
       setFNameState(true);
       setLNameState(true);
-      alert("Firstname and Lastname must be only thai or english character with between 2 to 25 character!")
+      alert("Firstname and Lastname must be only thai or english character with between 2 to 25 character")
     }
     else if ( selectedDate=='' || selectedMonth== ''){
       resetState();
       setMMState(true);
       setYYState(true);
-      alert("Please select birthmonth and birthyear!")
+      alert("Please select birthmonth and birthyear")
     }   
     
     else if (presentYear- parseInt(selectedDate) < 15) {
@@ -167,15 +202,15 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
       setAddrsState(true)
       alert("Please enter address!")
     }   
-    else if (address.length > 250 ) {
+    else if (address.length > 250 || address.length <2) {
       resetState();
       setProvinceState(true)
-      alert("Please select province!")
+      alert("Address must be between 2 to 200 character")
     }
     else if (isContainsSpecialChars2(address)) {
       resetState();
       setAddrsState(true)
-      alert("Address must be no speacial character!")
+      alert("Address cannot contains special character except / and .")
     }
     else if (selectedProvince=='') {
       resetState();
