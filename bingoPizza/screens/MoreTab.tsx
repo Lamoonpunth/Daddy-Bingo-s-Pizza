@@ -40,7 +40,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
         fetch("http://10.0.2.2:3000/addToCart",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({_id:userid,itemid:item._id,quantity:orderNumber,additional:"ยังไม่ได้ทำ"})
+            body:JSON.stringify({_id:userid,itemid:item._id,quantity:orderNumber,additional:userNote})
         })
         .then(response => response.json())
         .then(data => {console.log(data)})
