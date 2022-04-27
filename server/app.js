@@ -485,6 +485,20 @@ app.post('/addToCart',async(req,res) =>{
   }
 )
 
+app.post('/clearCart',async(req,res) =>{
+  try{
+    const user = await User.findOne({"_id":req.body._id})
+    await User.updateMany({"_id":req.body._id},{$set:{"cart":[]}})         
+    await user.save()
+    console.log(user)
+    res.json(user)
+  }
+  catch(error){
+    console.log(error)
+  }
+}
+)
+
 app.get('/getCart',async(req,res) =>{
   try{
     const user =await User.findOne({"_id":req.query.userid})

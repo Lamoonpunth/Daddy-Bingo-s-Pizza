@@ -85,6 +85,16 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
     }
     const onConfirm = () =>{
         handleupload(result);
+        fetch("http://10.0.2.2:3000/clearcart",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({_id:userid})
+        })
+        .then(response => response.json())
+        .then(json =>{
+            console.log(json)
+        })
+        .catch(error => console.log(error))
         navigation.navigate("OrderAwait",{cart:cart,user:user});
     }
 
