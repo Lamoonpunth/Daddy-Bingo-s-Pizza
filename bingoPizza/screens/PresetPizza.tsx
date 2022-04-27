@@ -290,8 +290,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.name}
-                            {item.price}
+                            {item.name}{"\n"}
+                            Price : {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -330,8 +330,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.name}
-                            {item.price}
+                            {item.name}{"\n"}
+                            Price : {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -370,8 +370,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.name}
-                            {item.price}
+                            {item.name}{"\n"}
+                            Price : {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -410,8 +410,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.name}
-                            {item.price}
+                            {item.name}{"\n"}
+                            Price : {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -450,8 +450,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.name}
-                            {item.price}
+                            {item.name}{"\n"}
+                            Price : {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
@@ -490,8 +490,8 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             color:'white',
                             backgroundColor:'transparent'
                             }}>
-                            {item.name}
-                            {item.price}
+                            {item.name}{"\n"}
+                            Price : {item.price}
                           </Text>
                         </View>
                       </ImageBackground>
