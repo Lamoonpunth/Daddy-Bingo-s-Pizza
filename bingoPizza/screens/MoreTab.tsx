@@ -48,6 +48,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
     const onAdd = () =>{
         onOrderNumber(orderNumber+1);
+        setUserNote('');
     }
 
     const onRemove = () =>{
