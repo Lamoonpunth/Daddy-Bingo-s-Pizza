@@ -84,6 +84,7 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                 <View style={styles.cartContainer}>
                   <View style={styles.flatContainer}>
                     <FlatList
+                      showsVerticalScrollIndicator={false}
                       data={cart}
                       keyExtractor={(item) => item.name}
                       renderItem={({item}) => (

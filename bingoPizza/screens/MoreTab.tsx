@@ -15,6 +15,7 @@ const screenHeight = Dimensions.get('screen').height;
 import { useFocusEffect } from '@react-navigation/native';
 import { globalStyles } from "../styles/globalStyles";
 import Gradient from "../styles/Gradient";
+import { TextInput } from "react-native-gesture-handler";
 
 export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
@@ -23,6 +24,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
     const {userid} = route.params;
     const [orderNumber, onOrderNumber] = React.useState(0);
     const [isInCart, setIsInCart] = React.useState(false);
+    const [userNote, setUserNote] = React.useState('');
 
     const onBackButton = () =>{
         if(type == null){
@@ -90,6 +92,16 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                             <Text style={{fontSize:20,marginBottom:4,}}>Description</Text>
                             <Text style={styles.descriptionFont}>{item.description}</Text>
                         </ScrollView>
+                        <View style={styles.noteBox}>
+                            <Text style={{fontSize:20}}>Note</Text>
+                            <TextInput
+                                multiline
+                                onChangeText={setUserNote}
+                                value={userNote}
+                                style={styles.noteInput}
+                                placeholder="บอกอะไรกับเชฟ"
+                            />
+                        </View>
                     </View>
                     <View style={styles.selected}>
                         <View style={styles.orderNumber}>
@@ -172,7 +184,25 @@ const styles = StyleSheet.create({
         //borderWidth:1,
     },
     scrollContainer: {
-        padding:25
+        padding:25,
+        width:screenWidth*.8,
+        height:screenHeight*.175,
+    },
+    noteBox: {
+        paddingHorizontal:25,
+        width:screenWidth*.8,
+        height:screenHeight*.125,
+        alignItems:'center',
+    },
+    noteInput: {
+        fontSize: 18,
+        width: screenWidth *.8,
+        height: screenHeight * 0.075,
+        margin: 8,
+        padding: 10,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        elevation: 10,
     },
     descriptionFont: {
         fontSize:18

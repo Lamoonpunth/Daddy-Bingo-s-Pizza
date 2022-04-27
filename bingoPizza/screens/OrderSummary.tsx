@@ -142,6 +142,7 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                 </View>
                 <View style={styles.orderlistspace}>
                     <FlatList
+                        showsVerticalScrollIndicator={false}
                         data={cart}
                         keyExtractor={(item) => item.name}
                         renderItem={({item})=>(
