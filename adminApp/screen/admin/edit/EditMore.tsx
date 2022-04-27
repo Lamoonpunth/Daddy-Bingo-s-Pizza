@@ -48,7 +48,7 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
         .then(json=> {console.log(json)
         onEdit('')
         onEditPrice('')
-        navigation.navigate('Menu',{"type":type,userid:userid})})
+        navigation.navigate('Menu',{"type":type,userid:userid});})
     }
 
     const onRemove = () =>{
@@ -62,6 +62,7 @@ export default function EditMore({navigation,route}:{navigation:any,route:any}) 
         })
         .then(response => response.json())
         .then(json=> {console.log(json)})
+        navigation.navigate('Menu',{"type":type,userid:userid});
     }
 
     useFocusEffect(

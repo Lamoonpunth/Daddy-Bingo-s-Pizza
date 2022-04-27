@@ -91,6 +91,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
                             <Text style={{fontSize:20,marginBottom:4,}}>Description</Text>
                             <Text style={styles.descriptionFont}>{item.description}</Text>
+                            <Text style={styles.priceFont}>ราคา {item.price} บาท</Text>
                         </ScrollView>
                         <View style={styles.noteBox}>
                             <Text style={{fontSize:20}}>Note</Text>
@@ -206,6 +207,10 @@ const styles = StyleSheet.create({
     },
     descriptionFont: {
         fontSize:18
+    },
+    priceFont: {
+        textAlign:'center',
+        fontSize:20
     },
     selected: {
         flexDirection:'column',

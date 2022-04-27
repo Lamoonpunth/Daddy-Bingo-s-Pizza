@@ -262,7 +262,7 @@ const styles = StyleSheet.create({
     },
     normalFont:{
       fontSize: 16,
-      color:'#FF6D7D',
+      color:'white',
     },
     
 });

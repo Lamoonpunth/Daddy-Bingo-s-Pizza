@@ -45,7 +45,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     .then(response=>response.json())
     .then(data => {console.log(data)
     navigation.navigate('TaskOrder')})
-    alert('จะกินมั้ย กินก็จ่าย');
   }
 
   const onClickAdminIcon = () => {
