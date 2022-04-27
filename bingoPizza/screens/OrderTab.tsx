@@ -93,6 +93,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
             <TouchableOpacity style={styles.promoBox}>
+              <Image style={styles.promoImage} source={require('../assets/images/promotion.jpg')}/>
             </TouchableOpacity>
           </View>
           <View style={styles.recommendcontainer}>
@@ -112,8 +113,9 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
                 showsHorizontalScrollIndicator={false}
                 style={{width:screenWidth}}
                 data={recommend}
+                keyExtractor={(item) => item.name}
                 renderItem={({item}) => (
-                  <TouchableOpacity style={styles.menuIcon} key={item.key} onPress={() => onClickRecommend(item)}>
+                  <TouchableOpacity style={styles.menuIcon} onPress={() => onClickRecommend(item)}>
                     <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage} />
                   </TouchableOpacity>
                 )}
@@ -130,8 +132,9 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
               style={{width:screenWidth}}
               numColumns={2}
               data={category}
+              keyExtractor={(item) => item.type}
               renderItem={({item}) => (
-                <TouchableOpacity style={styles.categoryBox} key={item.key} onPress={()=>onClickCategory(item.type)}>
+                <TouchableOpacity style={styles.categoryBox} onPress={()=>onClickCategory(item.type)}>
                   <ImageBackground source={item.img_path} style={styles.categoryIcon} imageStyle={{borderRadius:50}}>
                     <View style={styles.categoryIconBox}>
                       <Text style={styles.categoryFont}>{item.type}</Text>  
@@ -208,6 +211,12 @@ const styles = StyleSheet.create({
     height:screenHeight*0.3,
     borderRadius:50,
     elevation: 10,
+  },
+  promoImage:{
+    backgroundColor:'white',
+    width:screenWidth*0.85,
+    height:screenHeight*0.3,
+    borderRadius:50,
   },
   /*----------------------------------------------Recommend-------------------------------------------*/
   recommendcontainer: {

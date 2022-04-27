@@ -81,8 +81,9 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                   <View style={styles.flatContainer}>
                     <FlatList
                       data={cart}
+                      keyExtractor={(item) => item.name}
                       renderItem={({item}) => (
-                        <View style={styles.menu} key={item.key}>
+                        <View style={styles.menu}>
                             <View style={styles.boxName}>
                               <Text style={styles.nameFont}>{item.name}</Text>
                               <View style={styles.underline}></View>
@@ -104,10 +105,16 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
                     
                 </View>
 
+                { cart.length == 0?
+                <TouchableOpacity style={styles.checkoutBoxDisable} disabled={true} onPress={onCheckOut}>
+                  <Text style={styles.checkoutFont}>Check out</Text>
+                </TouchableOpacity>
+                :
                 <TouchableOpacity style={styles.checkoutBox} onPress={onCheckOut}>
                   <Text style={styles.checkoutFont}>Check out</Text>
                 </TouchableOpacity>
-            
+                }
+                
             </View>
         </Gradient>
     );
@@ -119,17 +126,15 @@ const styles = StyleSheet.create({
       flex: 1,
       flexDirection:'column',
       alignItems: 'center',
-      justifyContent: 'flex-end',
+      justifyContent: 'space-evenly',
       backgroundColor: 'transparent',
     },
     header: {
       width: screenWidth*.9,
-      height: screenHeight*.3,
+      height: screenHeight*.1,
       flexDirection:'row',
       alignItems:'center',
       justifyContent:'center',
-      marginTop:-screenHeight* .2,
-      marginBottom:-screenHeight*.05
 
     },
     iconContainer: {
@@ -229,6 +234,17 @@ const styles = StyleSheet.create({
       height: screenHeight * 0.075,
       borderRadius: 10,
       backgroundColor: '#FF6D7D',
+      marginVertical:10,
+      elevation: 12,
+    },
+    checkoutBoxDisable:{
+      flexDirection:'column',
+      alignItems:'center',
+      justifyContent:'center',
+      width: screenWidth*0.8,
+      height: screenHeight * 0.075,
+      borderRadius: 10,
+      backgroundColor: '#B8B8B8',
       marginVertical:10,
       elevation: 12,
     },

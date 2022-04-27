@@ -143,8 +143,9 @@ export default function OrderSummary({ navigation, route }: { navigation: any, r
                 <View style={styles.orderlistspace}>
                     <FlatList
                         data={cart}
+                        keyExtractor={(item) => item.name}
                         renderItem={({item})=>(
-                            <View key={item.key} style={styles.orderBox}>
+                            <View style={styles.orderBox}>
                                 <Text style={styles.orderFont}>x{item.quantity} {item.name}</Text>
                                 <Text style={styles.orderFont}>{item.price}</Text>
                             </View>

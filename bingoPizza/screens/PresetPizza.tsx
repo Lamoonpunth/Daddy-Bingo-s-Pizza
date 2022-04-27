@@ -270,11 +270,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={topping}
+                  keyExtractor={(item) => item._id}
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedTopping(item.name,item,index)}
-                    key={item._id}>
+                    onPress={() => onSelectedTopping(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -310,11 +310,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={size}
+                  keyExtractor={(item) => item._id}
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedSize(item.name,item,index)}
-                    key={item._id}>
+                    onPress={() => onSelectedSize(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -350,11 +350,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={dough}
+                  keyExtractor={(item) => item._id}
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedDough(item.name,item,index)}
-                    key={item._id}>
+                    onPress={() => onSelectedDough(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -390,11 +390,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={crust}
+                  keyExtractor={(item) => item._id}
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedCrust(item.name,item,index)}
-                    key={item._id}>
+                    onPress={() => onSelectedCrust(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -430,11 +430,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={sauce}
+                  keyExtractor={(item) => item._id}
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedSauce(item.name,item,index)}
-                    key={item._id}>
+                    onPress={() => onSelectedSauce(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -470,11 +470,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                   showsHorizontalScrollIndicator={false}
                   horizontal={true}
                   data={pack}
+                  keyExtractor={(item) => item._id}
                   renderItem={({item,index}) => (
                     <TouchableOpacity  
                     style={styles.optionBox} 
-                    onPress={() => onSelectedPackage(item.name,item,index)}
-                    key={item._id}>
+                    onPress={() => onSelectedPackage(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,

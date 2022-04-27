@@ -34,7 +34,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
     }
 
     const onAddToCart = () =>{
-        alert('จะกินก็นั่ง');
+        navigation.navigate('Menu',{"type":type,userid:userid});
         fetch("http://10.0.2.2:3000/addToCart",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},

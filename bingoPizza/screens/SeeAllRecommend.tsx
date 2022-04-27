@@ -65,8 +65,9 @@ export default function SeeAllRecommend({navigation,route}: {navigation:any,rout
         <View style={styles.cartContainer}>
           <FlatList
             data={recommend}
+            keyExtractor={(item) => item.name}
             renderItem={({item}) => (
-              <View style={styles.menu} key={item.key}>
+              <View style={styles.menu}>
                   <View style={styles.boxImage}>
                     <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
                   </View>
