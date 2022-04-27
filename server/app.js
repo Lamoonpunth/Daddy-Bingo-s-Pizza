@@ -560,6 +560,7 @@ app.get('/getordercart',async(req,res) =>{
     console.log(error)
   }
 })
+
 app.get('/getwaitingforpayment',async(req,res)=>{
   try{
     const order = await Order.find({status: "waiting for payment"})

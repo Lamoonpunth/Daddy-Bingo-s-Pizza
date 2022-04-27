@@ -19,14 +19,23 @@ import Gradient from '../../styles/Gradient';
 //import { FlatList } from "react-native-gesture-handler";
 import Constants from 'expo-constants';
 
-export default function TaskDeny({ navigation }: { navigation: any }) {
+export default function TaskDeny({ navigation,route }: { navigation: any , route:any}) {
   const [denyText , onChangedeny] = React.useState('');
-  
+  const {order} = route.params;
   const UselessTextInputMultiline = () => {
     const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
   }
   const onSend = () => {
-    navigation.navigate('TaskOrder')
+    fetch("http://10.0.2.2:3000/kitchendeny",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
+      body:JSON.stringify({
+          _id: order._id,
+      })
+    })
+    .then(response=>response.json())
+    .then(data => {console.log(data)
+    navigation.navigate('TaskOrder')})
     onChangedeny('')
   }
   const onClickAdminIcon = () => {

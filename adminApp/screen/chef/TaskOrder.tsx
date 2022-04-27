@@ -33,8 +33,8 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     {num:'Order4' ,key:'8'},
     
   ]);
-    const onReject = () => {
-     navigation.navigate('TaskDeny')
+    const onReject = (item:any) => {
+     navigation.navigate('TaskDeny',{order:item})
     }
     const onAccept = (item:any) => {
       fetch("http://10.0.2.2:3000/kitchenaccept",{
@@ -107,7 +107,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                       <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>
                       <View style ={styles.bottontoleftside}>  
                         <View style = {styles.forrowview}>
-                          <TouchableOpacity style={styles.ac_rjbox} onPress={onReject}>
+                          <TouchableOpacity style={styles.ac_rjbox} onPress={() =>onReject(item)}>
                             <Text style={styles.normalFont}>reject</Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={styles.acbox} onPress={() =>onAccept(item)}>
