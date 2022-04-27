@@ -43,6 +43,7 @@ export default function PaymentInfo({ navigation, route }: { navigation: any, ro
     )
     .then(response=>response.json())
     .then(json=>console.log(json))
+    navigation.navigate('Awaiting');
   }
 
   const getOrderCart = () =>{

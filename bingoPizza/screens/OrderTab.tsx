@@ -93,7 +93,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
             <TouchableOpacity style={styles.promoBox}>
-              <Image style={styles.promoImage} source={require('../assets/images/promotion.jpg')}/>
+              <Image style={styles.promoImage} source={{uri:"http://10.0.2.2:3000/getImage/promotion.jpg"}}/>
             </TouchableOpacity>
           </View>
           <View style={styles.recommendcontainer}>

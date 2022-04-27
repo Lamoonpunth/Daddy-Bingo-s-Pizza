@@ -101,7 +101,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
         <ScrollView style={styles.scrollMainContainer}>
           <View style={styles.promocontainer}>
             <TouchableOpacity style={styles.promoBox} onPress={onEditPromo}>
-              <ImageBackground source = {{uri:"http://10.0.2.2:3000/getImage/Promotion_2.jpg"}} style={styles.promoImage} imageStyle={{borderRadius:50}}/>
+              <ImageBackground source = {{uri:"http://10.0.2.2:3000/getImage/promotion.jpg"}} style={styles.promoImage} imageStyle={{borderRadius:50}}/>
             </TouchableOpacity>
           </View>
           <View style={styles.recommendcontainer}>
@@ -121,6 +121,7 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
                 showsHorizontalScrollIndicator={false}
                 style={{width:screenWidth}}
                 data={recommend}
+                keyExtractor={(item) => item.name}
                 renderItem={({item}) => (
                   <TouchableOpacity style={styles.menuIcon} onPress={onClickRecommend}>
                     <Image source = {{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage} />
@@ -140,8 +141,9 @@ export default function HomeAdmin({navigation, route}:{navigation:any,route:any}
               style={{width:screenWidth}}
               numColumns={2}
               data={category}
+              keyExtractor = {(item) => item.type}
               renderItem={({item}) => (
-                <TouchableOpacity style={styles.categoryBox} key={item.key} onPress={()=>onClickCategory(item.type)}>
+                <TouchableOpacity style={styles.categoryBox} onPress={()=>onClickCategory(item.type)}>
                   <ImageBackground source={item.img_path} style={styles.categoryIcon} imageStyle={{borderRadius:50}}>
                     <View style={styles.categoryIconBox}>
                       <Text style={styles.categoryFont}>{item.type}</Text>  
@@ -222,8 +224,12 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   promoImage:{
-    width:screenWidth*0.6,
+    alignItems:'center',
+    justifyContent:'center',
+    backgroundColor:'white',
+    width:screenWidth*0.85,
     height:screenHeight*0.3,
+    borderRadius:50,
   },
   /*----------------------------------------------Recommend-------------------------------------------*/
   recommendcontainer: {

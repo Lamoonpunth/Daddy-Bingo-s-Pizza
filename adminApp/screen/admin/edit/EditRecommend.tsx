@@ -20,9 +20,9 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function EditRecommend({navigation,route}: {navigation:any,route:any}) {
 
   const [recommend,setRecommend] = React.useState([
-    {key:1,name:'mexicangreenwave', img_path:'mexicangreenwave.png'},
-    {key:2,name:'pepperonipizza', img_path:'pepperonipizza.png'},
-    {key:3,name:'plaincheesepizza', img_path:'plaincheesepizza.png'},
+    {key:1,name:'mexicangreenwave', img_path:'mexicangreenwave.png', price:0},
+    {key:2,name:'pepperonipizza', img_path:'pepperonipizza.png', price:0},
+    {key:3,name:'plaincheesepizza', img_path:'plaincheesepizza.png', price:0},
   ]);
 
   const onSelected = () =>{
@@ -82,6 +82,7 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
         <View style={styles.cartContainer}>
           <FlatList
             data={recommend}
+            keyExtractor={(item:any) => item.key}
             renderItem={({item}) => (
               <View style={styles.menu} key={item.key}>
                   <View style={styles.boxImage}>

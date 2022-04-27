@@ -25,11 +25,11 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
   }
 
   const [awaitingPayment, onChangeAwaiting] = React.useState([
-    {customer_id:1, order_time:7.43, customer_fname:'โทนี่', customer_lname:'ฟรีไฟร์', payment: 1500, transaction:'complete', },
-    {customer_id:2, order_time:9.14, customer_fname:'ไม้โมก', customer_lname:'โยกไฟ', payment: 1500, transaction:'incomplete', },
-    {customer_id:3, order_time:10.15, customer_fname:'บิงโก', customer_lname:'โอรีโอ้', payment: 1500, transaction:'incomplete', },
-    {customer_id:4, order_time:12.58, customer_fname:'โอ๊ต', customer_lname:'กระโดดยาง', payment: 1500, transaction:'incomplete', },
-    {customer_id:5, order_time:13.11, customer_fname:'โอ', customer_lname:'เยอรมัน', payment: 1500, transaction:'complete', },
+    {customer_id:1, order_time:7.43, user_fname:'โทนี่', user_lname:'ฟรีไฟร์', price: 1500, transaction:'complete', },
+    {customer_id:2, order_time:9.14, user_fname:'ไม้โมก', user_lname:'โยกไฟ', price: 1500, transaction:'incomplete', },
+    {customer_id:3, order_time:10.15, user_fname:'บิงโก', user_lname:'โอรีโอ้', price: 1500, transaction:'incomplete', },
+    {customer_id:4, order_time:12.58, user_fname:'โอ๊ต', user_lname:'กระโดดยาง', price: 1500, transaction:'incomplete', },
+    {customer_id:5, order_time:13.11, user_fname:'โอ', user_lname:'เยอรมัน', price: 1500, transaction:'complete', },
   ])
   const onClickInfo = (item:any) =>{
     navigation.navigate('PaymentInfo',{payment:item})
@@ -65,8 +65,9 @@ export default function AwaitingPayment({ navigation, route }: { navigation: any
         <View style={styles.cartContainer}>
           <FlatList
             data={awaitingPayment}
+            keyExtractor={(item:any) => item.customer_id}
             renderItem={({item}) => (
-              <TouchableOpacity key={item.user_id} style={styles.touch} onPress={() => onClickInfo(item)}>
+              <TouchableOpacity style={styles.touch} onPress={() => onClickInfo(item)}>
                 <ImageBackground style={styles.awaiting} imageStyle={{borderRadius:30, opacity:0.25}} source={require('../../assets/images/Category/Pizza.jpg')}>
                   <View style={styles.customerDetail}>
                     <Text style={styles.detailFont}>{}{item.user_fname}{item.user_lname}</Text>
