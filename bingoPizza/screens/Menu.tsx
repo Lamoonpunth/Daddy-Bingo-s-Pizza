@@ -97,8 +97,9 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
             <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon} />
           </TouchableOpacity>
           <Text style={globalStyles.fontHeader}>{type}</Text>
-          <View style={globalStyles.underline}></View>
         </View>
+        <View style={styles.underline}></View>
+
 
         <View style={styles.cartContainer}>
           <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
@@ -127,14 +128,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconContainer: {
-    width: screenWidth * 0.9,
+    width: screenWidth * 0.2,
     flexDirection: 'row',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    marginLeft:-screenWidth*.215,
   },
   cartContainer: {
     borderColor: 'rgba(0,0,0,0.2)',
@@ -157,15 +159,15 @@ const styles = StyleSheet.create({
   menu: {
     marginVertical: 5,
     borderRadius: 50,
-    //borderWidth:1,
-    borderColor: 'gray',
+    borderWidth:1,
+    borderColor: 'rgba(0,0,0,.1)',
     backgroundColor: '#FF6D6D',
     width: screenWidth * 0.8,
     height: screenHeight * 0.22,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
-    elevation: 5
+    elevation: 6
   },
   boxImage: {
     borderRadius: 20,
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     backgroundColor: 'white',
-    //elevation: 12,
+    elevation: 8,
   },
   moreBox: {
     flexDirection: 'column',
@@ -200,7 +202,7 @@ const styles = StyleSheet.create({
     height: screenHeight * 0.05,
     borderRadius: 10,
     backgroundColor: 'white',
-    elevation: 12,
+    elevation: 8,
   },
   moreFont: {
     fontSize: 18,
@@ -241,6 +243,7 @@ const styles = StyleSheet.create({
     height: height * 6 / 100,
     backgroundColor: '#FF6D6D',
     borderRadius: 50,
+    elevation:4,
   },
   makeBox:{
     flexDirection:'row',
@@ -256,5 +259,12 @@ const styles = StyleSheet.create({
   makeFont: {
     fontSize:18,
     color:'white',
-  }
+  },
+  underline:{
+    width:screenWidth*.55,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:-screenHeight * .045,
+    marginBottom:-screenHeight *.03,
+  },
 });

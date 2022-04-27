@@ -92,11 +92,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     return (
       <Gradient>
         <View style={styles.container}>
-          <View style={styles.adminBox}>
-            <TouchableOpacity onPress={onClickAdminIcon}>
-              <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon} />
-            </TouchableOpacity>
-          </View>
           <View style={styles.header}>
             <TouchableOpacity style={styles.iconContainer} onPress={() => { navigation.goBack() }}>
               <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
@@ -152,6 +147,8 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       justifyContent: 'center',
     },
     iconContainer: {
+      marginLeft:-screenWidth*.2,
+      marginRight:screenWidth*.1,
       width: screenWidth * 0.1,
       flexDirection: 'row',
       alignItems: 'flex-start'
@@ -204,9 +201,9 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     },
     //-----------------Flatlist Task------------//
     Ingredient: {
-      marginVertical: 4,
+      marginVertical: screenHeight*.012,
+      marginHorizontal:screenWidth * .01,
       borderRadius: 20,
-      borderWidth: 2,
       borderColor: 'gray',
       width: screenWidth * 0.8,
       height: screenHeight * 0.15,

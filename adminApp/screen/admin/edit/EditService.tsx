@@ -34,8 +34,8 @@ export default function EditService({navigation}:{navigation:any}) {
             <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
           </TouchableOpacity>
           <Text style={globalStyles.fontHeader}>Service</Text>
-          <View style={globalStyles.underline}></View>  
         </View>
+        <View style={styles.underline}></View>  
 
         <View style={styles.serviceContainer}>
           <View style={styles.flatContainer}>
@@ -81,12 +81,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection:'column',
+    marginTop:screenHeight*.0,
+    marginBottom:-screenHeight*.05,
+    flexDirection:'row',
     alignItems:'center',
     justifyContent:'center',
   },
   iconContainer: {
-    width:screenWidth*0.9,
+    marginLeft:-screenWidth*.3,
+    width:screenWidth*0.275,
     flexDirection:'row',
     alignItems:'flex-start'
   },
@@ -107,25 +110,29 @@ const styles = StyleSheet.create({
     width:screenWidth*.8,
     height:screenHeight*.65,
     backgroundColor:'#fff',
+    
   },
   service: {
     marginVertical:5,
     borderRadius:50,
     borderWidth:1,
-    borderColor:'gray',
     backgroundColor:'white',
     width:screenWidth*0.8,
     height:screenHeight*0.22,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-evenly',
+    borderColor:'rgba(0,0,0,.01)',
+    elevation:5,
   },
   boxImage: {
     borderRadius:20,
     backgroundColor:'white',
     width:screenHeight*0.125,
     height:screenHeight*0.125,
-    borderWidth:1
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,.1)',
+    elevation:5,
   },
   boxDetails: {
     backgroundColor:'transparent',
@@ -134,6 +141,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     width:screenHeight*0.2,
     height:screenHeight*0.2,
+    
   },
   serviceFont:{
     fontSize: 18,
@@ -158,5 +166,12 @@ const styles = StyleSheet.create({
   moreFont:{
     fontSize: 18,
     color:'white',
+  },
+  underline:{
+    width:screenWidth*.55,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:screenHeight * .015,
+    marginBottom:-screenHeight *.02,
   },
 });

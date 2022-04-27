@@ -42,8 +42,10 @@ export default function EditProfile({navigation}:{navigation:any}) {
             </TouchableOpacity>
           </View>
           <Text style={globalStyles.fontHeader}>Your Profile</Text>
-          <View style={globalStyles.underline}></View>
         </View>
+
+        <View style={styles.underline}></View>
+
         <View style={styles.detail}>
           <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
             <View style={styles.box1}>
@@ -108,15 +110,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   iconContainer: {
-    width: screenWidth * 0.9,
+    width: screenWidth * 0.2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent:'space-between',
+    marginLeft:-screenWidth*.2,
   },
   detail: {
     flexDirection:'column',
@@ -189,5 +192,17 @@ const styles = StyleSheet.create({
   saveFont: {
     fontSize:18,
     color:'white',
-  }
+  },
+  backIcon: {
+    height:screenHeight*.03,
+    marginLeft:-screenWidth*.225,
+    marginRight:screenWidth*.1,
+  },
+  underline:{
+    width:screenWidth*.7,
+    height:screenHeight*0.0035,
+    backgroundColor:'white',
+    marginTop:-screenHeight * .025,
+    marginBottom:-screenHeight *.02,
+  },
 });

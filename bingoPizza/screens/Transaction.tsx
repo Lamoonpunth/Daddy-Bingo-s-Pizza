@@ -99,8 +99,9 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>   
                     </TouchableOpacity>
                     <Text style={styles.fontHeader}>Transaction</Text>
-                    <View style={globalStyles.underline}></View>  
                 </View>
+                <View style={globalStyles.underline}></View>  
+
                 <Image style={styles.transaction} source={{uri:"https://qrmango.com/promptpay/qr?pp_no=0808491161"+"&amount="+price+"&size=300"}}/>
                 <View style={styles.insertBox}>
                     <Text style={styles.insertFont}>Insert transaction</Text>
@@ -131,16 +132,17 @@ const styles = StyleSheet.create({
         width: width,
     },
     header: {
-        flexDirection:'column',
+        marginLeft:-width*.14,
+        flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
     },
     fontHeader:{
-        fontSize: 30,
+        fontSize: 42,
         color:'white',
     },
     iconContainer: {
-        width:width*0.9,
+        width:width*0.15,
         flexDirection:'row',
         alignItems:'flex-start'
     },
@@ -173,9 +175,11 @@ const styles = StyleSheet.create({
     insertButton: {
         padding:15,
         height: 50,
-        width: 75,
+        width: 85,
         backgroundColor:'#FF6D6D',
         borderRadius:10,
+        alignItems:'center',
+        elevation:4,
     },
     confirmButton: {
         padding:15,
@@ -183,6 +187,8 @@ const styles = StyleSheet.create({
         width: 85,
         backgroundColor:'#FF6D6D',
         borderRadius:10,
+        alignItems:'center',
+        elevation:4,
     },
     uploadFont: {
         fontSize:14,

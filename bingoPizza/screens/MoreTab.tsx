@@ -80,13 +80,14 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>   
                     </TouchableOpacity>
                     <Text style={styles.fontHeader}>{item.name}</Text>
-                    <View style={globalStyles.underline}></View>  
                 </View>
-
+                <View style={styles.underline}></View>  
+                
                 <View style={styles.cartContainer}>
                     <Image source={{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
                     <View style={styles.detail}>
                         <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+                            <Text style={{fontSize:20,marginBottom:4,}}>Description</Text>
                             <Text style={styles.descriptionFont}>{item.description}</Text>
                         </ScrollView>
                     </View>
@@ -103,7 +104,16 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                             </TouchableOpacity>
                         </View>
                         {orderNumber==0?
-                        <TouchableOpacity style={styles.addtocart} onPress={onAddToCart} disabled={true}>
+                        <TouchableOpacity style={{
+                            alignItems:'center',
+                            justifyContent:'center',
+                            width:screenWidth*.8,
+                            height:screenHeight*.05,
+                            borderColor:'rgba(0,0,0,0)',
+                            backgroundColor:'gray',
+                            borderRadius:10,
+                            elevation:8,
+                        }} onPress={onAddToCart} disabled={true}>
                             <Text style={styles.addFont}>add to cart</Text> 
                         </TouchableOpacity>
                         :
@@ -126,16 +136,17 @@ const styles = StyleSheet.create({
         justifyContent:'space-evenly',
     },
     header: {
-        flexDirection:'column',
+        flexDirection:'row',
         alignItems:'center',
         justifyContent:'center',
+        marginLeft:-screenWidth*.1,
     },
     fontHeader:{
         fontSize: 30,
         color:'white',
       },
     iconContainer: {
-        width:screenWidth*0.9,
+        width:screenWidth*0.15,
         flexDirection:'row',
         alignItems:'flex-start'
     },
@@ -164,7 +175,7 @@ const styles = StyleSheet.create({
         padding:25
     },
     descriptionFont: {
-        fontSize:20
+        fontSize:18
     },
     selected: {
         flexDirection:'column',
@@ -215,4 +226,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color:'white',
     },
+    underline:{
+        width:screenWidth*.7,
+        height:screenHeight*0.0035,
+        backgroundColor:'white',
+        marginTop:-screenHeight * .025,
+        marginBottom:-screenHeight *.02,
+      },
 })

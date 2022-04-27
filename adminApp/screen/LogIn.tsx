@@ -27,6 +27,8 @@ export default function LogIn({navigation}: {navigation: any}) {
     /*---------------------------------------------LogIn----------------------------------------------*/
     const [username , onChangeUser] = React.useState('');
     const [password , onChangePass] = React.useState('');
+    const [bordercolorusername, setBorderColorUsername] = React.useState(false);
+    const [bordercolorpass, setBorderColorPass] = React.useState(false);
     
     const onLogIn = () => {
       if (ModeLogIn == 'Admin') {
@@ -44,12 +46,18 @@ export default function LogIn({navigation}: {navigation: any}) {
         .then(data=>{
           console.log(data)
           if (username=='' && password==''){
+            setBorderColorUsername(true);
+            setBorderColorPass(true);
             alert("Please enter your username and password.");
           }
           else if (username==''){
+            setBorderColorUsername(true);
+            setBorderColorPass(false);
             alert("Please enter your username.");
           }
           else if (password==''){
+            setBorderColorUsername(false);
+            setBorderColorPass(true);
             alert("Please enter your password.");
           }
           else{
@@ -79,10 +87,14 @@ export default function LogIn({navigation}: {navigation: any}) {
             console.log(data)
             if (data == "Invalid username or password")
             {
+              setBorderColorUsername(true);
+              setBorderColorPass(true);
               alert(data)
             }
             else
             {
+              setBorderColorUsername(false);
+              setBorderColorPass(false);
               navigation.navigate('Admin', {screen:'Home', params:{userid:data}});
             }
           }).catch(error=>alert(error))
@@ -106,12 +118,18 @@ export default function LogIn({navigation}: {navigation: any}) {
         .then(data=>{
           console.log(data)
           if (username=='' && password==''){
+            setBorderColorUsername(true);
+            setBorderColorPass(true);
             alert("Please enter your username and password.");
           }
           else if (username==''){
+            setBorderColorUsername(true);
+            setBorderColorPass(false);
             alert("Please enter your username.");
           }
           else if (password==''){
+            setBorderColorUsername(false);
+            setBorderColorPass(true);
             alert("Please enter your password.");
           }
           else{
@@ -141,10 +159,14 @@ export default function LogIn({navigation}: {navigation: any}) {
             console.log(data)
             if (data == "Invalid username or password")
             {
+              setBorderColorUsername(true);
+              setBorderColorPass(true);
               alert(data)
             }
             else
             {
+              setBorderColorUsername(false);
+              setBorderColorPass(false);
               navigation.navigate('Chef', {screen:'Home', params:{userid:data}});
             }
           }).catch(error=>alert(error))
@@ -168,12 +190,19 @@ export default function LogIn({navigation}: {navigation: any}) {
         .then(data=>{
           console.log(data)
           if (username=='' && password==''){
+            setBorderColorUsername(true);
+            setBorderColorPass(true);
             alert("Please enter your username and password.");
+            
           }
           else if (username==''){
+            setBorderColorUsername(true);
+            setBorderColorPass(false);
             alert("Please enter your username.");
           }
           else if (password==''){
+            setBorderColorUsername(false);
+            setBorderColorPass(true);
             alert("Please enter your password.");
           }
           else{
@@ -203,10 +232,14 @@ export default function LogIn({navigation}: {navigation: any}) {
             console.log(data)
             if (data == "Invalid username or password")
             {
+              setBorderColorUsername(true);
+              setBorderColorPass(true);
               alert(data)
             }
             else
             {
+              setBorderColorUsername(false);
+              setBorderColorPass(false);
               navigation.navigate('Rider', {screen:'Home', params:{userid:data}});
             }
           }).catch(error=>alert(error))
@@ -244,17 +277,40 @@ export default function LogIn({navigation}: {navigation: any}) {
                 </View>
                 <View style={styles.logincontainer}>
                   <TextInput
-                  style={globalStyles.fontLogIn}
+                  style={{
+                    fontSize: 12,
+                    width: screenWidth *.6,
+                    height: screenHeight * 0.055,
+                    margin: 8,
+                    padding: 10,
+                    borderRadius: 30,
+                    borderWidth:1,
+                    borderColor: bordercolorusername? 'red': 'white',
+                    backgroundColor: 'white',
+                    elevation: 12,
+                  }}
                   onChangeText={onChangeUser}
                   value={username}
                   placeholder="Username"
                   />
                   <TextInput
-                    style={globalStyles.fontLogIn}
+                    style={{
+                      fontSize: 12,
+                      width: screenWidth *.6,
+                      height: screenHeight * 0.055,
+                      margin: 8,
+                      padding: 10,
+                      borderRadius: 30,
+                      borderWidth:1,
+                      borderColor: bordercolorpass? 'red': 'white',
+                      backgroundColor: 'white',
+                      elevation: 12,
+                    }}
                     onChangeText={onChangePass}
                     value={password}
                     placeholder="Password"
                     secureTextEntry={true} 
+
                   />
                   <TouchableOpacity style={globalStyles.loginbutton} onPress={onLogIn}>
                     <Text style={{fontSize:20, color: 'white'}}>
@@ -291,5 +347,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     backgroundColor: 'transparent',
     elevation:10
+  },
+  fontLogIn:{
+    fontSize: 12,
+    width: screenWidth *.6,
+    height: screenHeight * 0.055,
+    margin: 8,
+    padding: 10,
+    borderRadius: 30,
+    backgroundColor: 'white',
+    elevation: 12,
   },
 });

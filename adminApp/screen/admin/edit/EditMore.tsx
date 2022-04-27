@@ -137,6 +137,7 @@ const styles = StyleSheet.create({
         alignItems:'flex-start'
     },
     cartContainer: {
+        
         borderColor:'rgba(0,0,0,0.2)',
         alignItems:'center',
         justifyContent:'flex-start',

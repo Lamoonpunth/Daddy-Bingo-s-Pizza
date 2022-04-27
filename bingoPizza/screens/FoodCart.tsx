@@ -71,15 +71,12 @@ export default function FoodCart({navigation,route}:{navigation:any,route:any}){
     return(
         <Gradient>
             <View style={styles.container}>
-                
                 <View style={styles.header}>
-                    <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
+                    <TouchableOpacity style={styles.backIcon} onPress={() => {navigation.goBack()}}>
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
                     </TouchableOpacity>
                     <Text style={globalStyles.fontHeader}>ตะกร้าของคุณ</Text>
-                    
                 </View>
-
                 <View style={styles.cartContainer}>
                   <View style={styles.flatContainer}>
                     <FlatList
@@ -126,11 +123,17 @@ const styles = StyleSheet.create({
       backgroundColor: 'transparent',
     },
     header: {
-      flexDirection:'column',
+      width: screenWidth*.9,
+      height: screenHeight*.3,
+      flexDirection:'row',
       alignItems:'center',
       justifyContent:'center',
+      marginTop:-screenHeight* .2,
+      marginBottom:-screenHeight*.05
+
     },
     iconContainer: {
+      borderColor:'black',
       width:screenWidth*0.9,
       flexDirection:'row',
       alignItems:'flex-start'
@@ -232,5 +235,17 @@ const styles = StyleSheet.create({
     checkoutFont:{
       fontSize: 24,
       color:'white',
+    },
+    underline2:{
+      width:screenWidth*.7,
+      height:screenHeight*0.0035,
+      backgroundColor:'white',
+      marginTop:-screenHeight * .025,
+      marginBottom:-screenHeight *.02,
+    },
+    backIcon: {
+      height:screenHeight*.03,
+      marginLeft:-screenWidth*.125,
+      marginRight:screenWidth*.05,
     },
 });
