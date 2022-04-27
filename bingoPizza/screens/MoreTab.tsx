@@ -86,11 +86,14 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                 <View style={styles.underline}></View>  
                 
                 <View style={styles.cartContainer}>
-                    <Image source={{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
+                    <View style={styles.foodImage}>
+                        <Image source={{uri:"http://10.0.2.2:3000/getImage/"+item.img_path}} style={styles.foodImage}/>
+                    </View>
                     <View style={styles.detail}>
-                        <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={false}>
+                        <ScrollView style={styles.scrollContainer} showsVerticalScrollIndicator={true}>
                             <Text style={{fontSize:20,marginBottom:4,}}>Description</Text>
                             <Text style={styles.descriptionFont}>{item.description}</Text>
+                            <Text style={styles.priceFont}>ราคา {item.price} บาท</Text>
                         </ScrollView>
                         <View style={styles.noteBox}>
                             <Text style={{fontSize:20}}>Note</Text>
@@ -160,7 +163,7 @@ const styles = StyleSheet.create({
     iconContainer: {
         width:screenWidth*0.15,
         flexDirection:'row',
-        alignItems:'flex-start'
+        alignItems:'flex-start',
     },
     cartContainer: {
         borderColor:'rgba(0,0,0,0.2)',
@@ -184,20 +187,20 @@ const styles = StyleSheet.create({
         //borderWidth:1,
     },
     scrollContainer: {
-        padding:25,
+        paddingHorizontal:10,
         width:screenWidth*.8,
         height:screenHeight*.175,
     },
     noteBox: {
         paddingHorizontal:25,
         width:screenWidth*.8,
-        height:screenHeight*.125,
+        height:screenHeight*.12,
         alignItems:'center',
     },
     noteInput: {
         fontSize: 18,
         width: screenWidth *.8,
-        height: screenHeight * 0.075,
+        height: screenHeight * 0.05,
         margin: 8,
         padding: 10,
         borderRadius: 10,
@@ -206,6 +209,10 @@ const styles = StyleSheet.create({
     },
     descriptionFont: {
         fontSize:18
+    },
+    priceFont: {
+        textAlign:'center',
+        fontSize:20
     },
     selected: {
         flexDirection:'column',
