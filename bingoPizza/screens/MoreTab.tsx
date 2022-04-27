@@ -192,13 +192,13 @@ const styles = StyleSheet.create({
     noteBox: {
         paddingHorizontal:25,
         width:screenWidth*.8,
-        height:screenHeight*.125,
+        height:screenHeight*.12,
         alignItems:'center',
     },
     noteInput: {
         fontSize: 18,
         width: screenWidth *.8,
-        height: screenHeight * 0.075,
+        height: screenHeight * 0.05,
         margin: 8,
         padding: 10,
         borderRadius: 10,
