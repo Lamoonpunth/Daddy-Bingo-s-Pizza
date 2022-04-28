@@ -23,6 +23,8 @@ const screenHeight = Dimensions.get('screen').height;
 export default function OrderAwait({navigation, route}:{navigation:any,route:any}) {
     const {cart} = route.params;
     const {user} = route.params;
+    const {orderid} = route.params;
+    console.log(orderid)
     const [orderlist, onChangeOrderList] = React.useState([
         {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
         

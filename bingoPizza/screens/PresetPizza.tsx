@@ -45,7 +45,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   ]);
 
   const [selectedTopping, setTopping] = React.useState('Bacon')
-  const [selectedSize, setSize] = React.useState('XS');
+  const [selectedSize, setSize] = React.useState('one piece');
   const [selectedDough, setDough] = React.useState('Thick');
   const [selectedCrust, setCrust] = React.useState('None');
   const [selectedSauce, setSauce] = React.useState('Tomato-Based');

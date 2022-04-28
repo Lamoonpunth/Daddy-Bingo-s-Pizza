@@ -26,6 +26,10 @@ export default function Profile({navigation}:{navigation:any}) {
     navigation.goBack();
   }
 
+  const onSaveButton = () => {
+
+  }
+
   return (
     <Gradient>
       <View style={styles.container}>
@@ -43,38 +47,66 @@ export default function Profile({navigation}:{navigation:any}) {
             <View style={styles.box1}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Name</Text>
-                <TouchableOpacity >
+                <View >
                   <Image source={require('../assets/images/edit.png')}/>  
-                </TouchableOpacity>
+                </View>
               </View>
-              <Text></Text>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={name}
+                value={name}
+                onChangeText={onChangeName}
+              />
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Email</Text>
-                <TouchableOpacity >
+                <View >
                   <Image source={require('../assets/images/edit.png')}/>  
-                </TouchableOpacity>
+                </View>
               </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={email}
+                value={email}
+                onChangeText={onChangeEmail}
+              />
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Contact</Text>
-                <TouchableOpacity >
+                <View >
                   <Image source={require('../assets/images/edit.png')}/>  
-                </TouchableOpacity>
+                </View>
               </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={contact}
+                value={contact}
+                onChangeText={onChangeContact}
+              />
             </View>
             <View style={styles.box2}>
               <View style={styles.topicBox}>
                 <Text style={styles.topicFont}>Address</Text>
-                <TouchableOpacity >
+                <View >
                   <Image source={require('../assets/images/edit.png')}/>  
-                </TouchableOpacity>
+                </View>
               </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={address}
+                value={address}
+                onChangeText={onChangeAddress}
+              />
             </View>
           </ScrollView>
         </View>
+        <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
+          <View style={{backgroundColor:'transparent'}}>
+            <Text style={{fontSize:20, color: 'white'}}>Save</Text>
+          </View>  
+        </TouchableOpacity>
       </View>
     </Gradient>
   );
@@ -147,5 +179,26 @@ const styles = StyleSheet.create({
     height: 200,
     backgroundColor:'#FF6D6D',
     borderRadius:10,
-  }
+  },
+  detailFont: {
+    textAlign:'left',
+    fontSize:18,
+    color:'#FF6D6D',
+    width: screenWidth * .7,
+    height: 40,
+    backgroundColor:'white',
+    borderRadius:10,
+    paddingLeft:10
+  },
+  savebutton: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*36/100,
+    height:screenHeight*6/100,
+    backgroundColor:'#FF6D6D',
+    elevation:4,
+    borderRadius:20
+  },
 });

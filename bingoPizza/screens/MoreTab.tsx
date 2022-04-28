@@ -19,6 +19,7 @@ import { TextInput } from "react-native-gesture-handler";
 
 export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
 
+    const {IsRec} = route.params;
     const {item} = route.params;
     const {type} = route.params;
     const {userid} = route.params;
@@ -36,7 +37,6 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
     }
 
     const onAddToCart = () =>{
-        navigation.navigate('Menu',{"type":type,userid:userid});
         fetch("http://10.0.2.2:3000/addToCart",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
@@ -44,6 +44,11 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
         })
         .then(response => response.json())
         .then(data => {console.log(data)
+        console.log(type)
+        if(type  !== undefined)
+        {navigation.navigate('Menu',{"type":type,userid:userid});}
+        else
+        {navigation.navigate('Order',{userid:userid});}
         setUserNote('')})
     }
 

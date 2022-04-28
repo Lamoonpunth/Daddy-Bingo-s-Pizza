@@ -26,7 +26,7 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
   const { userid } = route.params;
   const { type } = route.params
   const Item = ({ title }: { title: any }) => (
-    <View >
+    <View style={styles.menuInfo}>
       <Text style={styles.menuFont} >{title}</Text>
     </View>
   )
@@ -184,15 +184,17 @@ const styles = StyleSheet.create({
     width: screenHeight * 0.2,
     height: screenHeight * 0.2,
   },
-  menuFont: {
-    fontSize: 18,
-    width: screenWidth * 0.3,
+  menuInfo: {
+    width: screenWidth * 0.4,
     height: screenWidth * 0.25,
-    margin: 8,
-    padding: 10,
+    marginTop: 8,
+    paddingTop: 10,
     borderRadius: 10,
-    backgroundColor: 'white',
-    elevation: 8,
+    backgroundColor: 'transparent',
+  },
+  menuFont: {
+    fontSize: 20,
+    color:'white'
   },
   moreBox: {
     flexDirection: 'column',
