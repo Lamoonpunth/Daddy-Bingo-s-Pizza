@@ -93,9 +93,9 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
         .then(response => response.json())
         .then(json =>{
             console.log(json)
+            navigation.navigate("OrderAwait",{cart:cart,user:user,orderid:json._id});
         })
         .catch(error => console.log(error))
-        navigation.navigate("OrderAwait",{cart:cart,user:user});
     }
 
     const {price} = route.params;
