@@ -73,7 +73,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickCategory= (type:any)=>{
-    console.log(type)
+    //console.log({type:type,userid:userid})
     navigation.navigate('Menu',{type:type,userid:userid});
   }
   const getRecommendList = () =>{
