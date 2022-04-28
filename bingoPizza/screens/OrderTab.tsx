@@ -22,6 +22,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   
   const {userid} = route.params;
   const [userType, onChangeUserType] = React.useState('Delivery');
+  const [recommendTemp, setRecommendTemp] = React.useState();
   /*ตัวเลือกของswitch selector*/ 
 
   const [promotion, onClickPromo] = React.useState([
@@ -54,7 +55,15 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickRecommend = (item:any) =>{
-    navigation.navigate('More', {IsRec:true ,item: item, userid: userid });
+    console.log(serverIP+'/getID?id='+item.menuid)
+    fetch(serverIP+'/getID?id='+item.menuid)
+    .then(response=>response.json())
+    .then(data => {
+      setRecommendTemp(data)
+      console.log(recommendTemp)
+      navigation.navigate('More', { item: recommendTemp[0], userid: userid })
+    }
+    )
   }
 
   const onSeeAllRecommend = (type:any) =>{

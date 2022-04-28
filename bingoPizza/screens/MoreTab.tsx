@@ -37,7 +37,6 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
     }
 
     const onAddToCart = () =>{
-        
         fetch("http://10.0.2.2:3000/addToCart",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
@@ -45,13 +44,11 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
         })
         .then(response => response.json())
         .then(data => {console.log(data)
-            if (IsRec){
-                navigation.goBack();
-            }
-            else{
-                navigation.navigate('Menu',{"type":type,userid:userid});
-            }
-            
+        console.log(type)
+        if(type  !== undefined)
+        {navigation.navigate('Menu',{"type":type,userid:userid});}
+        else
+        {navigation.navigate('Order',{userid:userid});}
         setUserNote('')})
     }
 
