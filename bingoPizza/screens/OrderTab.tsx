@@ -22,7 +22,6 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   
   const {userid} = route.params;
   const [userType, onChangeUserType] = React.useState('Delivery');
-  const [recommendTemp, setRecommendTemp] = React.useState();
   /*ตัวเลือกของswitch selector*/ 
 
   const [promotion, onClickPromo] = React.useState([
@@ -61,9 +60,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     fetch(serverIP+'/getID?id='+item.menuid)
     .then(response=>response.json())
     .then(data => {
-      setRecommendTemp(data)
-      console.log(recommendTemp)
-      navigation.navigate('More', { item: recommendTemp[0], userid: userid })
+      navigation.navigate('More', { item: data[0], userid: userid })
     }
     )
   }
@@ -84,7 +81,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   useFocusEffect(
     React.useCallback(() => {
       getRecommendList()
-    }, [])
+    }, [recommend])
   );
   return (
     <Gradient>

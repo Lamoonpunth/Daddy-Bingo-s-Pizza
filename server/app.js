@@ -369,7 +369,6 @@ app.get('/getAlacarte',async(req,res)=>{
   }
 })
 app.get('/getID',async(req,res)=>{
-  console.log(req.query)
   try{
     const menu = await Menu.find({"_id":req.query.id})
     console.log("getmenu")
