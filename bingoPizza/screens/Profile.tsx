@@ -22,7 +22,8 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
   const [email, onChangeEmail] = React.useState('Default');
   const [contact, onChangeContact] = React.useState('Default');
   const [address, onChangeAddress] = React.useState('Default');
-
+  const {userid} = route.params.params.params
+  console.log(userid)
   const onBackButton = () => {
     navigation.goBack();
   }

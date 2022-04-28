@@ -43,8 +43,9 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
 
   const onClickAdminIcon = () =>{
     //console.log('admin here')
-    //console.log(route)    
-    navigation.openDrawer();
+    //console.log(route)
+    console.log(userid)
+    navigation.openDrawer({params: userid});
   }
 
   const onClickAdminAddress = () =>{

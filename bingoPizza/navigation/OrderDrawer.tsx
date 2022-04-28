@@ -13,7 +13,6 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export function OrderDrawer({navigation,route}:{navigation:any,route:any},props:any){
-   
     const onProfile = () => {
         //console.log(route)        
         navigation.navigate("Profile",route);

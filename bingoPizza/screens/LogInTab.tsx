@@ -114,6 +114,7 @@ export default function LogInTab({navigation,route}:{navigation:any,route:any}) 
         {
           setLUsernameState(false);
           setLUserPassState(false);
+          
           navigation.navigate('Order', {screen:'Home', params:{userid:data}});
         }
       }).catch(error=>alert(error))

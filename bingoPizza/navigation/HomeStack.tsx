@@ -26,14 +26,14 @@ import 'react-native-gesture-handler';
 const LogIn = createNativeStackNavigator();
 const Order = createDrawerNavigator();
 
-function HomeOrder(){
+function HomeOrder({route,navigation}){
     return (
         <Order.Navigator initialRouteName='Home' screenOptions={{headerShown:false}} drawerContent={props => <OrderDrawer{...props}/>}>
             <Order.Screen name='Home' component={OrderTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Cart' component={FoodCart} options={{swipeEnabled:false}}/>
             <Order.Screen name='SeeAll' component={SeeAllRecommend} options={{swipeEnabled:false}}/>
             <Order.Screen name='Menu' component={Menu} options={{swipeEnabled:false}}/>
-            <Order.Screen name='Profile' component={Profile} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Profile' component={Profile} options={{swipeEnabled:false}} initialParams={{params:route.params}}/>
             <Order.Screen name='More' component={MoreTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Sub' component={Subscription} options={{swipeEnabled:false}}/>
             <Order.Screen name='SubscriptionSummary' component={SubscriptionSummary} options={{swipeEnabled:false}}/>
