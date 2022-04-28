@@ -912,9 +912,11 @@ app.get('/getuserdata',async(req,res) => {
 
 app.post('/updateuserpofile-name',async(req,res)=>{
   try{
-    await User.updateMany({ "_id":req.body._id},{$set:{"fname":req.body.fname}});
-    await User.updateMany({ "_id":req.body._id},{$set:{"lname":req.body.lname}});
-    res.json("updated")
+    await User.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"address":req.body.adress}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});
+    res.json("user-profile-updated")
   }
   catch(error){
     console.log(error)
