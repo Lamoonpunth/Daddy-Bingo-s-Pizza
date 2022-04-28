@@ -47,7 +47,12 @@ export default function Profile({navigation}:{navigation:any}) {
                   <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
-              <Text></Text>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={name}
+                value={name}
+                onChangeText={onChangeName}
+              />
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
@@ -56,6 +61,12 @@ export default function Profile({navigation}:{navigation:any}) {
                   <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={email}
+                value={email}
+                onChangeText={onChangeEmail}
+              />
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
@@ -64,6 +75,12 @@ export default function Profile({navigation}:{navigation:any}) {
                   <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={contact}
+                value={contact}
+                onChangeText={onChangeContact}
+              />
             </View>
             <View style={styles.box2}>
               <View style={styles.topicBox}>
@@ -72,6 +89,12 @@ export default function Profile({navigation}:{navigation:any}) {
                   <Image source={require('../assets/images/edit.png')}/>  
                 </TouchableOpacity>
               </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={address}
+                value={address}
+                onChangeText={onChangeAddress}
+              />
             </View>
           </ScrollView>
         </View>
@@ -147,5 +170,15 @@ const styles = StyleSheet.create({
     height: 200,
     backgroundColor:'#FF6D6D',
     borderRadius:10,
-  }
+  },
+  detailFont: {
+    textAlign:'left',
+    fontSize:18,
+    color:'#FF6D6D',
+    width: screenWidth * .7,
+    height: 40,
+    backgroundColor:'white',
+    borderRadius:10,
+    paddingLeft:10
+  },
 });

@@ -18,8 +18,6 @@ const serverIP = "http://10.0.2.2:3000"
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-
-
 export default function OrderTab({navigation, route}:{navigation:any,route:any}) {
   
   const {userid} = route.params;
@@ -56,7 +54,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickRecommend = (item:any) =>{
-    navigation.navigate('More', { item: item, userid: userid });
+    navigation.navigate('More', {IsRec:true ,item: item, userid: userid });
   }
 
   const onSeeAllRecommend = (type:any) =>{
