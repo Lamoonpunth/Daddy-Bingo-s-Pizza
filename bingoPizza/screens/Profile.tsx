@@ -15,8 +15,9 @@ const screenHeight = Dimensions.get('screen').height;
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 
-export default function Profile({navigation}:{navigation:any}) {
+export default function Profile({navigation,route}:{navigation:any,route:any}) {
   //const {userid} = route.params;
+  //console.log(route)
   const [name, onChangeName] = React.useState('Default');
   const [email, onChangeEmail] = React.useState('Default');
   const [contact, onChangeContact] = React.useState('Default');

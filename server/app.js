@@ -910,7 +910,7 @@ app.get('/getuserdata',async(req,res) => {
   }
 })
 
-app.post('/updateuserpofile-name',async(req,res)=>{
+app.post('/updateuserpofile',async(req,res)=>{
   try{
     await User.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});
     await User.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}});
@@ -924,8 +924,27 @@ app.post('/updateuserpofile-name',async(req,res)=>{
   }
 })
 
+// app.post('/updateriderprofile',async(req,res)=>{
+//   try{
+//     await Rider.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});    
+//     res.json("profile-updated")
+//   }
+//   catch(error){
+//     console.log(error)
+//     res.json(error)
+//   }
+// })
 
-
+// app.post('/updatechefprofile',async(req,res)=>{
+//   try{
+//     await Chef.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});    
+//     res.json("profile-updated")
+//   }
+//   catch(error){
+//     console.log(error)
+//     res.json(error)
+//   }
+// })
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './images');

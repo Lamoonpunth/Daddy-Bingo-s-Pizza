@@ -43,6 +43,8 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   ]);
 
   const onClickAdminIcon = () =>{
+    //console.log('admin here')
+    //console.log(route)    
     navigation.openDrawer();
   }
 
@@ -71,6 +73,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
 
   const onClickCategory= (type:any)=>{
+    console.log(type)
     navigation.navigate('Menu',{type:type,userid:userid});
   }
   const getRecommendList = () =>{
