@@ -16,7 +16,7 @@ import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 
 export default function Profile({navigation}:{navigation:any}) {
-
+  //const {userid} = route.params;
   const [name, onChangeName] = React.useState('Default');
   const [email, onChangeEmail] = React.useState('Default');
   const [contact, onChangeContact] = React.useState('Default');
@@ -25,10 +25,18 @@ export default function Profile({navigation}:{navigation:any}) {
   const onBackButton = () => {
     navigation.goBack();
   }
-
   const onSaveButton = () => {
-
-  }
+  //   fetch("http://10.0.2.2:3000/user",{
+  //       method:"POST",
+  //       headers:{'Content-Type': 'application/json'},
+  //       body:JSON.stringify({_id:userid,
+  //                            fname:name,
+  //                            lname:email,
+  //                            phonenumber:contact,
+  //                            address:address,})
+  // }).then(response => response.json())
+  // .then(data => {console.log(data) })
+}
 
   return (
     <Gradient>
@@ -46,7 +54,7 @@ export default function Profile({navigation}:{navigation:any}) {
           <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
-                <Text style={styles.topicFont}>Name</Text>
+                <Text style={styles.topicFont}>FirstName</Text>
                 <View >
                   <Image source={require('../assets/images/edit.png')}/>  
                 </View>
@@ -60,7 +68,7 @@ export default function Profile({navigation}:{navigation:any}) {
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
-                <Text style={styles.topicFont}>Email</Text>
+                <Text style={styles.topicFont}>Lastname</Text>
                 <View >
                   <Image source={require('../assets/images/edit.png')}/>  
                 </View>

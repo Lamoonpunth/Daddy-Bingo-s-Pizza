@@ -415,6 +415,8 @@ app.post('/updatemenu',async(req,res)=>{
   }
 }
 )
+
+
 app.post('/addrecommend',async(req,res)=> {
   try{
     const recommend = await Recommend.create({
@@ -485,7 +487,6 @@ app.post('/addToCart',async(req,res) =>{
     }
   }
 )
-
 app.post('/clearCart',async(req,res) =>{
   try{
     const user = await User.findOne({"_id":req.body._id})
@@ -499,7 +500,6 @@ app.post('/clearCart',async(req,res) =>{
   }
 }
 )
-
 app.get('/getCart',async(req,res) =>{
   try{
     const user =await User.findOne({"_id":req.query.userid})
@@ -909,6 +909,22 @@ app.get('/getuserdata',async(req,res) => {
     console.log(error)
   }
 })
+
+app.post('/updateuserpofile-name',async(req,res)=>{
+  try{
+    await User.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"address":req.body.adress}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});
+    res.json("user-profile-updated")
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+})
+
+
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
