@@ -28,7 +28,7 @@ export default function EditProfile({navigation}:{navigation:any}) {
     navigation.goBack();
   }
 
-  const onSave = () =>{
+  const onSaveButton = () =>{
     
   }
 
@@ -91,12 +91,19 @@ export default function EditProfile({navigation}:{navigation:any}) {
               />
             </View>
             <View style={styles.saveBox}>
-              <TouchableOpacity style={styles.save} onPress={onSave}>
+              <View style={styles.save}>
                 <Text style={styles.saveFont}>Save</Text>
-              </TouchableOpacity>
+              </View>
             </View>
           </ScrollView>
         </View>
+
+        <TouchableOpacity style={styles.savebutton} onPress={onSaveButton}>
+          <View style={{backgroundColor:'transparent'}}>
+            <Text style={{fontSize:20, color: 'white'}}>Save</Text>
+          </View>  
+        </TouchableOpacity>
+
       </View>
     </Gradient>
   );
@@ -204,5 +211,16 @@ const styles = StyleSheet.create({
     backgroundColor:'white',
     marginTop:-screenHeight * .025,
     marginBottom:-screenHeight *.02,
+  },
+  savebutton: {
+    borderWidth:1,
+    borderColor:'rgba(0,0,0,0)',
+    alignItems:'center',
+    justifyContent:'center',
+    width:screenWidth*36/100,
+    height:screenHeight*6/100,
+    backgroundColor:'#FF6D6D',
+    elevation:4,
+    borderRadius:20
   },
 });

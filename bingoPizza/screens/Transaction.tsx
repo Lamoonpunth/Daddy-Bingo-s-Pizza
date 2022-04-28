@@ -94,6 +94,8 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
         .then(json =>{
             console.log(json)
             navigation.navigate("OrderAwait",{cart:cart,user:user,orderid:json._id});
+            setResult({})
+            setImage(null)
         })
         .catch(error => console.log(error))
     }

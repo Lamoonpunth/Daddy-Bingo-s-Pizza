@@ -82,6 +82,15 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
     }
   }
 
+  const backToOrder = () =>{
+    onStar1(false);
+    onStar2(false);
+    onStar3(false);
+    onStar4(false);
+    onStar5(false);
+    navigation.goBack();
+  }
+
   return (
     <Gradient>
       <View style={styles.container}>
@@ -126,7 +135,7 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
                 :<Image source={require('../assets/images/star.png')} style={styles.star}/>} 
               </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity onPress={() => backToOrder()}>
               <Text style={styles.orderFont}>Back to order</Text>
             </TouchableOpacity>
           </View>
