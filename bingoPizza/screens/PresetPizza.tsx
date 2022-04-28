@@ -44,7 +44,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
 
-  const [selectedTopping, setTopping] = React.useState('Bacon')
+  const [selectedTopping, setTopping] = React.useState('Bacon');
   const [selectedSize, setSize] = React.useState('one piece');
   const [selectedDough, setDough] = React.useState('Thick');
   const [selectedCrust, setCrust] = React.useState('None');
@@ -58,11 +58,33 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const [selectedSaucePrice, setSaucePrice] = React.useState(50);
   const [selectedPackagePrice, setPackagePrice] = React.useState(0);
   const [selectedToppingImage, setToppingImage] = React.useState("PizzaBacon.jpg")
+  /*
   const onSelectedTopping = (type:any,item:any,index:any) =>{
     setTopping(type);
     setToppingPrice(item.price)
     setToppingImage(item.img_path)
     const newArrData = topping.map((e, index) =>{
+      if (item._id == e._id){
+        if (item.selected == false){
+          return {
+            ...e,selected:true
+          }
+        }
+        
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeTopping(newArrData);
+  }*/
+  
+  const onSelectedTopping = (type:any,item:any,index:any) =>{
+    setTopping(type);
+    setToppingPrice(item.price)
+    setToppingImage(item.img_path)
+    const newArrData = topping.map((e, index) =>{
+    //const newArrData = topping.map(newItem =>{
       if (item._id == e._id){
         return {
           ...e,selected:true
@@ -283,7 +305,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                           alignItems:'center',
                           justifyContent:'center',
                           backgroundColor: "#000000c0",
-                          opacity: item.selected? 1: 0.4
+                          opacity: item.selected? 1: 0.6
                         }}>
                           <Text style={{
                             fontSize:20,
@@ -323,7 +345,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                           alignItems:'center',
                           justifyContent:'center',
                           backgroundColor: "#000000c0",
-                          opacity: item.selected? 1: 0.4
+                          opacity: item.selected? 1: 0.6
                         }}>
                           <Text style={{
                             fontSize:20,
@@ -363,7 +385,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                           alignItems:'center',
                           justifyContent:'center',
                           backgroundColor: "#000000c0",
-                          opacity: item.selected? 1: 0.4
+                          opacity: item.selected? 1: 0.6
                         }}>
                           <Text style={{
                             fontSize:20,
@@ -403,7 +425,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                           alignItems:'center',
                           justifyContent:'center',
                           backgroundColor: "#000000c0",
-                          opacity: item.selected? 1: 0.4
+                          opacity: item.selected? 1: 0.6
                         }}>
                           <Text style={{
                             fontSize:20,
@@ -443,7 +465,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                           alignItems:'center',
                           justifyContent:'center',
                           backgroundColor: "#000000c0",
-                          opacity: item.selected? 1: 0.4
+                          opacity: item.selected? 1: 0.6
                         }}>
                           <Text style={{
                             fontSize:20,
@@ -483,7 +505,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                           alignItems:'center',
                           justifyContent:'center',
                           backgroundColor: "#000000c0",
-                          opacity: item.selected? 1: 0.4
+                          opacity: item.selected? 1: 0.6
                         }}>
                           <Text style={{
                             fontSize:20,
@@ -543,17 +565,16 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   detailBox: {
-    borderColor: 'black',
-    borderWidth:1,
     width:screenWidth,
     height:screenHeight*0.3,
     paddingHorizontal:20,
     flexDirection:'column',
     alignItems:'flex-start',
     justifyContent:'space-around',
+    backgroundColor:'transparent'
   },
   pizzaName: {
-    fontSize:28
+    fontSize:28,
   },
   pizzaDetail: {
     fontSize:20
@@ -574,8 +595,6 @@ const styles = StyleSheet.create({
     fontWeight:'500',
   },
   optionButtons: {
-    borderColor: 'black',
-    borderWidth:1,
     flex:7,
     flexDirection:'row',
     alignItems:'center',
@@ -608,7 +627,6 @@ const styles = StyleSheet.create({
     height:screenHeight*0.15,
     marginHorizontal:10,
     borderRadius:20,
-    elevation:5
   },
   crustBox: {
     alignItems:'center',

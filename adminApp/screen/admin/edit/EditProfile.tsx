@@ -90,11 +90,6 @@ export default function EditProfile({navigation}:{navigation:any}) {
                 onChangeText={onChangeContact}
               />
             </View>
-            <View style={styles.saveBox}>
-              <View style={styles.save}>
-                <Text style={styles.saveFont}>Save</Text>
-              </View>
-            </View>
           </ScrollView>
         </View>
 
@@ -166,9 +161,12 @@ const styles = StyleSheet.create({
   detailFont: {
     textAlign:'left',
     fontSize:18,
-    color:'white',
+    color:'#FF6D6D',
     width: screenWidth * .7,
-    height: 50,
+    height: 40,
+    backgroundColor:'white',
+    borderRadius:10,
+    paddingLeft:10
   },
   editButton: {
     width:50,
