@@ -74,8 +74,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     const newArrData = topping.map((e, index) =>{
     //const newArrData = topping.map(newItem =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -93,8 +98,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     const newArrData = topping2.map((e, index) =>{
     //const newArrData = topping.map(newItem =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -109,8 +119,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setSizePrice(item.price)
     const newArrData = size.map((e, index) =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -125,8 +140,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setDoughPrice(item.price)
     const newArrData = dough.map((e, index) =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -141,8 +161,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setCrustPrice(item.price)
     const newArrData = crust.map((e, index) =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -157,8 +182,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setSaucePrice(item.price)
     const newArrData = sauce.map((e, index) =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -173,8 +203,13 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setPackagePrice(item.price)
     const newArrData = pack.map((e, index) =>{
       if (item._id == e._id){
-        return {
+        if (item.selected == false){
+          return {
           ...e,selected:true
+          }
+        }
+        return {
+          ...e,selected:false
         }
       }
       return {
@@ -355,7 +390,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
             <View style={styles.optionsBox}>
               <ImageBackground source={require('../assets/images/topping.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
-                <Text style={styles.optionFont}>Topping (for 2 toppings pizza)</Text>
+                <Text style={styles.optionFont}>Topping(for 2 toppings pizza)</Text>
               </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
@@ -661,7 +696,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   optionFont: {
-    fontSize:28,
+    fontSize:26,
     fontWeight:'500',
   },
   optionButtons: {
