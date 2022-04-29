@@ -20,6 +20,7 @@ const get = 'http://10.0.2.2:3000/getImage/'
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
   const {userid} = route.params;
+  const [name,setName] = React.useState("Bacon")
   const [topping, onChangeTopping] = React.useState([
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
   ]);
@@ -85,10 +86,11 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   }
 
   const onSelectedTopping2 = (type:any,item:any,index:any) =>{
+    console.log(topping2)
     setTopping2(type);
     setToppingPrice2(item.price)
     setToppingImage2(item.img_path)
-    const newArrData = topping.map((e, index) =>{
+    const newArrData = topping2.map((e, index) =>{
     //const newArrData = topping.map(newItem =>{
       if (item._id == e._id){
         return {
@@ -193,9 +195,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
       headers:{'Content-Type': 'application/json'},
     
       body:JSON.stringify({    
-        name:selectedTopping,
+        name:name,
         type:"userPizza",
-        price:selectedToppingPrice+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice,
+        price:selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice,
         ingr_need:null,
         description:null,
         img_path:selectedToppingImage,
@@ -223,37 +225,47 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     fetch("http://10.0.2.2:3000/getTopping")
     .then(response=>response.json())
     .then(json=>{console.log(json)
-    onChangeTopping(json)})
+    onChangeTopping(json)
+    const None = [{name:"None", price:0,img_path:"",type:"Topping",_id:999,key:999}]
+    const New = None.concat(json)
+    onChangeTopping2(New)
+    onSelectedTopping(json[0].name,json[0],0)
+    onSelectedTopping2(New[0].name,New[0],0)})
   }
   const getSize = () =>{
     fetch("http://10.0.2.2:3000/getSize")
     .then(response=>response.json())
-    .then(json=>{console.log(json)
-    onChangeSize(json)})
+    .then(json=>{
+    onChangeSize(json)
+    onSelectedSize(json[0].name,json[0],0)})
   }
   const getDough = () =>{
     fetch("http://10.0.2.2:3000/getDough")
     .then(response=>response.json())
-    .then(json=>{console.log(json)
-    onChangeDough(json)})
+    .then(json=>{
+    onChangeDough(json)
+    onSelectedDough(json[0].name,json[0],0)})
   }
   const getCrust = () =>{
     fetch("http://10.0.2.2:3000/getCrust")
     .then(response=>response.json())
-    .then(json=>{console.log(json)
-    onChangeCrust(json)})
+    .then(json=>{
+    onChangeCrust(json)
+    onSelectedCrust(json[0].name,json[0],0)})
   }
   const getSauce = () =>{
     fetch("http://10.0.2.2:3000/getSauce")
     .then(response=>response.json())
-    .then(json=>{console.log(json)
-    onChangeSauce(json)})
+    .then(json=>{
+    onChangeSauce(json)
+    onSelectedSauce(json[0].name,json[0],0)})
   }
   const getPackage = () =>{
     fetch("http://10.0.2.2:3000/getPackage")
     .then(response=>response.json())
-    .then(json=>{console.log(json)
-    onChangePackage(json)})
+    .then(json=>{
+    onChangePackage(json)
+    onSelectedPackage(json[0].name,json[0],0)})
   }
   const renderall = () =>{
     getTopping()
@@ -264,11 +276,24 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     getPackage()
   }
 
+  const renderName = () =>{
+    if (selectedTopping2 == 'None')
+    setName(selectedTopping)
+    else
+    setName(selectedTopping + " + " + selectedTopping2)
+  }
+
   useFocusEffect(
     React.useCallback(() => {
         renderall()
       //checkItemInCart()
     }, [])
+  );
+  useFocusEffect(
+    React.useCallback(() => {
+        renderName()
+      //checkItemInCart()
+    }, [topping,topping2])
   );
   return (
     <Gradient>
@@ -284,7 +309,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
           <View style={styles.cartContainer}>
             
             <View style={styles.detailBox}>
-              <Text style={styles.pizzaName}>{selectedTopping}</Text>
+              <Text style={styles.pizzaName}>{name}</Text>
               <Text style={styles.pizzaDetail}>Details</Text>
             </View>
 
@@ -330,7 +355,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
             <View style={styles.optionsBox}>
               <ImageBackground source={require('../assets/images/topping.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
-                <Text style={styles.optionFont}>Topping2</Text>
+                <Text style={styles.optionFont}>Topping (for 2 toppings pizza)</Text>
               </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
@@ -572,7 +597,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
         </ScrollView>
         <TouchableOpacity style={styles.checkoutBox} onPress={addToCart}>
           <Text style={styles.checkoutFont}>Add to cart</Text>
-          <Text style={styles.checkoutFont}>{selectedToppingPrice+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice}</Text>
+          <Text style={styles.checkoutFont}>{selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice}</Text>
         </TouchableOpacity>   
       </View>
     </Gradient>
