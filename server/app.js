@@ -909,7 +909,7 @@ app.get('/getuserdata',async(req,res) => {
   }
 })
 
-app.post('/updateuserpofile',async(req,res)=>{
+app.post('/updateuserprofile',async(req,res)=>{
   try{
     await User.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});
     await User.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}});
