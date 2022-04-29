@@ -14,8 +14,8 @@ const screenHeight = Dimensions.get('screen').height;
 
 export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:any){
     const onProfile = () => {
-        //console.log(route)        
-        navigation.navigate("Profile",route);
+               
+        navigation.navigate("Profile");
     }
 
     const onSubscription = () => {

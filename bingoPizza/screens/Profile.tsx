@@ -15,29 +15,28 @@ const screenHeight = Dimensions.get('screen').height;
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
 
-export default function Profile({navigation,route}:{navigation:any,route:any}) {
-  //const {userid} = route.params;
-  //console.log(route)
+export default function Profile({navigation,route}:{navigation:any,route:any}) {  
   const [name, onChangeName] = React.useState('Default');
   const [email, onChangeEmail] = React.useState('Default');
   const [contact, onChangeContact] = React.useState('Default');
   const [address, onChangeAddress] = React.useState('Default');
   const {userid} = route.params.params.params
-  console.log(userid)
+  
   const onBackButton = () => {
     navigation.goBack();
   }
   const onSaveButton = () => {
-  //   fetch("http://10.0.2.2:3000/user",{
-  //       method:"POST",
-  //       headers:{'Content-Type': 'application/json'},
-  //       body:JSON.stringify({_id:userid,
-  //                            fname:name,
-  //                            lname:email,
-  //                            phonenumber:contact,
-  //                            address:address,})
-  // }).then(response => response.json())
-  // .then(data => {console.log(data) })
+    console.log(userid)
+    fetch("http://10.0.2.2:3000/updateuserprofile",{
+        method:"POST",
+        headers:{'Content-Type': 'application/json'},
+        body:JSON.stringify({_id:userid,
+                             fname:name,
+                             lname:email,
+                             phonenumber:contact,
+                             address:address,})
+  }).then(response => response.json())
+  .then(data => {console.log(data) })
 }
 
   return (
@@ -84,7 +83,7 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
             </View>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
-                <Text style={styles.topicFont}>Contact</Text>
+                <Text style={styles.topicFont}>Phonenumber</Text>
                 <View >
                   <Image source={require('../assets/images/edit.png')}/>  
                 </View>
