@@ -18,6 +18,33 @@ import { FlatList } from "react-native-gesture-handler";
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function Menu({ navigation, route }: { navigation: any, route: any }) {
+  const [topping, onChangeTopping] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
+  ]);
+
+  const [topping2, onChangeTopping2] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
+  ]);
+
+  const [dough, onChangeDough] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
+  
+  const [crust, onChangeCrust] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
+
+  const [sauce, onChangeSauce] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
+
+  const [pack, onChangePackage] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
+
+  const [size, onChangeSize] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
+  ]);
   const [listOfMenu, setListOfMenu] = React.useState([]);
   const onMoreButton = (menu: any) => {
     console.log(menu)
@@ -77,14 +104,68 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
       </View>
     });
   }
+  const getTopping = () =>{
+    fetch("http://10.0.2.2:3000/getTopping")
+    .then(response=>response.json())
+    .then(json=>{    
+      onChangeTopping(json)
+      const None = [{name:"None", price:0,img_path:"",type:"Topping",_id:999,key:999}]
+      const New = None.concat(json)
+      onChangeTopping2(New)
+    })
+  }
+  const getSize = () =>{
+    fetch("http://10.0.2.2:3000/getSize")
+    .then(response=>response.json())
+    .then(json=>{
+    onChangeSize(json)
+  })
+  }
+  const getDough = () =>{
+    fetch("http://10.0.2.2:3000/getDough")
+    .then(response=>response.json())
+    .then(json=>{
+    onChangeDough(json)
+  })
+  }
+  const getCrust = () =>{
+    fetch("http://10.0.2.2:3000/getCrust")
+    .then(response=>response.json())
+    .then(json=>{
+    onChangeCrust(json)
+  })
+  }
+  const getSauce = () =>{
+    fetch("http://10.0.2.2:3000/getSauce")
+    .then(response=>response.json())
+    .then(json=>{
+    onChangeSauce(json)
+  })
+  }
+  const getPackage = () =>{
+    fetch("http://10.0.2.2:3000/getPackage")
+    .then(response=>response.json())
+    .then(json=>{
+    onChangePackage(json)
+  })
+  }
+  const prepareForPreset = () =>{
+    getTopping()
+    getSize()
+    getDough()
+    getCrust()
+    getSauce()
+    getPackage()
+  }
   useFocusEffect(
     React.useCallback(() => {
+      prepareForPreset()
       getMenuList()
     }, [type,userid])
   );
 
   const onMake = () =>{
-    navigation.navigate('PresetPizza',{userid:userid})
+    navigation.navigate('PresetPizza',{userid:userid,topping:topping,topping2:topping2,dough:dough,crust:crust,sauce:sauce,pack:pack,size:size})
   }
 
   return (

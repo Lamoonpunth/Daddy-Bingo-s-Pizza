@@ -20,34 +20,20 @@ const get = 'http://10.0.2.2:3000/getImage/'
 export default function PresetPizza({navigation,route}: {navigation:any,route:any}) {
 
   const {userid} = route.params;
-  const [name,setName] = React.useState("Bacon")
-  const [topping, onChangeTopping] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
-  ]);
+  const [name,setName] = React.useState("")
+  const [topping, onChangeTopping] = React.useState(route.params.topping);
 
-  const [topping2, onChangeTopping2] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
-  ]);
+  const [topping2, onChangeTopping2] = React.useState(route.params.topping2);
 
-  const [dough, onChangeDough] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
-  ]);
+  const [dough, onChangeDough] = React.useState(route.params.dough);
   
-  const [crust, onChangeCrust] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
-  ]);
+  const [crust, onChangeCrust] = React.useState(route.params.crust);
 
-  const [sauce, onChangeSauce] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
-  ]);
+  const [sauce, onChangeSauce] = React.useState(route.params.sauce);
 
-  const [pack, onChangePackage] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
-  ]);
+  const [pack, onChangePackage] = React.useState(route.params.pack);
 
-  const [size, onChangeSize] = React.useState([
-    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
-  ]);
+  const [size, onChangeSize] = React.useState(route.params.size);
 
   const [selectedTopping, setTopping] = React.useState('Bacon');
   const [selectedTopping2, setTopping2] = React.useState('Bacon');
@@ -196,7 +182,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
       body:JSON.stringify({    
         name:name,
         type:"userPizza",
-        price:selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice,
+        price:selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice+selectedSaucePrice,
         ingr_need:null,
         description:null,
         img_path:selectedToppingImage,
@@ -223,12 +209,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const getTopping = () =>{
     fetch("http://10.0.2.2:3000/getTopping")
     .then(response=>response.json())
-    .then(json=>{
-    onChangeTopping(json)
-    const None = [{name:"None", price:0,img_path:"",type:"Topping",_id:999,key:999}]
-    const New = None.concat(json)
-    onChangeTopping2(New)
-  })
+    .then(json=>{ToppingDefault(json)})
   }
   const getSize = () =>{
     fetch("http://10.0.2.2:3000/getSize")
@@ -282,7 +263,6 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   }
   const ToppingDefault = () =>{
     onSelectedTopping(topping[0].name,topping[0],0)
-    console.log("topping")
   }
   const Topping2Default = () =>{
     onSelectedTopping2(topping2[0].name,topping2[0],0)
@@ -302,11 +282,21 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const PackageDefault = () =>{
     onSelectedPackage(pack[0].name,pack[0],0)
   }
+  const defaultAll = () =>{
+    ToppingDefault()
+    Topping2Default()
+    SizeDefault()
+    DoughDefault()
+    CrustDefault()
+    SauceDefault()
+    PackageDefault()
+  }
   useFocusEffect(
     React.useCallback(() => {
-        renderall()
-    }, [])
+        defaultAll()
+    }, [userid])
   );
+  
   useFocusEffect(
     React.useCallback(() => {
         renderName()
@@ -614,7 +604,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
         </ScrollView>
         <TouchableOpacity style={styles.checkoutBox} onPress={addToCart}>
           <Text style={styles.checkoutFont}>Add to cart</Text>
-          <Text style={styles.checkoutFont}>{selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice}</Text>
+          <Text style={styles.checkoutFont}>{selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice+selectedSaucePrice}</Text>
         </TouchableOpacity>   
       </View>
     </Gradient>
