@@ -962,7 +962,7 @@ app.post('/uploadSingle', upload.single('image'), (req, res) => {
 
 app.get('/getImage/:fileName', (req, res) => {
   try{  
-    const fileName = req.params.fileName;
+    const fileName = req.params.fileName;    
     res.sendFile(__dirname+'/images/'+fileName);
   }catch(err){
     res.status(400).json(err);
@@ -970,3 +970,47 @@ app.get('/getImage/:fileName', (req, res) => {
  
 });
 
+app.get('/getImage/Sauce/:fileName', (req, res) => {
+  try{  
+    const fileName = req.params.fileName;    
+    res.sendFile(__dirname+'/images/Sauce/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  }  
+});
+
+app.get('/getImage/Package/:fileName', (req, res) => {
+  try{      
+    const fileName = req.params.fileName;    
+    res.sendFile(__dirname+'/images/Package/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  }  
+});
+
+app.get('/getImage/Crust/:fileName', (req, res) => {
+  try{  
+    const fileName = req.params.fileName;    
+    res.sendFile(__dirname+'/images/Crust/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  }  
+});
+
+app.get('/getImage/Size/:fileName', (req, res) => {
+  try{  
+    const fileName = req.params.fileName;    
+    res.sendFile(__dirname+'/images/Size/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  }  
+});
+
+app.get('/getImage/Dough/:fileName', (req, res) => {
+  try{  
+    const fileName = req.params.fileName;    
+    res.sendFile(__dirname+'/images/Dough/'+fileName);
+  }catch(err){
+    res.status(400).json(err);
+  }  
+});
