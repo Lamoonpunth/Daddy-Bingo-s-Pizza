@@ -38,17 +38,27 @@ export default function EditIngredients({navigation}:{navigation:any}) {
     {name:'anchovy' , left: '10' , key: 19},
   ]);
 
+  const onAddService = () =>{
+
+  }
+
+  const onRemove = () =>{
+
+  }
+
   return (
     <Gradient>
       <View style={styles.container}>
 
         <View style={styles.header}>
-          <TouchableOpacity style={styles.backIcon} onPress={() => {navigation.goBack()}}>
+          <TouchableOpacity style={styles.iconContainer} onPress={() => {navigation.goBack()}}>
             <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
           </TouchableOpacity>
           <Text style={globalStyles.fontHeader}>Ingredients</Text>
+          <TouchableOpacity style={styles.addIcon} onPress={onAddService}>
+            <Image source={require('../../../assets/images/add.png')} style={globalStyles.addIcon}/>
+          </TouchableOpacity>
         </View>
-
         <View style={styles.underline}></View>  
 
         <View style={styles.ingredientContainer}>
@@ -57,24 +67,16 @@ export default function EditIngredients({navigation}:{navigation:any}) {
               data={ingredients}
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
-                <View style={styles.ingredients} key={item.key}>
-                  <View style={styles.boxImage}>
-
-                  </View>
+                <View style={styles.ingredient} key={item.key}>
+                  
                   <View style={styles.boxDetails}>
-                    <TextInput
-                    style={styles.ingredientsFont}
-                    value={item.name}
-                    placeholder={item.name}
-                    />
-                    <TextInput
-                    style={styles.ingredientsFont}
-                    value={item.left}
-                    placeholder={item.left}
-                    />
-                    <TouchableOpacity style={styles.moreBox}>
-                      <Text style={styles.moreFont}>Remove</Text>  
-                    </TouchableOpacity>
+                    <Text style={styles.ingredientFont}>{item.name}</Text>
+                    <Text style={styles.ingredientFont}>{item.left}</Text>
+                    <View style={styles.priceAndRemove}>
+                      <TouchableOpacity style={styles.remove} onPress={()=>onRemove()}>
+                        <Image source={require('../../../assets/images/trash-white.png')}/>
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               )}
@@ -95,14 +97,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
+    width:screenWidth,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   iconContainer: {
-    width:screenWidth*0.9,
-    flexDirection:'row',
-    alignItems:'flex-start'
+    width:40,
+    height:30
+  },
+  addIcon: {
+    width:screenWidth*0.1,
+    height:screenHeight*.03,
+    marginLeft:screenWidth*.03,
+    marginRight:-screenWidth*.02,
   },
   ingredientContainer: {
     borderColor:'rgba(0,0,0,0.2)',
@@ -122,18 +130,18 @@ const styles = StyleSheet.create({
     height:screenHeight*.65,
     backgroundColor:'#fff',
   },
-  ingredients: {
+  ingredient: {
     marginVertical:5,
     borderRadius:50,
     borderWidth:1,
-    backgroundColor:'white',
+    backgroundColor:'#FF6D6D',
     width:screenWidth*0.8,
     height:screenHeight*0.22,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-evenly',
-    elevation:8,
-    borderColor: 'rgba(0,0,0,.1)'
+    borderColor:'rgba(0,0,0,.01)',
+    elevation:5,
   },
   boxImage: {
     borderRadius:20,
@@ -141,51 +149,53 @@ const styles = StyleSheet.create({
     width:screenHeight*0.125,
     height:screenHeight*0.125,
     borderWidth:1,
-    elevation:8,
-    borderColor: 'rgba(0,0,0,.1)'
+    borderColor:'rgba(0,0,0,.1)',
+    elevation:5,
   },
   boxDetails: {
     backgroundColor:'transparent',
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
-    width:screenHeight*0.2,
+    width:screenWidth*0.7,
     height:screenHeight*0.2,
   },
-  ingredientsFont:{
+  ingredientFont: {
+    alignItems:'center',
     fontSize: 18,
-    width: screenHeight*0.2,
+    width: screenWidth*0.6,
     height: screenHeight * 0.05,
-    margin: 8,
-    padding: 10,
-    borderRadius: 10,
+    margin: 4,
+    padding: 8,
+    borderRadius: 20,
     backgroundColor: 'white',
     elevation: 12,
   },
-  moreBox:{
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'center',
-    width: screenHeight*0.1,
+  priceAndRemove: {
+    flexDirection:'row',
+    width: screenWidth*0.6,
     height: screenHeight * 0.05,
-    borderRadius: 10,
-    backgroundColor: '#FF6D7D',
+  },
+  priceFont: {
+    alignItems:'center',
+    fontSize: 18,
+    width: screenWidth*0.4,
+    height: screenHeight * 0.05,
+    margin: 4,
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'white',
     elevation: 12,
   },
-  moreFont:{
-    fontSize: 18,
-    color:'white',
-  },
-  backIcon: {
-    height:screenHeight*.03,
-    marginLeft:-screenWidth*.225,
-    marginRight:screenWidth*.1,
+  remove:{
+    flexDirection:'row-reverse',
+    width: screenWidth*0.6,
+    height: 50,
+    padding: 10,
   },
   underline:{
     width:screenWidth*.7,
     height:screenHeight*0.0035,
     backgroundColor:'white',
-    marginTop:-screenHeight * .025,
-    marginBottom:-screenHeight *.02,
   },
 });

@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'flex-start',
         elevation:5
-      },
+    },
     dueDate: {
         alignItems:'center',
         width:screenWidth*0.8,

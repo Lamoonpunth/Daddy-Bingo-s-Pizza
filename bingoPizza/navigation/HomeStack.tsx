@@ -10,7 +10,7 @@ import SeeAllRecommend from "../screens/SeeAllRecommend";
 import Menu from "../screens/Menu";
 import Profile from "../screens/Profile";
 import CustomerAddress from "../screens/CustomerAddress";
-import Service from "../screens/CustomerAddress copy";
+import Service from "../screens/Service";
 import PresetPizza from "../screens/PresetPizza";
 import MoreTab from "../screens/MoreTab";
 import Subscription from "../screens/SubscriptionTab";

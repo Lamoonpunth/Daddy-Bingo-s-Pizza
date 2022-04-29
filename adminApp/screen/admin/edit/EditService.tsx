@@ -18,12 +18,20 @@ const screenHeight = Dimensions.get('screen').height;
 export default function EditService({navigation}:{navigation:any}) {
 
   const [service, onChangeService] = React.useState([
-    {name:'HBD' , price: '19' , photo:'none' , key: 1},
-    {name:'สวัสดี' , price: '24' , photo:'none' , key: 2},
-    {name:'ครับ' , price: '33' , photo:'none' , key: 3},
-    {name:'ท่าน' , price: '42' , photo:'none' , key: 4},
-    {name:'สมาชิก' , price: '51' , photo:'none' , key: 5},
+    {name:'วันเกิด' , price: '19' , detail:'HBD' , key: 1},
+    {name:'สวัสดี' , price: '24' , detail:'none' , key: 2},
+    {name:'ครับ' , price: '33' , detail:'none' , key: 3},
+    {name:'ท่าน' , price: '42' , detail:'none' , key: 4},
+    {name:'สมาชิก' , price: '51' , detail:'none' , key: 5},
   ]);
+
+  const onAddService = () =>{
+
+  }
+
+  const onRemove = () =>{
+
+  }
 
   return (
     <Gradient>
@@ -34,6 +42,9 @@ export default function EditService({navigation}:{navigation:any}) {
             <Image source={require('../../../assets/images/back_icon.png')} style={globalStyles.backIcon}/>  
           </TouchableOpacity>
           <Text style={globalStyles.fontHeader}>Service</Text>
+          <TouchableOpacity style={styles.addIcon} onPress={onAddService}>
+            <Image source={require('../../../assets/images/add.png')} style={globalStyles.addIcon}/>
+          </TouchableOpacity>
         </View>
         <View style={styles.underline}></View>  
 
@@ -44,23 +55,15 @@ export default function EditService({navigation}:{navigation:any}) {
               showsVerticalScrollIndicator={false}
               renderItem={({item}) => (
                 <View style={styles.service} key={item.key}>
-                  <View style={styles.boxImage}>
-
-                  </View>
                   <View style={styles.boxDetails}>
-                    <TextInput
-                    style={styles.serviceFont}
-                    value={item.name}
-                    placeholder={item.name}
-                    />
-                    <TextInput
-                    style={styles.serviceFont}
-                    value={item.price}
-                    placeholder={item.price}
-                    />
-                    <TouchableOpacity style={styles.moreBox}>
-                      <Text style={styles.moreFont}>More</Text>  
-                    </TouchableOpacity>
+                    <Text style={styles.serviceFont}>{item.name}</Text>
+                    <Text style={styles.serviceFont}>{item.detail}</Text>
+                    <View style={styles.priceAndRemove}>
+                      <Text style={styles.priceFont}>{item.price}</Text>
+                      <TouchableOpacity style={styles.remove} onPress={()=>onRemove()}>
+                        <Image source={require('../../../assets/images/trash-white.png')}/>
+                      </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               )}
@@ -81,17 +84,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    marginTop:screenHeight*.0,
-    marginBottom:-screenHeight*.05,
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
+    width:screenWidth,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   iconContainer: {
-    marginLeft:-screenWidth*.3,
-    width:screenWidth*0.275,
-    flexDirection:'row',
-    alignItems:'flex-start'
+    width:40,
+    height:30
+  },
+  addIcon: {
+    width:screenWidth*0.1,
+    height:screenHeight*.03,
+    marginLeft:screenWidth*.03,
+    marginRight:-screenWidth*.02,
   },
   serviceContainer: {
     borderColor:'rgba(0,0,0,0.2)',
@@ -110,13 +116,12 @@ const styles = StyleSheet.create({
     width:screenWidth*.8,
     height:screenHeight*.65,
     backgroundColor:'#fff',
-    
   },
   service: {
     marginVertical:5,
     borderRadius:50,
     borderWidth:1,
-    backgroundColor:'white',
+    backgroundColor:'#FF6D6D',
     width:screenWidth*0.8,
     height:screenHeight*0.22,
     flexDirection:'row',
@@ -139,39 +144,46 @@ const styles = StyleSheet.create({
     flexDirection:'column',
     alignItems:'center',
     justifyContent:'center',
-    width:screenHeight*0.2,
+    width:screenWidth*0.7,
     height:screenHeight*0.2,
-    
   },
-  serviceFont:{
+  serviceFont: {
+    alignItems:'center',
     fontSize: 18,
-    width: screenHeight*0.2,
+    width: screenWidth*0.6,
     height: screenHeight * 0.05,
-    margin: 8,
-    padding: 10,
-    borderRadius: 10,
+    margin: 4,
+    padding: 8,
+    borderRadius: 20,
     backgroundColor: 'white',
     elevation: 12,
   },
-  moreBox:{
-    flexDirection:'column',
-    alignItems:'center',
-    justifyContent:'center',
-    width: screenHeight*0.1,
+  priceAndRemove: {
+    flexDirection:'row',
+    width: screenWidth*0.6,
     height: screenHeight * 0.05,
-    borderRadius: 10,
-    backgroundColor: '#FF6D7D',
+
+  },
+  priceFont: {
+    alignItems:'center',
+    fontSize: 18,
+    width: screenWidth*0.4,
+    height: screenHeight * 0.05,
+    margin: 4,
+    padding: 8,
+    borderRadius: 20,
+    backgroundColor: 'white',
     elevation: 12,
   },
-  moreFont:{
-    fontSize: 18,
-    color:'white',
+  remove:{
+    flexDirection:'row-reverse',
+    width: screenWidth*0.2,
+    height: 50,
+    padding: 10,
   },
   underline:{
-    width:screenWidth*.55,
+    width:screenWidth*.7,
     height:screenHeight*0.0035,
     backgroundColor:'white',
-    marginTop:screenHeight * .015,
-    marginBottom:-screenHeight *.02,
   },
 });
