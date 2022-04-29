@@ -12,7 +12,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
-export function OrderDrawer({navigation,route}:{navigation:any,route:any},props:any){
+export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:any){
     const onProfile = () => {
         //console.log(route)        
         navigation.navigate("Profile",route);
@@ -27,7 +27,7 @@ export function OrderDrawer({navigation,route}:{navigation:any,route:any},props:
     }
 
     const onAddress = () => {
-        
+        navigation.navigate("Address");
     }
 
     const onLogOut = () => {

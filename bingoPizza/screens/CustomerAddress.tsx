@@ -16,75 +16,16 @@ import Gradient from "../styles/Gradient";
 import { globalStyles } from "../styles/globalStyles";
 import { FlatList } from "react-native-gesture-handler";
 import { useFocusEffect } from '@react-navigation/native';
+import { color } from "react-native-reanimated";
 
-export default function Menu({ navigation, route }: { navigation: any, route: any }) {
-  const [listOfMenu, setListOfMenu] = React.useState([]);
-  const onMoreButton = (menu: any) => {
-    console.log(menu)
-    navigation.navigate('More', { item: menu, type: type, userid: userid });
-  }
-  const { userid } = route.params;
-  const { type } = route.params
-  const Item = ({ title }: { title: any }) => (
-    <View style={styles.menuInfo}>
-      <Text style={styles.menuFont} >{title}</Text>
-    </View>
-  )
-  // const renderItem = ({item}:{item:any}) => (    
-  //   <Item title={item}/>
-  // );
+export default function CustomerAddress({ navigation, route }: { navigation: any, route: any }) {
 
-  const renderItem = ({ item }: { item: any }) => (
-    <Item title={item.title} />
-  );
-
-  const getMenuList = async () => {
-    fetch('http://10.0.2.2:3000/get' + type, {
-      method: "GET",
-    }
-    )
-      .then(response => response.json())
-      .then(json => {
-        setListOfMenu(json);
-      }
-      )
-  }
   const onBackButton = () => {
-    setListOfMenu([])
     navigation.goBack()
   }
-  const renderMenuBox = () => {
-    const get = 'http://10.0.2.2:3000/getImage/'
-    return listOfMenu.map((menu: any) => {
-      return <View style={styles.menu} key={menu._id}>
-        <View>
-          <Image source={{ uri: get + menu.img_path }}
-            style={styles.foodImage}
-          />
-        </View>
-        <View style={styles.boxDetails}>
-          <FlatList
-            horizontal={true}
-            scrollEnabled={false}
-            keyExtractor={() => menu._id}
-            data={[{ "id": menu._id, "title": menu.name }]}
-            renderItem={renderItem}
-          />
-          <TouchableOpacity style={styles.moreBox} onPress={() => onMoreButton(menu)}>
-            <Text style={{ fontSize: 18, color: '#FF6D7D' }}>More</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    });
-  }
-  useFocusEffect(
-    React.useCallback(() => {
-      getMenuList()
-    }, [type,userid])
-  );
-
-  const onMake = () =>{
-    navigation.navigate('PresetPizza',{userid:userid})
+  
+  const onAddButton = () => {
+    
   }
 
   return (
@@ -96,28 +37,17 @@ export default function Menu({ navigation, route }: { navigation: any, route: an
           <TouchableOpacity style={styles.iconContainer} onPress={() => { onBackButton() }}>
             <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon} />
           </TouchableOpacity>
-          <Text style={globalStyles.fontHeader}>{type}</Text>
+          <Text style={globalStyles.fontHeader}>Your address</Text>
           <View style={styles.iconContainer}></View>
         </View>
         <View style={styles.underline}></View>
 
-
         <View style={styles.cartContainer}>
-          <ScrollView showsVerticalScrollIndicator={false} style={{marginVertical:15}} >
-            {renderMenuBox()}
-          </ScrollView>
-          {type=='Pizza'?
-            <TouchableOpacity style={styles.makeBox} onPress={onMake}>
-              <Text style={styles.makeFont}>Make your own</Text>
-            </TouchableOpacity>
-          :null}
+            
         </View>
       </View>
     </Gradient>
   );
-
-
-
 
 }
 
@@ -135,9 +65,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   },
   iconContainer: {
-    width: screenWidth * 0.2,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
+    width:40,
+    height:30
   },
   cartContainer: {
     borderColor: 'rgba(0,0,0,0.2)',

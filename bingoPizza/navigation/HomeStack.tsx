@@ -9,6 +9,7 @@ import FoodCart from "../screens/FoodCart";
 import SeeAllRecommend from "../screens/SeeAllRecommend";
 import Menu from "../screens/Menu";
 import Profile from "../screens/Profile";
+import CustomerAddress from "../screens/CustomerAddress";
 import PresetPizza from "../screens/PresetPizza";
 import MoreTab from "../screens/MoreTab";
 import Subscription from "../screens/SubscriptionTab";
@@ -26,7 +27,7 @@ import 'react-native-gesture-handler';
 const LogIn = createNativeStackNavigator();
 const Order = createDrawerNavigator();
 
-function HomeOrder({route,navigation}){
+function HomeOrder({route,navigation}:{route:any,navigation:any}){
     return (
         <Order.Navigator initialRouteName='Home' screenOptions={{headerShown:false}} drawerContent={props => <OrderDrawer{...props}/>}>
             <Order.Screen name='Home' component={OrderTab} options={{swipeEnabled:false}}/>
@@ -34,6 +35,7 @@ function HomeOrder({route,navigation}){
             <Order.Screen name='SeeAll' component={SeeAllRecommend} options={{swipeEnabled:false}}/>
             <Order.Screen name='Menu' component={Menu} options={{swipeEnabled:false}}/>
             <Order.Screen name='Profile' component={Profile} options={{swipeEnabled:false}} initialParams={{params:route.params}}/>
+            <Order.Screen name='Address' component={CustomerAddress} options={{swipeEnabled:false}}/>
             <Order.Screen name='More' component={MoreTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Sub' component={Subscription} options={{swipeEnabled:false}}/>
             <Order.Screen name='SubscriptionSummary' component={SubscriptionSummary} options={{swipeEnabled:false}}/>
