@@ -74,14 +74,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     const newArrData = topping.map((e, index) =>{
     //const newArrData = topping.map(newItem =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -91,21 +86,15 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   }
 
   const onSelectedTopping2 = (type:any,item:any,index:any) =>{
-    console.log(topping2)
     setTopping2(type);
     setToppingPrice2(item.price)
     setToppingImage2(item.img_path)
     const newArrData = topping2.map((e, index) =>{
     //const newArrData = topping.map(newItem =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -119,14 +108,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setSizePrice(item.price)
     const newArrData = size.map((e, index) =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -140,14 +124,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setDoughPrice(item.price)
     const newArrData = dough.map((e, index) =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -161,14 +140,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setCrustPrice(item.price)
     const newArrData = crust.map((e, index) =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -182,14 +156,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setSaucePrice(item.price)
     const newArrData = sauce.map((e, index) =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -203,14 +172,9 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     setPackagePrice(item.price)
     const newArrData = pack.map((e, index) =>{
       if (item._id == e._id){
-        if (item.selected == false){
           return {
           ...e,selected:true
           }
-        }
-        return {
-          ...e,selected:false
-        }
       }
       return {
         ...e,selected:false
@@ -259,48 +223,47 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const getTopping = () =>{
     fetch("http://10.0.2.2:3000/getTopping")
     .then(response=>response.json())
-    .then(json=>{console.log(json)
+    .then(json=>{
     onChangeTopping(json)
     const None = [{name:"None", price:0,img_path:"",type:"Topping",_id:999,key:999}]
     const New = None.concat(json)
     onChangeTopping2(New)
-    onSelectedTopping(json[0].name,json[0],0)
-    onSelectedTopping2(New[0].name,New[0],0)})
+  })
   }
   const getSize = () =>{
     fetch("http://10.0.2.2:3000/getSize")
     .then(response=>response.json())
     .then(json=>{
     onChangeSize(json)
-    onSelectedSize(json[0].name,json[0],0)})
+  })
   }
   const getDough = () =>{
     fetch("http://10.0.2.2:3000/getDough")
     .then(response=>response.json())
     .then(json=>{
     onChangeDough(json)
-    onSelectedDough(json[0].name,json[0],0)})
+  })
   }
   const getCrust = () =>{
     fetch("http://10.0.2.2:3000/getCrust")
     .then(response=>response.json())
     .then(json=>{
     onChangeCrust(json)
-    onSelectedCrust(json[0].name,json[0],0)})
+  })
   }
   const getSauce = () =>{
     fetch("http://10.0.2.2:3000/getSauce")
     .then(response=>response.json())
     .then(json=>{
     onChangeSauce(json)
-    onSelectedSauce(json[0].name,json[0],0)})
+  })
   }
   const getPackage = () =>{
     fetch("http://10.0.2.2:3000/getPackage")
     .then(response=>response.json())
     .then(json=>{
     onChangePackage(json)
-    onSelectedPackage(json[0].name,json[0],0)})
+  })
   }
   const renderall = () =>{
     getTopping()
@@ -317,18 +280,37 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     else
     setName(selectedTopping + " + " + selectedTopping2)
   }
-
+  const ToppingDefault = () =>{
+    onSelectedTopping(topping[0].name,topping[0],0)
+    console.log("topping")
+  }
+  const Topping2Default = () =>{
+    onSelectedTopping2(topping2[0].name,topping2[0],0)
+  }
+  const SizeDefault = () =>{
+    onSelectedSize(size[0].name,size[0],0)
+  }
+  const DoughDefault = () =>{
+    onSelectedDough(dough[0].name,dough[0],0)
+  }
+  const CrustDefault = () =>{
+    onSelectedCrust(crust[0].name,crust[0],0)
+  }
+  const SauceDefault = () =>{
+    onSelectedSauce(sauce[0].name,sauce[0],0)
+  }
+  const PackageDefault = () =>{
+    onSelectedPackage(pack[0].name,pack[0],0)
+  }
   useFocusEffect(
     React.useCallback(() => {
         renderall()
-      //checkItemInCart()
     }, [])
   );
   useFocusEffect(
     React.useCallback(() => {
         renderName()
-      //checkItemInCart()
-    }, [topping,topping2])
+    }, [selectedTopping,selectedTopping2])
   );
   return (
     <Gradient>
