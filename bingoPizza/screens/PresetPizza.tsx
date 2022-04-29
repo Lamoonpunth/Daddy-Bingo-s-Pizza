@@ -24,6 +24,10 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
   ]);
 
+  const [topping2, onChangeTopping2] = React.useState([
+    { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"}
+  ]);
+
   const [dough, onChangeDough] = React.useState([
     { name: '', icon: '', price:0 , _id: '' ,selected:false,key:"0"},
   ]);
@@ -45,6 +49,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   ]);
 
   const [selectedTopping, setTopping] = React.useState('Bacon');
+  const [selectedTopping2, setTopping2] = React.useState('Bacon');
   const [selectedSize, setSize] = React.useState('one piece');
   const [selectedDough, setDough] = React.useState('Thick');
   const [selectedCrust, setCrust] = React.useState('None');
@@ -52,32 +57,14 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
   const [selectedPackage, setPackage] = React.useState('Normal');
 
   const [selectedToppingPrice, setToppingPrice] = React.useState(0)
+  const [selectedToppingPrice2, setToppingPrice2] = React.useState(0)
   const [selectedSizePrice, setSizePrice] = React.useState(99);
   const [selectedDoughPrice, setDoughPrice] = React.useState(50);
   const [selectedCrustPrice, setCrustPrice] = React.useState(0);
   const [selectedSaucePrice, setSaucePrice] = React.useState(50);
   const [selectedPackagePrice, setPackagePrice] = React.useState(0);
   const [selectedToppingImage, setToppingImage] = React.useState("PizzaBacon.jpg")
-  /*
-  const onSelectedTopping = (type:any,item:any,index:any) =>{
-    setTopping(type);
-    setToppingPrice(item.price)
-    setToppingImage(item.img_path)
-    const newArrData = topping.map((e, index) =>{
-      if (item._id == e._id){
-        if (item.selected == false){
-          return {
-            ...e,selected:true
-          }
-        }
-        
-      }
-      return {
-        ...e,selected:false
-      }
-    })
-    onChangeTopping(newArrData);
-  }*/
+  const [selectedToppingImage2, setToppingImage2] = React.useState("PizzaBacon.jpg")
   
   const onSelectedTopping = (type:any,item:any,index:any) =>{
     setTopping(type);
@@ -95,6 +82,24 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
       }
     })
     onChangeTopping(newArrData);
+  }
+
+  const onSelectedTopping2 = (type:any,item:any,index:any) =>{
+    setTopping2(type);
+    setToppingPrice2(item.price)
+    setToppingImage2(item.img_path)
+    const newArrData = topping.map((e, index) =>{
+    //const newArrData = topping.map(newItem =>{
+      if (item._id == e._id){
+        return {
+          ...e,selected:true
+        }
+      }
+      return {
+        ...e,selected:false
+      }
+    })
+    onChangeTopping2(newArrData);
   }
 
   const onSelectedSize = (type:any,item:any,index:any) =>{
@@ -297,6 +302,46 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                     <TouchableOpacity  
                     style={styles.optionBox} 
                     onPress={() => onSelectedTopping(item.name,item,index)}>
+                      <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
+                        <View style={{
+                          borderRadius:10,
+                          width:screenWidth*0.5,
+                          height:screenHeight*0.15,
+                          alignItems:'center',
+                          justifyContent:'center',
+                          backgroundColor: "#000000c0",
+                          opacity: item.selected? 1: 0.6
+                        }}>
+                          <Text style={{
+                            fontSize:20,
+                            color:'white',
+                            backgroundColor:'transparent'
+                            }}>
+                            {item.name}{"\n"}
+                            Price : {item.price}
+                          </Text>
+                        </View>
+                      </ImageBackground>
+                    </TouchableOpacity>
+                  )}
+                />
+              </View>
+            </View>
+
+            <View style={styles.optionsBox}>
+              <ImageBackground source={require('../assets/images/topping.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
+                <Text style={styles.optionFont}>Topping2</Text>
+              </ImageBackground>
+              <View style={styles.optionButtons}>
+                <FlatList
+                  showsHorizontalScrollIndicator={false}
+                  horizontal={true}
+                  data={topping2}
+                  keyExtractor={(item) => item._id}
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity  
+                    style={styles.optionBox} 
+                    onPress={() => onSelectedTopping2(item.name,item,index)}>
                       <ImageBackground source={{uri:get+item.img_path}} style={styles.optionBox} imageStyle={{borderRadius:10}}>
                         <View style={{
                           borderRadius:10,
@@ -560,7 +605,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
     justifyContent:'space-around',
     width:screenWidth,
-    height:screenHeight*1.8,
+    height:screenHeight*2,
     backgroundColor:'#FFD1D1',
     elevation: 10,
   },
