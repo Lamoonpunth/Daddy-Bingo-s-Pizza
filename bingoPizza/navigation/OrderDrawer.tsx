@@ -23,7 +23,7 @@ export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:
     }
 
     const onService = () => {
-        
+        navigation.navigate("Service");
     }
 
     const onAddress = () => {

@@ -10,6 +10,7 @@ import SeeAllRecommend from "../screens/SeeAllRecommend";
 import Menu from "../screens/Menu";
 import Profile from "../screens/Profile";
 import CustomerAddress from "../screens/CustomerAddress";
+import Service from "../screens/CustomerAddress copy";
 import PresetPizza from "../screens/PresetPizza";
 import MoreTab from "../screens/MoreTab";
 import Subscription from "../screens/SubscriptionTab";
@@ -36,6 +37,7 @@ function HomeOrder({route,navigation}:{route:any,navigation:any}){
             <Order.Screen name='Menu' component={Menu} options={{swipeEnabled:false}}/>
             <Order.Screen name='Profile' component={Profile} options={{swipeEnabled:false}} initialParams={{params:route.params}}/>
             <Order.Screen name='Address' component={CustomerAddress} options={{swipeEnabled:false}}/>
+            <Order.Screen name='Service' component={Service} options={{swipeEnabled:false}}/>
             <Order.Screen name='More' component={MoreTab} options={{swipeEnabled:false}}/>
             <Order.Screen name='Sub' component={Subscription} options={{swipeEnabled:false}}/>
             <Order.Screen name='SubscriptionSummary' component={SubscriptionSummary} options={{swipeEnabled:false}}/>
