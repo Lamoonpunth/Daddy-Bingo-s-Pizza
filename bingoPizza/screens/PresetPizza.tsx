@@ -195,7 +195,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
       headers:{'Content-Type': 'application/json'},
     
       body:JSON.stringify({    
-        name:selectedTopping+" + "+selectedTopping2,
+        name:name,
         type:"userPizza",
         price:selectedToppingPrice+selectedToppingPrice2+selectedSizePrice+selectedDoughPrice+selectedCrustPrice+selectedPackagePrice,
         ingr_need:null,
