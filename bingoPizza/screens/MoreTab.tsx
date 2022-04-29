@@ -88,6 +88,7 @@ export default function MoreTab({navigation,route}:{navigation:any,route:any}) {
                         <Image source={require('../assets/images/back_icon.png')} style={globalStyles.backIcon}/>   
                     </TouchableOpacity>
                     <Text style={styles.fontHeader}>{item.name}</Text>
+                    <View style={styles.iconContainer}></View>
                 </View>
                 <View style={styles.underline}></View>  
                 
@@ -157,20 +158,21 @@ const styles = StyleSheet.create({
         justifyContent:'space-evenly',
     },
     header: {
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'center',
-        marginLeft:-screenWidth*.1,
-    },
+        width:screenWidth,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        paddingHorizontal:15
+      },
     fontHeader:{
         fontSize: 30,
         color:'white',
       },
-    iconContainer: {
-        width:screenWidth*0.15,
-        flexDirection:'row',
-        alignItems:'flex-start',
-    },
+      iconContainer: {
+        width: screenWidth * 0.2,
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+      },
     cartContainer: {
         borderColor:'rgba(0,0,0,0.2)',
         alignItems:'center',
