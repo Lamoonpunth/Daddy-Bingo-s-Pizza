@@ -34,10 +34,15 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
     }
     
     const onNextButton = () =>{
-        navigation.navigate('RegisterInfo', {type:type,Username:Username,Password:Password});
-        setUsername('');
-        setPassword('');
-        setConfirmPassword('');
+        if (Username == '' && Password == '' && confirmPassword == ''){
+            alert('Please Enter Username and Password.')
+        }
+        else{
+            navigation.navigate('RegisterInfo', {type:type,Username:Username,Password:Password});
+            setUsername('');
+            setPassword('');
+            setConfirmPassword(''); 
+        } 
     }
 
     return(
