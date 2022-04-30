@@ -256,11 +256,11 @@ export default function LogIn({navigation}: {navigation: any}) {
     return (
           <Gradient>
 
-            <View style={{flex:1}}>
+            <View style={styles.pizzaBox}>
               <Image source={require('../assets/images/pizza(login).png')} style={styles.pizzaImage}/>
             </View>
 
-            <View style={{flex:1 , alignItems:'center' , justifyContent:'center'}}>
+            <View style={styles.container}>
               <View style={globalStyles.LogInbox}>
                 <View style={styles.switchSelectorBox}>
                   <SwitchSelector
@@ -331,11 +331,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: screenWidth,
-    height: screenHeight/2.3,
+    height: screenHeight/2,
   },
   pizzaImage: {
     width: 400,
     height: 400,
+  },
+  container: {
+    width: screenWidth,
+    height: screenHeight/2,
+    alignItems:'center',
+    justifyContent:'center'
   },
   switchSelectorBox: {
     width:screenWidth*.6,

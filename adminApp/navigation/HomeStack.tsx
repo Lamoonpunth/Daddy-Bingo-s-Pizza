@@ -18,6 +18,9 @@ import TransactionInfo from '../screen/admin/TransactionInfo';
 import Menu from '../screen/admin/Menu';
 import EditAddMenu from '../screen/admin/edit/EditAddMenu';
 import EditMore from '../screen/admin/edit/EditMore';
+import RegisterEmployee from '../screen/admin/RegisterEmployee';
+import RegisterId from '../screen/admin/RegisterId';
+import RegisterInfo from '../screen/admin/RegisterInfo';
 
 import TaskOrder from "../screen/chef/TaskOrder";
 import TaskDeny from '../screen/chef/TaskDeny';
@@ -25,6 +28,7 @@ import TaskPrepare from '../screen/chef/TaskPrepare';
 
 import RiderTask from '../screen/rider/RiderTask';
 import RiderDelivery from '../screen/rider/RiderDelivery'
+
 import 'react-native-gesture-handler';
 import { DrawerMenu } from './DrawerAdmin';
 import { DrawerChef } from './DrawerChef';
@@ -51,6 +55,9 @@ function AdminNavigator() {
             <Drawer.Screen name='Awaiting' component={AwaitingPayment} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='PaymentInfo' component={PaymentInfo} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='TransactionInfo' component={TransactionInfo} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='RegisterEmployee' component={RegisterEmployee} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='RegisterId' component={RegisterId} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='RegisterInfo' component={RegisterInfo} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='Log Out' component={LogIn}/>
         </Drawer.Navigator>
     )
@@ -82,7 +89,7 @@ export const HomeStack = () => (
         <Stack.Screen name='LogIn' component={LogIn}/>
         <Stack.Screen name='Admin' component={AdminNavigator}/>
         <Stack.Screen name='Chef'  component={ChefNavigator}/>
-        <Stack.Screen name='Rider' component={RiderNavigator}/>  
+        <Stack.Screen name='Rider' component={RiderNavigator}/>
     </Stack.Navigator>
 );
 

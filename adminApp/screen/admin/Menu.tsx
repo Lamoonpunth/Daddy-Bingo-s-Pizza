@@ -141,7 +141,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   header: {
-    
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',

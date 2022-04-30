@@ -48,13 +48,14 @@ export const globalStyles = StyleSheet.create({
     },
     linearGradient: {
         flex: 1,
+        flexDirection:'column',
         alignItems: 'center',
         justifyContent: 'center',
     },
     keyboardAvoid: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'space-evenly',
         backgroundColor: 'transparent',
     },
     containerGradient: {

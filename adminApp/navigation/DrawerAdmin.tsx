@@ -33,6 +33,10 @@ export function DrawerMenu({navigation}:{navigation:any},props:any){
         navigation.navigate('Ingredients')
     }
 
+    const onRegisterEmployee = () => {
+        navigation.navigate('RegisterEmployee')
+    }
+
     const onLogOut = () => {
         Alert.alert(
             "Are you sure?",
@@ -69,6 +73,10 @@ export function DrawerMenu({navigation}:{navigation:any},props:any){
                 <TouchableOpacity onPress={onAwaitingPayment} style={styles.option}>
                     <Image source={require('../assets/images/awaiting.png')} style={styles.optionImage}/>
                     <Text style={styles.itemFont}>Awaiting payment</Text>    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onRegisterEmployee} style={styles.option}>
+                    <Image source={require('../assets/images/employee.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Register employee</Text>    
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.option}>
                     <Image source={require('../assets/images/logout.png')} style={styles.optionImage}/>
