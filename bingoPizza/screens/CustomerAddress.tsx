@@ -20,6 +20,10 @@ import { color } from "react-native-reanimated";
 
 export default function CustomerAddress({ navigation, route }: { navigation: any, route: any }) {
 
+  const [address, setAddress] = React.useState([
+    {savename:'บ้านของฉัน', province:'ปทุมธานี', district:'ลำลูกกา', subdistrict:'บึงคำพร้อย', postcode:'12150'}
+  ])
+
   const onBackButton = () => {
     navigation.goBack()
   }
