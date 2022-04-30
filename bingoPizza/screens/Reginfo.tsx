@@ -422,7 +422,6 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
           </View>
 
           <View style={styles.box1}>
-
             <View style={styles.pickerbox}>
               <Image 
                 style={styles.birthicon}
@@ -775,17 +774,11 @@ export default function TabOneScreen({navigation,route}: {navigation:any,route:a
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width:screenWidth,
+    height:screenHeight,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-evenly',
     backgroundColor: '#FF6D6D'
-  },
-  space1: {
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.75,
-    height:height*.015,
-    backgroundColor:'transparent',
   },
   title: {
     fontSize: 30,
@@ -795,44 +788,22 @@ const styles = StyleSheet.create({
   },
   roundedrec: {
     alignItems:'center',
-    justifyContent:'center',
-    width:screenWidth*.97,
-    height:screenHeight*.8,
+    justifyContent:'space-evenly',
+    width:screenWidth*.95,
+    height:screenHeight*.7,
     backgroundColor:'white',
     borderRadius:50,
     elevation: 12,
   },
   inputcontainer: {
-    flex:9,
+    flex:20,
     flexDirection:'column',
     flexWrap:'wrap',
-    justifyContent:'space-around',
+    justifyContent:'space-evenly',
     backgroundColor:'transparent',
-    //borderWidth: 1,
-  },
-  input: {
-    fontSize: 16,
-    width: width *.35,
-    height: height * 0.05,
-    margin: 8,
-    padding: 10,
-    borderRadius: 30,
-    backgroundColor: 'white',
-    elevation: 12,
-  },
-  input2: {
-    fontSize: 16,
-    width: width *.80,
-    height: height * 0.055,
-    margin: 8,
-    padding: 10,
-    borderRadius: 30,
-    backgroundColor: 'white',
-    elevation: 12,
   },
   savebutton: {
     flex:0.75,
-    //borderWidth:1,
     borderColor:'rgba(0,0,0,0)',
     alignItems:'center',
     justifyContent:'center',
@@ -842,11 +813,13 @@ const styles = StyleSheet.create({
     borderRadius:50,
     marginRight:70,
     elevation:4,
-    
   },
   box1: {
     flexDirection: "row",
     backgroundColor:'transparent',
+    alignItems:'center',
+    width:screenWidth*0.9,
+    height:screenHeight*0.075,
   },
   nameicon: {
     width: 30,
@@ -862,7 +835,7 @@ const styles = StyleSheet.create({
     margin:3,
   },
   gendericon:{
-    width: 32,
+    width: 40,
     height:40,
     margin: 4,
   },
@@ -881,21 +854,18 @@ const styles = StyleSheet.create({
     width: width *.35,
     minHeight: height * 0.06,
     backgroundColor: 'transparent',
-
   },
   pickerProvince:{
     fontSize: 16,
     width: width *.6,
     minHeight: height * 0.06,
     backgroundColor: 'transparent',
-
   },
   pickerDistrict:{
     fontSize: 16,
     width: width *.6,
     minHeight: height * 0.06,
     backgroundColor: 'transparent',
-
   },
   pickerSubDistrict:{
     fontSize: 16,
@@ -903,76 +873,12 @@ const styles = StyleSheet.create({
     minHeight: height * 0.06,
     backgroundColor: 'transparent',
   },
-  pickerZipCode:{
-    fontSize: 14,
-    width: width *.35,
-    minHeight: height * 0.06,
-    backgroundColor: 'transparent',
-  },
   pickerbox:{
     height: height * .05,
     flexDirection: "row"
   },
-  pickerboxinside:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.35,
-    height:height*0.055,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 12,
-  },
-  pickerboxinside2:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.35,
-    height:height*0.055,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 12,
-  },
-  pickerboxProvince:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.6,
-    height:height*0.055,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 12,
-    margin: 6
-  },
-  pickerboxDistrict:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.6,
-    height:height*0.055,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 12,
-    margin: 6
-  },
-  pickerboxSubDistrict:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.5,
-    height:height*0.055,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 12,
-    margin: 6
-  },
-  zipcode:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:width*.2,
-    height:height*0.055,
-    backgroundColor:'white',
-    borderRadius:50,
-    elevation: 12,
-    margin: 6
-  },
   space2: {
-    flex:1,
+    flex:2,
     flexDirection:'column',
     flexWrap:'wrap-reverse',
     alignItems:'center',
@@ -980,6 +886,5 @@ const styles = StyleSheet.create({
     height:height*.15,
     backgroundColor:'transparent',
     width:screenWidth*.97,
-    //borderWidth: 1,
   },
 });
