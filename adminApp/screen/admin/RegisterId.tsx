@@ -38,11 +38,28 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
             alert('Please Enter Username and Password.')
         }
         else{
-            navigation.navigate('RegisterInfo', {type:type,Username:Username,Password:Password});
+            if (type == 'Rider'){
+            fetch("http://10.0.2.2:3000/ridergen",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({username:Username,password:Password})
+            })
+            .then(response => response.json())
+            .then(json => alert("complete"))
+            }
+            else if (type == 'Chef'){
+            fetch("http://10.0.2.2:3000/chefgen",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({username:Username,password:Password})
+            })
+            .then(response => response.json())
+            .then(json => alert("complete"))
+            }
             setUsername('');
             setPassword('');
             setConfirmPassword(''); 
-        } 
+    } 
     }
 
     return(
