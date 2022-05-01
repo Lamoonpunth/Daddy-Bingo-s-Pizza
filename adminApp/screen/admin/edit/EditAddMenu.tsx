@@ -39,7 +39,7 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
 
     const onAddMenu = () =>{
         alert('สินค้าชื่อ : '+ nameMenu + 'ราคา : '+ price);
-
+        const lowertype = type.toLowerCase();
         var extension = result.uri.split(".")
         extension.reverse()
         let newfile = {
@@ -61,7 +61,7 @@ export default function EditAddMenu({navigation,route}:{navigation:any,route:any
             headers:{'Content-Type': 'application/json'},
             body:JSON.stringify({
                 "name":nameMenu,
-                "type":type,
+                "type":lowertype,
                 "price":price,
                 "ingr_need":[],
                 "description":description,
