@@ -13,8 +13,7 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:any){
-    const onProfile = () => {
-               
+    const onProfile = () => {               
         navigation.navigate("Profile");
     }
 
@@ -23,7 +22,7 @@ export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:
     }
 
     const onService = () => {
-        navigation.navigate("Service");
+        
     }
 
     const onAddress = () => {
@@ -47,7 +46,7 @@ export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:
     
     return(
         <View style={styles.menuContainer}>
-            <ImageBackground style={styles.profile} source={require('../constants/images/profile.jpg')}>
+            <ImageBackground style={styles.profile} source={require('../constants/images/profile2.jpg')}>
             </ImageBackground>
             <View style={styles.optionsBox}>
                 <TouchableOpacity onPress={onProfile} style={styles.option}>

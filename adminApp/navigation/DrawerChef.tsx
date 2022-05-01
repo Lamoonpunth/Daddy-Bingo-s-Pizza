@@ -39,7 +39,7 @@ export function DrawerChef({navigation}:{navigation:any},props:any){
     
     return(
         <View style={styles.menuContainer}>
-            <ImageBackground style={styles.profile} source={require('../assets/images/ricardo.jpg')}>
+            <ImageBackground style={styles.profile} source={require('../assets/images/chefIcon.jpg')}>
             </ImageBackground>
             <View style={styles.optionsBox}>
                 <TouchableOpacity onPress={onProfile} style={styles.option}>
