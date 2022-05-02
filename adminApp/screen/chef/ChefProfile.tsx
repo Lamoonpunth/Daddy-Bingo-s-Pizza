@@ -17,22 +17,39 @@ import { globalStyles } from '../../styles/globalStyles';
 import { useFocusEffect } from '@react-navigation/native';
 
 export default function ChefProfile({navigation,route}:{navigation:any,route:any}) {  
-
+  
+  const {userid} = route
+  
   const [name, onChangeName] = React.useState('Default');
   const [phone, onChangePhone] = React.useState('Default');
   
   const onBackButton = () => {
     navigation.goBack();
   }
+  //update chef profile
   const onSaveButton = () => {
-
+    // fetch("http://10.0.2.2:3000/updatechefprofile", {
+    //       method:"POST",
+    //       headers:{'Content-Type': 'application/json'},
+    //       body:JSON.stringify({_id:userid,
+    //                             name:name,
+    //                             phonenumber:phone})
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => {console.log(data) }) 
+    console.log(route)                    
 }
 
-  useFocusEffect(
-    React.useCallback(() => {
-           
-    }, [name,phone])
-  );
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     fetch('http://10.0.2.2:3000/getchefdata?_id='+userid)
+  //     .then(response => response.json())     
+  //     .then(json => {
+  //       onChangeName(json.name)
+  //       onChangePhone(json.phonenumber)
+  //     })      
+  //   }, [name,phone])
+  // );
 
   return (
     <Gradient>

@@ -928,27 +928,56 @@ app.post('/updateuserprofile',async(req,res)=>{
   }
 })
 
-// app.post('/updateriderprofile',async(req,res)=>{
-//   try{
-//     await Rider.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});    
-//     res.json("profile-updated")
-//   }
-//   catch(error){
-//     console.log(error)
-//     res.json(error)
-//   }
-// })
+app.post('/updateriderprofile',async(req,res)=>{
+  try{
+    await Rider.updateOne({ "_id":req.body._id},{$set:{"name":req.body.name}});    
+    await Rider.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});
+    res.json("profile-updated")
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+})
 
-// app.post('/updatechefprofile',async(req,res)=>{
-//   try{
-//     await Chef.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});    
-//     res.json("profile-updated")
-//   }
-//   catch(error){
-//     console.log(error)
-//     res.json(error)
-//   }
-// })
+app.post('/updatechefprofile',async(req,res)=>{
+  try{
+    await Chef.updateOne({ "_id":req.body._id},{$set:{"name":req.body.name}});  
+    await Chef.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});  
+    res.json("profile-updated")
+  }
+  catch(error){
+    console.log(error)
+    res.json(error)
+  }
+})
+app.get('/getchefdata',async(req,res) => {
+  try{
+  const chef =  await Chef.findOne({_id: req.query._id})
+  res.json({
+    name:chef.name,
+    phonenumber:chef.phonenumber,    
+  })
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/getriderdata',async(req,res) => {
+  try{
+  const rider =  await Rider.findOne({_id: req.query._id})
+  res.json({
+    name:rider.name,
+    phonenumber:rider.phonenumber,    
+  })
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, './images');
