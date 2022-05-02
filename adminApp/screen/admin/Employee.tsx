@@ -18,10 +18,10 @@ const screenHeight = Dimensions.get('screen').height;
 export default function Employee({navigation,route}:{navigation:any,route:any}){
     
     const [employee, setEmployee] = React.useState([
-        {key:1, name:'test', phone:'111'},
-        {key:2, name:'test', phone:'111'},
-        {key:3, name:'test', phone:'111'},
-        {key:4, name:'test', phone:'111'},
+        {key:1, fname:'test', lname:'test' ,phone:'111'},
+        {key:2, fname:'test', lname:'test' ,phone:'111'},
+        {key:3, fname:'test', lname:'test' ,phone:'111'},
+        {key:4, fname:'test', lname:'test' ,phone:'111'},
     ]);
 
     const onBackButton = () => {
@@ -55,8 +55,9 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                             </View>
                             <View style={styles.optionsName}>
                                 <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>
-                                <Text style={styles.fontDetail}>{item.name}</Text>
-                                <Text style={styles.fontDetail}>{item.phone}</Text>
+                                <Text style={styles.fontDetail}>ชื่อ:{item.fname}</Text>
+                                <Text style={styles.fontDetail}>นามสกุล:{item.lname}</Text>
+                                <Text style={styles.fontDetail}>เบอร์:{item.phone}</Text>
                             </View>
                         </View>
                     )}
@@ -132,12 +133,12 @@ const styles = StyleSheet.create({
         fontWeight:'900',
         color:'#FF6D6D',
         width:screenWidth*.5,
-        height:50,
+        height:40,
         backgroundColor:'white',
         borderRadius:10,
         elevation:10,
         flexDirection:'row',
         textAlign:'left',
-        padding:10
+        padding:5
     },
 });
