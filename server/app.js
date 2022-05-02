@@ -705,7 +705,7 @@ app.post('/admingen',async(req,res) =>{
 app.post('/ridergen',async(req,res) =>{
   try{
       //Get user input
-    const {username,password,name,phonenumber} = req.body;
+    const {username,password,fname,lname,phonenumber} = req.body;
     //Encrypt user password+salt
     const Salts = crypto.lib.WordArray.random(128/8);
     encryptedPassword = await SHA256(password+Salts);
@@ -714,7 +714,8 @@ app.post('/ridergen',async(req,res) =>{
     const user = await Rider.create({
       username:username,
       password:encryptedPassword,
-      name: name,
+      fname: fname,
+      lname: lname,
       phonenumber: phonenumber,
       salt :Salts
     })
@@ -741,7 +742,7 @@ app.post('/ridergen',async(req,res) =>{
 app.post('/chefgen',async(req,res) =>{
   try{
       //Get user input
-    const {username,password,name,phonenumber} = req.body;
+    const {username,password,fname,lname,phonenumber} = req.body;
     //Encrypt user password+salt
     const Salts = crypto.lib.WordArray.random(128/8);
     encryptedPassword = await SHA256(password+Salts);
@@ -750,7 +751,8 @@ app.post('/chefgen',async(req,res) =>{
     const user = await Chef.create({
       username:username,
       password:encryptedPassword,
-      name: name,
+      fname: fname,
+      lname: lname,     
       phonenumber: phonenumber,
       salt :Salts
     })

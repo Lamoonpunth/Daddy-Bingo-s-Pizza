@@ -29,29 +29,30 @@ export default function ChefProfile({navigation,route}:{navigation:any,route:any
   }
   //update chef profile
   const onSaveButton = () => {
-    // fetch("http://10.0.2.2:3000/updatechefprofile", {
-    //       method:"POST",
-    //       headers:{'Content-Type': 'application/json'},
-    //       body:JSON.stringify({_id:userid,
-    //                             fname:fname,
-    //                             lname:lname,
-    //                             phonenumber:phone})
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {console.log(data) }) 
-    console.log(route)                    
+    fetch("http://10.0.2.2:3000/updatechefprofile", {
+          method:"POST",
+          headers:{'Content-Type': 'application/json'},
+          body:JSON.stringify({_id:userid,
+                                fname:fname,
+                                lname:lname,
+                                phonenumber:phone})
+        })
+        .then(response => response.json())
+        .then(data => {console.log(data) }) 
+    console.log(Response)                    
 }
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     fetch('http://10.0.2.2:3000/getchefdata?_id='+userid)
-  //     .then(response => response.json())     
-  //     .then(json => {
-  //       onChangeName(json.name)
-  //       onChangePhone(json.phonenumber)
-  //     })      
-  //   }, [fname,lname,phone])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      fetch('http://10.0.2.2:3000/getchefdata?_id='+userid)
+      .then(response => response.json())     
+      .then(json => {
+        onChangeFname(json.fname)
+        onChangeLname(json.lname)
+        onChangePhone(json.phonenumber)
+      })      
+    }, [])
+  );
 
   return (
     <Gradient>

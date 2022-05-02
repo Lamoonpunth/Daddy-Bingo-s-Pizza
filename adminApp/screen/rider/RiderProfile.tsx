@@ -28,29 +28,31 @@ export default function RiderProfile({navigation,route}:{navigation:any,route:an
     navigation.goBack();
   }
   const onSaveButton = () => {
-    // fetch("http://10.0.2.2:3000/updateriderprofile", {
-    //       method:"POST",
-    //       headers:{'Content-Type': 'application/json'},
-    //       body:JSON.stringify({_id:userid,
-    //                             name:name,
-    //                             phonenumber:phone})
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {console.log(data) }) 
-    console.log(route)                   
+    fetch("http://10.0.2.2:3000/updateriderprofile", {
+          method:"POST",
+          headers:{'Content-Type': 'application/json'},
+          body:JSON.stringify({_id:userid,
+                                fname:fname,
+                                lname:lname,
+                                phonenumber:phone})
+        })
+        .then(response => response.json())
+        .then(data => {console.log(data) }) 
+    console.log(Response)                   
   
 }
 
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     fetch('http://10.0.2.2:3000/getriderdata?_id='+userid)
-  //     .then(response => response.json())     
-  //     .then(json => {
-  //       onChangeName(json.name)
-  //       onChangePhone(json.phonenumber)
-  //     })      
-  //   }, [name,phone])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      fetch('http://10.0.2.2:3000/getriderdata?_id='+userid)
+      .then(response => response.json())     
+      .then(json => {
+        onChangeFname(json.fname)
+        onChangeLname(json.lname)
+        onChangePhone(json.phonenumber)
+      })      
+    }, [])
+  );
 
   return (
     <Gradient>
