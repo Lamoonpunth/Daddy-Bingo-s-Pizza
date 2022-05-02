@@ -14,10 +14,12 @@ const screenHeight = Dimensions.get('screen').height;
 
 import Gradient from '../styles/Gradient';
 import { globalStyles } from '../styles/globalStyles';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default function Profile({navigation,route}:{navigation:any,route:any}) {  
-  const [name, onChangeName] = React.useState('Default');
-  const [email, onChangeEmail] = React.useState('Default');
+
+  const [fname, onChangeFname] = React.useState('Default');
+  const [lname, onChangeLname] = React.useState('Default');
   const [contact, onChangeContact] = React.useState('Default');
   const [address, onChangeAddress] = React.useState('Default');
   const {userid} = route.params.params.params
@@ -31,13 +33,20 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
         method:"POST",
         headers:{'Content-Type': 'application/json'},
         body:JSON.stringify({_id:userid,
-                             fname:name,
-                             lname:email,
+                             fname:fname,
+                             lname:lname,
                              phonenumber:contact,
                              address:address,})
   }).then(response => response.json())
   .then(data => {console.log(data) })
 }
+
+
+  useFocusEffect(
+    React.useCallback(() => {
+      
+    }, [])
+  );
 
   return (
     <Gradient>
@@ -62,9 +71,9 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
               </View>
               <TextInput 
                 style={styles.detailFont}
-                placeholder={name}
-                value={name}
-                onChangeText={onChangeName}
+                placeholder={fname}
+                value={fname}
+                onChangeText={onChangeFname}
               />
             </View>
             <View style={styles.box1}>
@@ -76,9 +85,9 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
               </View>
               <TextInput 
                 style={styles.detailFont}
-                placeholder={email}
-                value={email}
-                onChangeText={onChangeEmail}
+                placeholder={lname}
+                value={lname}
+                onChangeText={onChangeLname}
               />
             </View>
             <View style={styles.box1}>

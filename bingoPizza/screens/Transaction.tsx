@@ -136,9 +136,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                             <Text style={styles.uploadFont}>Confirm</Text>
                         </TouchableOpacity>
                         }
-                         
                     </View>
-                    
                 </View>
             </View>
         </Gradient>
