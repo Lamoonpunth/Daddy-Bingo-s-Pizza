@@ -18,6 +18,7 @@ import TransactionInfo from '../screen/admin/TransactionInfo';
 import Menu from '../screen/admin/Menu';
 import EditAddMenu from '../screen/admin/edit/EditAddMenu';
 import EditMore from '../screen/admin/edit/EditMore';
+import Employee from '../screen/admin/Employee';
 import RegisterEmployee from '../screen/admin/RegisterEmployee';
 import RegisterId from '../screen/admin/RegisterId';
 import RegisterInfo from '../screen/admin/RegisterInfo';
@@ -57,6 +58,7 @@ function AdminNavigator() {
             <Drawer.Screen name='Awaiting' component={AwaitingPayment} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='PaymentInfo' component={PaymentInfo} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='TransactionInfo' component={TransactionInfo} options={{swipeEnabled:false,}}/>
+            <Drawer.Screen name='Employee' component={Employee} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='RegisterEmployee' component={RegisterEmployee} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='RegisterId' component={RegisterId} options={{swipeEnabled:false,}}/>
             <Drawer.Screen name='RegisterInfo' component={RegisterInfo} options={{swipeEnabled:false,}}/>
