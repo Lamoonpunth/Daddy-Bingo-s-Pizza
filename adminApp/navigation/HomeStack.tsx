@@ -22,10 +22,12 @@ import RegisterEmployee from '../screen/admin/RegisterEmployee';
 import RegisterId from '../screen/admin/RegisterId';
 import RegisterInfo from '../screen/admin/RegisterInfo';
 
+import ChefProfile from '../screen/chef/ChefProfile';
 import TaskOrder from "../screen/chef/TaskOrder";
 import TaskDeny from '../screen/chef/TaskDeny';
 import TaskPrepare from '../screen/chef/TaskPrepare';
 
+import RiderProfile from '../screen/rider/RiderProfile';
 import RiderTask from '../screen/rider/RiderTask';
 import RiderDelivery from '../screen/rider/RiderDelivery'
 
@@ -69,6 +71,7 @@ function ChefNavigator() {
             <Chef.Screen name='TaskOrder' component={TaskOrder}/>
             <Chef.Screen name='TaskDeny' component={TaskDeny}/>
             <Chef.Screen name='TaskPrepare' component={TaskPrepare}/>
+            <Chef.Screen name='ChefProfile' component={ChefProfile}/>
             <Chef.Screen name='Log Out' component={LogIn}/>
         </Chef.Navigator>
     )
@@ -79,6 +82,7 @@ function RiderNavigator() {
         <Rider.Navigator initialRouteName='RiderTask' screenOptions={{headerShown:false}} drawerContent={props => <DrawerRider{...props}/>}>
             <Rider.Screen name='RiderTask' component={RiderTask}/>
             <Rider.Screen name='RiderDelivery' component={RiderDelivery}/>
+            <Rider.Screen name='RiderProfile' component={RiderProfile}/>
             <Rider.Screen name='Log Out' component={LogIn}/>
         </Rider.Navigator>
     )

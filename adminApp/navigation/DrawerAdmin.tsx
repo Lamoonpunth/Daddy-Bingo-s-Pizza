@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start',
         backgroundColor:'white',
         width: screenWidth*0.6,
-        height:100,
+        height:75,
     },
     optionImage: {
         width:40,

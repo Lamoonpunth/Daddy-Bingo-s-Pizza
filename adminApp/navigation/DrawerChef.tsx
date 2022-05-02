@@ -18,7 +18,7 @@ const screenHeight = Dimensions.get('screen').height;
 export function DrawerChef({navigation}:{navigation:any},props:any){
 
     const onProfile = () => {
-        navigation.navigate('Profile')
+        navigation.navigate('ChefProfile')
     }
 
     const onLogOut = () => {
