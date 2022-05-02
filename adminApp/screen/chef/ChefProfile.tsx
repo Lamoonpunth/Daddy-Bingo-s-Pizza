@@ -106,6 +106,7 @@ export default function ChefProfile({navigation,route}:{navigation:any,route:any
                 placeholder={phone}
                 value={phone}
                 onChangeText={onChangePhone}
+                keyboardType='number-pad'
               />
             </View>
           </ScrollView>

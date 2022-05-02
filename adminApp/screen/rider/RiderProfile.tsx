@@ -106,6 +106,7 @@ export default function RiderProfile({navigation,route}:{navigation:any,route:an
                 placeholder={phone}
                 value={phone}
                 onChangeText={onChangePhone}
+                keyboardType='number-pad'
               />
             </View>
           </ScrollView>

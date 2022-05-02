@@ -138,6 +138,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                         value={phone}
                         onChangeText={setPhone}
                         placeholder='Phone number'
+                        keyboardType='number-pad'
                         style={{
                             fontSize: 18,
                             width: screenWidth *.6,
