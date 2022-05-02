@@ -21,10 +21,14 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
     const [Username, setUsername] = React.useState('');
     const [Password, setPassword] = React.useState('');
     const [confirmPassword ,setConfirmPassword] = React.useState('');
+    const [realName, setRealName] = React.useState('');
+    const [phone, setPhone] = React.useState('');
 
-    const[Susernamestate, setSUsernameState] = React.useState(false);
-    const[Suserpassstate, setSUserPassState] = React.useState(false);
-    const[SuserCpassstate, setSUserCPassState] = React.useState(false);
+    const [Susernamestate, setSUsernameState] = React.useState(false);
+    const [Suserpassstate, setSUserPassState] = React.useState(false);
+    const [SuserCpassstate, setSUserCPassState] = React.useState(false);
+    const [SrealName, setSrealName] = React.useState(false);
+    const [Sphone, setSphone] = React.useState(false);
 
     const onBackButton = () => {
         navigation.navigate('RegisterEmployee');
@@ -79,6 +83,40 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                     <View style={styles.underline}></View>
                 </View>
                 <View style={styles.options}>
+                    <TextInput
+                        value={realName}
+                        onChangeText={setRealName}
+                        placeholder='Name'
+                        style={{
+                            fontSize: 18,
+                            width: screenWidth *.6,
+                            height: screenHeight * 0.055,
+                            margin: 8,
+                            padding: 10,
+                            borderRadius: 30,
+                            borderWidth:1,
+                            borderColor: SrealName? 'red' : 'white',
+                            backgroundColor: 'white',
+                            elevation: 12,
+                          }}
+                    />
+                    <TextInput
+                        value={phone}
+                        onChangeText={setPhone}
+                        placeholder='Phone number'
+                        style={{
+                            fontSize: 18,
+                            width: screenWidth *.6,
+                            height: screenHeight * 0.055,
+                            margin: 8,
+                            padding: 10,
+                            borderRadius: 30,
+                            borderWidth:1,
+                            borderColor: Sphone? 'red' : 'white',
+                            backgroundColor: 'white',
+                            elevation: 12,
+                          }}
+                    />
                     <TextInput
                         value={Username}
                         onChangeText={setUsername}
@@ -182,7 +220,7 @@ const styles = StyleSheet.create({
     },
     options: {
         width:screenWidth*.8,
-        height:screenHeight*0.25,
+        height:screenHeight*0.5,
         elevation:10,
         borderRadius:20,
         backgroundColor:'white',
