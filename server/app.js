@@ -902,6 +902,7 @@ app.get('/getuserdata',async(req,res) => {
     postcode:user.postcode,
     fname:user.fname,
     lname:user.lname,
+    phonenumber:user.phonenumber,
   })
   }
   catch(error){

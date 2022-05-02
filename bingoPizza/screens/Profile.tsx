@@ -41,20 +41,16 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
   .then(data => {console.log(data) })
 }
 
-  const getProfile = () =>{
-    fetch("http://10.0.2.2:3000/getuserdata?_id="+userid)
-    .then(response=>response.json())
-    .then(data => {
-      onChangeFname(data.fname)
-      onChangeLname(data.lname)
-      onChangeContact(data.phonenumber)
-      onChangeAddress(data.address)
-    })
-  }
-
   useFocusEffect(
     React.useCallback(() => {
-      getProfile();
+      fetch('http://10.0.2.2:3000/getuserdata?_id='+userid)
+      .then(response => response.json())     
+      .then(json => {
+        onChangeFname(json.fname)
+        onChangeLname(json.lname)
+        onChangeContact(json.phonenumber)
+        onChangeAddress(json.address)
+      })      
     }, [fname,lname,contact,address])
   );
 
