@@ -67,6 +67,7 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
       new Animated.Value(-60)
     ).current;
     useFocusEffect(() => {
+    Animated.loop(
       Animated.sequence([
         Animated.parallel([
           Animated.timing(queueText,{
@@ -156,7 +157,7 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
             toValue:0, delay:50, useNativeDriver:true
           }),
         ]),
-      ]).start();
+      ])).start();
     },);
     useFocusEffect(
       React.useCallback(() => {
@@ -181,7 +182,7 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
     <Gradient>
       <View style={styles.container}>
         <View style={styles.header}>
-            <Text style={styles.headerFont}>Delivery</Text>
+            <Text style={styles.headerFont}>Checking Payment</Text>
         </View>
         <View style={styles.status}>
             <View style={styles.statusBar}>
