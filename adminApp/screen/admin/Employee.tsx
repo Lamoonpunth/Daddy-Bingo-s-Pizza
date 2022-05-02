@@ -40,17 +40,20 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
 
     useFocusEffect(
         React.useCallback(() => {      
-        const rider = fetch('http://10.0.2.2:3000/getallrider')
-                        .then(response => response.json())
-                        .then(json => {
-                            return json
-                        })            
-        const chef =  fetch('http://10.0.2.2:3000/getallchef')
-                        .then(response => response.json())
-                        .then(json => {
-                            return json
-                        })      
-            
+            if(employeeType === 'Rider'){
+                const rider = fetch('http://10.0.2.2:3000/getallrider')
+                                .then(response => response.json())
+                                .then(json => {
+                                    setEmployee(json)
+                                })          
+            }  
+            else if(employeeType === 'Chef'){
+            const chef =  fetch('http://10.0.2.2:3000/getallchef')
+                            .then(response => response.json())
+                            .then(json => {
+                                    setEmployee(json)
+                            }) 
+            }                 
         }, [Employee])
       );
 
