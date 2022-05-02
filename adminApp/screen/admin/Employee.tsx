@@ -19,20 +19,25 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function Employee({navigation,route}:{navigation:any,route:any}){   
 
-    
     const [employeeType, setEmployeeType] = React.useState('Chef');
     const EmployeeOptions = [
         { label: "Chef", value: "Chef" },
         { label: "Rider", value: "Rider" },
       ];
 
-    const [employee, setEmployee] = React.useState([
+    const [chef, setChef] = React.useState([
         {key:1, fname:'test', lname:'test' ,phonenumber:'111'},
         {key:2, fname:'test', lname:'test' ,phonenumber:'111'},
         {key:3, fname:'test', lname:'test' ,phonenumber:'111'},
         {key:4, fname:'test', lname:'test' ,phonenumber:'111'},
     ]);
 
+    const [rider, setRider] = React.useState([
+        {key:1, fname:'test', lname:'test' ,phonenumber:'111'},
+        {key:2, fname:'test', lname:'test' ,phonenumber:'111'},
+        {key:3, fname:'test', lname:'test' ,phonenumber:'111'},
+        {key:4, fname:'test', lname:'test' ,phonenumber:'111'},
+    ]);
    
     const onBackButton = () => {
         navigation.goBack();
@@ -40,21 +45,19 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
 
     useFocusEffect(
         React.useCallback(() => {      
-            if(employeeType === 'Rider'){
-                const rider = fetch('http://10.0.2.2:3000/getallrider')
-                                .then(response => response.json())
-                                .then(json => {
-                                    setEmployee(json)
-                                })          
-            }  
-            else if(employeeType === 'Chef'){
-            const chef =  fetch('http://10.0.2.2:3000/getallchef')
-                            .then(response => response.json())
-                            .then(json => {
-                                    setEmployee(json)
-                            }) 
-            }                 
-        }, [Employee])
+            fetch('http://10.0.2.2:3000/getallrider')
+            .then(response => response.json())
+            .then(json => {
+                setRider(json)
+            })          
+            
+            fetch('http://10.0.2.2:3000/getallchef')
+            .then(response => response.json())
+            .then(json => {
+                    setChef(json)
+            }) 
+                            
+        }, [])
       );
 
 
@@ -87,8 +90,9 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                 />
             </View>
             <View style={styles.registerOptions}>
+                {employeeType == 'Chef'?
                 <FlatList
-                    data={employee}
+                    data={employeeType == 'Chef'? chef:rider}
                     showsVerticalScrollIndicator={false}
                     renderItem={({item}) => (
                         <View style={styles.options}>
@@ -103,7 +107,26 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                             </View>
                         </View>
                     )}
-                />    
+                />  
+                :
+                <FlatList
+                    data={rider}
+                    showsVerticalScrollIndicator={false}
+                    renderItem={({item}) => (
+                        <View style={styles.options}>
+                            <View style={styles.optionsImage}>
+                                <Image source={require('../../assets/images/service.png')} style={styles.image}/>
+                            </View>
+                            <View style={styles.optionsName}>
+                                <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>
+                                <Text style={styles.fontDetail}>ชื่อ:{item.fname}</Text>
+                                <Text style={styles.fontDetail}>นามสกุล:{item.lname}</Text>
+                                <Text style={styles.fontDetail}>เบอร์:{item.phonenumber}</Text>
+                            </View>
+                        </View>
+                    )}
+                />  
+                }   
             </View>
         </Gradient>
     ); 
