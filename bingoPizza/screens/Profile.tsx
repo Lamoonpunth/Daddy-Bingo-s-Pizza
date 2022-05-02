@@ -41,11 +41,21 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
   .then(data => {console.log(data) })
 }
 
+  const getProfile = () =>{
+    fetch("http://10.0.2.2:3000/getuserdata?_id="+userid)
+    .then(response=>response.json())
+    .then(data => {
+      onChangeFname(data.fname)
+      onChangeLname(data.lname)
+      onChangeContact(data.phonenumber)
+      onChangeAddress(data.address)
+    })
+  }
 
   useFocusEffect(
     React.useCallback(() => {
-      
-    }, [])
+      getProfile();
+    }, [fname,lname,contact,address])
   );
 
   return (
@@ -112,10 +122,11 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
                 </View>
               </View>
               <TextInput 
-                style={styles.detailFont}
+                style={styles.detailFontAddress}
                 placeholder={address}
                 value={address}
                 onChangeText={onChangeAddress}
+                multiline
               />
             </View>
           </ScrollView>
@@ -204,6 +215,18 @@ const styles = StyleSheet.create({
     color:'#FF6D6D',
     width: screenWidth * .7,
     height: 40,
+    backgroundColor:'white',
+    borderRadius:10,
+    paddingLeft:10
+  },
+  detailFontAddress: {
+    flexDirection:'row',
+    alignItems:'flex-start',
+    justifyContent:'flex-start',
+    fontSize:18,
+    color:'#FF6D6D',
+    width: screenWidth * .7,
+    height: 130,
     backgroundColor:'white',
     borderRadius:10,
     paddingLeft:10
