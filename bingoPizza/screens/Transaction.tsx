@@ -17,6 +17,9 @@ import * as ImagePicker from 'expo-image-picker';
 export default function Transaction({ navigation, route }: { navigation: any, route: any }) {
 
     const onBackButton = () =>{
+        setResult({})
+        setImage(null)
+        setIsUpload(false)
         navigation.goBack();
     }
 
@@ -36,6 +39,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
         if (!result.cancelled) {
             setResult(result)
             setImage("Uploaded");
+            setIsUpload(true);
         }
     };
 
@@ -96,6 +100,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
             navigation.navigate("OrderAwait",{cart:cart,user:user,orderid:json._id});
             setResult({})
             setImage(null)
+            setIsUpload(false)
         })
         .catch(error => console.log(error))
     }
@@ -122,9 +127,16 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
                         <TouchableOpacity style={styles.insertButton} onPress={pickImage}>
                             <Text style={styles.uploadFont}>Upload</Text>
                         </TouchableOpacity>
+                        {isUpload? 
                         <TouchableOpacity style={styles.confirmButton} onPress={onConfirm}>
                             <Text style={styles.uploadFont}>Confirm</Text>
-                        </TouchableOpacity> 
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity style={styles.confirmButtonFalse} onPress={onConfirm} disabled={true}>
+                            <Text style={styles.uploadFont}>Confirm</Text>
+                        </TouchableOpacity>
+                        }
+                         
                     </View>
                     
                 </View>
@@ -198,6 +210,15 @@ const styles = StyleSheet.create({
         height: 50,
         width: 85,
         backgroundColor:'#FF6D6D',
+        borderRadius:10,
+        alignItems:'center',
+        elevation:4,
+    },
+    confirmButtonFalse: {
+        padding:15,
+        height: 50,
+        width: 85,
+        backgroundColor:'gray',
         borderRadius:10,
         alignItems:'center',
         elevation:4,
