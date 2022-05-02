@@ -51,6 +51,10 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
         else if (confirmPassword == ''){
             alert('Please confirm your password.')
         }
+        else if (confirmPassword != Password){
+            alert('Please match your password.')
+            setConfirmPassword('')
+        }
         else{
             if (type == 'Rider'){
             fetch("http://10.0.2.2:3000/ridergen",{
@@ -72,7 +76,10 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
             }
             setUsername('');
             setPassword('');
-            setConfirmPassword(''); 
+            setConfirmPassword('');
+            setFname('');
+            setLname('');
+            setPhone('');
     } 
     }
 
