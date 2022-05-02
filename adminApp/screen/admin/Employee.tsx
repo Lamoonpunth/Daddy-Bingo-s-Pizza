@@ -37,7 +37,7 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                         <Image source={require('../../assets/images/back_icon.png')} style={globalStyles.backIcon} />
                     </TouchableOpacity>
 
-                    <Text style={styles.headerfont}>Register Employee</Text>
+                    <Text style={styles.headerfont}>Employees</Text>
 
                     <View style={styles.backIcon}></View>
                     
