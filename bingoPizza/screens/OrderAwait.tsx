@@ -24,7 +24,7 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
     const {cart} = route.params;
     const {user} = route.params;
     const {orderid} = route.params;
-    console.log(orderid)
+    const [status, setStatus] = React.useState()
     const [orderlist, onChangeOrderList] = React.useState([
         {name:'',img_path:'',quantity:0,additional:'',price:0,key:0},
         
@@ -66,7 +66,6 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
     const arriveText = useRef(
       new Animated.Value(-60)
     ).current;
-
     useFocusEffect(() => {
       Animated.sequence([
         Animated.parallel([
@@ -158,14 +157,24 @@ export default function OrderAwait({navigation, route}:{navigation:any,route:any
           }),
         ]),
       ]).start();
-      setTimeout(()=> {
-        navigation.navigate('Queue',{cart:cart,user:user});
-       }, 5500);
     },);
     useFocusEffect(
       React.useCallback(() => {
         onChangeOrderList(cart)
-      }, [])
+        var nextPageInterval = setInterval(checknextpage, 1000);
+        function checknextpage(){
+          fetch("http://10.0.2.2:3000/getorder?_id="+orderid)
+          .then(response => response.json())
+          .then(data =>  {
+            console.log(data[0].status)
+            if (data[0].status !== "waiting for payment")
+            {
+              navigation.navigate('Queue',{cart:cart,user:user,orderid:orderid});
+              clearInterval(nextPageInterval);
+            }
+          })
+        }
+      }, [orderid])
     );
 
   return (

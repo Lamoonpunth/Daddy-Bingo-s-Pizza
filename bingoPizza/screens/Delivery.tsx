@@ -15,11 +15,21 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function Delivery({navigation, route}:{navigation:any,route:any}) {
-
+  const {orderid} = route.params;
   useFocusEffect(() => {
-    setTimeout(()=> {
-      navigation.navigate('Arrive');
-     }, 10000);
+     var nextPageInterval = setInterval(checknextpage, 1000);
+     function checknextpage(){
+       fetch("http://10.0.2.2:3000/getorder?_id="+orderid)
+       .then(response => response.json())
+       .then(data =>  {
+         console.log(data[0].status)
+         if (data[0].status !== "waiting for rider" && data[0].status !== "delivering order")
+         {
+          navigation.navigate('Arrive');
+          clearInterval(nextPageInterval);
+         }
+       })
+     }
   });
   
   return (

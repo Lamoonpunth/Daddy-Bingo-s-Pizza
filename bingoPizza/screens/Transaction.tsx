@@ -22,7 +22,7 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
         setIsUpload(false)
         navigation.goBack();
     }
-
+    const [filename,setFilename] =useState();
     const [image, setImage] = useState(null);
     const [isUpload , setIsUpload] = React.useState(false);
     const {cart,rawCart,user,userid,total} = route.params
@@ -40,11 +40,11 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
             setResult(result)
             setImage("Uploaded");
             setIsUpload(true);
+            handleupload(result);
         }
     };
 
     const handleupload = (image) =>{
-        console.log(image.uri)
         var extension = image.uri.split(".")
         extension.reverse()
         let newfile = {
@@ -54,59 +54,52 @@ export default function Transaction({ navigation, route }: { navigation: any, ro
         }
         var formdata = new FormData();
         formdata.append('image', newfile);
-        console.log(formdata)
         fetch("http://10.0.2.2:3000/uploadSingle",{
         method:"POST",
         body:formdata,
         })
         .then(response=>response.json())
-        .then(file=>{
-            console.log(file.filename)
-            fetch("http://10.0.2.2:3000/checkout",{
-                method:"POST",
-                headers:{'Content-Type': 'application/json'},
-                body:JSON.stringify({
-                userid:userid,
-                cart:rawCart,
-                user_fname:user.fname,
-                user_lname:user.lname,
-                price:total,
-                province:user.province,
-                district:user.district,
-                subdistrict:user.subdistrict,
-                postcode:user.postcode,
-                bill_img:file.filename
-                })
-            })
-            .then(response => response.json())
-            .then(json =>{
-                console.log(json)
-            })
-            .catch(error => console.log(error))
-        })
+        .then(file=>setFilename(file.filename))
         .catch(error =>console.log(error))
 
     }
     const onConfirm = () =>{
-        handleupload(result);
-        fetch("http://10.0.2.2:3000/clearcart",{
+        fetch("http://10.0.2.2:3000/checkout",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({_id:userid})
+            body:JSON.stringify({
+            userid:userid,
+            cart:rawCart,
+            user_fname:user.fname,
+            user_lname:user.lname,
+            price:total,
+            province:user.province,
+            district:user.district,
+            subdistrict:user.subdistrict,
+            postcode:user.postcode,
+            bill_img:filename
+            })
         })
         .then(response => response.json())
         .then(json =>{
-            console.log(json)
             navigation.navigate("OrderAwait",{cart:cart,user:user,orderid:json._id});
-            setResult({})
-            setImage(null)
-            setIsUpload(false)
+            fetch("http://10.0.2.2:3000/clearcart",{
+                method:"POST",
+                headers:{'Content-Type': 'application/json'},
+                body:JSON.stringify({_id:userid})
+            })
+            .then(response => response.json())
+            .then(json =>{
+                setResult({})
+                setImage(null)
+                setIsUpload(false)
+            })
+            .catch(error => console.log(error))
         })
         .catch(error => console.log(error))
     }
 
     const {price} = route.params;
-    console.log(price)
 
     return (
         <Gradient>

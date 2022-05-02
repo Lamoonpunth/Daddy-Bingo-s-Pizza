@@ -547,7 +547,7 @@ app.post('/checkout',async(req,res)=>{
       postcode:req.body.postcode,
       bill_img:req.body.bill_img
     })
-    res.json(order)
+    .then(order=>res.json(order))
   }
   catch(error){
     console.log(error)

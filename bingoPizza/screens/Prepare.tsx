@@ -28,6 +28,7 @@ export default function Prepare({navigation, route}:{navigation:any,route:any}) 
   ])
   const {cart} =route.params;
   const {user} =route.params;
+  const {orderid} = route.params;
   const prepare = useRef(
     new Animated.Value(0)
   ).current;
@@ -43,14 +44,24 @@ export default function Prepare({navigation, route}:{navigation:any,route:any}) 
         })
       ]),
     ).start();
-    setTimeout(()=> {
-      navigation.navigate('Delivery',{cart:cart,user:user});
-     }, 10000);
   });
   useFocusEffect(
     React.useCallback(() => {
       setOrderList(cart)
-    }, [])
+      var nextPageInterval = setInterval(checknextpage, 1000);
+      function checknextpage(){
+        fetch("http://10.0.2.2:3000/getorder?_id="+orderid)
+        .then(response => response.json())
+        .then(data =>  {
+          console.log(data[0].status)
+          if (data[0].status !== "preparing order")
+          {
+            navigation.navigate('Delivery',{cart:cart,user:user,orderid:orderid});
+            clearInterval(nextPageInterval);
+          }
+        })
+      }
+    }, [orderid])
   );
 
   return (
