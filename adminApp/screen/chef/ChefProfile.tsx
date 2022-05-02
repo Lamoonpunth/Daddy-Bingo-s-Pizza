@@ -20,7 +20,8 @@ export default function ChefProfile({navigation,route}:{navigation:any,route:any
   
   const userid = route.params.params.params.userid
   console.log(userid)
-  const [name, onChangeName] = React.useState('Default');
+  const [fname, onChangeFname] = React.useState('Default');
+  const [lname, onChangeLname] = React.useState('Default');
   const [phone, onChangePhone] = React.useState('Default');
   
   const onBackButton = () => {
@@ -67,16 +68,30 @@ export default function ChefProfile({navigation,route}:{navigation:any,route:any
           <ScrollView showsVerticalScrollIndicator={false} style={styles.scroll}>
             <View style={styles.box1}>
               <View style={styles.topicBox}>
-                <Text style={styles.topicFont}>Name</Text>
+                <Text style={styles.topicFont}>First name</Text>
                 <View >
                   <Image source={require('../../assets/images/edit.png')}/>  
                 </View>
               </View>
               <TextInput 
                 style={styles.detailFont}
-                placeholder={name}
-                value={name}
-                onChangeText={onChangeName}
+                placeholder={fname}
+                value={fname}
+                onChangeText={onChangeFname}
+              />
+            </View>
+            <View style={styles.box1}>
+              <View style={styles.topicBox}>
+                <Text style={styles.topicFont}>Last name</Text>
+                <View >
+                  <Image source={require('../../assets/images/edit.png')}/>  
+                </View>
+              </View>
+              <TextInput 
+                style={styles.detailFont}
+                placeholder={lname}
+                value={lname}
+                onChangeText={onChangeLname}
               />
             </View>
             <View style={styles.box1}>

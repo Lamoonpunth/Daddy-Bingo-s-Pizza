@@ -21,7 +21,8 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
     const [Username, setUsername] = React.useState('');
     const [Password, setPassword] = React.useState('');
     const [confirmPassword ,setConfirmPassword] = React.useState('');
-    const [realName, setRealName] = React.useState('');
+    const [fname, setFname] = React.useState('');
+    const [lname, setLname] = React.useState('');
     const [phone, setPhone] = React.useState('');
 
     const onBackButton = () => {
@@ -29,12 +30,13 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
         setUsername('');
         setPassword('');
         setConfirmPassword('');
-        setRealName('');
+        setFname('');
+        setLname('');
         setPhone('');
     }
     
     const onNextButton = () =>{
-        if (realName == ''){
+        if (fname == '' && lname){
             alert('Please Enter employee name.')
         }
         else if (phone == ''){
@@ -92,9 +94,26 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                 </View>
                 <View style={styles.options}>
                     <TextInput
-                        value={realName}
-                        onChangeText={setRealName}
-                        placeholder='Name'
+                        value={fname}
+                        onChangeText={setFname}
+                        placeholder='First name'
+                        style={{
+                            fontSize: 18,
+                            width: screenWidth *.6,
+                            height: screenHeight * 0.055,
+                            margin: 8,
+                            padding: 10,
+                            borderRadius: 30,
+                            borderWidth:1,
+                            borderColor: 'white',
+                            backgroundColor: 'white',
+                            elevation: 12,
+                          }}
+                    />
+                    <TextInput
+                        value={lname}
+                        onChangeText={setLname}
+                        placeholder='Last name'
                         style={{
                             fontSize: 18,
                             width: screenWidth *.6,
