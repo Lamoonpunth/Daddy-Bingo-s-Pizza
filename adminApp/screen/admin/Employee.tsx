@@ -11,12 +11,19 @@ import {
 
 import Gradient from "../../styles/Gradient";
 import { globalStyles } from "../../styles/globalStyles";
+import SwitchSelector from "react-native-switch-selector";
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function Employee({navigation,route}:{navigation:any,route:any}){
     
+    const [employeeType, setEmployeeType] = React.useState('Chef');
+    const EmployeeOptions = [
+        { label: "Chef", value: "Chef" },
+        { label: "Rider", value: "Rider" },
+      ];
+
     const [employee, setEmployee] = React.useState([
         {key:1, fname:'test', lname:'test' ,phone:'111'},
         {key:2, fname:'test', lname:'test' ,phone:'111'},
@@ -43,6 +50,19 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                     
                 </View>
                 <View style={styles.underline}></View>
+            </View>
+            <View style={styles.switchSelectorBox}>
+                <SwitchSelector
+                onPress={(value: any) => setEmployeeType(value)}
+                options={EmployeeOptions}
+                initial={0}
+                textColor='#FF6D6D'
+                selectedTextStyle={{color:'#FFFFFF'}}
+                buttonColor='#FF6D6D'
+                borderColor='#E5E5E5'
+                fontSize={20}
+                hasPadding
+                />
             </View>
             <View style={styles.registerOptions}>
                 <FlatList
@@ -93,6 +113,10 @@ const styles = StyleSheet.create({
         width:screenWidth*.7,
         height:screenHeight*0.0035,
         backgroundColor:'white',
+    },
+    switchSelectorBox: {
+        width:screenWidth*.6,
+        backgroundColor:'transparent',
     },
     registerOptions: {
         width:screenWidth*.9,
