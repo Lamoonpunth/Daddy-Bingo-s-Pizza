@@ -14,19 +14,38 @@ import { globalStyles } from "../../styles/globalStyles";
 
 const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
+import { useFocusEffect } from '@react-navigation/native';
 
-export default function Employee({navigation,route}:{navigation:any,route:any}){
+export default function Employee({navigation,route}:{navigation:any,route:any}){   
+
     
     const [employee, setEmployee] = React.useState([
-        {key:1, fname:'test', lname:'test' ,phone:'111'},
-        {key:2, fname:'test', lname:'test' ,phone:'111'},
-        {key:3, fname:'test', lname:'test' ,phone:'111'},
-        {key:4, fname:'test', lname:'test' ,phone:'111'},
+        {key:1, fname:'test', lname:'test' ,phonenumber:'111'},
+        {key:2, fname:'test', lname:'test' ,phonenumber:'111'},
+        {key:3, fname:'test', lname:'test' ,phonenumber:'111'},
+        {key:4, fname:'test', lname:'test' ,phonenumber:'111'},
     ]);
 
+   
     const onBackButton = () => {
         navigation.goBack();
     }
+
+    useFocusEffect(
+        React.useCallback(() => {      
+        const rider = fetch('http://10.0.2.2:3000/getallrider')
+                        .then(response => response.json())
+                        .then(json => {
+                            return json
+                        })            
+        const chef =  fetch('http://10.0.2.2:3000/getallchef')
+                        .then(response => response.json())
+                        .then(json => {
+                            return json
+                        })      
+            
+        }, [Employee])
+      );
 
 
     return(
@@ -57,7 +76,7 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                                 <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>
                                 <Text style={styles.fontDetail}>ชื่อ:{item.fname}</Text>
                                 <Text style={styles.fontDetail}>นามสกุล:{item.lname}</Text>
-                                <Text style={styles.fontDetail}>เบอร์:{item.phone}</Text>
+                                <Text style={styles.fontDetail}>เบอร์:{item.phonenumber}</Text>
                             </View>
                         </View>
                     )}

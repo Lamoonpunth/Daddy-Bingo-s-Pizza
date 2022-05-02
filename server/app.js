@@ -983,6 +983,25 @@ app.get('/getriderdata',async(req,res) => {
   }
 })
 
+app.get('/getallrider',async(req,res) => {
+  try{
+  const rider =  await Rider.find({})
+  res.json(rider)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
+app.get('/getallchef',async(req,res) => {
+  try{
+  const chef =  await Chef.find({})
+  res.json(chef)
+  }
+  catch(error){
+    console.log(error)
+  }
+})
 
 const fileStorageEngine = multer.diskStorage({
   destination: (req, file, cb) => {
