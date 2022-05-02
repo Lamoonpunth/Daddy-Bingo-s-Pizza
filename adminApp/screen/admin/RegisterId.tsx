@@ -54,7 +54,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
             fetch("http://10.0.2.2:3000/ridergen",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({username:Username,password:Password})
+            body:JSON.stringify({username:Username,password:Password,fname:realName,lname:realName,phonenumber:phone})
             })
             .then(response => response.json())
             .then(json => alert("complete"))
@@ -63,7 +63,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
             fetch("http://10.0.2.2:3000/chefgen",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({username:Username,password:Password})
+            body:JSON.stringify({username:Username,password:Password,fname:realName,lname:realName,phonenumber:phone})
             })
             .then(response => response.json())
             .then(json => alert("complete"))

@@ -32,7 +32,8 @@ export default function ChefProfile({navigation,route}:{navigation:any,route:any
     //       method:"POST",
     //       headers:{'Content-Type': 'application/json'},
     //       body:JSON.stringify({_id:userid,
-    //                             name:name,
+    //                             fname:fname,
+    //                             lname:lname,
     //                             phonenumber:phone})
     //     })
     //     .then(response => response.json())
@@ -48,7 +49,7 @@ export default function ChefProfile({navigation,route}:{navigation:any,route:any
   //       onChangeName(json.name)
   //       onChangePhone(json.phonenumber)
   //     })      
-  //   }, [name,phone])
+  //   }, [fname,lname,phone])
   // );
 
   return (
