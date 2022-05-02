@@ -35,11 +35,25 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
         setUsername('');
         setPassword('');
         setConfirmPassword('');
+        setRealName('');
+        setPhone('');
     }
     
     const onNextButton = () =>{
-        if (Username == '' && Password == '' && confirmPassword == ''){
+        if (realName == ''){
+            alert('Please Enter employee name.')
+        }
+        else if (phone == ''){
+            alert('Please Enter employee phone number.')
+        }
+        else if (Username == '' && Password == '' && confirmPassword == ''){
             alert('Please Enter Username and Password.')
+        }
+        else if (Password == '' && confirmPassword == ''){
+            alert('Please Enter Password.')
+        }
+        else if (confirmPassword == ''){
+            alert('Please confirm your password.')
         }
         else{
             if (type == 'Rider'){
