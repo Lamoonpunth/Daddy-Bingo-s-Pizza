@@ -705,7 +705,7 @@ app.post('/admingen',async(req,res) =>{
 app.post('/ridergen',async(req,res) =>{
   try{
       //Get user input
-    const {username,password,name,phonenumber} = req.body;
+    const {username,password,fname,lname,phonenumber} = req.body;
     //Encrypt user password+salt
     const Salts = crypto.lib.WordArray.random(128/8);
     encryptedPassword = await SHA256(password+Salts);
@@ -714,7 +714,8 @@ app.post('/ridergen',async(req,res) =>{
     const user = await Rider.create({
       username:username,
       password:encryptedPassword,
-      name: name,
+      fname: fname,
+      lname: lname,
       phonenumber: phonenumber,
       salt :Salts
     })
@@ -741,7 +742,7 @@ app.post('/ridergen',async(req,res) =>{
 app.post('/chefgen',async(req,res) =>{
   try{
       //Get user input
-    const {username,password,name,phonenumber} = req.body;
+    const {username,password,fname,lname,phonenumber} = req.body;
     //Encrypt user password+salt
     const Salts = crypto.lib.WordArray.random(128/8);
     encryptedPassword = await SHA256(password+Salts);
@@ -750,7 +751,8 @@ app.post('/chefgen',async(req,res) =>{
     const user = await Chef.create({
       username:username,
       password:encryptedPassword,
-      name: name,
+      fname: fname,
+      lname: lname,     
       phonenumber: phonenumber,
       salt :Salts
     })
@@ -930,7 +932,8 @@ app.post('/updateuserprofile',async(req,res)=>{
 
 app.post('/updateriderprofile',async(req,res)=>{
   try{
-    await Rider.updateOne({ "_id":req.body._id},{$set:{"name":req.body.name}});    
+    await Rider.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});   
+    await Rider.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}});  
     await Rider.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});
     res.json("profile-updated")
   }
@@ -942,7 +945,8 @@ app.post('/updateriderprofile',async(req,res)=>{
 
 app.post('/updatechefprofile',async(req,res)=>{
   try{
-    await Chef.updateOne({ "_id":req.body._id},{$set:{"name":req.body.name}});  
+    await Chef.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}}); 
+    await Chef.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}}); 
     await Chef.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});  
     res.json("profile-updated")
   }
@@ -955,7 +959,8 @@ app.get('/getchefdata',async(req,res) => {
   try{
   const chef =  await Chef.findOne({_id: req.query._id})
   res.json({
-    name:chef.name,
+    fname:chef.fname,
+    lname:chef.lname,
     phonenumber:chef.phonenumber,    
   })
   }
@@ -968,7 +973,8 @@ app.get('/getriderdata',async(req,res) => {
   try{
   const rider =  await Rider.findOne({_id: req.query._id})
   res.json({
-    name:rider.name,
+    fname:rider.fname,
+    lname:rider.lname,
     phonenumber:rider.phonenumber,    
   })
   }
