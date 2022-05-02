@@ -24,12 +24,6 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
     const [realName, setRealName] = React.useState('');
     const [phone, setPhone] = React.useState('');
 
-    const [Susernamestate, setSUsernameState] = React.useState(false);
-    const [Suserpassstate, setSUserPassState] = React.useState(false);
-    const [SuserCpassstate, setSUserCPassState] = React.useState(false);
-    const [SrealName, setSrealName] = React.useState(false);
-    const [Sphone, setSphone] = React.useState(false);
-
     const onBackButton = () => {
         navigation.navigate('RegisterEmployee');
         setUsername('');
@@ -109,7 +103,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                             padding: 10,
                             borderRadius: 30,
                             borderWidth:1,
-                            borderColor: SrealName? 'red' : 'white',
+                            borderColor: 'white',
                             backgroundColor: 'white',
                             elevation: 12,
                           }}
@@ -126,7 +120,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                             padding: 10,
                             borderRadius: 30,
                             borderWidth:1,
-                            borderColor: Sphone? 'red' : 'white',
+                            borderColor: 'white',
                             backgroundColor: 'white',
                             elevation: 12,
                           }}
@@ -143,7 +137,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                             padding: 10,
                             borderRadius: 30,
                             borderWidth:1,
-                            borderColor: Susernamestate? 'red' : 'white',
+                            borderColor: 'white',
                             backgroundColor: 'white',
                             elevation: 12,
                           }}
@@ -160,7 +154,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                             padding: 10,
                             borderRadius: 30,
                             borderWidth:1,
-                            borderColor: Suserpassstate? 'red' : 'white',
+                            borderColor: 'white',
                             backgroundColor: 'white',
                             elevation: 12,
                         }}
@@ -178,7 +172,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                             padding: 10,
                             borderRadius: 30,
                             borderWidth:1,
-                            borderColor: SuserCpassstate? 'red' : 'white',
+                            borderColor: 'white',
                             backgroundColor: 'white',
                             elevation: 12,
                           }}
