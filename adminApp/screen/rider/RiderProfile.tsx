@@ -18,8 +18,8 @@ import { useFocusEffect } from '@react-navigation/native';
 
 export default function RiderProfile({navigation,route}:{navigation:any,route:any}) {  
 
-  const {userid} = route
-  
+  const userid = route.params.params.params.userid
+  console.log(userid)
   const [name, onChangeName] = React.useState('Default');
   const [phone, onChangePhone] = React.useState('Default');
   

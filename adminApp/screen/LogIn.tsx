@@ -156,7 +156,6 @@ export default function LogIn({navigation}: {navigation: any}) {
           .then(res=>res.json())
           
           .then(data=>{
-            console.log(data)
             if (data == "Invalid username or password")
             {
               setBorderColorUsername(true);
@@ -167,7 +166,7 @@ export default function LogIn({navigation}: {navigation: any}) {
             {
               setBorderColorUsername(false);
               setBorderColorPass(false);
-              navigation.navigate('Chef', {screen:'Home', params:{userid:data}});
+              navigation.navigate('Chef', {screen:'Home', params:{userid:data._id}});
             }
           }).catch(error=>alert(error))
           }
@@ -229,7 +228,6 @@ export default function LogIn({navigation}: {navigation: any}) {
           .then(res=>res.json())
           
           .then(data=>{
-            console.log(data)
             if (data == "Invalid username or password")
             {
               setBorderColorUsername(true);
@@ -240,7 +238,7 @@ export default function LogIn({navigation}: {navigation: any}) {
             {
               setBorderColorUsername(false);
               setBorderColorPass(false);
-              navigation.navigate('Rider', {screen:'Home', params:{userid:data}});
+              navigation.navigate('Rider', {screen:'Home', params:{userid:data._id}});
             }
           }).catch(error=>alert(error))
           }
