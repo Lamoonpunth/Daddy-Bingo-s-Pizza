@@ -545,7 +545,8 @@ app.post('/checkout',async(req,res)=>{
       district : req.body.district,
       subdistrict : req.body.subdistrict,
       postcode:req.body.postcode,
-      bill_img:req.body.bill_img
+      bill_img:req.body.bill_img,
+      reason : null
     })
     .then(order=>res.json(order))
   }
@@ -622,6 +623,7 @@ app.post('/kitchenaccept',async(req,res)=>{
 app.post('/kitchendeny',async(req,res)=>{
   try{
     await Order.updateMany({"_id":req.body._id},{$set:{status: "cancled by kitchen"}})
+    await Order.updateMany({"_id":req.body._id},{$set:{reason: req.body.reason}})
     res.json("updated")
   }
   catch(error){

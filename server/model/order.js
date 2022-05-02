@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
     district : {type:String , default :null},
     subdistrict : {type:String , default :null},
     postcode : {type:String , default :null},
+    reason : {type:String , default : null}
 
 });
 

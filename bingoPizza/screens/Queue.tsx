@@ -76,7 +76,7 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
           console.log(data[0].status)
           if (data[0].status === "cancled by kitchen")
           {
-            alert("cancled by kitchen")
+            alert("cancled by kitchen\nreason: " + data[0].reason)
             navigation.goBack();
             clearInterval(nextPageInterval);
           }
