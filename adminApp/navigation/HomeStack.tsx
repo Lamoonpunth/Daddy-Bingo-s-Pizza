@@ -67,24 +67,24 @@ function AdminNavigator() {
     )
 };
 
-function ChefNavigator() {
+function ChefNavigator({route}:{route:any}) {
     return (
         <Chef.Navigator initialRouteName='TaskOrder' screenOptions={{headerShown:false}} drawerContent={props => <DrawerChef{...props}/>}>
             <Chef.Screen name='TaskOrder' component={TaskOrder}/>
             <Chef.Screen name='TaskDeny' component={TaskDeny}/>
             <Chef.Screen name='TaskPrepare' component={TaskPrepare}/>
-            <Chef.Screen name='ChefProfile' component={ChefProfile}/>
+            <Chef.Screen name='ChefProfile' component={ChefProfile} initialParams ={{params:route.params}}/>
             <Chef.Screen name='Log Out' component={LogIn}/>
         </Chef.Navigator>
     )
 };
 
-function RiderNavigator() {
+function RiderNavigator({route}:{route:any}) {
     return (
         <Rider.Navigator initialRouteName='RiderTask' screenOptions={{headerShown:false}} drawerContent={props => <DrawerRider{...props}/>}>
             <Rider.Screen name='RiderTask' component={RiderTask}/>
             <Rider.Screen name='RiderDelivery' component={RiderDelivery}/>
-            <Rider.Screen name='RiderProfile' component={RiderProfile}/>
+            <Rider.Screen name='RiderProfile' component={RiderProfile} initialParams = {{params:route.params}}/>
             <Rider.Screen name='Log Out' component={LogIn}/>
         </Rider.Navigator>
     )
