@@ -18,11 +18,9 @@ const screenHeight = Dimensions.get('screen').height;
 export default function EditService({navigation}:{navigation:any}) {
 
   const [service, onChangeService] = React.useState([
-    {name:'วันเกิด' , price: '19' , detail:'HBD' , key: 1},
-    {name:'สวัสดี' , price: '24' , detail:'none' , key: 2},
-    {name:'ครับ' , price: '33' , detail:'none' , key: 3},
-    {name:'ท่าน' , price: '42' , detail:'none' , key: 4},
-    {name:'สมาชิก' , price: '51' , detail:'none' , key: 5},
+    {name:'Happy Birth Day' , price: '19' , detail:'HBD' , key: 1},
+    {name:'Surprise' , price: '24' , detail:'เซอไพรส์คนสำคัญ' , key: 2},
+    {name:'Normal' , price: '0' , detail:'พิซซ่าเพื่อคนอย่างคุณ' , key: 3},
   ]);
 
   const onAddService = () =>{
