@@ -200,7 +200,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
       fetch("http://10.0.2.2:3000/addToCart",{
         method:"POST",
         headers:{'Content-Type': 'application/json'},
-        body:JSON.stringify({_id:userid,itemid:userpizza._id,quantity:1,additional:"-"})
+        body:JSON.stringify({_id:userid,itemid:userpizza._id,quantity:1,additional:"topping:"+name+" size:"+selectedSize+" dough:"+selectedDough+" crust:"+selectedCrust+" sauce:"+selectedSauce+" package:"+selectedPackage})
     })
     .then(response => response.json())
     .then(data => {console.log(data)})

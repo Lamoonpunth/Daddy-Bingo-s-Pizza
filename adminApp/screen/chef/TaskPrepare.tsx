@@ -113,7 +113,7 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
                     </View>
                     <View style={styles.textContainer}>
                       <Text style={styles.prepareFont}>{item.name} x{item.quantity}</Text>
-                      <Text style={styles.prepareFont}>{item.description}</Text>
+                      <Text style={styles.prepareFont}>{item.additional}</Text>
                     </View>
                   </TouchableOpacity>
                 )}
