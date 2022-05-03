@@ -546,7 +546,8 @@ app.post('/checkout',async(req,res)=>{
       subdistrict : req.body.subdistrict,
       postcode:req.body.postcode,
       bill_img:req.body.bill_img,
-      reason : null
+      reason : null,
+      rate : 0
     })
     .then(order=>res.json(order))
   }
@@ -601,6 +602,17 @@ app.post('/paymentcheck',async(req,res)=>{
 app.get('/getwaitingforkitchen',async(req,res)=>{
   try{
     const order = await Order.find({status: "waiting for kitchen"})
+    res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
+
+})
+
+app.get('/getwaitingforkitchenandpreparingorder',async(req,res)=>{
+  try{
+    const order = await Order.find({$or:[{status: "waiting for kitchen"},{status : "preparing order"}]})
     res.json(order)
   }
   catch(error){
