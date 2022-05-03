@@ -24,13 +24,17 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function TaskOrder({navigation, route}:{navigation:any,route:any}){
  
   const [Task, onClickTask] = React.useState([
-    {key:'1', _id:11, user_fname:'', user_lname:''},
+    {key:'1', _id:11, user_fname:'', user_lname:'', status:'waiting for kitchen',},
     
   ]);
     const onReject = (item:any) => {
      navigation.navigate('TaskDeny',{order:item})
     }
-    const onAccept = (item:any) => {
+    const checkPrepareMenu = (item:any,index:any) => {
+        navigation.navigate('TaskPrepare',{order:item,status:item.status})
+    }
+
+    const updateAcceptedTask = (item:any,index:any) =>{
       fetch("http://10.0.2.2:3000/kitchenaccept",{
         method:"POST",
         headers:{'Content-Type': 'application/json'},
@@ -40,11 +44,9 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
       })
       .then(response=>response.json())
       .then(data => {console.log(data)
-        navigation.navigate('TaskPrepare',{order:TabBarIOSItem})})
+        //updateAcceptedTask(item,index)
+        navigation.navigate('TaskPrepare',{order:item})})
     }
-    const onComplete = (item:any) => {
-      
-     }
     const onLogOut = () => {
       Alert.alert(
         "Are you sure?",
@@ -92,23 +94,28 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                 <FlatList
                   numColumns={1}
                   data={Task}
-                  renderItem={({item}) => (
-                    <View style={styles.taskOrder}  key={item._id}>
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity style={styles.taskOrder}  key={item._id} onPress={()=>checkPrepareMenu(item,index)}>
                       <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>
-                      <View style ={styles.bottontoleftside}>  
+                      <View style ={styles.bottontoleftside}> 
+                        {item.status == 'waiting for kitchen'?
                         <View style = {styles.forrowview}>
                           <TouchableOpacity style={styles.ac_rjbox} onPress={() =>onReject(item)}>
-                            <Text style={styles.normalFont2}>reject</Text>
+                            <Text style={styles.normalFont1}>reject</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity style={styles.acbox} onPress={() =>onAccept(item)}>
+                          <TouchableOpacity style={styles.acbox} onPress={() =>updateAcceptedTask(item,index)}>
                             <Text style={styles.normalFont2}>Accept</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity style={styles.acbox} onPress={() =>onComplete(item)}>
-                            <Text style={styles.normalFont2}>Complete</Text>
-                          </TouchableOpacity>
                         </View>
+                        :
+                        <View style = {styles.forrowview}>
+                          <View style={styles.incombox}>
+                            <Text style={styles.normalFont2}>Incomplete</Text>
+                          </View>
+                        </View>
+                        } 
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   )}
                 />
               </View>   
@@ -258,7 +265,15 @@ const styles = StyleSheet.create({
       backgroundColor: '#FF6D7D',
       borderRadius:50,
       elevation:8,
-
+    },
+    incombox: {
+      flexDirection:'row',
+      width:screenWidth*0.3,
+      height:25,
+      justifyContent: 'center',
+      backgroundColor: '#FF6D7D',
+      borderRadius:50,
+      elevation:8,
     },
     normalFont1:{
       fontSize: 16,
