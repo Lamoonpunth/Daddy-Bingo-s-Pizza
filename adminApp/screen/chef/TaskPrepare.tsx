@@ -110,10 +110,16 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
               />
             </View>
           </View>
-
+          {status == 'waiting for kitchen'?
+          <TouchableOpacity style={styles.LogoutBoxDisable} disabled={true}>
+            <Text style={styles.checkoutFont}>Send out delivery</Text>
+          </TouchableOpacity>
+          :
           <TouchableOpacity style={styles.LogoutBox} onPress={onSendOut}>
             <Text style={styles.checkoutFont}>Send out delivery</Text>
           </TouchableOpacity>
+          }
+          
 
         </View>
       </Gradient>
@@ -168,6 +174,17 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       height: screenHeight * 0.075,
       borderRadius: 10,
       backgroundColor: '#FF6D7D',
+      marginVertical: 10,
+      elevation: 12,
+    },
+    LogoutBoxDisable: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: screenWidth * 0.8,
+      height: screenHeight * 0.075,
+      borderRadius: 10,
+      backgroundColor: 'gray',
       marginVertical: 10,
       elevation: 12,
     },
