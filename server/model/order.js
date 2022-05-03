@@ -21,7 +21,7 @@ const UserSchema = new mongoose.Schema({
     subdistrict : {type:String , default :null},
     postcode : {type:String , default :null},
     reason : {type:String , default : null},
-    order : {type:Number , default : 0}
+    rate : {type:Number , default : 0}
 
 });
 

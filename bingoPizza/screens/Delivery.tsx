@@ -25,7 +25,7 @@ export default function Delivery({navigation, route}:{navigation:any,route:any})
          console.log(data[0].status)
          if (data[0].status !== "waiting for rider" && data[0].status !== "delivering order")
          {
-          navigation.navigate('Arrive');
+          navigation.navigate('Arrive',{orderid:orderid});
           clearInterval(nextPageInterval);
          }
        })

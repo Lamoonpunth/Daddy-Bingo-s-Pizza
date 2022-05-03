@@ -17,13 +17,13 @@ const screenWidth = Dimensions.get('screen').width;
 const screenHeight = Dimensions.get('screen').height;
 
 export default function Arrive({navigation, route}:{navigation:any,route:any}) {
-
+  const [rate, setRate] = useState(0);
   const [star1, onStar1] = useState(false);
   const [star2, onStar2] = useState(false);
   const [star3, onStar3] = useState(false);
   const [star4, onStar4] = useState(false);
   const [star5, onStar5] = useState(false);
-
+  const {orderid} = route.params;
   const click1 = () =>{
     onStar1(!star1);
     if (star2==true){
@@ -32,6 +32,7 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
       onStar4(false);
       onStar5(false);
     }
+    setRate(1)
   }
 
   const click2 = () =>{
@@ -44,6 +45,7 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
       onStar4(false);
       onStar5(false);
     }
+    setRate(2)
   }
 
   const click3 = () =>{
@@ -57,6 +59,7 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
       onStar4(false);
       onStar5(false);
     }
+    setRate(3)
   }
 
   const click4 = () =>{
@@ -70,6 +73,7 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
       onStar4(false);
       onStar5(false);
     }
+    setRate(4)
   }
 
   const click5 = () =>{
@@ -80,6 +84,7 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
       onStar3(true);
       onStar4(true);
     }
+    setRate(5)
   }
 
   const backToOrder = () =>{
@@ -88,7 +93,15 @@ export default function Arrive({navigation, route}:{navigation:any,route:any}) {
     onStar3(false);
     onStar4(false);
     onStar5(false);
-    navigation.goBack();
+    console.log(rate)
+    console.log(orderid)
+    fetch("http://10.0.2.2:3000/rate",{
+      method:"POST",
+      headers:{'Content-Type': 'application/json'},
+      body:JSON.stringify({_id:orderid,rate:rate})
+  })
+  .then(response => response.json())
+  .then(data => {navigation.goBack()})
   }
 
   return (

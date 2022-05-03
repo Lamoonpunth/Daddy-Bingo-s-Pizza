@@ -681,6 +681,17 @@ app.post('/riderdone',async(req,res)=>{
     console.log(error)
   }
 })
+
+app.post('/rate',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{rate: req.body.rate}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
 //admin account generate
 app.post('/admingen',async(req,res) =>{
   try{
