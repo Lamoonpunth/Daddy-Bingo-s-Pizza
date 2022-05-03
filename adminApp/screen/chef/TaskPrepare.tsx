@@ -22,6 +22,7 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function TaskPrepare({ navigation,route }: { navigation: any ,route:any}) {
   
   const {order} = route.params;
+  const {status} = route.params;
   const [Ingredient, onClickIng] = React.useState([
     { num: 'Order1', key: '1', img_path: require('../../assets/images/mexicangreenwave.png') },
     { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
@@ -45,10 +46,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     .then(response=>response.json())
     .then(data => {console.log(data)
     navigation.navigate('TaskOrder')})
-  }
-
-  const onClickAdminIcon = () => {
-    navigation.openDrawer();
   }
 
   const onSelectedPrepare = (item:any,index:any) =>{

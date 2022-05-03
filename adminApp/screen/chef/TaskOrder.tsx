@@ -9,6 +9,7 @@ import {
     FlatList,
     ScrollView,
     TouchableOpacity,
+    TabBarIOSItem,
     } from "react-native";
 
 const screenWidth = Dimensions.get('screen').width;
@@ -46,7 +47,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
       })
       .then(response=>response.json())
       .then(data => {console.log(data)
-        navigation.navigate('TaskPrepare',{order:item})})
+        navigation.navigate('TaskPrepare',{order:TabBarIOSItem})})
      }
     const onLogOut = () => {
       Alert.alert(
@@ -80,22 +81,16 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     return(
         <Gradient>
           <View style={styles.container}>
-
-            
-
             <View style={styles.header}>
               <View style={styles.adminBox}>
                 <TouchableOpacity onPress={onClickAdminIcon}>
                   <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
                 </TouchableOpacity>
               </View>
-
-                <Text style={globalStyles.fontHeader}>TASK</Text> 
-                <View style={styles.iconContainer}>
-
-                </View>
+              <Text style={globalStyles.fontHeader}>TASK</Text> 
+              <View style={styles.iconContainer}>
+              </View>
             </View>
-
             <View style={styles.TaskTrack}>
               <View style={styles.flatContainer}>
                 <FlatList
@@ -117,14 +112,11 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                     </View>
                   )}
                 />
-              </View>
-                
+              </View>   
             </View>
-
             <TouchableOpacity style={styles.LogoutBox} onPress={onLogOut}>
               <Text style={styles.checkoutFont}>Log out</Text>
             </TouchableOpacity>
-
           </View>
         </Gradient>
     );
