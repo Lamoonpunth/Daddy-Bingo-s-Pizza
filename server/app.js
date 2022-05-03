@@ -623,8 +623,8 @@ app.get('/getwaitingforkitchenandpreparingorder',async(req,res)=>{
 
 app.post('/kitchenaccept',async(req,res)=>{
   try{
-    await Order.updateMany({"_id":req.body._id},{$set:{status: "preparing order"}})
-    await Order.updateMany({"_id":req.body._id},{$set:{confirm_datetime: Date.now()}})
+    await Order.updateOne({"_id":req.body._id},{$set:{status: "preparing order"}})
+    await Order.updateOne({"_id":req.body._id},{$set:{confirm_datetime: Date.now()}})
     res.json("updated")
   }
   catch(error){

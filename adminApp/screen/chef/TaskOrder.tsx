@@ -46,8 +46,9 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
         })
       })
       .then(response=>response.json())
-      .then(data => {console.log(data)
-        navigation.navigate('TaskPrepare',{order:TabBarIOSItem})})
+      .then(data => {
+        navigation.navigate('TaskPrepare',{order:item})
+      })
      }
     const onLogOut = () => {
       Alert.alert(
