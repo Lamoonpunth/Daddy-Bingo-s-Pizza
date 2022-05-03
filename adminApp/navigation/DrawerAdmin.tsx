@@ -63,36 +63,26 @@ export function DrawerMenu({navigation}:{navigation:any},props:any){
             <ImageBackground style={styles.profile} source={require('../assets/images/adminIcon.jpg')}>
             </ImageBackground>
             <View style={styles.optionsBox}>
-                <ScrollView style={{flex:1}}>
-                    <TouchableOpacity onPress={onProfile} style={styles.option}>
-                        <Image source={require('../assets/images/user_icon.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont}>Profile</Text>    
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onService} style={styles.option}>
-                        <Image source={require('../assets/images/service.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont}>Service</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onIngredients} style={styles.option}>
-                        <Image source={require('../assets/images/ingredients.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont}>Ingredients</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onAwaitingPayment} style={styles.option}>
-                        <Image source={require('../assets/images/awaiting.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont}>Awaiting payment</Text>    
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onEmployee} style={styles.option}>
-                        <Image source={require('../assets/images/employee.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont}>Employee</Text>    
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={onRegisterEmployee} style={styles.option}>
-                        <Image source={require('../assets/images/employee.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont}>Register employee</Text>    
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.option}>
-                        <Image source={require('../assets/images/logout.png')} style={styles.optionImage}/>
-                        <Text style={styles.itemFont} onPress={onLogOut}>Log Out</Text>
-                    </TouchableOpacity>
-                </ScrollView>
+                <TouchableOpacity onPress={onProfile} style={styles.option}>
+                    <Image source={require('../assets/images/user_icon.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Profile</Text>    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onAwaitingPayment} style={styles.option}>
+                    <Image source={require('../assets/images/awaiting.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Awaiting payment</Text>    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onEmployee} style={styles.option}>
+                    <Image source={require('../assets/images/employee.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Employee</Text>    
+                </TouchableOpacity>
+                <TouchableOpacity onPress={onRegisterEmployee} style={styles.option}>
+                    <Image source={require('../assets/images/employee.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont}>Register employee</Text>    
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.option}>
+                    <Image source={require('../assets/images/logout.png')} style={styles.optionImage}/>
+                    <Text style={styles.itemFont} onPress={onLogOut}>Log Out</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );
