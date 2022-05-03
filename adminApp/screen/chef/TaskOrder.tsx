@@ -69,7 +69,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     }
 
     const getWaitforkitchen = () =>{
-      fetch('http://10.0.2.2:3000/getwaitingforkitchen')
+      fetch('http://10.0.2.2:3000/getwaitingforkitchenandpreparingorder')
       .then(response => response.json())
       .then(order => {onClickTask(order)})
     }

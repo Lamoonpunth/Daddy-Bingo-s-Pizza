@@ -24,14 +24,7 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
   const {order} = route.params;
   const {status} = route.params;
   const [Ingredient, onClickIng] = React.useState([
-    { num: 'Order1', key: '1', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '3', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '4', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '5', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '6', img_path: require('../../assets/images/classicburger.png') },
-    { num: 'Order3', key: '7', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order4', key: '8', img_path: require('../../assets/images/mexicangreenwave.png') },
+    { name: 'Order1', key: '1', quantity:0, additional:'',img_path: require('../../assets/images/mexicangreenwave.png'), selected:false },
 
   ]);
  
