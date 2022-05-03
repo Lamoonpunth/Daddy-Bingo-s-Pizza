@@ -38,7 +38,7 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
                              phonenumber:contact,
                              address:address,})
   }).then(response => response.json())
-  .then(data => {console.log(data) })
+  .then(data => {console.log(data) ,navigation.goBack()})
 }
 
   useFocusEffect(
@@ -51,7 +51,7 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
         onChangeContact(json.phonenumber)
         onChangeAddress(json.address)
       })      
-    }, [fname,lname,contact,address])
+    }, [])
   );
 
   return (

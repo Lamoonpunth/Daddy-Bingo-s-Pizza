@@ -53,18 +53,6 @@ export function OrderDrawer({route,navigation}:{route:any,navigation:any},props:
                     <Image source={require('../assets/images/user_icon.png')} style={styles.optionImage}/>
                     <Text style={styles.itemFont}>Profile</Text>    
                 </TouchableOpacity>
-                <TouchableOpacity onPress={onSubscription} style={styles.option}>
-                    <Image source={require('../assets/images/subscription.png')} style={styles.optionImage}/>
-                    <Text style={styles.itemFont}>Subscription</Text>    
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onAddress} style={styles.option}>
-                    <Image source={require('../assets/images/address_icon.png')} style={styles.optionImage}/>
-                    <Text style={styles.itemFont}>Address</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={onService} style={styles.option}>
-                    <Image source={require('../assets/images/service.png')} style={styles.optionImage}/>
-                    <Text style={styles.itemFont}>Service</Text>
-                </TouchableOpacity>
                 <TouchableOpacity style={styles.option} onPress={onLogOut}>
                     <Image source={require('../assets/images/logout.png')} style={styles.optionImage}/>
                     <Text style={styles.itemFont}>Log Out</Text>
