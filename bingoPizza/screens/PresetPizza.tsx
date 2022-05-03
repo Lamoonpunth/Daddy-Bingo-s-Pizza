@@ -203,7 +203,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
         body:JSON.stringify({_id:userid,itemid:userpizza._id,quantity:1,additional:"topping:"+name+" size:"+selectedSize+" dough:"+selectedDough+" crust:"+selectedCrust+" sauce:"+selectedSauce+" package:"+selectedPackage})
     })
     .then(response => response.json())
-    .then(data => {console.log(data)})
+    .then(data => {console.log(data)}, navigation.goBack())
     })
   }
   const getTopping = () =>{
