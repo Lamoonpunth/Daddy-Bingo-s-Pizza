@@ -24,14 +24,7 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function TaskOrder({navigation, route}:{navigation:any,route:any}){
  
   const [Task, onClickTask] = React.useState([
-    {num:'Order1' ,key:'1'},
-    {num:'Order2' ,key:'2'},
-    {num:'Order3' ,key:'3'},
-    {num:'Order3' ,key:'4'},
-    {num:'Order3' ,key:'5'},
-    {num:'Order3' ,key:'6'},
-    {num:'Order3' ,key:'7'},
-    {num:'Order4' ,key:'8'},
+    {key:'1', _id:11, user_fname:'', user_lname:''},
     
   ]);
     const onReject = (item:any) => {
@@ -48,6 +41,9 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
       .then(response=>response.json())
       .then(data => {console.log(data)
         navigation.navigate('TaskPrepare',{order:TabBarIOSItem})})
+    }
+    const onComplete = (item:any) => {
+      
      }
     const onLogOut = () => {
       Alert.alert(
@@ -102,10 +98,13 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                       <View style ={styles.bottontoleftside}>  
                         <View style = {styles.forrowview}>
                           <TouchableOpacity style={styles.ac_rjbox} onPress={() =>onReject(item)}>
-                            <Text style={styles.normalFont}>reject</Text>
+                            <Text style={styles.normalFont2}>reject</Text>
                           </TouchableOpacity>
                           <TouchableOpacity style={styles.acbox} onPress={() =>onAccept(item)}>
                             <Text style={styles.normalFont2}>Accept</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={styles.acbox} onPress={() =>onComplete(item)}>
+                            <Text style={styles.normalFont2}>Complete</Text>
                           </TouchableOpacity>
                         </View>
                       </View>
