@@ -31,6 +31,7 @@ export default function TaskDeny({ navigation,route }: { navigation: any , route
       headers:{'Content-Type': 'application/json'},
       body:JSON.stringify({
           _id: order._id,
+          reason: denyText
       })
     })
     .then(response=>response.json())

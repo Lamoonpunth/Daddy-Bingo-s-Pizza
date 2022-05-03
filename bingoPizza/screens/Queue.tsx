@@ -28,6 +28,7 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
   ])
   const {cart} = route.params;
   const {user} = route.params;
+  const {orderid} = route.params;
   const [address,setAddress] = useState([
     {
       username : 'Username',
@@ -62,15 +63,31 @@ export default function Queue({navigation, route}:{navigation:any,route:any}) {
         })
       ]),
     ).start();
-    setTimeout(()=> {
-      navigation.navigate('Prepare',{cart:cart,user:user});
-     }, 10000);
   });
   useFocusEffect(
     React.useCallback(() => {
       setOrderList(cart)
       setAddress(user)
-    }, [])
+      var nextPageInterval = setInterval(checknextpage, 1000);
+      function checknextpage(){
+        fetch("http://10.0.2.2:3000/getorder?_id="+orderid)
+        .then(response => response.json())
+        .then(data =>  {
+          console.log(data[0].status)
+          if (data[0].status === "cancled by kitchen")
+          {
+            alert("cancled by kitchen\nreason: " + data[0].reason)
+            navigation.goBack();
+            clearInterval(nextPageInterval);
+          }
+          else if (data[0].status !== "waiting for kitchen")
+          {
+            navigation.navigate('Prepare',{cart:cart,user:user,orderid:orderid});
+            clearInterval(nextPageInterval);
+          }
+        })
+      }
+    }, [orderid])
   );
 
   return (
