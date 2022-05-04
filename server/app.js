@@ -402,6 +402,8 @@ app.post('/removemenu',async(req,res)=>{
   }
 }
 )
+
+
 app.post('/updatemenu',async(req,res)=>{
   try{
     await Menu.updateMany({ "_id":req.body._id},{$set:{"description":req.body.description}});
@@ -462,6 +464,29 @@ app.post('/removerecommend',async(req,res)=>{
     console.log(error)
   }
 })
+
+app.post('/removerider',async(req,res)=>{
+  try
+  {
+    const rider = await Rider.find({ "_id":req.body._id }).deleteOne();
+    res.json('removed')
+  }
+  catch(error){
+    console.log(error)
+  }
+});
+
+app.post('/removechef',async(req,res)=>{
+  try
+  {
+    const chef = await Chef.find({ "_id":req.body._id }).deleteOne();
+    res.json('removed')
+  }
+  catch(error){
+    console.log(error)
+  }
+});
+
 app.post('/addToCart',async(req,res) =>{
     try{
       const user = await User.findOne({"_id":req.body._id})
