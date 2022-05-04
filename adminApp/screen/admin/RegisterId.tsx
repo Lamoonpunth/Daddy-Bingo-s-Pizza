@@ -80,6 +80,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
             setFname('');
             setLname('');
             setPhone('');
+            navigation.navigate('Employee');
     } 
     }
 
@@ -191,6 +192,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                         onChangeText={setConfirmPassword}
                         placeholder='Confirm password'
                         editable={Password==''? false:true}
+                        secureTextEntry
                         style={{
                             fontSize: 18,
                             width: screenWidth *.6,
@@ -211,7 +213,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                 <View style={styles.next}>
                     <TouchableOpacity style={styles.nextbutton} onPress={onNextButton}>
                         <View style={{backgroundColor:'transparent'}}>
-                            <Text style={{fontSize:20, color: 'white'}}>Next</Text>
+                            <Text style={{fontSize:20, color: 'white'}}>Complete</Text>
                         </View>  
                     </TouchableOpacity>
                 </View>

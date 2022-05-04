@@ -43,6 +43,14 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
         navigation.goBack();
     }
 
+    const onRemoveChef = (item:any,index:any) =>{
+
+    }
+
+    const onRemoveRider = (item:any,index:any) =>{
+        
+    }
+
     useFocusEffect(
         React.useCallback(() => {      
             fetch('http://10.0.2.2:3000/getallrider')
@@ -92,19 +100,25 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
             <View style={styles.registerOptions}>
                 {employeeType == 'Chef'?
                 <FlatList
-                    data={employeeType == 'Chef'? chef:rider}
+                    data={chef}
                     showsVerticalScrollIndicator={false}
-                    renderItem={({item}) => (
+                    renderItem={({item,index}) => (
                         <View style={styles.options}>
                             <View style={styles.optionsImage}>
                                 <Image source={require('../../assets/images/service.png')} style={styles.image}/>
                             </View>
                             <View style={styles.optionsName}>
-                                <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>
+                                <View style={styles.optionsRemove}>
+                                    <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>    
+                                    <TouchableOpacity onPress={() => onRemoveChef(item,index)}>
+                                        <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>x</Text>
+                                    </TouchableOpacity>
+                                </View>
                                 <Text style={styles.fontDetail}>ชื่อ:{item.fname}</Text>
                                 <Text style={styles.fontDetail}>นามสกุล:{item.lname}</Text>
                                 <Text style={styles.fontDetail}>เบอร์:{item.phonenumber}</Text>
                             </View>
+                            
                         </View>
                     )}
                 />  
@@ -112,13 +126,18 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
                 <FlatList
                     data={rider}
                     showsVerticalScrollIndicator={false}
-                    renderItem={({item}) => (
+                    renderItem={({item,index}) => (
                         <View style={styles.options}>
                             <View style={styles.optionsImage}>
                                 <Image source={require('../../assets/images/service.png')} style={styles.image}/>
                             </View>
                             <View style={styles.optionsName}>
-                                <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>
+                                <View style={styles.optionsRemove}>
+                                    <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>ข้อมูลพนักงาน</Text>    
+                                    <TouchableOpacity onPress={() => onRemoveRider(item,index)}>
+                                        <Text style={{fontSize:24,fontWeight:'900',color:'#FF6D6D'}}>x</Text>
+                                    </TouchableOpacity>
+                                </View>
                                 <Text style={styles.fontDetail}>ชื่อ:{item.fname}</Text>
                                 <Text style={styles.fontDetail}>นามสกุล:{item.lname}</Text>
                                 <Text style={styles.fontDetail}>เบอร์:{item.phonenumber}</Text>
@@ -196,6 +215,13 @@ const styles = StyleSheet.create({
         height:screenHeight*0.25,
         alignItems:'center',
         justifyContent:'space-evenly',
+    },
+    optionsRemove: {
+        flexDirection:'row',
+        width:screenWidth*.45,
+        height:40,
+        alignItems:'center',
+        justifyContent:'space-between',
     },
     fontDetail: {
         fontSize:18,
