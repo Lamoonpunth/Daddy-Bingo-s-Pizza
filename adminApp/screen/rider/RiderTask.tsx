@@ -22,14 +22,6 @@ export default function RiderTask({ navigation, route }: { navigation: any, rout
 
   const [Task, onClickTask] = React.useState([
     {num:'Order1' ,key:'1'},
-    {num:'Order2' ,key:'2'},
-    {num:'Order3' ,key:'3'},
-    {num:'Order3' ,key:'4'},
-    {num:'Order3' ,key:'5'},
-    {num:'Order3' ,key:'6'},
-    {num:'Order3' ,key:'7'},
-    {num:'Order4' ,key:'8'},
-    
   ]);
     const onAccept = (item:any) => {
       fetch("http://10.0.2.2:3000/rideraccept",{

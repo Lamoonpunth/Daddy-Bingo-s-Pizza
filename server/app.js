@@ -546,7 +546,8 @@ app.post('/checkout',async(req,res)=>{
       subdistrict : req.body.subdistrict,
       postcode:req.body.postcode,
       bill_img:req.body.bill_img,
-      reason : null
+      reason : null,
+      rate : 0
     })
     .then(order=>res.json(order))
   }
@@ -609,10 +610,21 @@ app.get('/getwaitingforkitchen',async(req,res)=>{
 
 })
 
+app.get('/getwaitingforkitchenandpreparingorder',async(req,res)=>{
+  try{
+    const order = await Order.find({$or:[{status: "waiting for kitchen"},{status : "preparing order"}]})
+    res.json(order)
+  }
+  catch(error){
+    console.log(error)
+  }
+
+})
+
 app.post('/kitchenaccept',async(req,res)=>{
   try{
-    await Order.updateMany({"_id":req.body._id},{$set:{status: "preparing order"}})
-    await Order.updateMany({"_id":req.body._id},{$set:{confirm_datetime: Date.now()}})
+    await Order.updateOne({"_id":req.body._id},{$set:{status: "preparing order"}})
+    await Order.updateOne({"_id":req.body._id},{$set:{confirm_datetime: Date.now()}})
     res.json("updated")
   }
   catch(error){
@@ -669,6 +681,17 @@ app.post('/riderdone',async(req,res)=>{
     console.log(error)
   }
 })
+
+app.post('/rate',async(req,res)=>{
+  try{
+    await Order.updateMany({"_id":req.body._id},{$set:{rate: req.body.rate}})
+    res.json("updated")
+  }
+  catch(error){
+    console.log(error)
+  }
+})
+
 //admin account generate
 app.post('/admingen',async(req,res) =>{
   try{

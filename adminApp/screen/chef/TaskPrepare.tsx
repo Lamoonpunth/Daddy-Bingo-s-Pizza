@@ -22,15 +22,9 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function TaskPrepare({ navigation,route }: { navigation: any ,route:any}) {
   
   const {order} = route.params;
+  const {status} = route.params;
   const [Ingredient, onClickIng] = React.useState([
-    { num: 'Order1', key: '1', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order2', key: '2', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '3', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '4', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '5', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order3', key: '6', img_path: require('../../assets/images/classicburger.png') },
-    { num: 'Order3', key: '7', img_path: require('../../assets/images/mexicangreenwave.png') },
-    { num: 'Order4', key: '8', img_path: require('../../assets/images/mexicangreenwave.png') },
+    { name: 'Order1', key: '1', quantity:0, additional:'',img_path: require('../../assets/images/mexicangreenwave.png'), selected:false },
 
   ]);
  
@@ -45,10 +39,6 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
     .then(response=>response.json())
     .then(data => {console.log(data)
     navigation.navigate('TaskOrder')})
-  }
-
-  const onClickAdminIcon = () => {
-    navigation.openDrawer();
   }
 
   const onSelectedPrepare = (item:any,index:any) =>{
@@ -120,10 +110,16 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
               />
             </View>
           </View>
-
+          {status == 'waiting for kitchen'?
+          <TouchableOpacity style={styles.LogoutBoxDisable} disabled={true}>
+            <Text style={styles.checkoutFont}>Send out delivery</Text>
+          </TouchableOpacity>
+          :
           <TouchableOpacity style={styles.LogoutBox} onPress={onSendOut}>
             <Text style={styles.checkoutFont}>Send out delivery</Text>
           </TouchableOpacity>
+          }
+          
 
         </View>
       </Gradient>
@@ -178,6 +174,17 @@ export default function TaskPrepare({ navigation,route }: { navigation: any ,rou
       height: screenHeight * 0.075,
       borderRadius: 10,
       backgroundColor: '#FF6D7D',
+      marginVertical: 10,
+      elevation: 12,
+    },
+    LogoutBoxDisable: {
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: screenWidth * 0.8,
+      height: screenHeight * 0.075,
+      borderRadius: 10,
+      backgroundColor: 'gray',
       marginVertical: 10,
       elevation: 12,
     },

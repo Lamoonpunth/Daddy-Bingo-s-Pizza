@@ -9,6 +9,7 @@ import {
     FlatList,
     ScrollView,
     TouchableOpacity,
+    TabBarIOSItem,
     } from "react-native";
 
 const screenWidth = Dimensions.get('screen').width;
@@ -23,20 +24,17 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function TaskOrder({navigation, route}:{navigation:any,route:any}){
  
   const [Task, onClickTask] = React.useState([
-    {num:'Order1' ,key:'1'},
-    {num:'Order2' ,key:'2'},
-    {num:'Order3' ,key:'3'},
-    {num:'Order3' ,key:'4'},
-    {num:'Order3' ,key:'5'},
-    {num:'Order3' ,key:'6'},
-    {num:'Order3' ,key:'7'},
-    {num:'Order4' ,key:'8'},
+    {key:'1', _id:11, user_fname:'', user_lname:'', status:'waiting for kitchen',},
     
   ]);
     const onReject = (item:any) => {
      navigation.navigate('TaskDeny',{order:item})
     }
-    const onAccept = (item:any) => {
+    const checkPrepareMenu = (item:any,index:any) => {
+        navigation.navigate('TaskPrepare',{order:item,status:item.status})
+    }
+
+    const updateAcceptedTask = (item:any,index:any) =>{
       fetch("http://10.0.2.2:3000/kitchenaccept",{
         method:"POST",
         headers:{'Content-Type': 'application/json'},
@@ -46,8 +44,9 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
       })
       .then(response=>response.json())
       .then(data => {console.log(data)
+        //updateAcceptedTask(item,index)
         navigation.navigate('TaskPrepare',{order:item})})
-     }
+    }
     const onLogOut = () => {
       Alert.alert(
         "Are you sure?",
@@ -68,7 +67,7 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     }
 
     const getWaitforkitchen = () =>{
-      fetch('http://10.0.2.2:3000/getwaitingforkitchen')
+      fetch('http://10.0.2.2:3000/getwaitingforkitchenandpreparingorder')
       .then(response => response.json())
       .then(order => {onClickTask(order)})
     }
@@ -80,51 +79,50 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
     return(
         <Gradient>
           <View style={styles.container}>
-
-            
-
             <View style={styles.header}>
               <View style={styles.adminBox}>
                 <TouchableOpacity onPress={onClickAdminIcon}>
                   <Image source={require('../../assets/images/user_icon.png')} style={styles.adminIcon}/>  
                 </TouchableOpacity>
               </View>
-
-                <Text style={globalStyles.fontHeader}>TASK</Text> 
-                <View style={styles.iconContainer}>
-
-                </View>
+              <Text style={globalStyles.fontHeader}>TASK</Text> 
+              <View style={styles.iconContainer}>
+              </View>
             </View>
-
             <View style={styles.TaskTrack}>
               <View style={styles.flatContainer}>
                 <FlatList
                   numColumns={1}
                   data={Task}
-                  renderItem={({item}) => (
-                    <View style={styles.taskOrder}  key={item._id}>
+                  renderItem={({item,index}) => (
+                    <TouchableOpacity style={styles.taskOrder}  key={item._id} onPress={()=>checkPrepareMenu(item,index)}>
                       <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>
-                      <View style ={styles.bottontoleftside}>  
+                      <View style ={styles.bottontoleftside}> 
+                        {item.status == 'waiting for kitchen'?
                         <View style = {styles.forrowview}>
                           <TouchableOpacity style={styles.ac_rjbox} onPress={() =>onReject(item)}>
-                            <Text style={styles.normalFont}>reject</Text>
+                            <Text style={styles.normalFont1}>reject</Text>
                           </TouchableOpacity>
-                          <TouchableOpacity style={styles.acbox} onPress={() =>onAccept(item)}>
+                          <TouchableOpacity style={styles.acbox} onPress={() =>updateAcceptedTask(item,index)}>
                             <Text style={styles.normalFont2}>Accept</Text>
                           </TouchableOpacity>
                         </View>
+                        :
+                        <View style = {styles.forrowview}>
+                          <View style={styles.incombox}>
+                            <Text style={styles.normalFont2}>Incomplete</Text>
+                          </View>
+                        </View>
+                        } 
                       </View>
-                    </View>
+                    </TouchableOpacity>
                   )}
                 />
-              </View>
-                
+              </View>   
             </View>
-
             <TouchableOpacity style={styles.LogoutBox} onPress={onLogOut}>
               <Text style={styles.checkoutFont}>Log out</Text>
             </TouchableOpacity>
-
           </View>
         </Gradient>
     );
@@ -267,7 +265,15 @@ const styles = StyleSheet.create({
       backgroundColor: '#FF6D7D',
       borderRadius:50,
       elevation:8,
-
+    },
+    incombox: {
+      flexDirection:'row',
+      width:screenWidth*0.3,
+      height:25,
+      justifyContent: 'center',
+      backgroundColor: '#FF6D7D',
+      borderRadius:50,
+      elevation:8,
     },
     normalFont1:{
       fontSize: 16,
