@@ -468,7 +468,7 @@ app.post('/removerecommend',async(req,res)=>{
 app.post('/removerider',async(req,res)=>{
   try
   {
-    const rider = await Rider.find({ "_id":req.body._id }).deleteOne();
+    const rider = await Rider.find({ "fname":req.body.fname }).deleteOne();
     res.json('removed')
   }
   catch(error){
@@ -479,7 +479,7 @@ app.post('/removerider',async(req,res)=>{
 app.post('/removechef',async(req,res)=>{
   try
   {
-    const chef = await Chef.find({ "_id":req.body._id }).deleteOne();
+    const chef = await Chef.find({ "fname":req.body.fname }).deleteOne();
     res.json('removed')
   }
   catch(error){

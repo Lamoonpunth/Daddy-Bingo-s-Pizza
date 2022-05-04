@@ -44,11 +44,29 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
     }
 
     const onRemoveChef = (item:any,index:any) =>{
-        alert('555+')
+        console.log(chef[index].fname)
+        fetch("http://10.0.2.2:3000/removechef",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                fname: chef[index].fname
+            })
+        })
+        .then(response => response.json())
+        .then(json=> {console.log(json)})
     }
 
     const onRemoveRider = (item:any,index:any) =>{
-        
+        console.log(rider[index].fname)
+        fetch("http://10.0.2.2:3000/removerider",{
+            method:"POST",
+            headers:{'Content-Type': 'application/json'},
+            body:JSON.stringify({
+                fname: rider[index].fname
+            })
+        })
+        .then(response => response.json())
+        .then(json=> {console.log(json)})
     }
 
     useFocusEffect(
