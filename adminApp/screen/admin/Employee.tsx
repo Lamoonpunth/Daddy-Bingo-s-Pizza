@@ -54,6 +54,7 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
         })
         .then(response => response.json())
         .then(json=> {console.log(json)})
+        getChef();
     }
 
     const onRemoveRider = (item:any,index:any) =>{
@@ -67,22 +68,29 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
         })
         .then(response => response.json())
         .then(json=> {console.log(json)})
+        getRider();
     }
 
-    useFocusEffect(
-        React.useCallback(() => {      
-            fetch('http://10.0.2.2:3000/getallrider')
+    const getChef = () =>{
+        fetch('http://10.0.2.2:3000/getallchef')
+            .then(response => response.json())
+            .then(json => {
+                setChef(json)
+            })
+    }
+
+    const getRider = () =>{
+        fetch('http://10.0.2.2:3000/getallrider')
             .then(response => response.json())
             .then(json => {
                 setRider(json)
-            })          
-            
-            fetch('http://10.0.2.2:3000/getallchef')
-            .then(response => response.json())
-            .then(json => {
-                    setChef(json)
             }) 
-                            
+    }
+
+    useFocusEffect(
+        React.useCallback(() => {
+            getChef();
+            getRider();
         }, [])
       );
 

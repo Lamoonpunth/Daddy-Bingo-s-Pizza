@@ -80,6 +80,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
             setFname('');
             setLname('');
             setPhone('');
+            navigation.navigate('Employee');
     } 
     }
 
@@ -173,6 +174,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                         value={Password}
                         onChangeText={setPassword}
                         placeholder='Password'
+                        secureTextEntry
                         style={{
                             fontSize: 18,
                             width: screenWidth *.6,
@@ -190,6 +192,7 @@ export default function RegisterId({navigation,route}:{navigation:any,route:any}
                         value={confirmPassword}
                         onChangeText={setConfirmPassword}
                         placeholder='Confirm password'
+                        secureTextEntry
                         editable={Password==''? false:true}
                         style={{
                             fontSize: 18,
