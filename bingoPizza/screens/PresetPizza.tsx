@@ -73,7 +73,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
   const onSelectedTopping2 = (type:any,item:any,index:any) =>{
     setTopping2(type);
-    setToppingPrice2(item.price)
+    setToppingPrice2(0)
     setToppingImage2(item.img_path)
     const newArrData = topping2.map((e, index) =>{
     //const newArrData = topping.map(newItem =>{
@@ -362,7 +362,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
 
             <View style={styles.optionsBox}>
               <ImageBackground source={require('../assets/images/topping.jpg')} style={styles.optionHeader} imageStyle={{opacity:0.4}}>
-                <Text style={styles.optionFont}>Topping(for 2 toppings pizza)</Text>
+                <Text style={styles.optionFont}>Topping2(half&half)</Text>
               </ImageBackground>
               <View style={styles.optionButtons}>
                 <FlatList
@@ -390,7 +390,7 @@ export default function PresetPizza({navigation,route}: {navigation:any,route:an
                             backgroundColor:'transparent'
                             }}>
                             {item.name}{"\n"}
-                            Price : {item.price}
+                            Price : 0
                           </Text>
                         </View>
                       </ImageBackground>
