@@ -94,6 +94,10 @@ export default function TaskOrder({navigation, route}:{navigation:any,route:any}
                 <FlatList
                   numColumns={1}
                   data={Task}
+<<<<<<< HEAD
+=======
+                  keyExtractor={(item:any) => item._id}
+>>>>>>> 82da399511aee697a1595ceb3f25e550e1c601bf
                   renderItem={({item,index}) => (
                     <TouchableOpacity style={styles.taskOrder}  key={item._id} onPress={()=>checkPrepareMenu(item,index)}>
                       <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>

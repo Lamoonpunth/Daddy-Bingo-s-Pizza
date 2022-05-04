@@ -21,7 +21,10 @@ import { useFocusEffect } from '@react-navigation/native';
 export default function RiderTask({ navigation, route }: { navigation: any, route: any }) {
 
   const [Task, onClickTask] = React.useState([
+<<<<<<< HEAD
     {num:'Order1' ,key:'1'},
+=======
+>>>>>>> 82da399511aee697a1595ceb3f25e550e1c601bf
   ]);
     const onAccept = (item:any) => {
       fetch("http://10.0.2.2:3000/rideraccept",{
@@ -87,6 +90,7 @@ export default function RiderTask({ navigation, route }: { navigation: any, rout
                 <FlatList
                   numColumns={1}
                   data={Task}
+                  keyExtractor={(item:any) => item._id}
                   renderItem={({item}) => (
                     <View style={styles.taskOrder}  key={item._id}>
                       <Text style={styles.taskFont}>{item.user_fname} {item.user_lname}</Text>
