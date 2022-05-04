@@ -81,6 +81,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
   }
   useFocusEffect(
     React.useCallback(() => {
+      console.log('userid : '+userid)
       getRecommendList()
     }, [recommend])
   );
