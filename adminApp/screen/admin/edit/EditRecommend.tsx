@@ -37,8 +37,7 @@ export default function EditRecommend({navigation,route}: {navigation:any,route:
     fetch("http://10.0.2.2:3000/removerecommend",{
             method:"POST",
             headers:{'Content-Type': 'application/json'},
-            body:JSON.stringify({_id:recommend._id})
-            
+            body:JSON.stringify({_id:recommend._id})            
   })
   .then(response=>response.json())
   .then(json=>console.log(json))
