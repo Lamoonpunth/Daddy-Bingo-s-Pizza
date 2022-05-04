@@ -945,7 +945,7 @@ app.post('/updateuserprofile',async(req,res)=>{
   try{
     await User.updateOne({ "_id":req.body._id},{$set:{"fname":req.body.fname}});
     await User.updateOne({ "_id":req.body._id},{$set:{"lname":req.body.lname}});
-    await User.updateOne({ "_id":req.body._id},{$set:{"address":req.body.adress}});
+    await User.updateOne({ "_id":req.body._id},{$set:{"address":req.body.address}});
     await User.updateOne({ "_id":req.body._id},{$set:{"phonenumber":req.body.phonenumber}});
     res.json("user-profile-updated")
   }
