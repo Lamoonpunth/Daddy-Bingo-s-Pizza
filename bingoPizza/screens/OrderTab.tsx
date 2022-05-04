@@ -40,10 +40,12 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     {type:'Dessert',key:'4',img_path:require('../assets/images/Category/Dessert.jpg')},
     {type:'À la carte',key:'5',img_path:require('../assets/images/Category/carte.jpg')},
   ]);
+  const [address,setaddress] = React.useState(''); 
+ 
 
   const onClickAdminIcon = () =>{
     //console.log('admin here')
-    //console.log(route)
+    //console.log(route)    
     console.log(userid)
     navigation.openDrawer({params: userid});
   }
@@ -78,11 +80,19 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
     fetch("http://10.0.2.2:3000/getrecommend")
     .then(response=>response.json())
     .then(list => onClickRec(list))
-  }
+  };
+
+  const getAddress = () => {
+    fetch("http://10.0.2.2:3000/getuserdata?_id="+userid)
+    .then(response=>response.json())
+    .then(addr => setaddress(addr.address))
+  };
+
   useFocusEffect(
     React.useCallback(() => {
-      getRecommendList()
-    }, [recommend])
+      getRecommendList();
+      getAddress();
+    }, [recommend,address])
   );
   return (
     <Gradient>
@@ -92,7 +102,7 @@ export default function OrderTab({navigation, route}:{navigation:any,route:any})
             <Image source={require('../assets/images/user_icon.png')} style={styles.userIcon}/>  
           </TouchableOpacity>
           <View style={styles.userAddress}>
-            <Text style={globalStyles.fontNormal}>123/2 bingo house</Text>
+            <Text style={globalStyles.fontNormal}>{address}</Text>
           </View>
           <TouchableOpacity style ={{justifyContent: 'center',alignItems: 'center', flexDirection:'row'}} onPress={()=>(navigation.navigate('Cart',{userid:userid}))}>
             <Image source={require('../assets/images/basket_icon.png')} style={styles.basketIcon} />  
