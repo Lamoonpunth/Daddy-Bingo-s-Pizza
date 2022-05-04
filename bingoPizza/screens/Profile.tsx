@@ -51,7 +51,7 @@ export default function Profile({navigation,route}:{navigation:any,route:any}) {
         onChangeContact(json.phonenumber)
         onChangeAddress(json.address)
       })      
-    }, [fname,lname,contact,address])
+    }, [])
   );
 
   return (
