@@ -44,7 +44,7 @@ export default function Employee({navigation,route}:{navigation:any,route:any}){
     }
 
     const onRemoveChef = (item:any,index:any) =>{
-
+        alert('555+')
     }
 
     const onRemoveRider = (item:any,index:any) =>{
